@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KarateClub_DataAccess
 {
-    public class clsDataAccessSettings
+    static class clsDataAccessSettings
     {
+        public static string ConnectionString = "Server=.;Database=KarateClub;User Id=sa;Password=sa123456;";
     }
 }

@@ -1,0 +1,6 @@
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\bin\Debug\KarateClub_DataAccess.dll
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\bin\Debug\KarateClub_DataAccess.pdb
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.csproj.AssemblyReference.cache
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.csproj.CoreCompileInputs.cache
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.dll
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.pdb

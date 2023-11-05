@@ -1,0 +1,9 @@
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\KarateClub.exe.config
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\KarateClub.exe
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\KarateClub.pdb
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.csproj.AssemblyReference.cache
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Properties.Resources.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.csproj.GenerateResource.cache
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.csproj.CoreCompileInputs.cache
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.exe
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.pdb

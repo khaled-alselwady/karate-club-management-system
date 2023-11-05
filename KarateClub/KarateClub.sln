@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub", "KarateClub.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub_DataAccess", "..\KarateClub_DataAccess\KarateClub_DataAccess.csproj", "{08E658C9-F6F8-4FFD-9E84-586E9AADBBA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub_Business", "..\KarateClub_Business\KarateClub_Business.csproj", "{24C1E927-1294-4A8D-A435-93FF401A35D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{08E658C9-F6F8-4FFD-9E84-586E9AADBBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08E658C9-F6F8-4FFD-9E84-586E9AADBBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08E658C9-F6F8-4FFD-9E84-586E9AADBBA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C1E927-1294-4A8D-A435-93FF401A35D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C1E927-1294-4A8D-A435-93FF401A35D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C1E927-1294-4A8D-A435-93FF401A35D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C1E927-1294-4A8D-A435-93FF401A35D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
