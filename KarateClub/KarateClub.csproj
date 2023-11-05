@@ -76,5 +76,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarateClub_Business\KarateClub_Business.csproj">
+      <Project>{24c1e927-1294-4a8d-a435-93ff401a35d2}</Project>
+      <Name>KarateClub_Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
