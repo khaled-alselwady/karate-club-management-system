@@ -172,7 +172,7 @@ namespace KarateClub_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"if not Exist (select found = 1 from Users where Username = @Username)
+            string query = @"if not Exists (select found = 1 from Users where Username = @Username)
 begin
 insert into Users (PersonID, Username, Password, Permissions, IsActive)
 values (@PersonID, @Username, @Password, @Permissions, @IsActive)
