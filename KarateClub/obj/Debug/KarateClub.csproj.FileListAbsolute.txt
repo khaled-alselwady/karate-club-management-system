@@ -12,3 +12,7 @@ D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClu
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\KarateClub_Business.pdb
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\KarateClub_DataAccess.pdb
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.csproj.CopyComplete
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Main.frmMainMenu.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\FontAwesome.Sharp.dll
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\bin\Debug\Guna.UI2.dll
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.frmTest.resources
