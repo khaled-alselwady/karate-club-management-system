@@ -58,7 +58,7 @@
             // 
             // panelMainMenu
             // 
-            this.panelMainMenu.BackColor = System.Drawing.Color.Black;
+            this.panelMainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
             this.panelMainMenu.Controls.Add(this.btnLogOut);
             this.panelMainMenu.Controls.Add(this.btnPayments);
             this.panelMainMenu.Controls.Add(this.btnBeltTests);
@@ -108,9 +108,9 @@
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(70, 17);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(73, 25);
+            this.lblName.Size = new System.Drawing.Size(161, 25);
             this.lblName.TabIndex = 3;
-            this.lblName.Text = "Name";
+            this.lblName.Text = "Khaled Yousef";
             // 
             // cmsEditProfile
             // 
@@ -141,7 +141,7 @@
             // 
             this.pbUserImage.BackColor = System.Drawing.Color.Transparent;
             this.pbUserImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pbUserImage.Image = global::KarateClub.Properties.Resources.karate_logo;
+            this.pbUserImage.Image = global::KarateClub.Properties.Resources.DefaultMale;
             this.pbUserImage.ImageRotate = 0F;
             this.pbUserImage.Location = new System.Drawing.Point(0, 0);
             this.pbUserImage.Name = "pbUserImage";
@@ -403,7 +403,7 @@
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = global::KarateClub.Properties.Resources.karate_logo;
+            this.pbLogo.Image = global::KarateClub.Properties.Resources.karate_logo1;
             this.pbLogo.ImageRotate = 0F;
             this.pbLogo.Location = new System.Drawing.Point(32, -20);
             this.pbLogo.Name = "pbLogo";

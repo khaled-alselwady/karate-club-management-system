@@ -214,7 +214,7 @@ where MemberID = @MemberID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Members";
+            string query = @"select * from MembersDetails_view";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -275,6 +275,42 @@ where MemberID = @MemberID";
             }
 
             return Count;
+        }
+
+
+        public static int GetPersonIDByMemberID(int MemberID)
+        {
+            int PersonID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select PersonID from Members where MemberID = @MemberID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Value))
+                {
+                    PersonID = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return PersonID;
         }
 
     }

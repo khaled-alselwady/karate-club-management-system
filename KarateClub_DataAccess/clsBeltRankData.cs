@@ -57,6 +57,53 @@ namespace KarateClub_DataAccess
         }
 
 
+        public static bool GetRankInfoByName(string RankName, ref int RankID, ref decimal TestFees)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select * from BeltRanks where RankName = @RankName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@RankName", RankName);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // The record was found
+                    IsFound = true;
+
+                    RankID = (int)reader["RankID"];
+                    TestFees = (decimal)reader["TestFees"];
+                }
+                else
+                {
+                    // The record was not found
+                    IsFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+
         public static int AddNewRank(string RankName, decimal TestFees)
         {
             // This function will return the new person id if succeeded and -1 if not
@@ -203,7 +250,43 @@ where RankID = @RankID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from BeltRanks";
+            string query = @"select * from BeltRanks order by RankID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+        }
+
+
+        public static DataTable GetAllBeltRanksName()
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select RankName from BeltRanks order by RankID";
 
             SqlCommand command = new SqlCommand(query, connection);
 

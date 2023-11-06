@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KarateClub.Dashboard;
+using KarateClub.Members;
 
 namespace KarateClub.Main
 {
@@ -57,7 +58,7 @@ namespace KarateClub.Main
         {
             if (currentBtn != null)
             {
-                currentBtn.BackColor = Color.Black;
+                currentBtn.BackColor = Color.FromArgb(38, 32, 37);
                 currentBtn.ForeColor = Color.Gainsboro;
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
                 currentBtn.IconColor = Color.Gainsboro;
@@ -111,7 +112,7 @@ namespace KarateClub.Main
         private void btnMembers_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListMembers());
         }
 
         private void btnInstructors_Click(object sender, EventArgs e)

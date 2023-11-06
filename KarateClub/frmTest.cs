@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KarateClub.Members;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace KarateClub
         public frmTest()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmAddEditMember AddNewMember = new frmAddEditMember();
+            AddNewMember.Show();
         }
     }
 }

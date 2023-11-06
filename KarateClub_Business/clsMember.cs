@@ -3,21 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KarateClub_Business
 {
-    public class clsMember
+    public class clsMember : clsPerson
     {
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
         public int MemberID { get; set; }
-        public int PersonID { get; set; }
         public string EmergencyContactInfo { get; set; }
         public int LastBeltRankID { get; set; }
         public bool IsActive { get; set; }
+
+        public clsBeltRank LastBeltRankInfo { get; set; }
 
         public clsMember()
         {
@@ -30,21 +33,34 @@ namespace KarateClub_Business
             Mode = enMode.AddNew;
         }
 
-        private clsMember(int MemberID, int PersonID, string EmergencyContactInfo,
+        private clsMember(int PersonID, string Name, string Address,
+            string Phone, string Email, DateTime DateOfBirth, enGender Gender,
+            string ImagePath, int MemberID, string EmergencyContactInfo,
             int LastBeltRankID, bool IsActive)
         {
+            base.PersonID = PersonID;
+            base.Name = Name;
+            base.Address = Address;
+            base.Phone = Phone;
+            base.Email = Email;
+            base.DateOfBirth = DateOfBirth;
+            base.Gender = Gender;
+            base.ImagePath = ImagePath;
+
             this.MemberID = MemberID;
             this.PersonID = PersonID;
             this.EmergencyContactInfo = EmergencyContactInfo;
             this.LastBeltRankID = LastBeltRankID;
             this.IsActive = IsActive;
 
+            this.LastBeltRankInfo = clsBeltRank.Find(LastBeltRankID);
+
             Mode = enMode.Update;
         }
 
         private bool _AddNewMember()
         {
-            this.MemberID = clsMemberData.AddNewMember(this.PersonID, this.EmergencyContactInfo, 
+            this.MemberID = clsMemberData.AddNewMember(this.PersonID, this.EmergencyContactInfo,
                 this.LastBeltRankID, this.IsActive);
 
             return (this.MemberID != -1);
@@ -58,6 +74,13 @@ namespace KarateClub_Business
 
         public bool Save()
         {
+            base.Mode = (clsPerson.enMode)Mode;
+
+            if (!base.Save())
+            {
+                return false;
+            }
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -90,7 +113,16 @@ namespace KarateClub_Business
 
             if (IsFound)
             {
-                return new clsMember(MemberID, PersonID, EmergencyContactInfo, LastBeltRankID, IsActive);
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person == null)
+                {
+                    return null;
+                }
+
+                return new clsMember(Person.PersonID, Person.Name, Person.Address, Person.Phone,
+                    Person.Email, Person.DateOfBirth, Person.Gender, Person.ImagePath, MemberID,
+                    EmergencyContactInfo, LastBeltRankID, IsActive);
             }
             else
             {
@@ -98,9 +130,26 @@ namespace KarateClub_Business
             }
         }
 
+        private static int _GetPersonIDByMemberID(int MemberID)
+        {
+            return clsMemberData.GetPersonIDByMemberID(MemberID);
+        }
+
         public static bool DeleteMember(int MemberID)
         {
-            return clsMemberData.DeleteMember(MemberID);
+            int PersonID = _GetPersonIDByMemberID(MemberID);
+
+            if (PersonID == -1)
+            {
+                return false;
+            }
+
+            if (!clsMemberData.DeleteMember(MemberID))
+            {
+                return false;
+            }
+
+            return clsPerson.DeletePerson(PersonID);
         }
 
         public static bool DoesMemberExist(int MemberID)

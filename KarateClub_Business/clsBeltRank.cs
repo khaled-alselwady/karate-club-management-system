@@ -86,6 +86,23 @@ namespace KarateClub_Business
             }
         }
 
+        public static clsBeltRank Find(string RankName)
+        {
+            int RankID = -1;
+            decimal TestFees = -1M;
+
+            bool IsFound = clsBeltRankData.GetRankInfoByName(RankName, ref RankID, ref TestFees);
+
+            if (IsFound)
+            {
+                return new clsBeltRank(RankID, RankName, TestFees);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static bool DeleteRank(int RankID)
         {
             return clsBeltRankData.DeleteRank(RankID);
@@ -101,6 +118,10 @@ namespace KarateClub_Business
             return clsBeltRankData.GetAllBeltRanks();
         }
 
+        public static DataTable GetAllBeltRanksName()
+        {
+            return clsBeltRankData.GetAllBeltRanksName();
+        }
     }
 
 
