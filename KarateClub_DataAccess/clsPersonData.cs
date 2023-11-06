@@ -12,8 +12,9 @@ namespace KarateClub_DataAccess
 {
     public class clsPersonData
     {
-        public static bool GetPersonInfoByPersonID(int PersonID, ref string Name,
-            ref string Address, ref string ContactInfo)
+        public static bool GetPersonInfoByID(int PersonID, ref string Name, 
+            ref string Address, ref string Phone, ref string Email, 
+            ref DateTime DateOfBirth, ref byte Gender, ref string ImagePath)
         {
             bool IsFound = false;
 
@@ -33,14 +34,20 @@ namespace KarateClub_DataAccess
 
                 if (reader.Read())
                 {
+                    // The record was found
                     IsFound = true;
 
                     Name = (string)reader["Name"];
-                    Address = (reader["Address"] != DBNull.Value) ? ((string)reader["Address"]) : ("");
-                    ContactInfo = (string)reader["ContactInfo"];
+                    Address = (reader["Address"] != DBNull.Value) ? (string)reader["Address"] : string.Empty;
+                    Phone = (string)reader["Phone"];
+                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : string.Empty;
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    Gender = (byte)reader["Gender"];
+                    ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : string.Empty;
                 }
                 else
                 {
+                    // The record was not found
                     IsFound = false;
                 }
 
@@ -58,21 +65,22 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
-        public static int AddNewPerson(string Name, string Address, string ContactInfo)
+
+        public static int AddNewPerson(string Name, string Address, string Phone,
+            string Email, DateTime DateOfBirth, byte Gender, string ImagePath)
         {
+            // This function will return the new person id if succeeded and -1 if not
             int PersonID = -1;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"insert into people (Name, Address, ContactInfo)
-                             values (@Name, @Address, @ContactInfo)
-                             select scope_identity()";
+            string query = @"insert into People (Name, Address, Phone, Email, DateOfBirth, Gender, ImagePath)
+values (@Name, @Address, @Phone, @Email, @DateOfBirth, @Gender, @ImagePath)
+select scope_identity()";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Name", Name);
-            command.Parameters.AddWithValue("@ContactInfo", ContactInfo);
-
             if (string.IsNullOrWhiteSpace(Address))
             {
                 command.Parameters.AddWithValue("@Address", DBNull.Value);
@@ -80,6 +88,25 @@ namespace KarateClub_DataAccess
             else
             {
                 command.Parameters.AddWithValue("@Address", Address);
+            }
+            command.Parameters.AddWithValue("@Phone", Phone);
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                command.Parameters.AddWithValue("@Email", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@Email", Email);
+            }
+            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+            command.Parameters.AddWithValue("@Gender", Gender);
+            if (string.IsNullOrWhiteSpace(ImagePath))
+            {
+                command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@ImagePath", ImagePath);
             }
 
             try
@@ -105,25 +132,28 @@ namespace KarateClub_DataAccess
             return PersonID;
         }
 
-        public static bool UpdatePerson(int PersonID, string Name,
-             string Address, string ContactInfo)
+
+        public static bool UpdatePerson(int PersonID, string Name, string Address,
+            string Phone, string Email, DateTime DateOfBirth, byte Gender, string ImagePath)
         {
-            int RowsAffected = 0;
+            int RowAffected = 0;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"update people
-                             set    Name = @Name,
-                                    Address = @Address,
-                                    ContactInfo = @ContactInfo
-                             where  PersonID = @PersonID";
+            string query = @"Update People
+set Name = @Name,
+Address = @Address,
+Phone = @Phone,
+Email = @Email,
+DateOfBirth = @DateOfBirth,
+Gender = @Gender,
+ImagePath = @ImagePath
+where PersonID = @PersonID";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@PersonID", PersonID);
             command.Parameters.AddWithValue("@Name", Name);
-            command.Parameters.AddWithValue("@ContactInfo", ContactInfo);
-
             if (string.IsNullOrWhiteSpace(Address))
             {
                 command.Parameters.AddWithValue("@Address", DBNull.Value);
@@ -132,12 +162,31 @@ namespace KarateClub_DataAccess
             {
                 command.Parameters.AddWithValue("@Address", Address);
             }
+            command.Parameters.AddWithValue("@Phone", Phone);
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                command.Parameters.AddWithValue("@Email", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@Email", Email);
+            }
+            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+            command.Parameters.AddWithValue("@Gender", Gender);
+            if (string.IsNullOrWhiteSpace(ImagePath))
+            {
+                command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@ImagePath", ImagePath);
+            }
 
             try
             {
                 connection.Open();
 
-                RowsAffected = command.ExecuteNonQuery();
+                RowAffected = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -148,12 +197,13 @@ namespace KarateClub_DataAccess
                 connection.Close();
             }
 
-            return (RowsAffected > 0);
+            return (RowAffected > 0);
         }
+
 
         public static bool DeletePerson(int PersonID)
         {
-            int RowsAffected = 0;
+            int RowAffected = 0;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
@@ -167,7 +217,7 @@ namespace KarateClub_DataAccess
             {
                 connection.Open();
 
-                RowsAffected = command.ExecuteNonQuery();
+                RowAffected = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -178,8 +228,9 @@ namespace KarateClub_DataAccess
                 connection.Close();
             }
 
-            return (RowsAffected > 0);
+            return (RowAffected > 0);
         }
+
 
         public static bool DoesPersonExist(int PersonID)
         {
@@ -187,7 +238,7 @@ namespace KarateClub_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select Found = 1 from People where PersonID = PersonID";
+            string query = @"select found = 1 from People where PersonID = @PersonID";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -213,9 +264,10 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
+
         public static DataTable GetAllPeople()
         {
-            DataTable dtPeople = new DataTable();
+            DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
@@ -231,7 +283,7 @@ namespace KarateClub_DataAccess
 
                 if (reader.HasRows)
                 {
-                    dtPeople.Load(reader);
+                    dt.Load(reader);
                 }
 
                 reader.Close();
@@ -245,7 +297,8 @@ namespace KarateClub_DataAccess
                 connection.Close();
             }
 
-            return dtPeople;
+            return dt;
         }
+
     }
 }

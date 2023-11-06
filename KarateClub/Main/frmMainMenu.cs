@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KarateClub.Dashboard;
 
 namespace KarateClub.Main
 {
@@ -104,7 +105,7 @@ namespace KarateClub.Main
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmDashboard());
         }
 
         private void btnMembers_Click(object sender, EventArgs e)

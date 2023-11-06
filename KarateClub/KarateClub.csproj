@@ -59,6 +59,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dashboard\frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\frmDashboard.Designer.cs">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dashboard\frmDashboard.resx">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +123,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pencil-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Instructors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Members.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Subscriptions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BeltTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Payments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Instructor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

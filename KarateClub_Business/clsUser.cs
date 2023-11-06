@@ -168,6 +168,11 @@ namespace KarateClub_Business
             return clsUserData.GetAllUsers();
         }
 
+        public static short Count()
+        {
+            return clsUserData.CountUsers();
+        }
+
     }
 
 

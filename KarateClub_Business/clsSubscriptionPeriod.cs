@@ -118,6 +118,10 @@ namespace KarateClub_Business
             return clsSubscriptionPeriodData.GetAllSubscriptionPeriods();
         }
 
+        public static short Count()
+        {
+            return clsSubscriptionPeriodData.CountSubscriptionPeriods();
+        }
     }
 
 

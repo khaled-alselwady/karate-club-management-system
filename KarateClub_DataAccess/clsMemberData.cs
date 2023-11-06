@@ -243,5 +243,39 @@ where MemberID = @MemberID";
             return dt;
         }
 
+
+        public static short CountMembers()
+        {
+            short Count = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select count(*) from Members";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && short.TryParse(result.ToString(), out short Value))
+                {
+                    Count = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return Count;
+        }
+
     }
 }

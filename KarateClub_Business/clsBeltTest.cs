@@ -121,6 +121,11 @@ namespace KarateClub_Business
             return clsBeltTestData.GetAllBeltTests();
         }
 
+        public static short Count()
+        {
+            return clsBeltTestData.CountBeltTests();
+        }
+
     }
 
 

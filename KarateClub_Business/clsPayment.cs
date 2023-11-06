@@ -105,6 +105,11 @@ namespace KarateClub_Business
             return clsPaymentData.GetAllPayments();
         }
 
+        public static short Count()
+        {
+            return clsPaymentData.CountPayments();
+        }
+
     }
 
 

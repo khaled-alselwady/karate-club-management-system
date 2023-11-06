@@ -101,6 +101,11 @@ namespace KarateClub_Business
             return clsInstructorData.GetAllInstructors();
         }
 
+        public static short Count()
+        {
+            return clsInstructorData.CountInstructors();
+        }
+
     }
 
 
