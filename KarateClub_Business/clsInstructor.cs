@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace KarateClub_Business
 {
-    public class clsInstructor
+    public class clsInstructor : clsPerson
     {
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
         public int InstructorID { get; set; }
-        public int PersonID { get; set; }
         public string Qualification { get; set; }
 
         public clsInstructor()
@@ -26,29 +25,53 @@ namespace KarateClub_Business
             Mode = enMode.AddNew;
         }
 
-        private clsInstructor(int InstructorID, int PersonID, string Qualification)
+        private clsInstructor(int PersonID, string Name, string Address,
+            string Phone, string Email, DateTime DateOfBirth,
+            enGender Gender, string ImagePath, int InstructorID,
+            string Qualification)
         {
+            base.PersonID = PersonID;
+            base.Name = Name;
+            base.Address = Address;
+            base.Phone = Phone;
+            base.Email = Email;
+            base.DateOfBirth = DateOfBirth;
+            base.Gender = Gender;
+            base.ImagePath = ImagePath;
+
             this.InstructorID = InstructorID;
-            this.PersonID = PersonID;
             this.Qualification = Qualification;
 
             Mode = enMode.Update;
         }
 
+        private static int _GetPersonIDByInstructorID(int InstructorID)
+        {
+            return clsInstructorData.GetPersonIDByInstructorID(InstructorID);
+        }
+
         private bool _AddNewInstructor()
         {
-            this.InstructorID = clsInstructorData.AddNewInstructor(this.PersonID, this.Qualification);
+            this.InstructorID = clsInstructorData.AddNewInstructor(this.PersonID,
+                this.Qualification);
 
             return (this.InstructorID != -1);
         }
 
         private bool _UpdateInstructor()
         {
-            return clsInstructorData.UpdateInstructor(this.InstructorID, this.PersonID, this.Qualification);
+            return clsInstructorData.UpdateInstructor(this.InstructorID,
+                this.PersonID, this.Qualification);
         }
 
         public bool Save()
         {
+            base.Mode = (clsPerson.enMode)Mode;
+            if (!base.Save())
+            {
+                return false;
+            }
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -74,11 +97,22 @@ namespace KarateClub_Business
             int PersonID = -1;
             string Qualification = string.Empty;
 
-            bool IsFound = clsInstructorData.GetInstructorInfoByID(InstructorID, ref PersonID, ref Qualification);
+            bool IsFound = clsInstructorData.GetInstructorInfoByID(InstructorID,
+                ref PersonID, ref Qualification);
 
             if (IsFound)
             {
-                return new clsInstructor(InstructorID, PersonID, Qualification);
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person == null)
+                {
+                    return null;
+                }
+
+                return new clsInstructor(Person.PersonID, Person.Name, Person.Address,
+                    Person.Phone, Person.Email, Person.DateOfBirth, Person.Gender,
+                     Person.ImagePath, InstructorID, Qualification);
+
             }
             else
             {
@@ -88,7 +122,19 @@ namespace KarateClub_Business
 
         public static bool DeleteInstructor(int InstructorID)
         {
-            return clsInstructorData.DeleteInstructor(InstructorID);
+            int PersonID = _GetPersonIDByInstructorID(InstructorID);
+
+            if (PersonID == -1)
+            {
+                return false;
+            }
+
+            if (!clsInstructorData.DeleteInstructor(InstructorID))
+            {
+                return false;
+            }
+
+            return clsPerson.DeletePerson(PersonID);
         }
 
         public static bool DoesInstructorExist(int InstructorID)

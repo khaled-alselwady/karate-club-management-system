@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KarateClub.Dashboard;
 using KarateClub.Members;
+using KarateClub.Instructors;
 
 namespace KarateClub.Main
 {
@@ -118,7 +119,7 @@ namespace KarateClub.Main
         private void btnInstructors_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListInstructors());
         }
 
         private void btnUsers_Click(object sender, EventArgs e)

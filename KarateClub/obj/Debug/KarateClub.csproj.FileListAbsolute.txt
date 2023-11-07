@@ -23,3 +23,10 @@ D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClu
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Members.frmAddEditMember.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Members.frmListMembers.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Members.frmShowMemberDetails.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.UserControls.ucInstructorCard.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.People.UserControls.ucPersonCard.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.UserControls.ucInstructorCardWithFilter.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.frmAddEditInstructor.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.frmFindInstructor.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.frmShowInstructorDetails.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Instructors.frmListInstructors.resources

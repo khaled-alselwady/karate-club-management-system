@@ -40,9 +40,6 @@ namespace KarateClub.Members
                 case "Phone":
                     return "Phone";
 
-                case "Email":
-                    return "Email";
-
                 case "Is Active":
                     return "IsActive";
 
@@ -76,7 +73,7 @@ namespace KarateClub.Members
                 dgvMembersList.Columns[0].Width = 115;
 
                 dgvMembersList.Columns[1].HeaderText = "Name";
-                dgvMembersList.Columns[1].Width = 150;
+                dgvMembersList.Columns[1].Width = 190;
 
                 dgvMembersList.Columns[2].HeaderText = "Rank Name";
                 dgvMembersList.Columns[2].Width = 180;
@@ -85,16 +82,13 @@ namespace KarateClub.Members
                 dgvMembersList.Columns[3].Width = 100;
 
                 dgvMembersList.Columns[4].HeaderText = "Date Of Birth";
-                dgvMembersList.Columns[4].Width = 110;
+                dgvMembersList.Columns[4].Width = 130;
 
-                dgvMembersList.Columns[5].HeaderText = "Email";
-                dgvMembersList.Columns[5].Width = 200;
+                dgvMembersList.Columns[5].HeaderText = "Phone";
+                dgvMembersList.Columns[5].Width = 110;
 
-                dgvMembersList.Columns[6].HeaderText = "Phone";
-                dgvMembersList.Columns[6].Width = 110;
-
-                dgvMembersList.Columns[7].HeaderText = "Is Active";
-                dgvMembersList.Columns[7].Width = 80;
+                dgvMembersList.Columns[6].HeaderText = "Is Active";
+                dgvMembersList.Columns[6].Width = 80;
             }
         }
 
@@ -185,6 +179,11 @@ namespace KarateClub.Members
 
         private void cbBeltRank_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_dtAllMembers.Rows.Count == 0)
+            {
+                return;
+            }
+
             if (cbBeltRank.Text == "All")
             {
                 _dtAllMembers.DefaultView.RowFilter = "";
@@ -199,6 +198,11 @@ namespace KarateClub.Members
 
         private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_dtAllMembers.Rows.Count == 0)
+            {
+                return;
+            }
+
             if (cbGender.Text == "All")
             {
                 _dtAllMembers.DefaultView.RowFilter = "";
@@ -209,11 +213,6 @@ namespace KarateClub.Members
 
             _dtAllMembers.DefaultView.RowFilter = string.Format("[{0}] like '{1}%'", "Gender", cbGender.Text);
             lblNumberOfRecords.Text = dgvMembersList.Rows.Count.ToString();
-        }
-
-        private void cbIsActive_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -227,16 +226,19 @@ namespace KarateClub.Members
         private void addNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
+            AddNewMember.MemberIDBack += RefreshList;
             AddNewMember.Show();
-
-            _RefreshMemberList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember(_GetMemberIDFromDGV());
-            AddNewMember.Show();
+            AddNewMember.MemberIDBack += RefreshList;
+            AddNewMember.Show();           
+        }
 
+        private void RefreshList(object sender, int MemberID)
+        {
             _RefreshMemberList();
         }
 
@@ -262,6 +264,11 @@ namespace KarateClub.Members
 
         private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_dtAllMembers.Rows.Count == 0)
+            {
+                return;
+            }
+
             if (cbIsActive.Text == "All")
             {
                 _dtAllMembers.DefaultView.RowFilter = "";
@@ -285,9 +292,8 @@ namespace KarateClub.Members
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
+            AddNewMember.MemberIDBack += RefreshList;
             AddNewMember.Show();
-
-            _RefreshMemberList();
         }
 
     }

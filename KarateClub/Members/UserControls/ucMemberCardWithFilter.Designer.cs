@@ -29,26 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ucMemberCard1 = new KarateClub.Members.UserControls.ucMemberCard();
             this.gbFilters = new System.Windows.Forms.GroupBox();
-            this.txtFilterValue = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.btnAddNewMember = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
+            this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ucMemberCard1 = new KarateClub.Members.UserControls.ucMemberCard();
             this.gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ucMemberCard1
-            // 
-            this.ucMemberCard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucMemberCard1.BackColor = System.Drawing.Color.White;
-            this.ucMemberCard1.Location = new System.Drawing.Point(3, 86);
-            this.ucMemberCard1.Name = "ucMemberCard1";
-            this.ucMemberCard1.Size = new System.Drawing.Size(959, 267);
-            this.ucMemberCard1.TabIndex = 0;
-            this.ucMemberCard1.Load += new System.EventHandler(this.ucMemberCard1_Load);
             // 
             // gbFilters
             // 
@@ -59,21 +49,21 @@
             this.gbFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbFilters.Location = new System.Drawing.Point(3, 3);
             this.gbFilters.Name = "gbFilters";
-            this.gbFilters.Size = new System.Drawing.Size(955, 77);
+            this.gbFilters.Size = new System.Drawing.Size(891, 77);
             this.gbFilters.TabIndex = 17;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
             // 
-            // txtFilterValue
+            // label22
             // 
-            this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFilterValue.Location = new System.Drawing.Point(141, 29);
-            this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtFilterValue.Name = "txtFilterValue";
-            this.txtFilterValue.Size = new System.Drawing.Size(214, 26);
-            this.txtFilterValue.TabIndex = 17;
-            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
-            this.txtFilterValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtFilterValue_Validating);
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(20, 31);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(107, 20);
+            this.label22.TabIndex = 114;
+            this.label22.Text = "Member ID :";
             // 
             // btnAddNewMember
             // 
@@ -100,20 +90,30 @@
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
-            // label22
+            // txtFilterValue
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(20, 31);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(107, 20);
-            this.label22.TabIndex = 114;
-            this.label22.Text = "Member ID :";
+            this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFilterValue.Location = new System.Drawing.Point(141, 29);
+            this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtFilterValue.Name = "txtFilterValue";
+            this.txtFilterValue.Size = new System.Drawing.Size(214, 26);
+            this.txtFilterValue.TabIndex = 17;
+            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
+            this.txtFilterValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtFilterValue_Validating);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // ucMemberCard1
+            // 
+            this.ucMemberCard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucMemberCard1.BackColor = System.Drawing.Color.White;
+            this.ucMemberCard1.Location = new System.Drawing.Point(3, 86);
+            this.ucMemberCard1.Name = "ucMemberCard1";
+            this.ucMemberCard1.Size = new System.Drawing.Size(895, 356);
+            this.ucMemberCard1.TabIndex = 0;
+            this.ucMemberCard1.Load += new System.EventHandler(this.ucMemberCard1_Load);
             // 
             // ucMemberCardWithFilter
             // 
@@ -123,7 +123,7 @@
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ucMemberCard1);
             this.Name = "ucMemberCardWithFilter";
-            this.Size = new System.Drawing.Size(961, 350);
+            this.Size = new System.Drawing.Size(899, 443);
             this.gbFilters.ResumeLayout(false);
             this.gbFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

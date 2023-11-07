@@ -41,11 +41,11 @@
             this.cbIsActive = new System.Windows.Forms.ComboBox();
             this.cbBeltRank = new System.Windows.Forms.ComboBox();
             this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
-            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.dgvMembersList = new System.Windows.Forms.DataGridView();
             this.btnAddNewMember = new System.Windows.Forms.Button();
             this.cmsEditProfile.SuspendLayout();
@@ -62,7 +62,7 @@
             "All",
             "Male",
             "Female"});
-            this.cbGender.Location = new System.Drawing.Point(309, 249);
+            this.cbGender.Location = new System.Drawing.Point(309, 248);
             this.cbGender.Name = "cbGender";
             this.cbGender.Size = new System.Drawing.Size(113, 28);
             this.cbGender.TabIndex = 146;
@@ -80,7 +80,6 @@
             "Rank Name",
             "Gender",
             "Phone",
-            "Email",
             "Is Active"});
             this.cbFilter.Location = new System.Drawing.Point(87, 248);
             this.cbFilter.Name = "cbFilter";
@@ -92,7 +91,7 @@
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(309, 250);
+            this.txtSearch.Location = new System.Drawing.Point(309, 248);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(256, 26);
@@ -188,19 +187,6 @@
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.cmsEditProfile.Size = new System.Drawing.Size(253, 156);
             // 
-            // pbPersonImage
-            // 
-            this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbPersonImage.Image = global::KarateClub.Properties.Resources.People_400;
-            this.pbPersonImage.InitialImage = null;
-            this.pbPersonImage.Location = new System.Drawing.Point(456, 14);
-            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pbPersonImage.Name = "pbPersonImage";
-            this.pbPersonImage.Size = new System.Drawing.Size(220, 161);
-            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPersonImage.TabIndex = 149;
-            this.pbPersonImage.TabStop = false;
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -242,6 +228,19 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
             this.deleteToolStripMenuItem.Text = "   Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // pbPersonImage
+            // 
+            this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPersonImage.Image = global::KarateClub.Properties.Resources.People_400;
+            this.pbPersonImage.InitialImage = null;
+            this.pbPersonImage.Location = new System.Drawing.Point(456, 14);
+            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pbPersonImage.Name = "pbPersonImage";
+            this.pbPersonImage.Size = new System.Drawing.Size(220, 161);
+            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPersonImage.TabIndex = 149;
+            this.pbPersonImage.TabStop = false;
             // 
             // dgvMembersList
             // 

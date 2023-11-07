@@ -48,7 +48,6 @@ namespace KarateClub_Business
             base.ImagePath = ImagePath;
 
             this.MemberID = MemberID;
-            this.PersonID = PersonID;
             this.EmergencyContactInfo = EmergencyContactInfo;
             this.LastBeltRankID = LastBeltRankID;
             this.IsActive = IsActive;
@@ -108,8 +107,9 @@ namespace KarateClub_Business
             int LastBeltRankID = -1;
             bool IsActive = false;
 
-            bool IsFound = clsMemberData.GetMemberInfoByID(MemberID, ref PersonID, ref EmergencyContactInfo,
-                ref LastBeltRankID, ref IsActive);
+            bool IsFound = clsMemberData.GetMemberInfoByID(MemberID, ref PersonID,
+                ref EmergencyContactInfo, ref LastBeltRankID, ref IsActive);
+
 
             if (IsFound)
             {

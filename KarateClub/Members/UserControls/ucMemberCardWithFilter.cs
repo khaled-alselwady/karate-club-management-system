@@ -36,7 +36,7 @@ namespace KarateClub.Members.UserControls
             set
             {
                 _ShowAddMemberButton = value;
-                btnFind.Visible = _ShowAddMemberButton;
+                btnAddNewMember.Visible = _ShowAddMemberButton;
             }
         }
 
@@ -123,7 +123,15 @@ namespace KarateClub.Members.UserControls
 
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not implemented yet");
+            frmAddEditMember AddNewMember = new frmAddEditMember();
+            AddNewMember.MemberIDBack += AddNewMember_MemberIDBack;
+            AddNewMember.Show();
+        }
+
+        private void AddNewMember_MemberIDBack(object sender, int MemberID)
+        {
+            txtFilterValue.Text = MemberID.ToString();
+            ucMemberCard1.LoadMemberInfo(MemberID);
         }
     }
 }

@@ -218,7 +218,7 @@ where InstructorID = @InstructorID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Instructors";
+            string query = @"select * from InstructorsDetails_view";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -279,6 +279,42 @@ where InstructorID = @InstructorID";
             }
 
             return Count;
+        }
+
+
+        public static int GetPersonIDByInstructorID(int InstructorID)
+        {
+            int PersonID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select PersonID from Instructors where InstructorID = @InstructorID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@InstructorID", InstructorID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Value))
+                {
+                    PersonID = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return PersonID;
         }
 
     }

@@ -34,54 +34,23 @@ namespace KarateClub.Members.UserControls
             this._Member = null;
 
             lblMemberID.Text = "[????]";
-            lblFullName.Text = "[????]";
-            lblDateOfBirth.Text = "[????]";
-            lblGender.Text = "[????]";
-            lblAddress.Text = "[????]";
-            lblEmail.Text = "[????]";
-            lblPhone.Text = "[????]";
             lblLastBeltRank.Text = "[????]";
             lblIsActive.Text = "[????]";
             lblEmergencyContact.Text = "[????]";
-            pbMemberImage.Image = Resources.DefaultMale;
 
             llEditMemberInfo.Enabled = false;
-        }
-
-        private void _LoadMemberImage()
-        {
-            if (_Member.ImagePath != "")
-            {
-                if (File.Exists(_Member.ImagePath))
-                    pbMemberImage.ImageLocation = _Member.ImagePath;
-                else
-                    MessageBox.Show("Could not find this image: = " + _Member.ImagePath,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (_Member.Gender == (byte)clsPerson.enGender.Male)
-                    pbMemberImage.Image = Resources.DefaultMale;
-                else
-                    pbMemberImage.Image = Resources.DefaultFemale;
-            }
         }
 
         private void _FillMemberInfo()
         {
             llEditMemberInfo.Enabled = true;
+
+            ucPersonCard1.LoadPersonInfo(_Member.PersonID);
+
             lblMemberID.Text = _Member.MemberID.ToString();
-            lblFullName.Text = _Member.Name;
-            lblDateOfBirth.Text = clsFormat.DateToShort(_Member.DateOfBirth);
-            lblGender.Text = _Member.GenderName;
-            lblAddress.Text = _Member.Address;
-            lblEmail.Text = _Member.Email;
-            lblPhone.Text = _Member.Phone;
             lblLastBeltRank.Text = _Member.LastBeltRankInfo.RankName;
             lblIsActive.Text = (_Member.IsActive) ? "Yes" : "No";
             lblEmergencyContact.Text = _Member.EmergencyContactInfo;
-
-            _LoadMemberImage();
         }
 
         public void LoadMemberInfo(int MemberID)
@@ -116,8 +85,12 @@ namespace KarateClub.Members.UserControls
         private void llEditMemberInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditMember EditMember = new frmAddEditMember(_MemberID);
-            EditMember.Show();
+            EditMember.MemberIDBack += Refresh;
+            EditMember.Show();            
+        }
 
+        private void Refresh(object sender, int MemberID)
+        {
             LoadMemberInfo(_MemberID);
         }
     }

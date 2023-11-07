@@ -39,19 +39,20 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(81)))), ((int)(((byte)(4)))));
             this.label1.Location = new System.Drawing.Point(1, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(959, 48);
+            this.label1.Size = new System.Drawing.Size(888, 48);
             this.label1.TabIndex = 1;
             this.label1.Text = "Member Details";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::KarateClub.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(804, 373);
+            this.btnClose.Location = new System.Drawing.Point(733, 445);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(156, 37);
@@ -63,9 +64,9 @@
             // ucMemberCard1
             // 
             this.ucMemberCard1.BackColor = System.Drawing.Color.White;
-            this.ucMemberCard1.Location = new System.Drawing.Point(1, 98);
+            this.ucMemberCard1.Location = new System.Drawing.Point(1, 75);
             this.ucMemberCard1.Name = "ucMemberCard1";
-            this.ucMemberCard1.Size = new System.Drawing.Size(959, 267);
+            this.ucMemberCard1.Size = new System.Drawing.Size(897, 363);
             this.ucMemberCard1.TabIndex = 0;
             // 
             // frmShowMemberDetails
@@ -73,7 +74,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(965, 418);
+            this.ClientSize = new System.Drawing.Size(896, 490);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ucMemberCard1);

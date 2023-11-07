@@ -74,6 +74,42 @@
     <Compile Include="Global Classes\clsFormat.cs" />
     <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="Global Classes\clsValidation.cs" />
+    <Compile Include="Instructors\frmAddEditInstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Instructors\frmAddEditInstructor.Designer.cs">
+      <DependentUpon>frmAddEditInstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instructors\frmFindInstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Instructors\frmFindInstructor.Designer.cs">
+      <DependentUpon>frmFindInstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instructors\frmListInstructors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Instructors\frmListInstructors.Designer.cs">
+      <DependentUpon>frmListInstructors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instructors\frmShowInstructorDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Instructors\frmShowInstructorDetails.Designer.cs">
+      <DependentUpon>frmShowInstructorDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instructors\UserControls\ucInstructorCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Instructors\UserControls\ucInstructorCard.Designer.cs">
+      <DependentUpon>ucInstructorCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instructors\UserControls\ucInstructorCardWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Instructors\UserControls\ucInstructorCardWithFilter.Designer.cs">
+      <DependentUpon>ucInstructorCardWithFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\frmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +152,12 @@
     <Compile Include="Members\UserControls\ucMemberCardWithFilter.Designer.cs">
       <DependentUpon>ucMemberCardWithFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="People\UserControls\ucPersonCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="People\UserControls\ucPersonCard.Designer.cs">
+      <DependentUpon>ucPersonCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dashboard\frmDashboard.resx">
@@ -123,6 +165,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\frmAddEditInstructor.resx">
+      <DependentUpon>frmAddEditInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\frmFindInstructor.resx">
+      <DependentUpon>frmFindInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\frmListInstructors.resx">
+      <DependentUpon>frmListInstructors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\frmShowInstructorDetails.resx">
+      <DependentUpon>frmShowInstructorDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\UserControls\ucInstructorCard.resx">
+      <DependentUpon>ucInstructorCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\UserControls\ucInstructorCardWithFilter.resx">
+      <DependentUpon>ucInstructorCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\frmMainMenu.resx">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
@@ -144,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Members\UserControls\ucMemberCardWithFilter.resx">
       <DependentUpon>ucMemberCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\UserControls\ucPersonCard.resx">
+      <DependentUpon>ucPersonCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
