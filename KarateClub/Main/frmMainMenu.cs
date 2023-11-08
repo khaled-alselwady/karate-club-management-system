@@ -212,7 +212,10 @@ namespace KarateClub.Main
             }
             else
             {
-                pbUserImage.Image = Resources.DefaultMale;
+                if (clsGlobal.CurrentUser.Gender == clsPerson.enGender.Male)
+                    pbUserImage.Image = Resources.DefaultMale;
+                else
+                    pbUserImage.Image = Resources.DefaultFemale;
             }
 
             lblName.Text = clsGlobal.CurrentUser.Username;
