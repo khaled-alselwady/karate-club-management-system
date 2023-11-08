@@ -31,7 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnAddNewInstructor = new System.Windows.Forms.Button();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,24 +45,11 @@
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnAddNewInstructor = new System.Windows.Forms.Button();
             this.cmsEditProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInstructorsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAddNewInstructor
-            // 
-            this.btnAddNewInstructor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddNewInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewInstructor.Image = global::KarateClub.Properties.Resources.Add_Person_40;
-            this.btnAddNewInstructor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewInstructor.Location = new System.Drawing.Point(1094, 232);
-            this.btnAddNewInstructor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnAddNewInstructor.Name = "btnAddNewInstructor";
-            this.btnAddNewInstructor.Size = new System.Drawing.Size(49, 49);
-            this.btnAddNewInstructor.TabIndex = 171;
-            this.btnAddNewInstructor.UseVisualStyleBackColor = true;
-            this.btnAddNewInstructor.Click += new System.EventHandler(this.btnAddNewInstructor_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -270,6 +256,17 @@
             this.label1.TabIndex = 160;
             this.label1.Text = "Filter By:";
             // 
+            // btnAddNewInstructor
+            // 
+            this.btnAddNewInstructor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNewInstructor.Image = global::KarateClub.Properties.Resources.Add_Person_401;
+            this.btnAddNewInstructor.Location = new System.Drawing.Point(1055, 226);
+            this.btnAddNewInstructor.Name = "btnAddNewInstructor";
+            this.btnAddNewInstructor.Size = new System.Drawing.Size(88, 55);
+            this.btnAddNewInstructor.TabIndex = 171;
+            this.btnAddNewInstructor.UseVisualStyleBackColor = true;
+            this.btnAddNewInstructor.Click += new System.EventHandler(this.btnAddNewInstructor_Click);
+            // 
             // frmListInstructors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,8 +297,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAddNewInstructor;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewMemberToolStripMenuItem;
@@ -316,5 +311,6 @@
         private System.Windows.Forms.ComboBox cbFilter;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddNewInstructor;
     }
 }

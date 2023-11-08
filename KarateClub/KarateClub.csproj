@@ -160,6 +160,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\frmAddEditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmAddEditUser.Designer.cs">
+      <DependentUpon>frmAddEditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\frmFindUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmFindUser.Designer.cs">
+      <DependentUpon>frmFindUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\frmListUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmListUsers.Designer.cs">
+      <DependentUpon>frmListUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\frmShowUserDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmShowUserDetails.Designer.cs">
+      <DependentUpon>frmShowUserDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserControls\ucUserCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Users\UserControls\ucUserCard.Designer.cs">
+      <DependentUpon>ucUserCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserControls\ucUserCardWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Users\UserControls\ucUserCardWithFilter.Designer.cs">
+      <DependentUpon>ucUserCardWithFilter.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Dashboard\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -218,6 +254,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Users\frmAddEditUser.resx">
+      <DependentUpon>frmAddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmFindUser.resx">
+      <DependentUpon>frmFindUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmListUsers.resx">
+      <DependentUpon>frmListUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmShowUserDetails.resx">
+      <DependentUpon>frmShowUserDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\UserControls\ucUserCard.resx">
+      <DependentUpon>ucUserCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\UserControls\ucUserCardWithFilter.resx">
+      <DependentUpon>ucUserCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -300,6 +354,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Delete 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Person 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Man 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Email 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Address 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\call 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\belt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\active-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inactive-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddPerson 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qualification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\confirm-password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add Person 401.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

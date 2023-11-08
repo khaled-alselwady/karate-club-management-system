@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KarateClub.Main;
 using KarateClub.Members;
+using KarateClub.Users;
 
 namespace KarateClub
 {

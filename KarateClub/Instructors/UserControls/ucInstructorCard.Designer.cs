@@ -35,13 +35,16 @@
             this.label22 = new System.Windows.Forms.Label();
             this.lblInstructorID = new System.Windows.Forms.Label();
             this.ucPersonCard1 = new KarateClub.People.UserControls.ucPersonCard();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.lblQualifications);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label8);
@@ -108,7 +111,7 @@
             // 
             this.lblInstructorID.AutoSize = true;
             this.lblInstructorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructorID.Location = new System.Drawing.Point(140, 37);
+            this.lblInstructorID.Location = new System.Drawing.Point(174, 37);
             this.lblInstructorID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInstructorID.Name = "lblInstructorID";
             this.lblInstructorID.Size = new System.Drawing.Size(53, 20);
@@ -122,9 +125,20 @@
             this.ucPersonCard1.Size = new System.Drawing.Size(895, 231);
             this.ucPersonCard1.TabIndex = 0;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox2.Location = new System.Drawing.Point(136, 35);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 143;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(452, 37);
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.qualification;
+            this.pictureBox1.Location = new System.Drawing.Point(452, 35);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(31, 26);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -141,6 +155,7 @@
             this.Size = new System.Drawing.Size(899, 317);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -156,5 +171,6 @@
         private System.Windows.Forms.LinkLabel llEditInstructorInfo;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblInstructorID;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbGender = new System.Windows.Forms.ComboBox();
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -41,16 +41,16 @@
             this.cbIsActive = new System.Windows.Forms.ComboBox();
             this.cbBeltRank = new System.Windows.Forms.ComboBox();
             this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.dgvMembersList = new System.Windows.Forms.DataGridView();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbPersonImage = new System.Windows.Forms.PictureBox();
-            this.dgvMembersList = new System.Windows.Forms.DataGridView();
             this.btnAddNewMember = new System.Windows.Forms.Button();
+            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.cmsEditProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembersList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             this.SuspendLayout();
             // 
             // cbGender
@@ -187,6 +187,49 @@
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.cmsEditProfile.Size = new System.Drawing.Size(253, 156);
             // 
+            // dgvMembersList
+            // 
+            this.dgvMembersList.AllowUserToAddRows = false;
+            this.dgvMembersList.AllowUserToDeleteRows = false;
+            this.dgvMembersList.AllowUserToResizeRows = false;
+            this.dgvMembersList.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMembersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvMembersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMembersList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvMembersList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvMembersList.Location = new System.Drawing.Point(14, 283);
+            this.dgvMembersList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvMembersList.MultiSelect = false;
+            this.dgvMembersList.Name = "dgvMembersList";
+            this.dgvMembersList.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMembersList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvMembersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMembersList.Size = new System.Drawing.Size(1128, 371);
+            this.dgvMembersList.TabIndex = 158;
+            this.dgvMembersList.TabStop = false;
+            this.dgvMembersList.DoubleClick += new System.EventHandler(this.dgvMembersList_DoubleClick);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -229,6 +272,17 @@
             this.deleteToolStripMenuItem.Text = "   Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // btnAddNewMember
+            // 
+            this.btnAddNewMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNewMember.Image = global::KarateClub.Properties.Resources.Add_Person_401;
+            this.btnAddNewMember.Location = new System.Drawing.Point(1054, 222);
+            this.btnAddNewMember.Name = "btnAddNewMember";
+            this.btnAddNewMember.Size = new System.Drawing.Size(88, 55);
+            this.btnAddNewMember.TabIndex = 159;
+            this.btnAddNewMember.UseVisualStyleBackColor = true;
+            this.btnAddNewMember.Click += new System.EventHandler(this.btnAddNewMember_Click);
+            // 
             // pbPersonImage
             // 
             this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -241,63 +295,6 @@
             this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonImage.TabIndex = 149;
             this.pbPersonImage.TabStop = false;
-            // 
-            // dgvMembersList
-            // 
-            this.dgvMembersList.AllowUserToAddRows = false;
-            this.dgvMembersList.AllowUserToDeleteRows = false;
-            this.dgvMembersList.AllowUserToResizeRows = false;
-            this.dgvMembersList.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgvMembersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMembersList.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgvMembersList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvMembersList.Location = new System.Drawing.Point(14, 283);
-            this.dgvMembersList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dgvMembersList.MultiSelect = false;
-            this.dgvMembersList.Name = "dgvMembersList";
-            this.dgvMembersList.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembersList.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvMembersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembersList.Size = new System.Drawing.Size(1128, 371);
-            this.dgvMembersList.TabIndex = 158;
-            this.dgvMembersList.TabStop = false;
-            this.dgvMembersList.DoubleClick += new System.EventHandler(this.dgvMembersList_DoubleClick);
-            // 
-            // btnAddNewMember
-            // 
-            this.btnAddNewMember.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddNewMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewMember.Image = global::KarateClub.Properties.Resources.Add_Person_40;
-            this.btnAddNewMember.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewMember.Location = new System.Drawing.Point(1093, 228);
-            this.btnAddNewMember.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnAddNewMember.Name = "btnAddNewMember";
-            this.btnAddNewMember.Size = new System.Drawing.Size(49, 49);
-            this.btnAddNewMember.TabIndex = 159;
-            this.btnAddNewMember.UseVisualStyleBackColor = true;
-            this.btnAddNewMember.Click += new System.EventHandler(this.btnAddNewMember_Click);
             // 
             // frmListMembers
             // 
@@ -323,8 +320,8 @@
             this.Text = "frmListMembers";
             this.Load += new System.EventHandler(this.frmListMembers_Load);
             this.cmsEditProfile.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembersList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

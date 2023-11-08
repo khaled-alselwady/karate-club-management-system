@@ -50,6 +50,14 @@ namespace KarateClub.Members.UserControls
             lblMemberID.Text = _Member.MemberID.ToString();
             lblLastBeltRank.Text = _Member.LastBeltRankInfo.RankName;
             lblIsActive.Text = (_Member.IsActive) ? "Yes" : "No";
+
+            if (_Member.IsActive)
+                pbIsActive.Image = Resources.active_user;
+
+            else
+                pbIsActive.Image = Resources.inactive_user;
+
+
             lblEmergencyContact.Text = _Member.EmergencyContactInfo;
         }
 
@@ -86,7 +94,7 @@ namespace KarateClub.Members.UserControls
         {
             frmAddEditMember EditMember = new frmAddEditMember(_MemberID);
             EditMember.MemberIDBack += Refresh;
-            EditMember.Show();            
+            EditMember.Show();
         }
 
         private void Refresh(object sender, int MemberID)

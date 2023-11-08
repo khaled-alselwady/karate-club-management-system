@@ -52,13 +52,31 @@
             this.lblMemberID = new System.Windows.Forms.Label();
             this.llRemoveImage = new System.Windows.Forms.LinkLabel();
             this.llSetImage = new System.Windows.Forms.LinkLabel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbGender = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pbMemberImage = new System.Windows.Forms.PictureBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMemberImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGender)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMemberImage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -67,7 +85,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(81)))), ((int)(((byte)(4)))));
             this.lblTitle.Location = new System.Drawing.Point(5, 9);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(1045, 48);
+            this.lblTitle.Size = new System.Drawing.Size(1123, 48);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Tilte";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,7 +160,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(436, 171);
+            this.label10.Location = new System.Drawing.Point(486, 171);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(171, 20);
@@ -153,7 +171,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(474, 99);
+            this.label8.Location = new System.Drawing.Point(524, 99);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(133, 20);
@@ -164,7 +182,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(542, 135);
+            this.label4.Location = new System.Drawing.Point(592, 135);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
@@ -175,7 +193,7 @@
             // 
             this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(143, 129);
+            this.txtName.Location = new System.Drawing.Point(188, 129);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(275, 29);
             this.txtName.TabIndex = 148;
@@ -185,7 +203,7 @@
             // 
             this.dtpDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDateOfBirth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDateOfBirth.Location = new System.Drawing.Point(143, 166);
+            this.dtpDateOfBirth.Location = new System.Drawing.Point(188, 166);
             this.dtpDateOfBirth.Name = "dtpDateOfBirth";
             this.dtpDateOfBirth.Size = new System.Drawing.Size(173, 26);
             this.dtpDateOfBirth.TabIndex = 149;
@@ -194,7 +212,7 @@
             // 
             this.rbMale.AutoSize = true;
             this.rbMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMale.Location = new System.Drawing.Point(143, 205);
+            this.rbMale.Location = new System.Drawing.Point(188, 205);
             this.rbMale.Name = "rbMale";
             this.rbMale.Size = new System.Drawing.Size(61, 24);
             this.rbMale.TabIndex = 150;
@@ -207,7 +225,7 @@
             // 
             this.rbFemale.AutoSize = true;
             this.rbFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFemale.Location = new System.Drawing.Point(247, 205);
+            this.rbFemale.Location = new System.Drawing.Point(292, 205);
             this.rbFemale.Name = "rbFemale";
             this.rbFemale.Size = new System.Drawing.Size(80, 24);
             this.rbFemale.TabIndex = 151;
@@ -220,7 +238,7 @@
             // 
             this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(143, 237);
+            this.txtEmail.Location = new System.Drawing.Point(188, 237);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(275, 29);
             this.txtEmail.TabIndex = 152;
@@ -230,7 +248,7 @@
             // 
             this.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(143, 282);
+            this.txtAddress.Location = new System.Drawing.Point(188, 282);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(684, 101);
@@ -241,7 +259,7 @@
             this.cbLastBeltRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLastBeltRank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLastBeltRank.FormattingEnabled = true;
-            this.cbLastBeltRank.Location = new System.Drawing.Point(614, 96);
+            this.cbLastBeltRank.Location = new System.Drawing.Point(697, 96);
             this.cbLastBeltRank.Name = "cbLastBeltRank";
             this.cbLastBeltRank.Size = new System.Drawing.Size(213, 28);
             this.cbLastBeltRank.TabIndex = 154;
@@ -250,7 +268,7 @@
             // 
             this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone.Location = new System.Drawing.Point(614, 129);
+            this.txtPhone.Location = new System.Drawing.Point(697, 129);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(213, 29);
             this.txtPhone.TabIndex = 155;
@@ -261,7 +279,7 @@
             // 
             this.txtEmergencyContact.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmergencyContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmergencyContact.Location = new System.Drawing.Point(614, 166);
+            this.txtEmergencyContact.Location = new System.Drawing.Point(697, 166);
             this.txtEmergencyContact.Name = "txtEmergencyContact";
             this.txtEmergencyContact.Size = new System.Drawing.Size(213, 29);
             this.txtEmergencyContact.TabIndex = 156;
@@ -271,7 +289,7 @@
             // 
             this.chkIsActive.AutoSize = true;
             this.chkIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIsActive.Location = new System.Drawing.Point(614, 207);
+            this.chkIsActive.Location = new System.Drawing.Point(697, 207);
             this.chkIsActive.Name = "chkIsActive";
             this.chkIsActive.Size = new System.Drawing.Size(92, 24);
             this.chkIsActive.TabIndex = 157;
@@ -282,7 +300,7 @@
             // 
             this.lblMemberID.AutoSize = true;
             this.lblMemberID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberID.Location = new System.Drawing.Point(139, 96);
+            this.lblMemberID.Location = new System.Drawing.Point(184, 96);
             this.lblMemberID.Name = "lblMemberID";
             this.lblMemberID.Size = new System.Drawing.Size(53, 20);
             this.lblMemberID.TabIndex = 158;
@@ -292,7 +310,7 @@
             // 
             this.llRemoveImage.AutoSize = true;
             this.llRemoveImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llRemoveImage.Location = new System.Drawing.Point(915, 330);
+            this.llRemoveImage.Location = new System.Drawing.Point(1000, 330);
             this.llRemoveImage.Name = "llRemoveImage";
             this.llRemoveImage.Size = new System.Drawing.Size(68, 20);
             this.llRemoveImage.TabIndex = 161;
@@ -304,13 +322,111 @@
             // 
             this.llSetImage.AutoSize = true;
             this.llSetImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llSetImage.Location = new System.Drawing.Point(906, 301);
+            this.llSetImage.Location = new System.Drawing.Point(991, 301);
             this.llSetImage.Name = "llSetImage";
             this.llSetImage.Size = new System.Drawing.Size(83, 20);
             this.llSetImage.TabIndex = 159;
             this.llSetImage.TabStop = true;
             this.llSetImage.Text = "Set Image";
             this.llSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llSetImage_LinkClicked);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::KarateClub.Properties.Resources.belt;
+            this.pictureBox4.Location = new System.Drawing.Point(660, 96);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 173;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::KarateClub.Properties.Resources.call_32;
+            this.pictureBox9.Location = new System.Drawing.Point(660, 169);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 172;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.Phone_32;
+            this.pictureBox2.Location = new System.Drawing.Point(660, 132);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 171;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::KarateClub.Properties.Resources.Address_32;
+            this.pictureBox7.Location = new System.Drawing.Point(137, 282);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 170;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox1.Location = new System.Drawing.Point(137, 96);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 169;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pbGender
+            // 
+            this.pbGender.Image = global::KarateClub.Properties.Resources.Man_32;
+            this.pbGender.Location = new System.Drawing.Point(137, 204);
+            this.pbGender.Name = "pbGender";
+            this.pbGender.Size = new System.Drawing.Size(31, 26);
+            this.pbGender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbGender.TabIndex = 168;
+            this.pbGender.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::KarateClub.Properties.Resources.Person_32;
+            this.pictureBox8.Location = new System.Drawing.Point(137, 132);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 167;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::KarateClub.Properties.Resources.Email_32;
+            this.pictureBox5.Location = new System.Drawing.Point(137, 240);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 166;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::KarateClub.Properties.Resources.Calendar_32;
+            this.pictureBox3.Location = new System.Drawing.Point(137, 168);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 165;
+            this.pictureBox3.TabStop = false;
             // 
             // btnSave
             // 
@@ -319,7 +435,7 @@
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::KarateClub.Properties.Resources.Save_32;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(671, 391);
+            this.btnSave.Location = new System.Drawing.Point(715, 391);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(156, 37);
@@ -335,7 +451,7 @@
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::KarateClub.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(507, 391);
+            this.btnClose.Location = new System.Drawing.Point(551, 391);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(156, 37);
@@ -350,7 +466,7 @@
             this.pbMemberImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMemberImage.Image = global::KarateClub.Properties.Resources.DefaultMale;
             this.pbMemberImage.InitialImage = null;
-            this.pbMemberImage.Location = new System.Drawing.Point(860, 129);
+            this.pbMemberImage.Location = new System.Drawing.Point(945, 129);
             this.pbMemberImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbMemberImage.Name = "pbMemberImage";
             this.pbMemberImage.Size = new System.Drawing.Size(169, 167);
@@ -358,21 +474,22 @@
             this.pbMemberImage.TabIndex = 160;
             this.pbMemberImage.TabStop = false;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // frmAddEditMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1052, 432);
+            this.ClientSize = new System.Drawing.Size(1130, 432);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbGender);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.llRemoveImage);
@@ -404,8 +521,17 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add/Edit Member";
             this.Load += new System.EventHandler(this.frmAddEditMember_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pbMemberImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGender)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMemberImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,5 +567,14 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbGender;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }

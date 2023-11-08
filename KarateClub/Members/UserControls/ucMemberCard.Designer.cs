@@ -38,19 +38,23 @@
             this.label22 = new System.Windows.Forms.Label();
             this.lblMemberID = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.ucPersonCard1 = new KarateClub.People.UserControls.ucPersonCard();
+            this.pbIsActive = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.ucPersonCard1 = new KarateClub.People.UserControls.ucPersonCard();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIsActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.pbIsActive);
+            this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.lblEmergencyContact);
             this.groupBox1.Controls.Add(this.pictureBox9);
             this.groupBox1.Controls.Add(this.label10);
@@ -61,7 +65,6 @@
             this.groupBox1.Controls.Add(this.lblIsActive);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.lblMemberID);
-            this.groupBox1.Controls.Add(this.pictureBox6);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(4, 232);
@@ -77,7 +80,7 @@
             // 
             this.lblEmergencyContact.AutoSize = true;
             this.lblEmergencyContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmergencyContact.Location = new System.Drawing.Point(540, 82);
+            this.lblEmergencyContact.Location = new System.Drawing.Point(533, 82);
             this.lblEmergencyContact.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmergencyContact.Name = "lblEmergencyContact";
             this.lblEmergencyContact.Size = new System.Drawing.Size(53, 20);
@@ -99,7 +102,7 @@
             // 
             this.lblLastBeltRank.AutoSize = true;
             this.lblLastBeltRank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastBeltRank.Location = new System.Drawing.Point(540, 37);
+            this.lblLastBeltRank.Location = new System.Drawing.Point(533, 37);
             this.lblLastBeltRank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastBeltRank.Name = "lblLastBeltRank";
             this.lblLastBeltRank.Size = new System.Drawing.Size(53, 20);
@@ -133,7 +136,7 @@
             // 
             this.lblIsActive.AutoSize = true;
             this.lblIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsActive.Location = new System.Drawing.Point(140, 82);
+            this.lblIsActive.Location = new System.Drawing.Point(160, 82);
             this.lblIsActive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIsActive.Name = "lblIsActive";
             this.lblIsActive.Size = new System.Drawing.Size(53, 20);
@@ -155,7 +158,7 @@
             // 
             this.lblMemberID.AutoSize = true;
             this.lblMemberID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberID.Location = new System.Drawing.Point(140, 37);
+            this.lblMemberID.Location = new System.Drawing.Point(160, 37);
             this.lblMemberID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMemberID.Name = "lblMemberID";
             this.lblMemberID.Size = new System.Drawing.Size(53, 20);
@@ -173,9 +176,37 @@
             this.label15.TabIndex = 120;
             this.label15.Text = "Is Active:";
             // 
+            // ucPersonCard1
+            // 
+            this.ucPersonCard1.Location = new System.Drawing.Point(0, 3);
+            this.ucPersonCard1.Name = "ucPersonCard1";
+            this.ucPersonCard1.Size = new System.Drawing.Size(895, 231);
+            this.ucPersonCard1.TabIndex = 6;
+            // 
+            // pbIsActive
+            // 
+            this.pbIsActive.Image = global::KarateClub.Properties.Resources.active_user;
+            this.pbIsActive.Location = new System.Drawing.Point(122, 79);
+            this.pbIsActive.Name = "pbIsActive";
+            this.pbIsActive.Size = new System.Drawing.Size(31, 26);
+            this.pbIsActive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbIsActive.TabIndex = 147;
+            this.pbIsActive.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox2.Location = new System.Drawing.Point(122, 37);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 146;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox9
             // 
-            this.pictureBox9.Location = new System.Drawing.Point(502, 82);
+            this.pictureBox9.Image = global::KarateClub.Properties.Resources.call_32;
+            this.pictureBox9.Location = new System.Drawing.Point(493, 80);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(31, 26);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -184,28 +215,13 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(502, 37);
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.belt;
+            this.pictureBox1.Location = new System.Drawing.Point(493, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(31, 26);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 141;
             this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Location = new System.Drawing.Point(103, 82);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 125;
-            this.pictureBox6.TabStop = false;
-            // 
-            // ucPersonCard1
-            // 
-            this.ucPersonCard1.Location = new System.Drawing.Point(0, 3);
-            this.ucPersonCard1.Name = "ucPersonCard1";
-            this.ucPersonCard1.Size = new System.Drawing.Size(895, 231);
-            this.ucPersonCard1.TabIndex = 6;
             // 
             // ucMemberCard
             // 
@@ -218,9 +234,10 @@
             this.Size = new System.Drawing.Size(895, 358);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIsActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -232,7 +249,6 @@
         private System.Windows.Forms.Label lblIsActive;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblMemberID;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblEmergencyContact;
         private System.Windows.Forms.PictureBox pictureBox9;
@@ -241,5 +257,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
         private People.UserControls.ucPersonCard ucPersonCard1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbIsActive;
     }
 }

@@ -324,7 +324,7 @@ where UserID = @UserID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select found = 1 from Users where Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS";
+            string query = @"select found = 1 from Users where Username = @Username";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -392,7 +392,7 @@ where UserID = @UserID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Users";
+            string query = @"select * from usersDetails_view";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -453,6 +453,42 @@ where UserID = @UserID";
             }
 
             return Count;
+        }
+
+
+        public static int GetPersonIDByUserID(int UserID)
+        {
+            int PersonID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select PersonID from Users where UserID = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Value))
+                {
+                    PersonID = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return PersonID;
         }
 
     }

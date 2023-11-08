@@ -99,7 +99,7 @@ namespace KarateClub.Members
             cbLastBeltRank.SelectedIndex = cbLastBeltRank.FindString("White Belt");     
         }
 
-        private void _FillFieldsWithPersonInfo()
+        private void _FillFieldsWithMemberInfo()
         {
             lblMemberID.Text = _Member.MemberID.ToString();
             txtName.Text = _Member.Name;
@@ -140,7 +140,7 @@ namespace KarateClub.Members
                 return;
             }
 
-            _FillFieldsWithPersonInfo();
+            _FillFieldsWithMemberInfo();
 
             //load person image in case it was set.
             if (_Member.ImagePath != "")
@@ -272,7 +272,7 @@ namespace KarateClub.Members
 
         private void ValidateEmptyTextBox(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(((TextBox)sender).Text.Trim()))
+            if (string.IsNullOrWhiteSpace(((TextBox)sender).Text.Trim()))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(((TextBox)sender), "This field is required!");

@@ -17,6 +17,7 @@ namespace KarateClub.Members
         public frmShowMemberDetails(int memberID)
         {
             InitializeComponent();
+
             ucMemberCard1.LoadMemberInfo(memberID);
         }
 

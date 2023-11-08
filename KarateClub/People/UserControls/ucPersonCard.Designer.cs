@@ -38,18 +38,19 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pbGender = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGender)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -58,10 +59,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.lblPhone);
             this.groupBox1.Controls.Add(this.lblGender);
             this.groupBox1.Controls.Add(this.lblAddress);
@@ -193,60 +196,6 @@
             this.lblPersonID.TabIndex = 127;
             this.lblPersonID.Text = "[????]";
             // 
-            // pbGender
-            // 
-            this.pbGender.Location = new System.Drawing.Point(129, 145);
-            this.pbGender.Name = "pbGender";
-            this.pbGender.Size = new System.Drawing.Size(31, 26);
-            this.pbGender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbGender.TabIndex = 130;
-            this.pbGender.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Location = new System.Drawing.Point(129, 73);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 128;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Location = new System.Drawing.Point(432, 145);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 126;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(129, 181);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 124;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(129, 109);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 122;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(432, 109);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 121;
-            this.pictureBox2.TabStop = false;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -302,6 +251,66 @@
             this.label1.TabIndex = 114;
             this.label1.Text = "Name:";
             // 
+            // pbGender
+            // 
+            this.pbGender.Image = global::KarateClub.Properties.Resources.Man_32;
+            this.pbGender.Location = new System.Drawing.Point(129, 145);
+            this.pbGender.Name = "pbGender";
+            this.pbGender.Size = new System.Drawing.Size(31, 26);
+            this.pbGender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbGender.TabIndex = 130;
+            this.pbGender.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::KarateClub.Properties.Resources.Person_32;
+            this.pictureBox8.Location = new System.Drawing.Point(129, 73);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 128;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::KarateClub.Properties.Resources.Address_32;
+            this.pictureBox7.Location = new System.Drawing.Point(432, 145);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 126;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::KarateClub.Properties.Resources.Email_32;
+            this.pictureBox5.Location = new System.Drawing.Point(129, 181);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 124;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::KarateClub.Properties.Resources.Calendar_32;
+            this.pictureBox3.Location = new System.Drawing.Point(129, 109);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 122;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.Phone_32;
+            this.pictureBox2.Location = new System.Drawing.Point(432, 109);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 121;
+            this.pictureBox2.TabStop = false;
+            // 
             // pbPersonImage
             // 
             this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -315,6 +324,16 @@
             this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonImage.TabIndex = 112;
             this.pbPersonImage.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox1.Location = new System.Drawing.Point(129, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 147;
+            this.pictureBox1.TabStop = false;
             // 
             // ucPersonCard
             // 
@@ -332,6 +351,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -360,5 +380,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pbPersonImage;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -8,13 +8,25 @@ using System.Threading.Tasks;
 
 namespace KarateClub_Business
 {
-    public class clsUser
+    public class clsUser : clsPerson
     {
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
+        public enum enPermissions
+        {
+            All = -1,
+            ManageMembers = 1,
+            ManageInstructors = 2,
+            ManageUsers = 4,
+            ManageMembersInstructors = 8,
+            ManageBeltRanks = 16,
+            ManageSubscriptionPeriods = 32,
+            ManageBeltTests = 64,
+            ManagePayments = 128
+        }
+
         public int UserID { get; set; }
-        public int PersonID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int Permissions { get; set; }
@@ -32,11 +44,21 @@ namespace KarateClub_Business
             Mode = enMode.AddNew;
         }
 
-        private clsUser(int UserID, int PersonID, string Username, string Password,
+        private clsUser(int PersonID, string Name, string Address,
+            string Phone, string Email, DateTime DateOfBirth, enGender Gender,
+            string ImagePath, int UserID, string Username, string Password,
             int Permissions, bool IsActive)
         {
+            base.PersonID = PersonID;
+            base.Name = Name;
+            base.Address = Address;
+            base.Phone = Phone;
+            base.Email = Email;
+            base.DateOfBirth = DateOfBirth;
+            base.Gender = Gender;
+            base.ImagePath = ImagePath;
+
             this.UserID = UserID;
-            this.PersonID = PersonID;
             this.Username = Username;
             this.Password = Password;
             this.Permissions = Permissions;
@@ -61,6 +83,12 @@ namespace KarateClub_Business
 
         public bool Save()
         {
+            base.Mode = (clsPerson.enMode)Mode;
+            if (!base.Save())
+            {
+                return false;
+            }
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -81,6 +109,11 @@ namespace KarateClub_Business
             return false;
         }
 
+        private static int _GetPersonIDByUserID(int UserID)
+        {
+            return clsUserData.GetPersonIDByUserID(UserID);
+        }
+
         public static clsUser Find(int UserID)
         {
             int PersonID = -1;
@@ -94,7 +127,16 @@ namespace KarateClub_Business
 
             if (IsFound)
             {
-                return new clsUser(UserID, PersonID, Username, Password, Permissions, IsActive);
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person == null)
+                {
+                    return null;
+                }
+
+                return new clsUser(Person.PersonID, Person.Name, Person.Address, Person.Phone,
+                    Person.Email, Person.DateOfBirth, Person.Gender, Person.ImagePath,
+                    UserID, Username, Password, Permissions, IsActive);
             }
             else
             {
@@ -115,7 +157,16 @@ namespace KarateClub_Business
 
             if (IsFound)
             {
-                return new clsUser(UserID, PersonID, Username, Password, Permissions, IsActive);
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person == null)
+                {
+                    return null;
+                }
+
+                return new clsUser(Person.PersonID, Person.Name, Person.Address, Person.Phone,
+                    Person.Email, Person.DateOfBirth, Person.Gender, Person.ImagePath,
+                    UserID, Username, Password, Permissions, IsActive);
             }
             else
             {
@@ -135,7 +186,16 @@ namespace KarateClub_Business
 
             if (IsFound)
             {
-                return new clsUser(UserID, PersonID, Username, Password, Permissions, IsActive);
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person == null)
+                {
+                    return null;
+                }
+
+                return new clsUser(Person.PersonID, Person.Name, Person.Address, Person.Phone,
+                    Person.Email, Person.DateOfBirth, Person.Gender, Person.ImagePath,
+                    UserID, Username, Password, Permissions, IsActive);
             }
             else
             {
@@ -145,7 +205,19 @@ namespace KarateClub_Business
 
         public static bool DeleteUser(int UserID)
         {
-            return clsUserData.DeleteUser(UserID);
+            int PersonID = _GetPersonIDByUserID(UserID);
+
+            if (PersonID == -1)
+            {
+                return false;
+            }
+
+            if (!clsUserData.DeleteUser(UserID))
+            {
+                return false;
+            }
+
+            return clsPerson.DeletePerson(PersonID);
         }
 
         public static bool DoesUserExist(int UserID)

@@ -116,11 +116,6 @@ namespace KarateClub.Members.UserControls
             txtFilterValue.Focus();
         }
 
-        private void ucMemberCard1_Load(object sender, EventArgs e)
-        {
-            txtFilterValue.Focus();
-        }
-
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
@@ -132,6 +127,11 @@ namespace KarateClub.Members.UserControls
         {
             txtFilterValue.Text = MemberID.ToString();
             ucMemberCard1.LoadMemberInfo(MemberID);
+        }
+
+        private void ucMemberCardWithFilter_Load(object sender, EventArgs e)
+        {
+            txtFilterValue.Focus();
         }
     }
 }

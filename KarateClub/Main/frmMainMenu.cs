@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using KarateClub.Dashboard;
 using KarateClub.Members;
 using KarateClub.Instructors;
+using KarateClub.Users;
 
 namespace KarateClub.Main
 {
@@ -43,8 +44,8 @@ namespace KarateClub.Main
                 //currentBtn.ForeColor = color;
                 currentBtn.TextAlign = ContentAlignment.MiddleCenter;
                 currentBtn.IconColor = Color.FromArgb(241, 158, 2);
-                currentBtn.TextImageRelation = TextImageRelation.TextBeforeImage;
-                currentBtn.ImageAlign = ContentAlignment.MiddleRight;
+                //currentBtn.TextImageRelation = TextImageRelation.TextBeforeImage;
+                //currentBtn.ImageAlign = ContentAlignment.MiddleRight;
                 //Left border button
 
                 leftBorderBtn.Visible = true;
@@ -63,8 +64,8 @@ namespace KarateClub.Main
                 currentBtn.ForeColor = Color.Gainsboro;
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
                 currentBtn.IconColor = Color.Gainsboro;
-                currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
-                currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
+                //currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+                //currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
             }
         }
 
@@ -125,7 +126,7 @@ namespace KarateClub.Main
         private void btnUsers_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListUsers());
         }
 
         private void btnMemberInstructors_Click(object sender, EventArgs e)
