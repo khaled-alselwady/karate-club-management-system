@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             this.panelMainMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.panelLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.panelTitle = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.lblName = new System.Windows.Forms.Label();
-            this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
-            this.panelChildForm = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.pbUserImage = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.btnMenu = new FontAwesome.Sharp.IconButton();
             this.btnLogOut = new FontAwesome.Sharp.IconButton();
             this.btnPayments = new FontAwesome.Sharp.IconButton();
             this.btnBeltTests = new FontAwesome.Sharp.IconButton();
@@ -46,14 +39,23 @@
             this.btnInstructors = new FontAwesome.Sharp.IconButton();
             this.btnMembers = new FontAwesome.Sharp.IconButton();
             this.btnDashboard = new FontAwesome.Sharp.IconButton();
+            this.panelLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pbLogo = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.editMyProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelTitle = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.lblName = new System.Windows.Forms.Label();
+            this.pbUserImage = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.btnMenu = new FontAwesome.Sharp.IconButton();
+            this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelChildForm = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.panelMainMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            this.panelTitle.SuspendLayout();
-            this.cmsEditProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUserImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+            this.panelTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUserImage)).BeginInit();
+            this.cmsEditProfile.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMainMenu
@@ -75,101 +77,6 @@
             this.panelMainMenu.Name = "panelMainMenu";
             this.panelMainMenu.Size = new System.Drawing.Size(276, 787);
             this.panelMainMenu.TabIndex = 0;
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.Controls.Add(this.pbLogo);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(276, 141);
-            this.panelLogo.TabIndex = 1;
-            // 
-            // panelTitle
-            // 
-            this.panelTitle.Controls.Add(this.lblName);
-            this.panelTitle.Controls.Add(this.pbUserImage);
-            this.panelTitle.Controls.Add(this.btnMenu);
-            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(175)))), ((int)(((byte)(16)))));
-            this.panelTitle.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(74)))), ((int)(((byte)(0)))));
-            this.panelTitle.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(74)))), ((int)(((byte)(0)))));
-            this.panelTitle.FillColor4 = System.Drawing.Color.Black;
-            this.panelTitle.Location = new System.Drawing.Point(276, 0);
-            this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(1155, 63);
-            this.panelTitle.TabIndex = 1;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.BackColor = System.Drawing.Color.Transparent;
-            this.lblName.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.ForeColor = System.Drawing.Color.White;
-            this.lblName.Location = new System.Drawing.Point(70, 17);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(161, 25);
-            this.lblName.TabIndex = 3;
-            this.lblName.Text = "Khaled Yousef";
-            // 
-            // cmsEditProfile
-            // 
-            this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
-            this.cmsEditProfile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editMyProfileToolStripMenuItem});
-            this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
-            this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
-            this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
-            this.cmsEditProfile.RenderStyle.ColorTable = null;
-            this.cmsEditProfile.RenderStyle.RoundedEdges = true;
-            this.cmsEditProfile.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
-            this.cmsEditProfile.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
-            this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
-            this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(152, 26);
-            // 
-            // panelChildForm
-            // 
-            this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChildForm.Location = new System.Drawing.Point(276, 63);
-            this.panelChildForm.Name = "panelChildForm";
-            this.panelChildForm.Size = new System.Drawing.Size(1155, 724);
-            this.panelChildForm.TabIndex = 3;
-            // 
-            // pbUserImage
-            // 
-            this.pbUserImage.BackColor = System.Drawing.Color.Transparent;
-            this.pbUserImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pbUserImage.Image = global::KarateClub.Properties.Resources.DefaultMale;
-            this.pbUserImage.ImageRotate = 0F;
-            this.pbUserImage.Location = new System.Drawing.Point(0, 0);
-            this.pbUserImage.Name = "pbUserImage";
-            this.pbUserImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbUserImage.Size = new System.Drawing.Size(64, 63);
-            this.pbUserImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbUserImage.TabIndex = 2;
-            this.pbUserImage.TabStop = false;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnMenu.ContextMenuStrip = this.cmsEditProfile;
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.IconChar = FontAwesome.Sharp.IconChar.Navicon;
-            this.btnMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(168)))), ((int)(((byte)(40)))));
-            this.btnMenu.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnMenu.Location = new System.Drawing.Point(1113, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(42, 63);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.UseVisualStyleBackColor = false;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // btnLogOut
             // 
@@ -401,6 +308,15 @@
             this.btnDashboard.UseVisualStyleBackColor = true;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
+            // panelLogo
+            // 
+            this.panelLogo.Controls.Add(this.pbLogo);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(276, 141);
+            this.panelLogo.TabIndex = 1;
+            // 
             // pbLogo
             // 
             this.pbLogo.Image = global::KarateClub.Properties.Resources.karate_logo1;
@@ -412,14 +328,124 @@
             this.pbLogo.TabIndex = 1;
             this.pbLogo.TabStop = false;
             // 
-            // editMyProfileToolStripMenuItem
+            // panelTitle
             // 
-            this.editMyProfileToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.editMyProfileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.editMyProfileToolStripMenuItem.Image = global::KarateClub.Properties.Resources.pencil_edit;
-            this.editMyProfileToolStripMenuItem.Name = "editMyProfileToolStripMenuItem";
-            this.editMyProfileToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.editMyProfileToolStripMenuItem.Text = "Edit My Profile";
+            this.panelTitle.Controls.Add(this.lblName);
+            this.panelTitle.Controls.Add(this.pbUserImage);
+            this.panelTitle.Controls.Add(this.btnMenu);
+            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(175)))), ((int)(((byte)(16)))));
+            this.panelTitle.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(74)))), ((int)(((byte)(0)))));
+            this.panelTitle.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(74)))), ((int)(((byte)(0)))));
+            this.panelTitle.FillColor4 = System.Drawing.Color.Black;
+            this.panelTitle.Location = new System.Drawing.Point(276, 0);
+            this.panelTitle.Name = "panelTitle";
+            this.panelTitle.Size = new System.Drawing.Size(1155, 63);
+            this.panelTitle.TabIndex = 1;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.Color.Transparent;
+            this.lblName.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.ForeColor = System.Drawing.Color.White;
+            this.lblName.Location = new System.Drawing.Point(70, 17);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(161, 25);
+            this.lblName.TabIndex = 3;
+            this.lblName.Text = "Khaled Yousef";
+            // 
+            // pbUserImage
+            // 
+            this.pbUserImage.BackColor = System.Drawing.Color.Transparent;
+            this.pbUserImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbUserImage.Image = global::KarateClub.Properties.Resources.DefaultMale;
+            this.pbUserImage.ImageRotate = 0F;
+            this.pbUserImage.Location = new System.Drawing.Point(0, 0);
+            this.pbUserImage.Name = "pbUserImage";
+            this.pbUserImage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbUserImage.Size = new System.Drawing.Size(64, 63);
+            this.pbUserImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbUserImage.TabIndex = 2;
+            this.pbUserImage.TabStop = false;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnMenu.ContextMenuStrip = this.cmsEditProfile;
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMenu.FlatAppearance.BorderSize = 0;
+            this.btnMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMenu.IconChar = FontAwesome.Sharp.IconChar.Navicon;
+            this.btnMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(168)))), ((int)(((byte)(40)))));
+            this.btnMenu.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnMenu.Location = new System.Drawing.Point(1113, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(42, 63);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.UseVisualStyleBackColor = false;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // cmsEditProfile
+            // 
+            this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
+            this.cmsEditProfile.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmsEditProfile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.changePasswordToolStripMenuItem,
+            this.signOutToolStripMenuItem});
+            this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
+            this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.ColorTable = null;
+            this.cmsEditProfile.RenderStyle.RoundedEdges = true;
+            this.cmsEditProfile.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.cmsEditProfile.Size = new System.Drawing.Size(230, 140);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(229, 38);
+            this.toolStripMenuItem1.Text = "     Current User Info";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.changePasswordToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Password_32;
+            this.changePasswordToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
+            this.changePasswordToolStripMenuItem.Text = "     Change Password";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
+            // signOutToolStripMenuItem
+            // 
+            this.signOutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.signOutToolStripMenuItem.Image = global::KarateClub.Properties.Resources.sign_out_32__2;
+            this.signOutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
+            this.signOutToolStripMenuItem.Text = "     Sign Out";
+            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
+            // 
+            // panelChildForm
+            // 
+            this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelChildForm.Location = new System.Drawing.Point(276, 63);
+            this.panelChildForm.Name = "panelChildForm";
+            this.panelChildForm.Size = new System.Drawing.Size(1155, 724);
+            this.panelChildForm.TabIndex = 3;
             // 
             // frmMainMenu
             // 
@@ -434,13 +460,14 @@
             this.Name = "frmMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMainMenu";
+            this.Load += new System.EventHandler(this.frmMainMenu_Load);
             this.panelMainMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
-            this.cmsEditProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbUserImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
+            this.cmsEditProfile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -465,7 +492,9 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox pbUserImage;
         private System.Windows.Forms.Label lblName;
         private Guna.UI2.WinForms.Guna2ContextMenuStrip cmsEditProfile;
-        private System.Windows.Forms.ToolStripMenuItem editMyProfileToolStripMenuItem;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel panelChildForm;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem signOutToolStripMenuItem;
     }
 }

@@ -22,6 +22,8 @@ namespace KarateClub.Users.UserControls
         public int UserID => _UserID;
         public clsUser SelectedUserInfo => _User;
 
+        private bool _ShowPermissions = true;
+
         public ucUserCard()
         {
             InitializeComponent();
@@ -56,7 +58,7 @@ namespace KarateClub.Users.UserControls
                 pbIsActive.Image = Resources.inactive_user;
         }
 
-        public void LoadUserInfo(int UserID)
+        public void LoadUserInfo(int UserID, bool ShowPermissions = true)
         {
             this._UserID = UserID;
 
@@ -83,6 +85,8 @@ namespace KarateClub.Users.UserControls
             }
 
             _FillUserInfo();
+
+            _ShowPermissions = ShowPermissions;
         }
 
         private void Refresh(object sender, int UserID)
@@ -92,9 +96,9 @@ namespace KarateClub.Users.UserControls
 
         private void llEditUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddEditUser AddNewUser = new frmAddEditUser(_UserID);
-            AddNewUser.UserIDBack += Refresh;
-            AddNewUser.Show();
+            frmAddEditUser EditUser = new frmAddEditUser(_UserID, _ShowPermissions);
+            EditUser.UserIDBack += Refresh;
+            EditUser.Show();
         }
 
 

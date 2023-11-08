@@ -72,6 +72,7 @@
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsFormat.cs" />
+    <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="Global Classes\clsValidation.cs" />
     <Compile Include="Instructors\frmAddEditInstructor.cs">
@@ -109,6 +110,12 @@
     </Compile>
     <Compile Include="Instructors\UserControls\ucInstructorCardWithFilter.Designer.cs">
       <DependentUpon>ucInstructorCardWithFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\frmMainMenu.cs">
       <SubType>Form</SubType>
@@ -166,6 +173,12 @@
     <Compile Include="Users\frmAddEditUser.Designer.cs">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Users\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users\frmFindUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +233,9 @@
     <EmbeddedResource Include="Instructors\UserControls\ucInstructorCardWithFilter.resx">
       <DependentUpon>ucInstructorCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main\frmMainMenu.resx">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +272,9 @@
     </Compile>
     <EmbeddedResource Include="Users\frmAddEditUser.resx">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\frmFindUser.resx">
       <DependentUpon>frmFindUser.cs</DependentUpon>
@@ -402,6 +421,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Add Person 401.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\karate-player.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\karate-player1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\username-login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\password-login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add New User 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign_out 32 -2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

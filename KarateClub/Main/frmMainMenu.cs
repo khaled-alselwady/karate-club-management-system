@@ -12,6 +12,11 @@ using KarateClub.Dashboard;
 using KarateClub.Members;
 using KarateClub.Instructors;
 using KarateClub.Users;
+using KarateClub.Global_Classes;
+using KarateClub.Login;
+using KarateClub_Business;
+using System.Resources;
+using KarateClub.Properties;
 
 namespace KarateClub.Main
 {
@@ -21,13 +26,17 @@ namespace KarateClub.Main
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
-        public frmMainMenu()
+        private Form _frmLoginForm;
+
+        public frmMainMenu(Form loginForm)
         {
             InitializeComponent();
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 58);
             panelMainMenu.Controls.Add(leftBorderBtn);
+
+            this._frmLoginForm = loginForm;
         }
 
         public void ActivateButton(object senderBtn)
@@ -94,6 +103,8 @@ namespace KarateClub.Main
             {
                 // lblTitleChildForm.Text = childForm.Text;
             }
+
+            RefreshUserInfo(this, clsGlobal.CurrentUser.UserID);
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -127,6 +138,7 @@ namespace KarateClub.Main
         {
             ActivateButton(sender);
             OpenChildForm(new frmListUsers());
+            RefreshUserInfo(this, clsGlobal.CurrentUser.UserID);
         }
 
         private void btnMemberInstructors_Click(object sender, EventArgs e)
@@ -162,7 +174,68 @@ namespace KarateClub.Main
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+
+            clsGlobal.CurrentUser = null;
+            _frmLoginForm.Show();
+            this.Close();
+        }
+
+        private void frmMainMenu_Load(object sender, EventArgs e)
+        {
+            currentBtn = btnDashboard;
+            leftBorderBtn.BackColor = Color.FromArgb(241, 158, 2);
+            leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
+            currentBtn.TextAlign = ContentAlignment.MiddleCenter;
+            currentBtn.IconColor = Color.FromArgb(241, 158, 2);
+            leftBorderBtn.Visible = true;
+            leftBorderBtn.BringToFront();
+            OpenChildForm(new frmDashboard());
+
+            if (clsGlobal.CurrentUser.ImagePath != "")
+            {
+                pbUserImage.ImageLocation = clsGlobal.CurrentUser.ImagePath;
+            }
+
+            lblName.Text = clsGlobal.CurrentUser.Username;
+        }
+
+        private void RefreshUserInfo(object sender, int UserID)
+        {
+            clsGlobal.CurrentUser = clsUser.Find(UserID);
+
+            if (clsGlobal.CurrentUser == null)
+                return;
+
+            if (clsGlobal.CurrentUser.ImagePath != "")
+            {
+                pbUserImage.ImageLocation = clsGlobal.CurrentUser.ImagePath;
+            }
+            else
+            {
+                pbUserImage.Image = Resources.DefaultMale;
+            }
+
+            lblName.Text = clsGlobal.CurrentUser.Username;
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmShowUserDetails ShowCurrentUserDetails = new frmShowUserDetails(clsGlobal.CurrentUser.UserID, false);
+            ShowCurrentUserDetails.RefreshUserInfo += RefreshUserInfo;
+            ShowCurrentUserDetails.Show();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword ChangePasswordToCurrentUser = new frmChangePassword(clsGlobal.CurrentUser.UserID, false);
+            ChangePasswordToCurrentUser.Show();
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsGlobal.CurrentUser = null;
+            _frmLoginForm.Show();
+            this.Close();
         }
     }
 }

@@ -42,6 +42,17 @@ namespace KarateClub.Users
             this._Mode = enMode.Update;
         }
 
+        public frmAddEditUser(int UserID, bool ShowPermissions)
+        {
+            InitializeComponent();
+
+            this._UserID = UserID;
+            this._Mode = enMode.Update;
+
+            gbPermissions.Enabled = ShowPermissions;
+            chkIsActive.Enabled = ShowPermissions;
+        }
+
         private bool _IsAllItemIsChecked()
         {
             foreach (CheckBox item in gbPermissions.Controls)

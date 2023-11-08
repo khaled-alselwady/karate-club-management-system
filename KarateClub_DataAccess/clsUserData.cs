@@ -68,7 +68,7 @@ namespace KarateClub_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Users where Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS";
+            string query = @"select * from Users where Username = @Username";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -119,7 +119,7 @@ namespace KarateClub_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Users where Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS AND Password = @Password COLLATE SQL_Latin1_General_CP1_CS_AS";
+            string query = @"select * from Users where Username = @Username AND Password = @Password";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -164,7 +164,7 @@ namespace KarateClub_DataAccess
         }
 
 
-        public static int AddNewUser(int PersonID, string Username, string Password, 
+        public static int AddNewUser(int PersonID, string Username, string Password,
             int Permissions, bool IsActive)
         {
             // This function will return the new person id if succeeded and -1 if not
@@ -211,7 +211,7 @@ end";
         }
 
 
-        public static bool UpdateUser(int UserID, int PersonID, string Username, 
+        public static bool UpdateUser(int UserID, int PersonID, string Username,
             string Password, int Permissions, bool IsActive)
         {
             int RowAffected = 0;
@@ -357,7 +357,7 @@ where UserID = @UserID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select found = 1 from Users where Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS and Password = @Password COLLATE SQL_Latin1_General_CP1_CS_AS";
+            string query = @"select found = 1 from Users where Username = @Username and Password = @Password";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -489,6 +489,39 @@ where UserID = @UserID";
             }
 
             return PersonID;
+        }
+
+
+        public static bool ChangePassword(int UserID, string NewPassword)
+        {
+            int RowsAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"update Users
+                             set Password = @NewPassword
+                             where UserID = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@NewPassword", NewPassword);
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
         }
 
     }

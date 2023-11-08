@@ -109,6 +109,11 @@ namespace KarateClub_Business
             return false;
         }
 
+        public bool ChangePassword(string NewPassword)
+        {
+            return clsUserData.ChangePassword(this.UserID, NewPassword);
+        }
+
         private static int _GetPersonIDByUserID(int UserID)
         {
             return clsUserData.GetPersonIDByUserID(UserID);

@@ -1,4 +1,5 @@
-﻿using KarateClub.Members;
+﻿using KarateClub.Global_Classes;
+using KarateClub.Members;
 using KarateClub_Business;
 using System;
 using System.Collections.Generic;
@@ -255,6 +256,14 @@ namespace KarateClub.Users
             frmAddEditUser AddNewUser = new frmAddEditUser();
             AddNewUser.UserIDBack += RefreshList;
             AddNewUser.Show();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword ChangePasswordToCurrentUser = new frmChangePassword(_GetUserIDFromDGV());
+            ChangePasswordToCurrentUser.Show();
+
+            _RefreshUserList();
         }
     }
 }
