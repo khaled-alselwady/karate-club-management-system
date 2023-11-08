@@ -123,6 +123,30 @@
     <Compile Include="Main\frmMainMenu.Designer.cs">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MembersInstructors\frmAddEditMembersInstructors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\frmAddEditMembersInstructors.Designer.cs">
+      <DependentUpon>frmAddEditMembersInstructors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MembersInstructors\frmListMembersInstructors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\frmListMembersInstructors.Designer.cs">
+      <DependentUpon>frmListMembersInstructors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MembersInstructors\frmShowMembersInstructorsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\frmShowMembersInstructorsDetails.Designer.cs">
+      <DependentUpon>frmShowMembersInstructorsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucMembersInstructorsCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucMembersInstructorsCard.Designer.cs">
+      <DependentUpon>ucMembersInstructorsCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Members\frmAddEditMember.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +262,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\frmMainMenu.resx">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\frmAddEditMembersInstructors.resx">
+      <DependentUpon>frmAddEditMembersInstructors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\frmListMembersInstructors.resx">
+      <DependentUpon>frmListMembersInstructors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\frmShowMembersInstructorsDetails.resx">
+      <DependentUpon>frmShowMembersInstructorsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\UserControls\ucMembersInstructorsCard.resx">
+      <DependentUpon>ucMembersInstructorsCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Members\frmAddEditMember.resx">
       <DependentUpon>frmAddEditMember.cs</DependentUpon>
@@ -442,6 +478,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sign_out 32 -2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

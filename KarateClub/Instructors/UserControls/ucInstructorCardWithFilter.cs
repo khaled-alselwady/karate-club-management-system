@@ -132,5 +132,11 @@ namespace KarateClub.Instructors.UserControls
             txtFilterValue.Text = InstructorID.ToString();
             ucInstructorCard1.LoadInstructorInfo(InstructorID);
         }
+
+        public void LoadInstructorInfo(int InstructorID)
+        {
+            txtFilterValue.Text = InstructorID.ToString();
+            ucInstructorCard1.LoadInstructorInfo(InstructorID);
+        }
     }
 }

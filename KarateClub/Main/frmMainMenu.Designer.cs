@@ -211,7 +211,7 @@
             this.btnMemberInstructors.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMemberInstructors.Size = new System.Drawing.Size(276, 58);
             this.btnMemberInstructors.TabIndex = 5;
-            this.btnMemberInstructors.Text = "  Member Instructors";
+            this.btnMemberInstructors.Text = "  Members Instructors";
             this.btnMemberInstructors.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMemberInstructors.UseVisualStyleBackColor = true;
             this.btnMemberInstructors.Click += new System.EventHandler(this.btnMemberInstructors_Click);
@@ -407,7 +407,7 @@
             this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(230, 140);
+            this.cmsEditProfile.Size = new System.Drawing.Size(230, 118);
             // 
             // toolStripMenuItem1
             // 

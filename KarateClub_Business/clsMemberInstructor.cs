@@ -18,6 +18,9 @@ namespace KarateClub_Business
         public int InstructorID { get; set; }
         public DateTime AssignDate { get; set; }
 
+        public clsMember MemberInfo { get; set; }
+        public clsInstructor InstructorInfo { get; set; }
+
         public clsMemberInstructor()
         {
             this.MemberInstructorID = -1;
@@ -25,10 +28,10 @@ namespace KarateClub_Business
             this.InstructorID = -1;
             this.AssignDate = DateTime.Now;
 
-            Mode = enMode.AddNew;
+            this.Mode = enMode.AddNew;
         }
 
-        private clsMemberInstructor(int MemberInstructorID, int MemberID, 
+        private clsMemberInstructor(int MemberInstructorID, int MemberID,
             int InstructorID, DateTime AssignDate)
         {
             this.MemberInstructorID = MemberInstructorID;
@@ -36,7 +39,10 @@ namespace KarateClub_Business
             this.InstructorID = InstructorID;
             this.AssignDate = AssignDate;
 
-            Mode = enMode.Update;
+            this.MemberInfo = clsMember.Find(MemberID);
+            this.InstructorInfo = clsInstructor.Find(InstructorID);
+
+            this.Mode = enMode.Update;
         }
 
         private bool _AddNewMemberInstructor()
@@ -107,6 +113,11 @@ namespace KarateClub_Business
         public static DataTable GetAllMemberInstructors()
         {
             return clsMemberInstructorData.GetAllMemberInstructors();
+        }
+
+        public static bool IsInstructorTrainingMember(int InstructorID, int MemberID)
+        {
+            return clsMemberInstructorData.IsInstructorTrainingMember(InstructorID, MemberID);
         }
 
     }

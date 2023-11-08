@@ -152,6 +152,11 @@ namespace KarateClub_Business
             return clsInstructorData.CountInstructors();
         }
 
+        public bool IsTrainingThisMember(int MemberID)
+        {
+            return clsMemberInstructor.IsInstructorTrainingMember(this.InstructorID, MemberID);
+        }
+
     }
 
 

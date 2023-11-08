@@ -17,6 +17,7 @@ using KarateClub.Login;
 using KarateClub_Business;
 using System.Resources;
 using KarateClub.Properties;
+using KarateClub.MembersInstructors;
 
 namespace KarateClub.Main
 {
@@ -144,7 +145,7 @@ namespace KarateClub.Main
         private void btnMemberInstructors_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListMembersInstructors());
         }
 
         private void btnBeltRanks_Click(object sender, EventArgs e)

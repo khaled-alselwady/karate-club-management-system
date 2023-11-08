@@ -10,7 +10,7 @@ namespace KarateClub_DataAccess
 {
     public class clsMemberInstructorData
     {
-        public static bool GetMemberInstructorInfoByID(int MemberInstructorID, 
+        public static bool GetMemberInstructorInfoByID(int MemberInstructorID,
             ref int MemberID, ref int InstructorID, ref DateTime AssignDate)
         {
             bool IsFound = false;
@@ -100,7 +100,7 @@ select scope_identity()";
         }
 
 
-        public static bool UpdateMemberInstructor(int MemberInstructorID, int MemberID, 
+        public static bool UpdateMemberInstructor(int MemberInstructorID, int MemberID,
             int InstructorID, DateTime AssignDate)
         {
             int RowAffected = 0;
@@ -209,7 +209,7 @@ where MemberInstructorID = @MemberInstructorID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from MemberInstructors";
+            string query = @"select * from MembersInstructorsDetails_view order by MemberInstructorID desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -238,5 +238,38 @@ where MemberInstructorID = @MemberInstructorID";
             return dt;
         }
 
+
+        public static bool IsInstructorTrainingMember(int InstructorID, int MemberID)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select top 1 Found = 1 from MemberInstructors where InstructorID = @InstructorID and MemberID = @MemberID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@InstructorID", InstructorID);
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                IsFound = (result != null);
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
     }
 }

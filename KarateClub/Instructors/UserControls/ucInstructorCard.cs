@@ -25,7 +25,7 @@ namespace KarateClub.Instructors.UserControls
             InitializeComponent();
         }
 
-        private void _Reset()
+        public void Reset()
         {
             this._InstructorID = -1;
             this._Instructor = null;
@@ -55,7 +55,7 @@ namespace KarateClub.Instructors.UserControls
                 MessageBox.Show("There is no instructor with id = -1", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                _Reset();
+                Reset();
 
                 return;
             }
@@ -68,7 +68,7 @@ namespace KarateClub.Instructors.UserControls
                     "Missing Member", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
-                _Reset();
+                Reset();
 
                 return;
             }

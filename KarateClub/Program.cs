@@ -7,6 +7,7 @@ using KarateClub.Login;
 using KarateClub.Main;
 using KarateClub.Members;
 using KarateClub.Users;
+using KarateClub.MembersInstructors;
 
 namespace KarateClub
 {

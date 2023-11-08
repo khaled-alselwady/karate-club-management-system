@@ -133,5 +133,12 @@ namespace KarateClub.Members.UserControls
         {
             txtFilterValue.Focus();
         }
+
+        public void LoadMemberInfo(int MemberID)
+        {
+            txtFilterValue.Text = MemberID.ToString();
+            ucMemberCard1.LoadMemberInfo(MemberID);
+        }
+
     }
 }
