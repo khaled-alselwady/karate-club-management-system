@@ -49,6 +49,7 @@
     <Compile Include="clsMemberInstructorData.cs" />
     <Compile Include="clsPaymentData.cs" />
     <Compile Include="clsPersonData.cs" />
+    <Compile Include="clsSettingsData.cs" />
     <Compile Include="clsSubscriptionPeriodData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

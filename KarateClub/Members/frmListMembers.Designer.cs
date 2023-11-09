@@ -45,6 +45,7 @@
             this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvMembersList = new System.Windows.Forms.DataGridView();
             this.btnAddNewMember = new System.Windows.Forms.Button();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
@@ -174,7 +175,8 @@
             this.toolStripMenuItem1,
             this.addNewMemberToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.showToolStripMenuItem});
             this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
             this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -185,7 +187,7 @@
             this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(253, 156);
+            this.cmsEditProfile.Size = new System.Drawing.Size(253, 216);
             // 
             // toolStripMenuItem1
             // 
@@ -228,6 +230,16 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
             this.deleteToolStripMenuItem.Text = "   Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Calendar_32;
+            this.showToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+            this.showToolStripMenuItem.Text = "   Show Period History";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // dgvMembersList
             // 
@@ -346,5 +358,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.DataGridView dgvMembersList;
         private System.Windows.Forms.Button btnAddNewMember;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
     }
 }

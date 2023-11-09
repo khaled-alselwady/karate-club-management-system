@@ -59,7 +59,7 @@ namespace KarateClub_DataAccess
         }
 
 
-        public static int AddNewPayment(decimal Amount, DateTime Date, int MemberID)
+        public static int AddNewPayment(decimal Amount, int MemberID)
         {
             // This function will return the new person id if succeeded and -1 if not
             int PaymentID = -1;
@@ -73,7 +73,7 @@ select scope_identity()";
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Amount", Amount);
-            command.Parameters.AddWithValue("@Date", Date);
+            command.Parameters.AddWithValue("@Date", DateTime.Now);
             command.Parameters.AddWithValue("@MemberID", MemberID);
 
             try

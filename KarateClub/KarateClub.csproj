@@ -203,6 +203,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionPeriods\frmAddEditSubscriptionPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmAddEditSubscriptionPeriod.Designer.cs">
+      <DependentUpon>frmAddEditSubscriptionPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmListSubscriptionPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmListSubscriptionPeriod.Designer.cs">
+      <DependentUpon>frmListSubscriptionPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.Designer.cs">
+      <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users\frmAddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +342,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SubscriptionPeriods\frmAddEditSubscriptionPeriod.resx">
+      <DependentUpon>frmAddEditSubscriptionPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\frmListSubscriptionPeriod.resx">
+      <DependentUpon>frmListSubscriptionPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.resx">
+      <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Users\frmAddEditUser.resx">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -505,6 +532,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\belt-ranks.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar 321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Application Types 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New Application 64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

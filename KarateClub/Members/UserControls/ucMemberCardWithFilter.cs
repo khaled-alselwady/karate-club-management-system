@@ -140,5 +140,10 @@ namespace KarateClub.Members.UserControls
             ucMemberCard1.LoadMemberInfo(MemberID);
         }
 
+        public void Clear()
+        {
+            ucMemberCard1.Reset();
+        }
+
     }
 }

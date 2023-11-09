@@ -10,8 +10,9 @@ namespace KarateClub_DataAccess
 {
     public class clsSubscriptionPeriodData
     {
-        public static bool GetPeriodInfoByID(int PeriodID, ref DateTime StartDate, ref DateTime EndDate, 
-            ref decimal Fees, ref bool Paid, ref int MemberID, ref int PaymentID)
+        public static bool GetPeriodInfoByID(int PeriodID, ref DateTime StartDate,
+            ref DateTime EndDate, ref decimal Fees, ref bool IsPaid, ref int MemberID,
+            ref int PaymentID)
         {
             bool IsFound = false;
 
@@ -37,9 +38,9 @@ namespace KarateClub_DataAccess
                     StartDate = (DateTime)reader["StartDate"];
                     EndDate = (DateTime)reader["EndDate"];
                     Fees = (decimal)reader["Fees"];
-                    Paid = (bool)reader["Paid"];
+                    IsPaid = (bool)reader["IsPaid"];
                     MemberID = (int)reader["MemberID"];
-                    PaymentID = (int)reader["PaymentID"];
+                    PaymentID = (reader["PaymentID"] != DBNull.Value) ? (int)reader["PaymentID"] : -1;
                 }
                 else
                 {
@@ -61,17 +62,16 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
-
-        public static int AddNewPeriod(DateTime StartDate, DateTime EndDate, decimal Fees, bool Paid,
-            int MemberID, int PaymentID)
+        public static int AddNewPeriod(DateTime StartDate, DateTime EndDate, decimal Fees,
+            bool IsPaid, int MemberID, int PaymentID)
         {
             // This function will return the new person id if succeeded and -1 if not
             int PeriodID = -1;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"insert into SubscriptionPeriods (StartDate, EndDate, Fees, Paid, MemberID, PaymentID)
-values (@StartDate, @EndDate, @Fees, @Paid, @MemberID, @PaymentID)
+            string query = @"insert into SubscriptionPeriods (StartDate, EndDate, Fees, IsPaid, MemberID, PaymentID)
+values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID)
 select scope_identity()";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -79,9 +79,16 @@ select scope_identity()";
             command.Parameters.AddWithValue("@StartDate", StartDate);
             command.Parameters.AddWithValue("@EndDate", EndDate);
             command.Parameters.AddWithValue("@Fees", Fees);
-            command.Parameters.AddWithValue("@Paid", Paid);
+            command.Parameters.AddWithValue("@IsPaid", IsPaid);
             command.Parameters.AddWithValue("@MemberID", MemberID);
-            command.Parameters.AddWithValue("@PaymentID", PaymentID);
+            if (PaymentID <= 0)
+            {
+                command.Parameters.AddWithValue("@PaymentID", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@PaymentID", PaymentID);
+            }
 
             try
             {
@@ -106,9 +113,8 @@ select scope_identity()";
             return PeriodID;
         }
 
-
         public static bool UpdatePeriod(int PeriodID, DateTime StartDate, DateTime EndDate,
-            decimal Fees, bool Paid, int MemberID, int PaymentID)
+            decimal Fees, bool IsPaid, int MemberID, int PaymentID)
         {
             int RowAffected = 0;
 
@@ -118,7 +124,7 @@ select scope_identity()";
 set StartDate = @StartDate,
 EndDate = @EndDate,
 Fees = @Fees,
-Paid = @Paid,
+IsPaid = @IsPaid,
 MemberID = @MemberID,
 PaymentID = @PaymentID
 where PeriodID = @PeriodID";
@@ -129,9 +135,16 @@ where PeriodID = @PeriodID";
             command.Parameters.AddWithValue("@StartDate", StartDate);
             command.Parameters.AddWithValue("@EndDate", EndDate);
             command.Parameters.AddWithValue("@Fees", Fees);
-            command.Parameters.AddWithValue("@Paid", Paid);
+            command.Parameters.AddWithValue("@IsPaid", IsPaid);
             command.Parameters.AddWithValue("@MemberID", MemberID);
-            command.Parameters.AddWithValue("@PaymentID", PaymentID);
+            if (PaymentID <= 0)
+            {
+                command.Parameters.AddWithValue("@PaymentID", DBNull.Value);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@PaymentID", PaymentID);
+            }
 
             try
             {
@@ -150,7 +163,6 @@ where PeriodID = @PeriodID";
 
             return (RowAffected > 0);
         }
-
 
         public static bool DeletePeriod(int PeriodID)
         {
@@ -181,7 +193,6 @@ where PeriodID = @PeriodID";
 
             return (RowAffected > 0);
         }
-
 
         public static bool DoesPeriodExist(int PeriodID)
         {
@@ -215,14 +226,13 @@ where PeriodID = @PeriodID";
             return IsFound;
         }
 
-
         public static DataTable GetAllSubscriptionPeriods()
         {
             DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from SubscriptionPeriods";
+            string query = @"select * from SubscriptionPeriodsDetails_view order by PeriodID desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -250,7 +260,6 @@ where PeriodID = @PeriodID";
 
             return dt;
         }
-
 
         public static short CountSubscriptionPeriods()
         {
@@ -283,6 +292,90 @@ where PeriodID = @PeriodID";
             }
 
             return Count;
+        }
+
+        public static int GetLastActivePeriodForMember(int MemberID)
+        {
+            int LastActivePeriodID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select top 1 PeriodID from SubscriptionPeriods
+                             inner join members on members.MemberID = SubscriptionPeriods.MemberID
+                             where SubscriptionPeriods.MemberID = @MemberID and Members.IsActive = 1 and CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE())
+                             order by SubscriptionPeriods.StartDate desc";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Value))
+                {
+                    LastActivePeriodID = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return LastActivePeriodID;
+        }
+
+        public static DataTable GetAllPeriodsForMember(int MemberID)
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT        dbo.SubscriptionPeriods.PeriodID,
+                             (SELECT        Name
+                               FROM            dbo.People
+                               WHERE        (PersonID = dbo.Members.PersonID)) AS MemberName, dbo.SubscriptionPeriods.Fees, dbo.SubscriptionPeriods.IsPaid, dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate, DATEDIFF(day, 
+                         dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate) AS SubscriptionDays, dbo.SubscriptionPeriods.PaymentID, CASE WHEN CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE()) 
+                         THEN 1 ELSE 0 END AS IsActive
+FROM            dbo.SubscriptionPeriods INNER JOIN
+                         dbo.Members ON dbo.Members.MemberID = dbo.SubscriptionPeriods.MemberID
+						 where SubscriptionPeriods.MemberID = @MemberID
+						 order by SubscriptionPeriods.StartDate desc";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
         }
 
     }

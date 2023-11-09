@@ -40,7 +40,7 @@ namespace KarateClub_Business
 
         private bool _AddNewPayment()
         {
-            this.PaymentID = clsPaymentData.AddNewPayment(this.Amount, this.Date, this.MemberID);
+            this.PaymentID = clsPaymentData.AddNewPayment(this.Amount, this.MemberID);
 
             return (this.PaymentID != -1);
         }

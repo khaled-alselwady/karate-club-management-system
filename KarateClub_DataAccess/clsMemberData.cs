@@ -313,5 +313,39 @@ where MemberID = @MemberID";
             return PersonID;
         }
 
+
+        public static bool SetActivity(int MemberID, bool IsActive)
+        {
+            int RowAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"Update Members
+                             set IsActive = @IsActive
+                             where MemberID = @MemberID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
+
+            try
+            {
+                connection.Open();
+
+                RowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowAffected > 0);
+        }
+
     }
 }

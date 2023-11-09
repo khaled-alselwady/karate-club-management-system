@@ -1,4 +1,5 @@
-﻿using KarateClub_Business;
+﻿using KarateClub.SubscriptionPeriods;
+using KarateClub_Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -296,5 +297,12 @@ namespace KarateClub.Members
             AddNewMember.Show();
         }
 
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowSubscriptionPeriodsHistory ShowHistory = new frmShowSubscriptionPeriodsHistory(_GetMemberIDFromDGV());
+            ShowHistory.ShowDialog();
+
+            _RefreshMemberList();
+        }
     }
 }

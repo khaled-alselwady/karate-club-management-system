@@ -27,7 +27,7 @@ namespace KarateClub.People.UserControls
             InitializeComponent();
         }
 
-        private void _Reset()
+        public void Reset()
         {
             this._PersonID = -1;
             this._Person = null;
@@ -83,7 +83,7 @@ namespace KarateClub.People.UserControls
                 MessageBox.Show("There is no person with id = -1", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                _Reset();
+                Reset();
 
                 return;
             }
@@ -95,7 +95,7 @@ namespace KarateClub.People.UserControls
                 MessageBox.Show($"There is no person with id = {PersonID}", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                _Reset();
+                Reset();
 
                 return;
             }

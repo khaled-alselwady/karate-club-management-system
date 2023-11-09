@@ -100,6 +100,16 @@ namespace KarateClub_Business
             return false;
         }
 
+        public bool SetActivity(bool IsActive)
+        {
+            return SetActivity(this.MemberID, IsActive);
+        }
+
+        public static bool SetActivity(int MemberID, bool IsActive)
+        {
+            return clsMemberData.SetActivity(MemberID, IsActive);
+        }
+
         public static clsMember Find(int MemberID)
         {
             int PersonID = -1;
@@ -165,6 +175,16 @@ namespace KarateClub_Business
         public static short Count()
         {
             return clsMemberData.CountMembers();
+        }
+
+        public int GetLastActivePeriodID()
+        {
+            return clsSubscriptionPeriod.GetLastActivePeriodIDForMember(this.MemberID);
+        }
+
+        public bool DoesHaveAnActivePeriodID()
+        {
+            return (GetLastActivePeriodID() != -1);
         }
 
     }

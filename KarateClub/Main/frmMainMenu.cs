@@ -19,6 +19,7 @@ using System.Resources;
 using KarateClub.Properties;
 using KarateClub.MembersInstructors;
 using KarateClub.BeltRanks;
+using KarateClub.SubscriptionPeriods;
 
 namespace KarateClub.Main
 {
@@ -158,7 +159,7 @@ namespace KarateClub.Main
         private void btnSubscriptionPeriods_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListSubscriptionPeriod());
         }
 
         private void btnBeltTests_Click(object sender, EventArgs e)

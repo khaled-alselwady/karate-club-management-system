@@ -33,10 +33,14 @@ namespace KarateClub.Members.UserControls
             this._MemberID = -1;
             this._Member = null;
 
+            ucPersonCard1.Reset();
+
             lblMemberID.Text = "[????]";
             lblLastBeltRank.Text = "[????]";
             lblIsActive.Text = "[????]";
             lblEmergencyContact.Text = "[????]";
+
+            pbIsActive.Image = Resources.active_user;
 
             llEditMemberInfo.Enabled = false;
         }
