@@ -143,6 +143,16 @@ namespace KarateClub.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap belt_ranks {
+            get {
+                object obj = ResourceManager.GetObject("belt-ranks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BeltTest {
             get {
                 object obj = ResourceManager.GetObject("BeltTest", resourceCulture);
@@ -336,6 +346,16 @@ namespace KarateClub.Properties {
         internal static System.Drawing.Bitmap Members {
             get {
                 object obj = ResourceManager.GetObject("Members", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_32 {
+            get {
+                object obj = ResourceManager.GetObject("money 32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

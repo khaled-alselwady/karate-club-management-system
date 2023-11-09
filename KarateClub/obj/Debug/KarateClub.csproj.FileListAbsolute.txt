@@ -42,3 +42,5 @@ D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClu
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.MembersInstructors.UserControls.ucMembersInstructorsCard.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.MembersInstructors.frmListMembersInstructors.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.MembersInstructors.frmShowMembersInstructorsDetails.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltRanks.frmEditBeltRank.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltRanks.frmListBeltRanks.resources

@@ -244,6 +244,39 @@ where RankID = @RankID";
         }
 
 
+        public static bool DoesRankExist(string RankName)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select found = 1 from BeltRanks where RankName = @RankName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@RankName", RankName);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                IsFound = (result != null);
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+
         public static DataTable GetAllBeltRanks()
         {
             DataTable dt = new DataTable();
