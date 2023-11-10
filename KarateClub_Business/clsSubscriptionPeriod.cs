@@ -13,6 +13,8 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
+        public enum enIssueReason { FirstTime = 1, Renew = 2 };
+
         public int PeriodID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -20,9 +22,12 @@ namespace KarateClub_Business
         public bool IsPaid { get; set; }
         public int MemberID { get; set; }
         public int PaymentID { get; set; }
+        public enIssueReason IssueReason { get; set; }
+        public bool IsActive { get; set; }
 
         public clsMember MemberInfo { get; set; }
         public clsPayment PaymentInfo { get; set; }
+        public string IssueReasonText => _IssueReasonText(this.IssueReason);
 
         public clsSubscriptionPeriod()
         {
@@ -33,13 +38,15 @@ namespace KarateClub_Business
             this.IsPaid = false;
             this.MemberID = -1;
             this.PaymentID = -1;
+            this.IssueReason = enIssueReason.FirstTime;
+            this.IsActive = true;
 
             this.Mode = enMode.AddNew;
         }
 
         private clsSubscriptionPeriod(int PeriodID, DateTime StartDate,
             DateTime EndDate, decimal Fees, bool IsPaid, int MemberID,
-            int PaymentID)
+            int PaymentID, enIssueReason IssueReason, bool IsActive)
         {
             this.PeriodID = PeriodID;
             this.StartDate = StartDate;
@@ -48,6 +55,8 @@ namespace KarateClub_Business
             this.IsPaid = IsPaid;
             this.MemberID = MemberID;
             this.PaymentID = PaymentID;
+            this.IssueReason = IssueReason;
+            this.IsActive = IsActive;
 
             this.MemberInfo = clsMember.Find(MemberID);
 
@@ -59,14 +68,17 @@ namespace KarateClub_Business
 
         private bool _AddNewPeriod()
         {
-            this.PeriodID = clsSubscriptionPeriodData.AddNewPeriod(this.StartDate, this.EndDate, this.Fees, this.IsPaid, this.MemberID, this.PaymentID);
+            this.PeriodID = clsSubscriptionPeriodData.AddNewPeriod(this.StartDate, this.EndDate,
+                this.Fees, this.IsPaid, this.MemberID, this.PaymentID, (byte)this.IssueReason);
 
             return (this.PeriodID != -1);
         }
 
         private bool _UpdatePeriod()
         {
-            return clsSubscriptionPeriodData.UpdatePeriod(this.PeriodID, this.StartDate, this.EndDate, this.Fees, this.IsPaid, this.MemberID, this.PaymentID);
+            return clsSubscriptionPeriodData.UpdatePeriod(this.PeriodID, this.StartDate,
+                this.EndDate, this.Fees, this.IsPaid, this.MemberID, this.PaymentID,
+                (byte)this.IssueReason, this.IsActive);
         }
 
         public bool Save()
@@ -99,14 +111,17 @@ namespace KarateClub_Business
             bool IsPaid = false;
             int MemberID = -1;
             int PaymentID = -1;
+            byte IssueReason = 0;
+            bool isActive = true;
 
             bool IsFound = clsSubscriptionPeriodData.GetPeriodInfoByID(PeriodID, ref StartDate,
-                ref EndDate, ref Fees, ref IsPaid, ref MemberID, ref PaymentID);
+                ref EndDate, ref Fees, ref IsPaid, ref MemberID, ref PaymentID,
+                ref IssueReason, ref isActive);
 
             if (IsFound)
             {
                 return new clsSubscriptionPeriod(PeriodID, StartDate, EndDate, Fees,
-                    IsPaid, MemberID, PaymentID);
+                    IsPaid, MemberID, PaymentID, (enIssueReason)IssueReason, isActive);
             }
             else
             {
@@ -168,9 +183,20 @@ namespace KarateClub_Business
             return clsSubscriptionPeriodData.GetAllPeriodsForMember(MemberID);
         }
 
+        private string _IssueReasonText(enIssueReason IssueReason)
+        {
+            switch (IssueReason)
+            {
+                case enIssueReason.FirstTime:
+                    return "First Time";
+
+                case enIssueReason.Renew:
+                    return "Renew";
+
+                default:
+                    return "First Time";
+            }
+        }
+
     }
-
-
-
-
 }

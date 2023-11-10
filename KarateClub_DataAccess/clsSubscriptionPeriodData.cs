@@ -12,7 +12,7 @@ namespace KarateClub_DataAccess
     {
         public static bool GetPeriodInfoByID(int PeriodID, ref DateTime StartDate,
             ref DateTime EndDate, ref decimal Fees, ref bool IsPaid, ref int MemberID,
-            ref int PaymentID)
+            ref int PaymentID, ref byte IssueReason, ref bool IsActive)
         {
             bool IsFound = false;
 
@@ -41,6 +41,8 @@ namespace KarateClub_DataAccess
                     IsPaid = (bool)reader["IsPaid"];
                     MemberID = (int)reader["MemberID"];
                     PaymentID = (reader["PaymentID"] != DBNull.Value) ? (int)reader["PaymentID"] : -1;
+                    IssueReason = (byte)reader["IssueReason"];
+                    IsActive = (bool)reader["IsActive"];
                 }
                 else
                 {
@@ -63,16 +65,20 @@ namespace KarateClub_DataAccess
         }
 
         public static int AddNewPeriod(DateTime StartDate, DateTime EndDate, decimal Fees,
-            bool IsPaid, int MemberID, int PaymentID)
+            bool IsPaid, int MemberID, int PaymentID, byte IssueReason)
         {
             // This function will return the new person id if succeeded and -1 if not
             int PeriodID = -1;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"insert into SubscriptionPeriods (StartDate, EndDate, Fees, IsPaid, MemberID, PaymentID)
-values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID)
-select scope_identity()";
+            string query = @"update SubscriptionPeriods
+                             set IsActive = 0
+                             where MemberID = @MemberID;
+
+                             insert into SubscriptionPeriods (StartDate, EndDate, Fees, IsPaid, MemberID, PaymentID, IssueReason, IsActive)
+                             values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID, @IssueReason, 1)
+                             select scope_identity()";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -81,6 +87,8 @@ select scope_identity()";
             command.Parameters.AddWithValue("@Fees", Fees);
             command.Parameters.AddWithValue("@IsPaid", IsPaid);
             command.Parameters.AddWithValue("@MemberID", MemberID);
+            command.Parameters.AddWithValue("@IssueReason", IssueReason);
+
             if (PaymentID <= 0)
             {
                 command.Parameters.AddWithValue("@PaymentID", DBNull.Value);
@@ -114,7 +122,7 @@ select scope_identity()";
         }
 
         public static bool UpdatePeriod(int PeriodID, DateTime StartDate, DateTime EndDate,
-            decimal Fees, bool IsPaid, int MemberID, int PaymentID)
+            decimal Fees, bool IsPaid, int MemberID, int PaymentID, byte IssueReason, bool IsActive)
         {
             int RowAffected = 0;
 
@@ -126,7 +134,9 @@ EndDate = @EndDate,
 Fees = @Fees,
 IsPaid = @IsPaid,
 MemberID = @MemberID,
-PaymentID = @PaymentID
+PaymentID = @PaymentID,
+IssueReason = @IssueReason,
+IsActive = @IsActive
 where PeriodID = @PeriodID";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -137,6 +147,9 @@ where PeriodID = @PeriodID";
             command.Parameters.AddWithValue("@Fees", Fees);
             command.Parameters.AddWithValue("@IsPaid", IsPaid);
             command.Parameters.AddWithValue("@MemberID", MemberID);
+            command.Parameters.AddWithValue("@IssueReason", IssueReason);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
+
             if (PaymentID <= 0)
             {
                 command.Parameters.AddWithValue("@PaymentID", DBNull.Value);
