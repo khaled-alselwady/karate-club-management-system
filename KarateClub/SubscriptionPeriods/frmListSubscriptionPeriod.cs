@@ -82,15 +82,7 @@ namespace KarateClub.SubscriptionPeriods
 
                 dgvSubscriptionPeriodsList.Columns[8].HeaderText = "Is Active";
                 dgvSubscriptionPeriodsList.Columns[8].Width = 100;
-
-
-                DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-                checkBoxColumn.HeaderText = "Is Active";
-                checkBoxColumn.Name = "IsActive";
-                checkBoxColumn.DataPropertyName = "IsActive";
-                dgvSubscriptionPeriodsList.Columns.Remove("IsActive"); // Remove the original IsActive column
-                dgvSubscriptionPeriodsList.Columns.Insert(8, checkBoxColumn);
-            }          
+            }
         }
 
         private int _GetPeriodIDFromDGV()
@@ -107,11 +99,13 @@ namespace KarateClub.SubscriptionPeriods
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtSearch.Visible = (cbFilter.Text != "None") && (cbFilter.Text != "Is Paid") && (cbFilter.Text != "Is Active");
+            txtSearch.Visible = (cbFilter.Text != "None") && (cbFilter.Text != "Is Paid") && (cbFilter.Text != "Is Active") && (cbFilter.Text != "Is Expired");
 
             cbIsPaid.Visible = (cbFilter.Text == "Is Paid");
 
             cbIsActive.Visible = (cbFilter.Text == "Is Active");
+
+            cbIsExpired.Visible = (cbFilter.Text == "Is Expired");
 
             if (txtSearch.Visible)
             {
@@ -127,6 +121,11 @@ namespace KarateClub.SubscriptionPeriods
             if (cbIsActive.Visible)
             {
                 cbIsActive.SelectedIndex = 0;
+            }
+
+            if (cbIsExpired.Visible)
+            {
+                cbIsExpired.SelectedIndex = 0;
             }
         }
 
@@ -205,6 +204,15 @@ namespace KarateClub.SubscriptionPeriods
             if (dgvSubscriptionPeriodsList.Rows.Count > 0)
             {
                 payToolStripMenuItem.Enabled = !(bool)dgvSubscriptionPeriodsList.CurrentRow.Cells["IsPaid"].Value;
+                editToolStripMenuItem.Enabled = payToolStripMenuItem.Enabled;
+
+                DateTime EndDate = (DateTime)dgvSubscriptionPeriodsList.CurrentRow.Cells["EndDate"].Value;
+
+                RenewtoolStripMenuItem1.Enabled = (EndDate < DateTime.Now) && (bool)dgvSubscriptionPeriodsList.CurrentRow.Cells["IsActive"].Value;
+
+                deleteToolStripMenuItem.Enabled = !(bool)dgvSubscriptionPeriodsList.CurrentRow.Cells["IsPaid"].Value &&
+                                                   (bool)dgvSubscriptionPeriodsList.CurrentRow.Cells["IsActive"].Value;
+
             }
         }
 
@@ -252,7 +260,7 @@ namespace KarateClub.SubscriptionPeriods
 
                 if (Period == null)
                 {
-                    MessageBox.Show("Deleted Failed", "Failed",
+                    MessageBox.Show("Pay Failed", "Failed",
                        MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     return;
@@ -262,10 +270,16 @@ namespace KarateClub.SubscriptionPeriods
 
                 if (PaymentID != -1)
                 {
-                    MessageBox.Show("Deleted Done Successfully", "Deleted",
+                    Period.PaymentID = PaymentID;
+                    Period.IsPaid = (PaymentID != -1);
+
+                    if (Period.Save())
+                    {
+                        MessageBox.Show("Pay Done Successfully", "Deleted",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    _RefreshSubscriptionPeriodsList();
+                        _RefreshSubscriptionPeriodsList();
+                    }
                 }
                 else
                 {
@@ -303,6 +317,66 @@ namespace KarateClub.SubscriptionPeriods
             ShowHistory.ShowDialog();
 
             _RefreshSubscriptionPeriodsList();
+        }
+
+        private void ShowPeriodDetailstoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmShowSubscriptionPeriodDetails ShowSubscriptionPeriodDetails = new frmShowSubscriptionPeriodDetails(_GetPeriodIDFromDGV());
+            ShowSubscriptionPeriodDetails.ShowDialog();
+        }
+
+        private void RenewtoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmRenewSubscriptionPeriod RenewSubscriptionPeriod = new frmRenewSubscriptionPeriod(_GetPeriodIDFromDGV());
+            RenewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
+            RenewSubscriptionPeriod.Show();
+        }
+
+        private void btnRenewPeriod_Click(object sender, EventArgs e)
+        {
+            frmRenewSubscriptionPeriod RenewSubscriptionPeriod = new frmRenewSubscriptionPeriod();
+            RenewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
+            RenewSubscriptionPeriod.Show();
+        }
+
+        private void btnRenewPeriod_MouseEnter(object sender, EventArgs e)
+        {
+            btnRenewPeriod.BackColor = Color.Gainsboro;
+        }
+
+        private void btnRenewPeriod_MouseLeave(object sender, EventArgs e)
+        {
+            btnRenewPeriod.BackColor = Color.White;
+        }
+
+        private void cbIsExpired_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_dtAllSubscriptionPeriod.Rows.Count == 0)
+            {
+                return;
+            }
+
+            if (cbIsExpired.Text == "All")
+            {
+                _dtAllSubscriptionPeriod.DefaultView.RowFilter = "";
+                lblNumberOfRecords.Text = dgvSubscriptionPeriodsList.Rows.Count.ToString();
+
+                return;
+            }
+
+            if (cbIsExpired.Text == "Yes")
+            {
+                _dtAllSubscriptionPeriod.DefaultView.RowFilter =
+                string.Format("[{0}] < '{1}'", "EndDate", DateTime.Now);
+            }
+            else
+            {
+                _dtAllSubscriptionPeriod.DefaultView.RowFilter =
+                string.Format("[{0}] >= '{1}'", "EndDate", DateTime.Now);
+            }
+            
+
+            lblNumberOfRecords.Text = dgvSubscriptionPeriodsList.Rows.Count.ToString();
         }
     }
 }

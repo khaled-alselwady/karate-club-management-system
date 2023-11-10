@@ -69,7 +69,7 @@ namespace KarateClub_Business
         private bool _AddNewPeriod()
         {
             this.PeriodID = clsSubscriptionPeriodData.AddNewPeriod(this.StartDate, this.EndDate,
-                this.Fees, this.IsPaid, this.MemberID, this.PaymentID, (byte)this.IssueReason);
+                this.Fees, this.IsPaid, this.MemberID, this.PaymentID, (byte)this.IssueReason, this.IsActive);
 
             return (this.PeriodID != -1);
         }
@@ -158,19 +158,39 @@ namespace KarateClub_Business
 
             if (!Payment.Save())
             {
-                this.PaymentID = -1;
-                this.IsPaid = false;
+                clsMember.SetActivity(this.MemberID, false);
                 return -1;
             }
-
-            this.PaymentID = Payment.PaymentID;
-            this.IsPaid = true;
-
-            this.Save();
 
             clsMember.SetActivity(this.MemberID, true);
 
             return Payment.PaymentID;
+        }
+
+        public int Renew(decimal Fees, DateTime StartDate, DateTime EndDate, bool IsPaid, ref int PaymentID)
+        {
+            clsSubscriptionPeriod NewPeriod = new clsSubscriptionPeriod();
+
+            NewPeriod.MemberID = this.MemberID;
+            NewPeriod.Fees = Fees;
+            NewPeriod.StartDate = StartDate;
+            NewPeriod.EndDate = EndDate;
+            NewPeriod.IsPaid = IsPaid;
+            NewPeriod.IssueReason = enIssueReason.Renew;
+            NewPeriod.IsActive = true;
+
+            if (NewPeriod.IsPaid)
+            {
+                NewPeriod.PaymentID = NewPeriod.Pay(Fees);
+                PaymentID = NewPeriod.PaymentID;
+            }
+
+            if (!NewPeriod.Save())
+            {
+                return -1;
+            }
+
+            return NewPeriod.PeriodID;
         }
 
         public static int GetLastActivePeriodIDForMember(int MemberID)
@@ -196,6 +216,16 @@ namespace KarateClub_Business
                 default:
                     return "First Time";
             }
+        }
+
+        public bool UpdateActivityAndIsPaid(bool IsPaid, bool IsActive)
+        {
+            return clsSubscriptionPeriodData.UpdateActivityAndIsPaid(this.PeriodID, IsPaid, IsActive);
+        }
+
+        public bool DidPeriodExpire()
+        {
+            return (this.EndDate < DateTime.Now);
         }
 
     }

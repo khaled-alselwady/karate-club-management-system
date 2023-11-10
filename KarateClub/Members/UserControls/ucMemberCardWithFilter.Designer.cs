@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.gbFilters = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.btnAddNewMember = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ucMemberCard1 = new KarateClub.Members.UserControls.ucMemberCard();
-            this.btnAddNewMember = new System.Windows.Forms.Button();
-            this.btnFind = new System.Windows.Forms.Button();
             this.gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -65,30 +65,6 @@
             this.label22.TabIndex = 114;
             this.label22.Text = "Member ID :";
             // 
-            // txtFilterValue
-            // 
-            this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFilterValue.Location = new System.Drawing.Point(141, 29);
-            this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtFilterValue.Name = "txtFilterValue";
-            this.txtFilterValue.Size = new System.Drawing.Size(214, 26);
-            this.txtFilterValue.TabIndex = 17;
-            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
-            this.txtFilterValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtFilterValue_Validating);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // ucMemberCard1
-            // 
-            this.ucMemberCard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucMemberCard1.BackColor = System.Drawing.Color.White;
-            this.ucMemberCard1.Location = new System.Drawing.Point(3, 86);
-            this.ucMemberCard1.Name = "ucMemberCard1";
-            this.ucMemberCard1.Size = new System.Drawing.Size(895, 356);
-            this.ucMemberCard1.TabIndex = 0;
-            // 
             // btnAddNewMember
             // 
             this.btnAddNewMember.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -114,10 +90,35 @@
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
+            // txtFilterValue
+            // 
+            this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFilterValue.Location = new System.Drawing.Point(141, 29);
+            this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtFilterValue.Name = "txtFilterValue";
+            this.txtFilterValue.Size = new System.Drawing.Size(214, 26);
+            this.txtFilterValue.TabIndex = 17;
+            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
+            this.txtFilterValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtFilterValue_Validating);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // ucMemberCard1
+            // 
+            this.ucMemberCard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucMemberCard1.BackColor = System.Drawing.Color.White;
+            this.ucMemberCard1.Location = new System.Drawing.Point(3, 86);
+            this.ucMemberCard1.Name = "ucMemberCard1";
+            this.ucMemberCard1.Size = new System.Drawing.Size(895, 356);
+            this.ucMemberCard1.TabIndex = 0;
+            // 
             // ucMemberCardWithFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ucMemberCard1);

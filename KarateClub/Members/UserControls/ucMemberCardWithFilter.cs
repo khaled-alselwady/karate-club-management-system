@@ -76,7 +76,6 @@ namespace KarateClub.Members.UserControls
             // Check if the pressed key is Enter (character code 13)
             if (e.KeyChar == (char)13)
             {
-
                 btnFind.PerformClick();
             }
 

@@ -80,7 +80,7 @@ namespace KarateClub.SubscriptionPeriods
             ucMemberCardWithFilter1.LoadMemberInfo(_Period.MemberID);
 
             lblPeriodID.Text = _Period.PeriodID.ToString();
-            lblMemberID.Text = _Period.MemberID.ToString();            
+            lblMemberID.Text = _Period.MemberID.ToString();
 
             if (_Period.StartDate < DateTime.Now)
             {
@@ -99,7 +99,7 @@ namespace KarateClub.SubscriptionPeriods
             {
                 dtpEndDate.Value = _Period.EndDate;
             }
-            
+
             txtFees.Text = _Period.Fees.ToString("F0");
 
             if (_Period.IsPaid)
@@ -223,15 +223,28 @@ namespace KarateClub.SubscriptionPeriods
             _Period.EndDate = dtpEndDate.Value;
             _Period.MemberID = ucMemberCardWithFilter1.MemberID;
             _Period.Fees = Convert.ToDecimal(txtFees.Text.Trim());
+            _Period.IsActive = true;
+
+            if (_Mode == enMode.AddNew)
+            {
+                _Period.IssueReason = clsSubscriptionPeriod.enIssueReason.FirstTime;
+            }
+
+            int PaymentID = -1;
 
             if (rbYes.Enabled && rbYes.Checked)
             {
                 // create record in the payment table
 
-                int PaymentID = _Period.Pay(Convert.ToDecimal(txtFees.Text.Trim()));
+                PaymentID = _Period.Pay(Convert.ToDecimal(txtFees.Text.Trim()));
 
                 lblPaymentID.Text = PaymentID.ToString();
             }
+
+            _Period.PaymentID = PaymentID;
+            _Period.IsPaid = (PaymentID != -1);
+
+            clsMember.SetActivity(_Period.MemberID, _Period.IsPaid);
 
             if (_Period.Save())
             {

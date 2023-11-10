@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace KarateClub_DataAccess
 {
@@ -65,7 +66,7 @@ namespace KarateClub_DataAccess
         }
 
         public static int AddNewPeriod(DateTime StartDate, DateTime EndDate, decimal Fees,
-            bool IsPaid, int MemberID, int PaymentID, byte IssueReason)
+            bool IsPaid, int MemberID, int PaymentID, byte IssueReason, bool IsActive)
         {
             // This function will return the new person id if succeeded and -1 if not
             int PeriodID = -1;
@@ -77,7 +78,7 @@ namespace KarateClub_DataAccess
                              where MemberID = @MemberID;
 
                              insert into SubscriptionPeriods (StartDate, EndDate, Fees, IsPaid, MemberID, PaymentID, IssueReason, IsActive)
-                             values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID, @IssueReason, 1)
+                             values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID, @IssueReason, @IsActive)
                              select scope_identity()";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -88,6 +89,7 @@ namespace KarateClub_DataAccess
             command.Parameters.AddWithValue("@IsPaid", IsPaid);
             command.Parameters.AddWithValue("@MemberID", MemberID);
             command.Parameters.AddWithValue("@IssueReason", IssueReason);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
 
             if (PaymentID <= 0)
             {
@@ -314,9 +316,9 @@ where PeriodID = @PeriodID";
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"select top 1 PeriodID from SubscriptionPeriods
-                             inner join members on members.MemberID = SubscriptionPeriods.MemberID
-                             where SubscriptionPeriods.MemberID = @MemberID and Members.IsActive = 1 and CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE())
-                             order by SubscriptionPeriods.StartDate desc";
+                             where MemberID = @MemberID
+                             and CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE())
+                             order by StartDate desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -355,8 +357,7 @@ where PeriodID = @PeriodID";
                              (SELECT        Name
                                FROM            dbo.People
                                WHERE        (PersonID = dbo.Members.PersonID)) AS MemberName, dbo.SubscriptionPeriods.Fees, dbo.SubscriptionPeriods.IsPaid, dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate, DATEDIFF(day, 
-                         dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate) AS SubscriptionDays, dbo.SubscriptionPeriods.PaymentID, CASE WHEN CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE()) 
-                         THEN 1 ELSE 0 END AS IsActive
+                         dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate) AS SubscriptionDays, dbo.SubscriptionPeriods.PaymentID,dbo.SubscriptionPeriods.IsActive 
 FROM            dbo.SubscriptionPeriods INNER JOIN
                          dbo.Members ON dbo.Members.MemberID = dbo.SubscriptionPeriods.MemberID
 						 where SubscriptionPeriods.MemberID = @MemberID
@@ -389,6 +390,41 @@ FROM            dbo.SubscriptionPeriods INNER JOIN
             }
 
             return dt;
+        }
+
+        public static bool UpdateActivityAndIsPaid(int PeriodID, bool IsPaid, bool IsActive)
+        {
+            int RowAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"update SubscriptionPeriods
+                             set   IsPaid = @IsPaid,
+                                   IsActive = @IsActive
+                             where PeriodID = @PeriodID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PeriodID", PeriodID);
+            command.Parameters.AddWithValue("@IsActive", IsActive);
+            command.Parameters.AddWithValue("@IsPaid", IsPaid);
+
+            try
+            {
+                connection.Open();
+
+                RowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowAffected > 0);
         }
 
     }

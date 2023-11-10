@@ -215,11 +215,35 @@
     <Compile Include="SubscriptionPeriods\frmListSubscriptionPeriod.Designer.cs">
       <DependentUpon>frmListSubscriptionPeriod.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubscriptionPeriods\frmRenewSubscriptionPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmRenewSubscriptionPeriod.Designer.cs">
+      <DependentUpon>frmRenewSubscriptionPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodDetails.Designer.cs">
+      <DependentUpon>frmShowSubscriptionPeriodDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.Designer.cs">
       <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfo.Designer.cs">
+      <DependentUpon>ucSubscriptionPeriodInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfoWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfoWithFilter.Designer.cs">
+      <DependentUpon>ucSubscriptionPeriodInfoWithFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\frmAddEditUser.cs">
       <SubType>Form</SubType>
@@ -348,8 +372,20 @@
     <EmbeddedResource Include="SubscriptionPeriods\frmListSubscriptionPeriod.resx">
       <DependentUpon>frmListSubscriptionPeriod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\frmRenewSubscriptionPeriod.resx">
+      <DependentUpon>frmRenewSubscriptionPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\frmShowSubscriptionPeriodDetails.resx">
+      <DependentUpon>frmShowSubscriptionPeriodDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.resx">
       <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfo.resx">
+      <DependentUpon>ucSubscriptionPeriodInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfoWithFilter.resx">
+      <DependentUpon>ucSubscriptionPeriodInfoWithFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\frmAddEditUser.resx">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
@@ -544,6 +580,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\New Application 64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Notes 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-period.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-period2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-period3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Renew Driving License 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\renew-period.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

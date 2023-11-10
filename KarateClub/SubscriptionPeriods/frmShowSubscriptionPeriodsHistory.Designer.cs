@@ -35,13 +35,17 @@
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvSubscriptionPeriodsList = new System.Windows.Forms.DataGridView();
+            this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.ShowPeriodDetailstoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblNumberOfRecords = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.ucMemberCard1 = new KarateClub.Members.UserControls.ucMemberCard();
+            this.payToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubscriptionPeriodsList)).BeginInit();
+            this.cmsEditProfile.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -110,6 +114,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSubscriptionPeriodsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSubscriptionPeriodsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSubscriptionPeriodsList.ContextMenuStrip = this.cmsEditProfile;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -136,6 +141,36 @@
             this.dgvSubscriptionPeriodsList.Size = new System.Drawing.Size(866, 164);
             this.dgvSubscriptionPeriodsList.TabIndex = 171;
             this.dgvSubscriptionPeriodsList.TabStop = false;
+            // 
+            // cmsEditProfile
+            // 
+            this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
+            this.cmsEditProfile.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmsEditProfile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowPeriodDetailstoolStripMenuItem1,
+            this.payToolStripMenuItem});
+            this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
+            this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.ColorTable = null;
+            this.cmsEditProfile.RenderStyle.RoundedEdges = true;
+            this.cmsEditProfile.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.cmsEditProfile.Size = new System.Drawing.Size(239, 86);
+            this.cmsEditProfile.Opening += new System.ComponentModel.CancelEventHandler(this.cmsEditProfile_Opening);
+            // 
+            // ShowPeriodDetailstoolStripMenuItem1
+            // 
+            this.ShowPeriodDetailstoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.ShowPeriodDetailstoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
+            this.ShowPeriodDetailstoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowPeriodDetailstoolStripMenuItem1.Name = "ShowPeriodDetailstoolStripMenuItem1";
+            this.ShowPeriodDetailstoolStripMenuItem1.Size = new System.Drawing.Size(238, 38);
+            this.ShowPeriodDetailstoolStripMenuItem1.Text = "   Show Period Details";
+            this.ShowPeriodDetailstoolStripMenuItem1.Click += new System.EventHandler(this.ShowPeriodDetailstoolStripMenuItem1_Click);
             // 
             // lblNumberOfRecords
             // 
@@ -182,6 +217,16 @@
             this.ucMemberCard1.Size = new System.Drawing.Size(899, 363);
             this.ucMemberCard1.TabIndex = 169;
             // 
+            // payToolStripMenuItem
+            // 
+            this.payToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.payToolStripMenuItem.Image = global::KarateClub.Properties.Resources.money_32;
+            this.payToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.payToolStripMenuItem.Name = "payToolStripMenuItem";
+            this.payToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.payToolStripMenuItem.Text = "   Pay";
+            this.payToolStripMenuItem.Click += new System.EventHandler(this.payToolStripMenuItem_Click);
+            // 
             // frmShowSubscriptionPeriodsHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +248,7 @@
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubscriptionPeriodsList)).EndInit();
+            this.cmsEditProfile.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,5 +264,8 @@
         private System.Windows.Forms.Label lblNumberOfRecords;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnClose;
+        private Guna.UI2.WinForms.Guna2ContextMenuStrip cmsEditProfile;
+        private System.Windows.Forms.ToolStripMenuItem ShowPeriodDetailstoolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem payToolStripMenuItem;
     }
 }

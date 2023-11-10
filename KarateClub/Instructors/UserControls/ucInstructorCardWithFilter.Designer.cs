@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.ucInstructorCard1 = new KarateClub.Instructors.UserControls.ucInstructorCard();
             this.gbFilters = new System.Windows.Forms.GroupBox();
+            this.btnAddNewInstructor = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnAddNewInstructor = new System.Windows.Forms.Button();
-            this.btnFind = new System.Windows.Forms.Button();
             this.gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,31 @@
             this.gbFilters.TabIndex = 18;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
+            // 
+            // btnAddNewInstructor
+            // 
+            this.btnAddNewInstructor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddNewInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNewInstructor.Image = global::KarateClub.Properties.Resources.AddPerson_32;
+            this.btnAddNewInstructor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddNewInstructor.Location = new System.Drawing.Point(441, 22);
+            this.btnAddNewInstructor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAddNewInstructor.Name = "btnAddNewInstructor";
+            this.btnAddNewInstructor.Size = new System.Drawing.Size(44, 37);
+            this.btnAddNewInstructor.TabIndex = 116;
+            this.btnAddNewInstructor.UseVisualStyleBackColor = true;
+            this.btnAddNewInstructor.Click += new System.EventHandler(this.btnAddNewInstructor_Click);
+            // 
+            // btnFind
+            // 
+            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFind.Image = global::KarateClub.Properties.Resources.SearchPerson;
+            this.btnFind.Location = new System.Drawing.Point(388, 22);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(44, 37);
+            this.btnFind.TabIndex = 115;
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // label22
             // 
@@ -87,36 +112,12 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // btnAddNewInstructor
-            // 
-            this.btnAddNewInstructor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddNewInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewInstructor.Image = global::KarateClub.Properties.Resources.AddPerson_32;
-            this.btnAddNewInstructor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewInstructor.Location = new System.Drawing.Point(441, 22);
-            this.btnAddNewInstructor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnAddNewInstructor.Name = "btnAddNewInstructor";
-            this.btnAddNewInstructor.Size = new System.Drawing.Size(44, 37);
-            this.btnAddNewInstructor.TabIndex = 116;
-            this.btnAddNewInstructor.UseVisualStyleBackColor = true;
-            this.btnAddNewInstructor.Click += new System.EventHandler(this.btnAddNewInstructor_Click);
-            // 
-            // btnFind
-            // 
-            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFind.Image = global::KarateClub.Properties.Resources.SearchPerson;
-            this.btnFind.Location = new System.Drawing.Point(388, 22);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(44, 37);
-            this.btnFind.TabIndex = 115;
-            this.btnFind.UseVisualStyleBackColor = true;
-            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
             // ucInstructorCardWithFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ucInstructorCard1);
             this.Name = "ucInstructorCardWithFilter";

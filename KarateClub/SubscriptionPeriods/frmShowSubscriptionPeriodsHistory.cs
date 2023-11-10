@@ -68,7 +68,7 @@ namespace KarateClub.SubscriptionPeriods
                 dgvSubscriptionPeriodsList.Columns.Insert(8, checkBoxColumn);
             }
 
-            
+
 
         }
 
@@ -80,6 +80,60 @@ namespace KarateClub.SubscriptionPeriods
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ShowPeriodDetailstoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmShowSubscriptionPeriodDetails ShowSubscriptionPeriodDetails =
+                new frmShowSubscriptionPeriodDetails
+                ((int)dgvSubscriptionPeriodsList.CurrentRow.Cells["PeriodID"].Value);
+
+            ShowSubscriptionPeriodDetails.ShowDialog();
+        }
+
+        private void payToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to pay for this period?", "Confirm", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+
+                clsSubscriptionPeriod Period = clsSubscriptionPeriod.
+                    Find((int)dgvSubscriptionPeriodsList.CurrentRow.Cells["PeriodID"].Value);
+
+                if (Period == null)
+                {
+                    MessageBox.Show("Pay Failed", "Failed",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                int PaymentID = Period.Pay((decimal)dgvSubscriptionPeriodsList.CurrentRow.Cells["Fees"].Value);
+
+                if (PaymentID != -1)
+                {
+                    Period.PaymentID = PaymentID;
+                    Period.IsPaid = (PaymentID != -1);
+
+                    if (Period.Save())
+                    {
+                        MessageBox.Show("Pay Done Successfully", "Deleted",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _RefreshSubscriptionPeriodsList();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Deleted Failed", "Failed",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void cmsEditProfile_Opening(object sender, CancelEventArgs e)
+        {
+            payToolStripMenuItem.Enabled = !(bool)dgvSubscriptionPeriodsList.CurrentRow.Cells["IsPaid"].Value;
         }
     }
 }
