@@ -33,9 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvMemberBeltTestsList = new System.Windows.Forms.DataGridView();
             this.lblNumberOfRecords = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgvMemberBeltTestsList = new System.Windows.Forms.DataGridView();
             this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.ShowTestDetailstoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +87,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Member Tests";
             // 
+            // lblNumberOfRecords
+            // 
+            this.lblNumberOfRecords.AutoSize = true;
+            this.lblNumberOfRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumberOfRecords.Location = new System.Drawing.Point(108, 278);
+            this.lblNumberOfRecords.Name = "lblNumberOfRecords";
+            this.lblNumberOfRecords.Size = new System.Drawing.Size(27, 20);
+            this.lblNumberOfRecords.TabIndex = 167;
+            this.lblNumberOfRecords.Text = "??";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 278);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 20);
+            this.label2.TabIndex = 166;
+            this.label2.Text = "# Records:";
+            // 
             // dgvMemberBeltTestsList
             // 
             this.dgvMemberBeltTestsList.AllowUserToAddRows = false;
@@ -130,26 +150,6 @@
             this.dgvMemberBeltTestsList.TabIndex = 159;
             this.dgvMemberBeltTestsList.TabStop = false;
             // 
-            // lblNumberOfRecords
-            // 
-            this.lblNumberOfRecords.AutoSize = true;
-            this.lblNumberOfRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberOfRecords.Location = new System.Drawing.Point(108, 278);
-            this.lblNumberOfRecords.Name = "lblNumberOfRecords";
-            this.lblNumberOfRecords.Size = new System.Drawing.Size(27, 20);
-            this.lblNumberOfRecords.TabIndex = 167;
-            this.lblNumberOfRecords.Text = "??";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 278);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 20);
-            this.label2.TabIndex = 166;
-            this.label2.Text = "# Records:";
-            // 
             // cmsEditProfile
             // 
             this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
@@ -167,7 +167,7 @@
             this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(231, 102);
+            this.cmsEditProfile.Size = new System.Drawing.Size(231, 80);
             // 
             // ShowTestDetailstoolStripMenuItem1
             // 
@@ -197,7 +197,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.guna2TabControl1);
             this.Name = "ucMemberTests";
-            this.Size = new System.Drawing.Size(924, 415);
+            this.Size = new System.Drawing.Size(924, 357);
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

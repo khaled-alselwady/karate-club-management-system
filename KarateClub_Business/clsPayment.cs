@@ -13,10 +13,36 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
+        public enum enPaymentFor { SubscriptionPeriod, BeltTest }
+        public enPaymentFor PaymentFor = enPaymentFor.SubscriptionPeriod;
+
         public int PaymentID { get; set; }
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public int MemberID { get; set; }
+
+        public clsMember MemberInfo { get; set; }
+
+        private int _TempID = -1;
+
+        public int PaymentForID
+        {
+            get
+            {
+                if ((_TempID = clsSubscriptionPeriod.GetPeriodIDByPaymentID(PaymentID)) != -1)
+                {
+                    PaymentFor = enPaymentFor.SubscriptionPeriod;
+                    return _TempID;
+                }
+                if ((_TempID = clsBeltTest.GetTestIDByPaymentID(PaymentID)) != -1)
+                {
+                    PaymentFor = enPaymentFor.BeltTest;
+                    return _TempID;
+                }
+
+                return -1;
+            }
+        }
 
         public clsPayment()
         {
@@ -34,6 +60,8 @@ namespace KarateClub_Business
             this.Amount = Amount;
             this.Date = Date;
             this.MemberID = MemberID;
+
+            this.MemberInfo = clsMember.Find(MemberID);
 
             Mode = enMode.Update;
         }
@@ -108,6 +136,11 @@ namespace KarateClub_Business
         public static short Count()
         {
             return clsPaymentData.CountPayments();
+        }
+
+        public static DataTable GetAllPaymentsForMember(int MemberID)
+        {
+            return clsPaymentData.GetAllPaymentsForMember(MemberID);
         }
 
     }

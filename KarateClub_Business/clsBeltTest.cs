@@ -157,6 +157,11 @@ namespace KarateClub_Business
             return clsBeltTestData.GetAllBeltTestsForMember(MemberID);
         }
 
+        public static int GetTestIDByPaymentID(int PaymentID)
+        {
+            return clsBeltTestData.GetTestIDByPaymentID(PaymentID);
+        }
+
     }
 
 

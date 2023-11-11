@@ -193,6 +193,11 @@ namespace KarateClub_Business
             return clsBeltTest.GetAllBeltTestsForMember(this.MemberID);
         }
 
+        public DataTable GetAllPayments()
+        {
+            return clsPayment.GetAllPaymentsForMember(this.MemberID);
+        }
+
     }
 
 

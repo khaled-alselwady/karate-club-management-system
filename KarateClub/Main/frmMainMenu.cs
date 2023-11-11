@@ -21,6 +21,7 @@ using KarateClub.MembersInstructors;
 using KarateClub.BeltRanks;
 using KarateClub.SubscriptionPeriods;
 using KarateClub.BeltTests;
+using KarateClub.Payment;
 
 namespace KarateClub.Main
 {
@@ -172,7 +173,7 @@ namespace KarateClub.Main
         private void btnPayments_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListPayments());
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)

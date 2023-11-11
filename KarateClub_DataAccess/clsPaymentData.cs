@@ -58,7 +58,6 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
-
         public static int AddNewPayment(decimal Amount, int MemberID)
         {
             // This function will return the new person id if succeeded and -1 if not
@@ -99,8 +98,8 @@ select scope_identity()";
             return PaymentID;
         }
 
-
-        public static bool UpdatePayment(int PaymentID, decimal Amount, DateTime Date, int MemberID)
+        public static bool UpdatePayment(int PaymentID,
+            decimal Amount, DateTime Date, int MemberID)
         {
             int RowAffected = 0;
 
@@ -137,7 +136,6 @@ where PaymentID = @PaymentID";
             return (RowAffected > 0);
         }
 
-
         public static bool DeletePayment(int PaymentID)
         {
             int RowAffected = 0;
@@ -167,7 +165,6 @@ where PaymentID = @PaymentID";
 
             return (RowAffected > 0);
         }
-
 
         public static bool DoesPaymentExist(int PaymentID)
         {
@@ -201,14 +198,14 @@ where PaymentID = @PaymentID";
             return IsFound;
         }
 
-
         public static DataTable GetAllPayments()
         {
             DataTable dt = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from Payments";
+            string query = @"select * from PaymentsDetails_view order by PaymentID desc";
+
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -236,7 +233,6 @@ where PaymentID = @PaymentID";
 
             return dt;
         }
-
 
         public static short CountPayments()
         {
@@ -271,5 +267,49 @@ where PaymentID = @PaymentID";
             return Count;
         }
 
+        public static DataTable GetAllPaymentsForMember(int MemberID)
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT        dbo.Payments.PaymentID,
+                             (SELECT        Name
+                               FROM            dbo.People
+                               WHERE        (dbo.Members.PersonID = PersonID)) AS MemberName, dbo.Payments.Date, dbo.Payments.Amount
+FROM            dbo.Payments INNER JOIN
+                         dbo.Members ON dbo.Members.MemberID = dbo.Payments.MemberID
+						 where Members.MemberID = @MemberID
+						 order by Payments.PaymentID desc";
+
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+        }
     }
 }

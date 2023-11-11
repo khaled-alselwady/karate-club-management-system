@@ -228,5 +228,10 @@ namespace KarateClub_Business
             return (this.EndDate < DateTime.Now);
         }
 
+        public static int GetPeriodIDByPaymentID(int PaymentID)
+        {
+            return clsSubscriptionPeriodData.GetPeriodIDByPaymentID(PaymentID);
+        }
+
     }
 }

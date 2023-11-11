@@ -1,4 +1,5 @@
 ﻿using KarateClub.BeltTests;
+using KarateClub.Payment;
 using KarateClub.SubscriptionPeriods;
 using KarateClub_Business;
 using System;
@@ -326,6 +327,12 @@ namespace KarateClub.Members
         private void cmsEditProfile_Opening(object sender, CancelEventArgs e)
         {
             TakeNextBeltTesttoolStripMenuItem2.Enabled = (bool)dgvMembersList.CurrentRow.Cells["IsActive"].Value;
+        }
+
+        private void showPaymentsHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowMemberPaymentsHistory ShowMemberPaymentsHistory = new frmShowMemberPaymentsHistory(_GetMemberIDFromDGV());
+            ShowMemberPaymentsHistory.ShowDialog();
         }
     }
 }

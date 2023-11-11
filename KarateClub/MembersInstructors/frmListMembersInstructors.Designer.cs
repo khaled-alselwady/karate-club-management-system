@@ -32,10 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvMembersInstructorsList = new System.Windows.Forms.DataGridView();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.ShowDetailstoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddNewMember = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
@@ -44,10 +45,9 @@
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembersInstructorsList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             this.cmsEditProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvMembersInstructorsList
@@ -94,15 +94,47 @@
             this.dgvMembersInstructorsList.TabStop = false;
             this.dgvMembersInstructorsList.DoubleClick += new System.EventHandler(this.dgvMembersInstructorsList_DoubleClick);
             // 
-            // deleteToolStripMenuItem
+            // cmsEditProfile
             // 
-            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.deleteToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Delete_32;
-            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(192, 38);
-            this.deleteToolStripMenuItem.Text = "   Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
+            this.cmsEditProfile.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmsEditProfile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowDetailstoolStripMenuItem1,
+            this.addNewToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
+            this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.ColorTable = null;
+            this.cmsEditProfile.RenderStyle.RoundedEdges = true;
+            this.cmsEditProfile.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
+            this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.cmsEditProfile.Size = new System.Drawing.Size(193, 156);
+            // 
+            // ShowDetailstoolStripMenuItem1
+            // 
+            this.ShowDetailstoolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShowDetailstoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.ShowDetailstoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
+            this.ShowDetailstoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowDetailstoolStripMenuItem1.Name = "ShowDetailstoolStripMenuItem1";
+            this.ShowDetailstoolStripMenuItem1.Size = new System.Drawing.Size(192, 38);
+            this.ShowDetailstoolStripMenuItem1.Text = "   Show Details";
+            this.ShowDetailstoolStripMenuItem1.Click += new System.EventHandler(this.ShowDetailstoolStripMenuItem1_Click);
+            // 
+            // addNewToolStripMenuItem
+            // 
+            this.addNewToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addNewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.addNewToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Add_Person_40;
+            this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(192, 38);
+            this.addNewToolStripMenuItem.Text = "   Add New";
+            this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -115,26 +147,15 @@
             this.editToolStripMenuItem.Text = "   Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // addNewToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
-            this.addNewToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addNewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.addNewToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Add_Person_40;
-            this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(192, 38);
-            this.addNewToolStripMenuItem.Text = "   Add New";
-            this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
-            // 
-            // ShowDetailstoolStripMenuItem1
-            // 
-            this.ShowDetailstoolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShowDetailstoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.ShowDetailstoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
-            this.ShowDetailstoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ShowDetailstoolStripMenuItem1.Name = "ShowDetailstoolStripMenuItem1";
-            this.ShowDetailstoolStripMenuItem1.Size = new System.Drawing.Size(192, 38);
-            this.ShowDetailstoolStripMenuItem1.Text = "   Show Details";
-            this.ShowDetailstoolStripMenuItem1.Click += new System.EventHandler(this.ShowDetailstoolStripMenuItem1_Click);
+            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.deleteToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Delete_32;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(192, 38);
+            this.deleteToolStripMenuItem.Text = "   Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // btnAddNewMember
             // 
@@ -161,7 +182,7 @@
             // pbPersonImage
             // 
             this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbPersonImage.Image = global::KarateClub.Properties.Resources.People_400;
+            this.pbPersonImage.Image = global::KarateClub.Properties.Resources.member_instructor_list;
             this.pbPersonImage.InitialImage = null;
             this.pbPersonImage.Location = new System.Drawing.Point(457, 28);
             this.pbPersonImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -229,27 +250,6 @@
             this.label1.TabIndex = 160;
             this.label1.Text = "Filter By:";
             // 
-            // cmsEditProfile
-            // 
-            this.cmsEditProfile.BackColor = System.Drawing.Color.Black;
-            this.cmsEditProfile.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmsEditProfile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShowDetailstoolStripMenuItem1,
-            this.addNewToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
-            this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
-            this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
-            this.cmsEditProfile.RenderStyle.ColorTable = null;
-            this.cmsEditProfile.RenderStyle.RoundedEdges = true;
-            this.cmsEditProfile.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
-            this.cmsEditProfile.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
-            this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
-            this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(193, 156);
-            // 
             // frmListMembersInstructors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,8 +271,8 @@
             this.Text = "frmListMembersInstructors";
             this.Load += new System.EventHandler(this.frmListMembersInstructors_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembersInstructorsList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             this.cmsEditProfile.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

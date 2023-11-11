@@ -239,7 +239,7 @@ where PeriodID = @PeriodID";
             }
 
             return IsFound;
-        }
+        }       
 
         public static DataTable GetAllSubscriptionPeriods()
         {
@@ -425,6 +425,41 @@ FROM            dbo.SubscriptionPeriods INNER JOIN
             }
 
             return (RowAffected > 0);
+        }
+
+        public static int GetPeriodIDByPaymentID(int PaymentID)
+        {
+            int PeriodID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select PeriodID from SubscriptionPeriods where PaymentID = @PaymentID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PaymentID", PaymentID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int ID))
+                {
+                    PeriodID = ID;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return PeriodID;
         }
 
     }

@@ -237,6 +237,36 @@
     <Compile Include="Members\UserControls\ucMemberCardWithFilter.Designer.cs">
       <DependentUpon>ucMemberCardWithFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Payment\frmListPayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payment\frmListPayments.Designer.cs">
+      <DependentUpon>frmListPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\frmShowMemberPaymentsHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payment\frmShowMemberPaymentsHistory.Designer.cs">
+      <DependentUpon>frmShowMemberPaymentsHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\frmShowPaymentDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payment\frmShowPaymentDetails.Designer.cs">
+      <DependentUpon>frmShowPaymentDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\UserControls\ucMemberPayments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Payment\UserControls\ucMemberPayments.Designer.cs">
+      <DependentUpon>ucMemberPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\UserControls\ucPaymentDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Payment\UserControls\ucPaymentDetails.Designer.cs">
+      <DependentUpon>ucPaymentDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\UserControls\ucPersonCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -415,6 +445,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Members\UserControls\ucMemberCardWithFilter.resx">
       <DependentUpon>ucMemberCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment\frmListPayments.resx">
+      <DependentUpon>frmListPayments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment\frmShowMemberPaymentsHistory.resx">
+      <DependentUpon>frmShowMemberPaymentsHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment\frmShowPaymentDetails.resx">
+      <DependentUpon>frmShowPaymentDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment\UserControls\ucMemberPayments.resx">
+      <DependentUpon>ucMemberPayments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment\UserControls\ucPaymentDetails.resx">
+      <DependentUpon>ucPaymentDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\UserControls\ucPersonCard.resx">
       <DependentUpon>ucPersonCard.cs</DependentUpon>
@@ -662,12 +707,29 @@
   <ItemGroup>
     <None Include="Resources\renew-period.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\payment.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\passed.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\failed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\members-list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\instructor-list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\member-instructor-list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\subscription-period.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\renew-subscripion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -61,7 +61,6 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
-
         public static int AddNewTest(int MemberID, int RankID, bool Result, DateTime Date,
             int TestedByInstructorID, int PaymentID)
         {
@@ -115,7 +114,6 @@ namespace KarateClub_DataAccess
             return TestID;
         }
 
-
         public static bool UpdateTest(int TestID, int MemberID, int RankID, bool Result,
             DateTime Date, int TestedByInstructorID, int PaymentID)
         {
@@ -160,7 +158,6 @@ where TestID = @TestID";
             return (RowAffected > 0);
         }
 
-
         public static bool DeleteTest(int TestID)
         {
             int RowAffected = 0;
@@ -190,7 +187,6 @@ where TestID = @TestID";
 
             return (RowAffected > 0);
         }
-
 
         public static bool DoesTestExist(int TestID)
         {
@@ -223,7 +219,6 @@ where TestID = @TestID";
 
             return IsFound;
         }
-
 
         public static DataTable GetAllBeltTests()
         {
@@ -260,7 +255,6 @@ where TestID = @TestID";
             return dt;
         }
 
-
         public static short CountBeltTests()
         {
             short Count = 0;
@@ -293,7 +287,6 @@ where TestID = @TestID";
 
             return Count;
         }
-
 
         public static DataTable GetAllBeltTestsForMember(int MemberID)
         {
@@ -342,6 +335,41 @@ FROM            dbo.BeltTests INNER JOIN
             }
 
             return dt;
+        }
+
+        public static int GetTestIDByPaymentID(int PaymentID)
+        {
+            int TestID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select TestID from BeltTests where PaymentID = @PaymentID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PaymentID", PaymentID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int ID))
+                {
+                    TestID = ID;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return TestID;
         }
     }
 }
