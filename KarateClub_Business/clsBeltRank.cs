@@ -106,7 +106,7 @@ namespace KarateClub_Business
         public static bool DeleteRank(int RankID)
         {
             return clsBeltRankData.DeleteRank(RankID);
-        }      
+        }
 
         public static bool DoesRankExist(int RankID)
         {
@@ -126,6 +126,11 @@ namespace KarateClub_Business
         public static DataTable GetAllBeltRanksName()
         {
             return clsBeltRankData.GetAllBeltRanksName();
+        }
+
+        public static int GetNextBeltRankID(int CurrentBeltRankID)
+        {
+            return clsBeltRankData.GetNextBeltRankID(CurrentBeltRankID);
         }
     }
 

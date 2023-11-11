@@ -149,7 +149,7 @@ namespace KarateClub.MembersInstructors
         }
 
         private void tcMembersInstructors_SelectedIndexChanged(object sender, EventArgs e)
-        {           
+        {
             if (_IsInstructorTrainingThisMember())
             {
                 // the instructor is already training this member!
@@ -201,8 +201,8 @@ namespace KarateClub.MembersInstructors
 
             if (!ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
             {
-                MessageBox.Show("Selected Member is Not Active, choose an active member."
-                    , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Selected Member is Not Active, choose an active member.",
+                     "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 btnMemberInfoNext.Enabled = false;
                 btnSave.Enabled = false;

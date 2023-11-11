@@ -30,6 +30,8 @@ namespace KarateClub.Instructors.UserControls
             this._InstructorID = -1;
             this._Instructor = null;
 
+            ucPersonCard1.Reset();
+
             lblInstructorID.Text = "[????]";
             lblQualifications.Text = "[????]";
 

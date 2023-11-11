@@ -82,6 +82,7 @@
             // 
             // ucMemberCardWithFilter1
             // 
+            this.ucMemberCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucMemberCardWithFilter1.BackColor = System.Drawing.Color.White;
             this.ucMemberCardWithFilter1.FilterEnabled = true;
             this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(6, 72);
@@ -157,31 +158,35 @@
             // 
             // dtpEndDate
             // 
+            this.dtpEndDate.AutoRoundedCorners = true;
+            this.dtpEndDate.BorderRadius = 17;
             this.dtpEndDate.Checked = true;
             this.dtpEndDate.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.dtpEndDate.ForeColor = System.Drawing.Color.White;
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEndDate.Location = new System.Drawing.Point(159, 173);
             this.dtpEndDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpEndDate.MinDate = new System.DateTime(2023, 11, 8, 0, 0, 0, 0);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(139, 36);
+            this.dtpEndDate.Size = new System.Drawing.Size(151, 36);
             this.dtpEndDate.TabIndex = 172;
             this.dtpEndDate.Value = new System.DateTime(2023, 11, 8, 23, 9, 0, 486);
             // 
             // dtpStartDate
             // 
+            this.dtpStartDate.AutoRoundedCorners = true;
+            this.dtpStartDate.BorderRadius = 17;
             this.dtpStartDate.Checked = true;
             this.dtpStartDate.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.dtpStartDate.ForeColor = System.Drawing.Color.White;
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpStartDate.Location = new System.Drawing.Point(159, 129);
             this.dtpStartDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpStartDate.MinDate = new System.DateTime(2023, 11, 8, 0, 0, 0, 0);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(139, 36);
+            this.dtpStartDate.Size = new System.Drawing.Size(151, 36);
             this.dtpStartDate.TabIndex = 171;
             this.dtpStartDate.Value = new System.DateTime(2023, 11, 8, 23, 9, 0, 486);
             // 

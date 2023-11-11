@@ -51,3 +51,10 @@ D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClu
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.SubscriptionPeriods.UserControls.ucSubscriptionPeriodInfoWithFilter.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.SubscriptionPeriods.frmShowSubscriptionPeriodDetails.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.SubscriptionPeriods.frmRenewSubscriptionPeriod.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.MembersInstructors.UserControls.ucMemberInstructorCardWithFilter.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.frmShowBeltTestDetails.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.UserControls.ucBeltTestInfo.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.frmAddNewBeltTest.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.frmListBeltTests.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.frmShowMemberTestsHistory.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.BeltTests.UserControls.ucMemberTests.resources

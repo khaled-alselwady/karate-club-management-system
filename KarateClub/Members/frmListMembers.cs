@@ -1,4 +1,5 @@
-﻿using KarateClub.SubscriptionPeriods;
+﻿using KarateClub.BeltTests;
+using KarateClub.SubscriptionPeriods;
 using KarateClub_Business;
 using System;
 using System.Collections.Generic;
@@ -212,7 +213,9 @@ namespace KarateClub.Members
                 return;
             }
 
-            _dtAllMembers.DefaultView.RowFilter = string.Format("[{0}] like '{1}%'", "Gender", cbGender.Text);
+            _dtAllMembers.DefaultView.RowFilter =
+                string.Format("[{0}] like '{1}%'", "Gender", cbGender.Text);
+
             lblNumberOfRecords.Text = dgvMembersList.Rows.Count.ToString();
         }
 
@@ -278,7 +281,9 @@ namespace KarateClub.Members
                 return;
             }
 
-            _dtAllMembers.DefaultView.RowFilter = string.Format("[{0}] = {1}", "IsActive", (cbIsActive.Text == "Yes"));
+            _dtAllMembers.DefaultView.RowFilter =
+                string.Format("[{0}] = {1}", "IsActive", (cbIsActive.Text == "Yes"));
+
             lblNumberOfRecords.Text = dgvMembersList.Rows.Count.ToString();
         }
 
@@ -303,6 +308,24 @@ namespace KarateClub.Members
             ShowHistory.ShowDialog();
 
             _RefreshMemberList();
+        }
+
+        private void ShowTestsHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowMemberTestsHistory ShowMemberTestsHistory = new frmShowMemberTestsHistory(_GetMemberIDFromDGV());
+            ShowMemberTestsHistory.ShowDialog();
+        }
+
+        private void TakeNextBeltTesttoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(_GetMemberIDFromDGV());
+            AddNewBeltTest.RefreshDataBack += _RefreshMemberList;
+            AddNewBeltTest.Show();
+        }
+
+        private void cmsEditProfile_Opening(object sender, CancelEventArgs e)
+        {
+            TakeNextBeltTesttoolStripMenuItem2.Enabled = (bool)dgvMembersList.CurrentRow.Cells["IsActive"].Value;
         }
     }
 }

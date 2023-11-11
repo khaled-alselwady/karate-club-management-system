@@ -23,5 +23,10 @@ namespace KarateClub
             frmAddEditMember AddNewMember = new frmAddEditMember();
             AddNewMember.Show();
         }
+
+        private void frmTest_Activated(object sender, EventArgs e)
+        {
+            ucMemberInstructorCardWithFilter1.FilterFocus();
+        }
     }
 }

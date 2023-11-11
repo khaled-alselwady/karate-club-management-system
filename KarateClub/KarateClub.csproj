@@ -71,6 +71,42 @@
     <Compile Include="BeltRanks\frmListBeltRanks.Designer.cs">
       <DependentUpon>frmListBeltRanks.cs</DependentUpon>
     </Compile>
+    <Compile Include="BeltTests\frmAddNewBeltTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeltTests\frmAddNewBeltTest.Designer.cs">
+      <DependentUpon>frmAddNewBeltTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeltTests\frmListBeltTests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeltTests\frmListBeltTests.Designer.cs">
+      <DependentUpon>frmListBeltTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeltTests\frmShowBeltTestDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeltTests\frmShowBeltTestDetails.Designer.cs">
+      <DependentUpon>frmShowBeltTestDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeltTests\frmShowMemberTestsHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeltTests\frmShowMemberTestsHistory.Designer.cs">
+      <DependentUpon>frmShowMemberTestsHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeltTests\UserControls\ucBeltTestInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BeltTests\UserControls\ucBeltTestInfo.Designer.cs">
+      <DependentUpon>ucBeltTestInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeltTests\UserControls\ucMemberTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BeltTests\UserControls\ucMemberTests.Designer.cs">
+      <DependentUpon>ucMemberTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +188,12 @@
     </Compile>
     <Compile Include="MembersInstructors\frmShowMembersInstructorsDetails.Designer.cs">
       <DependentUpon>frmShowMembersInstructorsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucMemberInstructorCardWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucMemberInstructorCardWithFilter.Designer.cs">
+      <DependentUpon>ucMemberInstructorCardWithFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="MembersInstructors\UserControls\ucMembersInstructorsCard.cs">
       <SubType>UserControl</SubType>
@@ -293,6 +335,24 @@
     <EmbeddedResource Include="BeltRanks\frmListBeltRanks.resx">
       <DependentUpon>frmListBeltRanks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\frmAddNewBeltTest.resx">
+      <DependentUpon>frmAddNewBeltTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\frmListBeltTests.resx">
+      <DependentUpon>frmListBeltTests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\frmShowBeltTestDetails.resx">
+      <DependentUpon>frmShowBeltTestDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\frmShowMemberTestsHistory.resx">
+      <DependentUpon>frmShowMemberTestsHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\UserControls\ucBeltTestInfo.resx">
+      <DependentUpon>ucBeltTestInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeltTests\UserControls\ucMemberTests.resx">
+      <DependentUpon>ucMemberTests.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -331,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MembersInstructors\frmShowMembersInstructorsDetails.resx">
       <DependentUpon>frmShowMembersInstructorsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\UserControls\ucMemberInstructorCardWithFilter.resx">
+      <DependentUpon>ucMemberInstructorCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MembersInstructors\UserControls\ucMembersInstructorsCard.resx">
       <DependentUpon>ucMembersInstructorsCard.cs</DependentUpon>
@@ -598,6 +661,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\renew-period.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\passed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\failed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

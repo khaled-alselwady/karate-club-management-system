@@ -21,6 +21,7 @@ namespace KarateClub_Business
         public bool IsActive { get; set; }
 
         public clsBeltRank LastBeltRankInfo { get; set; }
+        public clsBeltRank NextBeltRankInfo => clsBeltRank.Find(clsBeltRank.GetNextBeltRankID(this.LastBeltRankID));
 
         public clsMember()
         {
@@ -185,6 +186,11 @@ namespace KarateClub_Business
         public bool DoesHaveAnActivePeriodID()
         {
             return (GetLastActivePeriodID() != -1);
+        }
+
+        public DataTable GetAllBeltTests()
+        {
+            return clsBeltTest.GetAllBeltTestsForMember(this.MemberID);
         }
 
     }

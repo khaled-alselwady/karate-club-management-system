@@ -348,5 +348,45 @@ where RankID = @RankID";
             return dt;
         }
 
+
+        public static int GetNextBeltRankID(int CurrentBeltRankID)
+        {
+            int NextBeltRankID = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            // this query will return the next belt, but in case in the last belt, it will return the last belt itself
+            string query = @"SELECT COALESCE(
+                                 (SELECT TOP 1 RankID FROM BeltRanks WHERE RankID > @CurrentBeltRankID ORDER BY RankID),
+                                 (SELECT TOP 1 RankID FROM BeltRanks ORDER BY RankID DESC)
+                             ) AS NextBeltRankID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@CurrentBeltRankID", CurrentBeltRankID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Value))
+                {
+                    NextBeltRankID = Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return NextBeltRankID;
+        }
+
     }
 }

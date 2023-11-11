@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblQualifications = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.llEditInstructorInfo = new System.Windows.Forms.LinkLabel();
             this.label22 = new System.Windows.Forms.Label();
             this.lblInstructorID = new System.Windows.Forms.Label();
             this.ucPersonCard1 = new KarateClub.People.UserControls.ucPersonCard();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -44,6 +44,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.lblQualifications);
             this.groupBox1.Controls.Add(this.pictureBox1);
@@ -61,6 +62,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Instructor Information";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox2.Location = new System.Drawing.Point(136, 35);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 143;
+            this.pictureBox2.TabStop = false;
+            // 
             // lblQualifications
             // 
             this.lblQualifications.AutoSize = true;
@@ -71,6 +82,16 @@
             this.lblQualifications.Size = new System.Drawing.Size(53, 20);
             this.lblQualifications.TabIndex = 142;
             this.lblQualifications.Text = "[????]";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.qualification;
+            this.pictureBox1.Location = new System.Drawing.Point(452, 35);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 141;
+            this.pictureBox1.TabStop = false;
             // 
             // label8
             // 
@@ -120,30 +141,11 @@
             // 
             // ucPersonCard1
             // 
+            this.ucPersonCard1.BackColor = System.Drawing.Color.White;
             this.ucPersonCard1.Location = new System.Drawing.Point(3, 3);
             this.ucPersonCard1.Name = "ucPersonCard1";
             this.ucPersonCard1.Size = new System.Drawing.Size(895, 231);
             this.ucPersonCard1.TabIndex = 0;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
-            this.pictureBox2.Location = new System.Drawing.Point(136, 35);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 143;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::KarateClub.Properties.Resources.qualification;
-            this.pictureBox1.Location = new System.Drawing.Point(452, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 141;
-            this.pictureBox1.TabStop = false;
             // 
             // ucInstructorCard
             // 

@@ -59,18 +59,7 @@ namespace KarateClub.Members.UserControls
         {
             InitializeComponent();
         }
-
-        private void _FindNow()
-        {
-            ucMemberCard1.LoadMemberInfo(int.Parse(txtFilterValue.Text.Trim()));
-
-            if (OnMemberSelected != null && FilterEnabled)
-            {
-                // Raise the event with a parameter
-                OnMemberSelected(ucMemberCard1.MemberID);
-            }
-        }
-
+    
         private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check if the pressed key is Enter (character code 13)
@@ -94,7 +83,7 @@ namespace KarateClub.Members.UserControls
 
             }
 
-            _FindNow();
+            LoadMemberInfo(int.Parse(txtFilterValue.Text.Trim()));
         }
 
         private void txtFilterValue_Validating(object sender, CancelEventArgs e)
@@ -137,6 +126,12 @@ namespace KarateClub.Members.UserControls
         {
             txtFilterValue.Text = MemberID.ToString();
             ucMemberCard1.LoadMemberInfo(MemberID);
+
+            if (OnMemberSelected != null && FilterEnabled)
+            {
+                // Raise the event with a parameter
+                OnMemberSelected(ucMemberCard1.MemberID);
+            }
         }
 
         public void Clear()

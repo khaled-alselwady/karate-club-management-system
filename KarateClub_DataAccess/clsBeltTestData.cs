@@ -70,9 +70,18 @@ namespace KarateClub_DataAccess
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"insert into BeltTests (MemberID, RankID, Result, Date, TestedByInstructorID, PaymentID)
-values (@MemberID, @RankID, @Result, @Date, @TestedByInstructorID, @PaymentID)
-select scope_identity()";
+            string query = @"INSERT INTO BeltTests (MemberID, RankID, Result, Date, TestedByInstructorID, PaymentID)
+                             VALUES (@MemberID, @RankID, @Result, @Date, @TestedByInstructorID, @PaymentID);
+                             
+                             IF (@Result = 1)
+                             BEGIN
+                                 UPDATE Members
+                                 SET LastBeltRankID = @RankID
+                                 WHERE MemberID = @MemberID;
+                             END
+                             
+                             SELECT SCOPE_IDENTITY();";
+
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -222,7 +231,7 @@ where TestID = @TestID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from BeltTests";
+            string query = @"select * from TestsDetails_view order by TestID desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -285,5 +294,54 @@ where TestID = @TestID";
             return Count;
         }
 
+
+        public static DataTable GetAllBeltTestsForMember(int MemberID)
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT        dbo.BeltTests.TestID,Members.MemberID,
+                             (SELECT        Name
+                               FROM            dbo.People
+                               WHERE        (dbo.Members.PersonID = PersonID)) AS MemberName, dbo.BeltRanks.RankName, dbo.BeltTests.Date,
+                             (SELECT        Name
+                               FROM            dbo.People
+                               WHERE        (dbo.Instructors.PersonID = PersonID)) AS InstructorName, dbo.BeltTests.PaymentID, dbo.BeltTests.Result
+FROM            dbo.BeltTests INNER JOIN
+                         dbo.Members ON dbo.Members.MemberID = dbo.BeltTests.MemberID INNER JOIN
+                         dbo.Instructors ON dbo.Instructors.InstructorID = dbo.BeltTests.TestedByInstructorID INNER JOIN
+                         dbo.BeltRanks ON dbo.BeltRanks.RankID = dbo.BeltTests.RankID
+						 where Members.MemberID = @MemberID
+                         order by TestID desc";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@MemberID", MemberID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+        }
     }
 }

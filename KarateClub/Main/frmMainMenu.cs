@@ -20,6 +20,7 @@ using KarateClub.Properties;
 using KarateClub.MembersInstructors;
 using KarateClub.BeltRanks;
 using KarateClub.SubscriptionPeriods;
+using KarateClub.BeltTests;
 
 namespace KarateClub.Main
 {
@@ -165,7 +166,7 @@ namespace KarateClub.Main
         private void btnBeltTests_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new Form());
+            OpenChildForm(new frmListBeltTests());
         }
 
         private void btnPayments_Click(object sender, EventArgs e)

@@ -21,12 +21,17 @@ namespace KarateClub_Business
         public int TestedByInstructorID { get; set; }
         public int PaymentID { get; set; }
 
+        public clsMember MemberInfo { get; set; }
+        public clsInstructor InstructorInfo { get; set; }
+        public clsBeltRank BeltRankInfo { get; set; }
+        public clsPayment PaymentInfo { get; set; }
+
         public clsBeltTest()
         {
             this.TestID = -1;
             this.MemberID = -1;
             this.RankID = -1;
-            this.Result = false;
+            this.Result = true;
             this.Date = DateTime.Now;
             this.TestedByInstructorID = -1;
             this.PaymentID = -1;
@@ -34,7 +39,8 @@ namespace KarateClub_Business
             Mode = enMode.AddNew;
         }
 
-        private clsBeltTest(int TestID, int MemberID, int RankID, bool Result, DateTime Date, int TestedByInstructorID, int PaymentID)
+        private clsBeltTest(int TestID, int MemberID, int RankID, bool Result,
+            DateTime Date, int TestedByInstructorID, int PaymentID)
         {
             this.TestID = TestID;
             this.MemberID = MemberID;
@@ -43,6 +49,11 @@ namespace KarateClub_Business
             this.Date = Date;
             this.TestedByInstructorID = TestedByInstructorID;
             this.PaymentID = PaymentID;
+
+            this.MemberInfo = clsMember.Find(MemberID);
+            this.InstructorInfo = clsInstructor.Find(TestedByInstructorID);
+            this.BeltRankInfo = clsBeltRank.Find(RankID);
+            this.PaymentInfo = clsPayment.Find(PaymentID);
 
             Mode = enMode.Update;
         }
@@ -57,7 +68,7 @@ namespace KarateClub_Business
 
         private bool _UpdateTest()
         {
-            return clsBeltTestData.UpdateTest(this.TestID, this.MemberID, this.RankID, 
+            return clsBeltTestData.UpdateTest(this.TestID, this.MemberID, this.RankID,
                 this.Result, this.Date, this.TestedByInstructorID, this.PaymentID);
         }
 
@@ -87,7 +98,7 @@ namespace KarateClub_Business
         {
             int MemberID = -1;
             int RankID = -1;
-            bool Result = false;
+            bool Result = true;
             DateTime Date = DateTime.Now;
             int TestedByInstructorID = -1;
             int PaymentID = -1;
@@ -124,6 +135,26 @@ namespace KarateClub_Business
         public static short Count()
         {
             return clsBeltTestData.CountBeltTests();
+        }
+
+        public int Pay(decimal Amount)
+        {
+            clsPayment Payment = new clsPayment();
+
+            Payment.MemberID = this.MemberID;
+            Payment.Amount = Amount;
+
+            if (!Payment.Save())
+            {
+                return -1;
+            }
+
+            return Payment.PaymentID;
+        }
+
+        public static DataTable GetAllBeltTestsForMember(int MemberID)
+        {
+            return clsBeltTestData.GetAllBeltTestsForMember(MemberID);
         }
 
     }

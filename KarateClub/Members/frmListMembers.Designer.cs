@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbGender = new System.Windows.Forms.ComboBox();
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -49,6 +49,8 @@
             this.dgvMembersList = new System.Windows.Forms.DataGridView();
             this.btnAddNewMember = new System.Windows.Forms.Button();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
+            this.ShowTestsHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TakeNextBeltTesttoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEditProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembersList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
@@ -63,7 +65,7 @@
             "All",
             "Male",
             "Female"});
-            this.cbGender.Location = new System.Drawing.Point(309, 248);
+            this.cbGender.Location = new System.Drawing.Point(309, 247);
             this.cbGender.Name = "cbGender";
             this.cbGender.Size = new System.Drawing.Size(113, 28);
             this.cbGender.TabIndex = 146;
@@ -150,7 +152,7 @@
             "All",
             "Yes",
             "No"});
-            this.cbIsActive.Location = new System.Drawing.Point(309, 248);
+            this.cbIsActive.Location = new System.Drawing.Point(309, 247);
             this.cbIsActive.Name = "cbIsActive";
             this.cbIsActive.Size = new System.Drawing.Size(113, 28);
             this.cbIsActive.TabIndex = 151;
@@ -161,7 +163,7 @@
             this.cbBeltRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBeltRank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBeltRank.FormattingEnabled = true;
-            this.cbBeltRank.Location = new System.Drawing.Point(309, 248);
+            this.cbBeltRank.Location = new System.Drawing.Point(309, 247);
             this.cbBeltRank.Name = "cbBeltRank";
             this.cbBeltRank.Size = new System.Drawing.Size(213, 28);
             this.cbBeltRank.TabIndex = 155;
@@ -176,7 +178,9 @@
             this.addNewMemberToolStripMenuItem,
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem,
-            this.showToolStripMenuItem});
+            this.TakeNextBeltTesttoolStripMenuItem2,
+            this.showToolStripMenuItem,
+            this.ShowTestsHistoryToolStripMenuItem});
             this.cmsEditProfile.Name = "guna2ContextMenuStrip1";
             this.cmsEditProfile.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.cmsEditProfile.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -187,7 +191,8 @@
             this.cmsEditProfile.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.cmsEditProfile.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.cmsEditProfile.Size = new System.Drawing.Size(253, 216);
+            this.cmsEditProfile.Size = new System.Drawing.Size(253, 292);
+            this.cmsEditProfile.Opening += new System.ComponentModel.CancelEventHandler(this.cmsEditProfile_Opening);
             // 
             // toolStripMenuItem1
             // 
@@ -238,7 +243,7 @@
             this.showToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
             this.showToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
-            this.showToolStripMenuItem.Text = "   Show Period History";
+            this.showToolStripMenuItem.Text = "   Show Periods History";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // dgvMembersList
@@ -247,37 +252,37 @@
             this.dgvMembersList.AllowUserToDeleteRows = false;
             this.dgvMembersList.AllowUserToResizeRows = false;
             this.dgvMembersList.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMembersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvMembersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMembersList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMembersList.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvMembersList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMembersList.Location = new System.Drawing.Point(14, 283);
             this.dgvMembersList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvMembersList.MultiSelect = false;
             this.dgvMembersList.Name = "dgvMembersList";
             this.dgvMembersList.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembersList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMembersList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMembersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMembersList.Size = new System.Drawing.Size(1128, 371);
             this.dgvMembersList.TabIndex = 158;
@@ -307,6 +312,26 @@
             this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonImage.TabIndex = 149;
             this.pbPersonImage.TabStop = false;
+            // 
+            // ShowTestsHistoryToolStripMenuItem
+            // 
+            this.ShowTestsHistoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.ShowTestsHistoryToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Calendar_32;
+            this.ShowTestsHistoryToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowTestsHistoryToolStripMenuItem.Name = "ShowTestsHistoryToolStripMenuItem";
+            this.ShowTestsHistoryToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+            this.ShowTestsHistoryToolStripMenuItem.Text = "   Show Tests Histroy";
+            this.ShowTestsHistoryToolStripMenuItem.Click += new System.EventHandler(this.ShowTestsHistoryToolStripMenuItem_Click);
+            // 
+            // TakeNextBeltTesttoolStripMenuItem2
+            // 
+            this.TakeNextBeltTesttoolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+            this.TakeNextBeltTesttoolStripMenuItem2.Image = global::KarateClub.Properties.Resources.Notes_32;
+            this.TakeNextBeltTesttoolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.TakeNextBeltTesttoolStripMenuItem2.Name = "TakeNextBeltTesttoolStripMenuItem2";
+            this.TakeNextBeltTesttoolStripMenuItem2.Size = new System.Drawing.Size(252, 38);
+            this.TakeNextBeltTesttoolStripMenuItem2.Text = "   Take Next Belt Test";
+            this.TakeNextBeltTesttoolStripMenuItem2.Click += new System.EventHandler(this.TakeNextBeltTesttoolStripMenuItem2_Click);
             // 
             // frmListMembers
             // 
@@ -359,5 +384,7 @@
         private System.Windows.Forms.DataGridView dgvMembersList;
         private System.Windows.Forms.Button btnAddNewMember;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShowTestsHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TakeNextBeltTesttoolStripMenuItem2;
     }
 }

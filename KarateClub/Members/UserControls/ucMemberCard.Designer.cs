@@ -29,9 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbIsActive = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblEmergencyContact = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lblLastBeltRank = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.llEditMemberInfo = new System.Windows.Forms.LinkLabel();
             this.lblIsActive = new System.Windows.Forms.Label();
@@ -39,10 +43,6 @@
             this.lblMemberID = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.ucPersonCard1 = new KarateClub.People.UserControls.ucPersonCard();
-            this.pbIsActive = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIsActive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -76,6 +76,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Member Information";
             // 
+            // pbIsActive
+            // 
+            this.pbIsActive.Image = global::KarateClub.Properties.Resources.Question_32;
+            this.pbIsActive.Location = new System.Drawing.Point(122, 79);
+            this.pbIsActive.Name = "pbIsActive";
+            this.pbIsActive.Size = new System.Drawing.Size(31, 26);
+            this.pbIsActive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbIsActive.TabIndex = 147;
+            this.pbIsActive.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
+            this.pictureBox2.Location = new System.Drawing.Point(122, 37);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 146;
+            this.pictureBox2.TabStop = false;
+            // 
             // lblEmergencyContact
             // 
             this.lblEmergencyContact.AutoSize = true;
@@ -86,6 +106,16 @@
             this.lblEmergencyContact.Size = new System.Drawing.Size(53, 20);
             this.lblEmergencyContact.TabIndex = 145;
             this.lblEmergencyContact.Text = "[????]";
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::KarateClub.Properties.Resources.call_32;
+            this.pictureBox9.Location = new System.Drawing.Point(493, 80);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 144;
+            this.pictureBox9.TabStop = false;
             // 
             // label10
             // 
@@ -108,6 +138,16 @@
             this.lblLastBeltRank.Size = new System.Drawing.Size(53, 20);
             this.lblLastBeltRank.TabIndex = 142;
             this.lblLastBeltRank.Text = "[????]";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KarateClub.Properties.Resources.belt;
+            this.pictureBox1.Location = new System.Drawing.Point(493, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 141;
+            this.pictureBox1.TabStop = false;
             // 
             // label8
             // 
@@ -182,46 +222,6 @@
             this.ucPersonCard1.Name = "ucPersonCard1";
             this.ucPersonCard1.Size = new System.Drawing.Size(895, 231);
             this.ucPersonCard1.TabIndex = 6;
-            // 
-            // pbIsActive
-            // 
-            this.pbIsActive.Image = global::KarateClub.Properties.Resources.active_user;
-            this.pbIsActive.Location = new System.Drawing.Point(122, 79);
-            this.pbIsActive.Name = "pbIsActive";
-            this.pbIsActive.Size = new System.Drawing.Size(31, 26);
-            this.pbIsActive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbIsActive.TabIndex = 147;
-            this.pbIsActive.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::KarateClub.Properties.Resources.id;
-            this.pictureBox2.Location = new System.Drawing.Point(122, 37);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 146;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = global::KarateClub.Properties.Resources.call_32;
-            this.pictureBox9.Location = new System.Drawing.Point(493, 80);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 144;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::KarateClub.Properties.Resources.belt;
-            this.pictureBox1.Location = new System.Drawing.Point(493, 37);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 141;
-            this.pictureBox1.TabStop = false;
             // 
             // ucMemberCard
             // 

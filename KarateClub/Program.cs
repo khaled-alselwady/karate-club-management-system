@@ -8,6 +8,7 @@ using KarateClub.Main;
 using KarateClub.Members;
 using KarateClub.Users;
 using KarateClub.MembersInstructors;
+using KarateClub.BeltTests;
 
 namespace KarateClub
 {
