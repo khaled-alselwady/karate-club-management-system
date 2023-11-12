@@ -40,6 +40,7 @@
             this.lblAssignDate = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.llEditInfo = new System.Windows.Forms.LinkLabel();
+            this.llShowTrainedMembers = new System.Windows.Forms.LinkLabel();
             this.tcMembersInstructors.SuspendLayout();
             this.tpMember.SuspendLayout();
             this.tpInstructor.SuspendLayout();
@@ -103,6 +104,7 @@
             // 
             this.tpInstructor.BackColor = System.Drawing.Color.White;
             this.tpInstructor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tpInstructor.Controls.Add(this.llShowTrainedMembers);
             this.tpInstructor.Controls.Add(this.ucInstructorCard1);
             this.tpInstructor.Location = new System.Drawing.Point(4, 44);
             this.tpInstructor.Name = "tpInstructor";
@@ -192,6 +194,19 @@
             this.llEditInfo.Text = "Edit Members-Instructors Info";
             this.llEditInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llEditInfo_LinkClicked);
             // 
+            // llShowTrainedMembers
+            // 
+            this.llShowTrainedMembers.AutoSize = true;
+            this.llShowTrainedMembers.Enabled = false;
+            this.llShowTrainedMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llShowTrainedMembers.Location = new System.Drawing.Point(726, 349);
+            this.llShowTrainedMembers.Name = "llShowTrainedMembers";
+            this.llShowTrainedMembers.Size = new System.Drawing.Size(176, 20);
+            this.llShowTrainedMembers.TabIndex = 180;
+            this.llShowTrainedMembers.TabStop = true;
+            this.llShowTrainedMembers.Text = "Show Trained Members";
+            this.llShowTrainedMembers.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowTrainedMembers_LinkClicked);
+            // 
             // ucMembersInstructorsCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +225,7 @@
             this.tcMembersInstructors.ResumeLayout(false);
             this.tpMember.ResumeLayout(false);
             this.tpInstructor.ResumeLayout(false);
+            this.tpInstructor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
@@ -231,5 +247,6 @@
         private System.Windows.Forms.Label lblAssignDate;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.LinkLabel llEditInfo;
+        private System.Windows.Forms.LinkLabel llShowTrainedMembers;
     }
 }

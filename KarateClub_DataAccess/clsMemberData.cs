@@ -214,7 +214,7 @@ where MemberID = @MemberID";
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select * from MembersDetails_view";
+            string query = @"select * from MembersDetails_view order by MemberID desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 

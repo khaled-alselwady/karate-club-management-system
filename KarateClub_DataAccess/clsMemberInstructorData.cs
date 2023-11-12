@@ -276,7 +276,8 @@ where MemberInstructorID = @MemberInstructorID";
                              from MemberInstructors
                              inner join MembersDetails_view
                              on MembersDetails_view.MemberID = MemberInstructors.MemberID
-                             where MemberInstructors.InstructorID = @InstructorID";
+                             where MemberInstructors.InstructorID = @InstructorID
+                             order by MembersDetails_view.MemberID desc";
 
             SqlCommand command = new SqlCommand(query, connection);
 

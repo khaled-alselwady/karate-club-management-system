@@ -51,7 +51,7 @@ namespace KarateClub.BeltTests
             lblBeltRankID.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.RankID.ToString();
             lblBeltRankName.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.RankName;
             lblFees.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.TestFees.ToString("F0");
-
+            llShowTestsHistory.Enabled = true;
             // subscribe with the delegate, and it will enter in the `EnableBtnSave` method when the Instructor is selected because I but the invoke there
             ucMemberInstructorCardWithFilter1.InstructorDataBack += EnableBtnSave;
         }
@@ -138,6 +138,12 @@ namespace KarateClub.BeltTests
         {
             frmShowBeltTestDetails ShowBeltTestDetails = new frmShowBeltTestDetails(_NewBeltTestID);
             ShowBeltTestDetails.ShowDialog();
+        }
+
+        private void llShowTestsHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmShowMemberTestsHistory ShowMemberTestsHistory = new frmShowMemberTestsHistory(ucMemberInstructorCardWithFilter1.SelectedMemberID);
+            ShowMemberTestsHistory.ShowDialog();
         }
     }
 }

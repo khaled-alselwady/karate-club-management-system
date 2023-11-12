@@ -104,7 +104,7 @@ namespace KarateClub.MembersInstructors
                 tcMembersInstructors.SelectedTab = tpMember;
 
                 MessageBox.Show("Selected Member is Not Active, choose an active member."
-                    , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
@@ -287,6 +287,9 @@ namespace KarateClub.MembersInstructors
 
                 lblTitle.Text = "Update Members-Instructors";
                 this.Text = "Update Members-Instructors";
+
+                btnSave.Enabled = false;
+                ucInstructorCardWithFilter1.FilterEnabled = false;
 
                 MembersInstructorsIDBack?.Invoke(this, _MembersInstructor.MemberInstructorID);
             }

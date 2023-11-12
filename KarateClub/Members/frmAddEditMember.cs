@@ -72,6 +72,7 @@ namespace KarateClub.Members
                 lblTitle.Text = "Add New Member";
                 this.Text = "Add New Member";
                 _Member = new clsMember();
+                chkIsActive.Enabled = false; 
                 _ResetFields();
             }
             else

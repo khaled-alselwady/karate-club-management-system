@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.ucMemberInstructorCardWithFilter1 = new KarateClub.MembersInstructors.UserControls.ucMemberInstructorCardWithFilter();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,6 +55,8 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.llShowNewBeltTestDetails = new System.Windows.Forms.LinkLabel();
+            this.llShowTestsHistory = new System.Windows.Forms.LinkLabel();
+            this.ucMemberInstructorCardWithFilter1 = new KarateClub.MembersInstructors.UserControls.ucMemberInstructorCardWithFilter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -76,15 +77,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Add New Belt Test";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ucMemberInstructorCardWithFilter1
-            // 
-            this.ucMemberInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucMemberInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucMemberInstructorCardWithFilter1.Location = new System.Drawing.Point(3, 78);
-            this.ucMemberInstructorCardWithFilter1.Name = "ucMemberInstructorCardWithFilter1";
-            this.ucMemberInstructorCardWithFilter1.Size = new System.Drawing.Size(923, 554);
-            this.ucMemberInstructorCardWithFilter1.TabIndex = 4;
             // 
             // btnSave
             // 
@@ -403,13 +395,36 @@
             this.llShowNewBeltTestDetails.AutoSize = true;
             this.llShowNewBeltTestDetails.Enabled = false;
             this.llShowNewBeltTestDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llShowNewBeltTestDetails.Location = new System.Drawing.Point(155, 852);
+            this.llShowNewBeltTestDetails.Location = new System.Drawing.Point(243, 853);
             this.llShowNewBeltTestDetails.Name = "llShowNewBeltTestDetails";
             this.llShowNewBeltTestDetails.Size = new System.Drawing.Size(204, 20);
             this.llShowNewBeltTestDetails.TabIndex = 195;
             this.llShowNewBeltTestDetails.TabStop = true;
             this.llShowNewBeltTestDetails.Text = "Show New Belt Test Details";
             this.llShowNewBeltTestDetails.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowNewBeltTestDetails_LinkClicked);
+            // 
+            // llShowTestsHistory
+            // 
+            this.llShowTestsHistory.AutoSize = true;
+            this.llShowTestsHistory.Enabled = false;
+            this.llShowTestsHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llShowTestsHistory.Location = new System.Drawing.Point(53, 853);
+            this.llShowTestsHistory.Name = "llShowTestsHistory";
+            this.llShowTestsHistory.Size = new System.Drawing.Size(145, 20);
+            this.llShowTestsHistory.TabIndex = 196;
+            this.llShowTestsHistory.TabStop = true;
+            this.llShowTestsHistory.Text = "Show Tests History";
+            this.llShowTestsHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowTestsHistory_LinkClicked);
+            // 
+            // ucMemberInstructorCardWithFilter1
+            // 
+            this.ucMemberInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucMemberInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ucMemberInstructorCardWithFilter1.FilterEnable = true;
+            this.ucMemberInstructorCardWithFilter1.Location = new System.Drawing.Point(3, 78);
+            this.ucMemberInstructorCardWithFilter1.Name = "ucMemberInstructorCardWithFilter1";
+            this.ucMemberInstructorCardWithFilter1.Size = new System.Drawing.Size(923, 554);
+            this.ucMemberInstructorCardWithFilter1.TabIndex = 4;
             // 
             // frmAddNewBeltTest
             // 
@@ -418,6 +433,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 876);
+            this.Controls.Add(this.llShowTestsHistory);
             this.Controls.Add(this.llShowNewBeltTestDetails);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSave);
@@ -474,5 +490,6 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel llShowNewBeltTestDetails;
+        private System.Windows.Forms.LinkLabel llShowTestsHistory;
     }
 }

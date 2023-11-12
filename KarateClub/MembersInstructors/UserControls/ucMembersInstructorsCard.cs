@@ -1,4 +1,5 @@
 ﻿using KarateClub.Global_Classes;
+using KarateClub.Instructors;
 using KarateClub_Business;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,7 @@ namespace KarateClub.MembersInstructors.UserControls
 
 
             llEditInfo.Enabled = true;
+            llShowTrainedMembers.Enabled = true;
             ucMemberCard1.LoadMemberInfo(_MembersInstructors.MemberID);
             ucInstructorCard1.LoadInstructorInfo(_MembersInstructors.InstructorID);
 
@@ -77,6 +79,12 @@ namespace KarateClub.MembersInstructors.UserControls
         private void Refresh(object sender, int MembersInstructorsID)
         {
             LoadMembersInstructorsInfo(MembersInstructorsID);
+        }
+
+        private void llShowTrainedMembers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmShowTrainedMembersByInstructor ShowTrainedMembersByInstructor = new frmShowTrainedMembersByInstructor(ucInstructorCard1.InstructorID);
+            ShowTrainedMembersByInstructor.ShowDialog();
         }
     }
 }
