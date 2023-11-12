@@ -89,6 +89,7 @@
             this.dgvPaymentsList.Size = new System.Drawing.Size(1128, 371);
             this.dgvPaymentsList.TabIndex = 181;
             this.dgvPaymentsList.TabStop = false;
+            this.dgvPaymentsList.DoubleClick += new System.EventHandler(this.dgvPaymentsList_DoubleClick);
             // 
             // cmsEditProfile
             // 

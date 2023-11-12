@@ -149,6 +149,7 @@
             this.dgvMemberBeltTestsList.Size = new System.Drawing.Size(894, 269);
             this.dgvMemberBeltTestsList.TabIndex = 159;
             this.dgvMemberBeltTestsList.TabStop = false;
+            this.dgvMemberBeltTestsList.DoubleClick += new System.EventHandler(this.dgvMemberBeltTestsList_DoubleClick);
             // 
             // cmsEditProfile
             // 
@@ -184,7 +185,8 @@
             // 
             this.addNewTestToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addNewTestToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.addNewTestToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Add_Person_40;
+            this.addNewTestToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Notes_32;
+            this.addNewTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.addNewTestToolStripMenuItem.Name = "addNewTestToolStripMenuItem";
             this.addNewTestToolStripMenuItem.Size = new System.Drawing.Size(230, 38);
             this.addNewTestToolStripMenuItem.Text = "   Take Next Belt Test";

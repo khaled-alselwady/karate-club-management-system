@@ -226,5 +226,11 @@ namespace KarateClub.Instructors
             AddNewInstructor.InstructorIDBack += RefreshList;
             AddNewInstructor.Show();
         }
+
+        private void ShowTrainedMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowTrainedMembersByInstructor ShowTrainedMembersByInstructor = new frmShowTrainedMembersByInstructor(_GetInstructorIDFromDGV());
+            ShowTrainedMembersByInstructor.ShowDialog();
+        }
     }
 }

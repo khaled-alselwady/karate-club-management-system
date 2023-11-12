@@ -58,7 +58,6 @@ namespace KarateClub_DataAccess
             return IsFound;
         }
 
-
         public static int AddNewMemberInstructor(int MemberID, int InstructorID, DateTime AssignDate)
         {
             // This function will return the new person id if succeeded and -1 if not
@@ -99,7 +98,6 @@ select scope_identity()";
             return MemberInstructorID;
         }
 
-
         public static bool UpdateMemberInstructor(int MemberInstructorID, int MemberID,
             int InstructorID, DateTime AssignDate)
         {
@@ -138,7 +136,6 @@ where MemberInstructorID = @MemberInstructorID";
             return (RowAffected > 0);
         }
 
-
         public static bool DeleteMemberInstructor(int MemberInstructorID)
         {
             int RowAffected = 0;
@@ -168,7 +165,6 @@ where MemberInstructorID = @MemberInstructorID";
 
             return (RowAffected > 0);
         }
-
 
         public static bool DoesMemberInstructorExist(int MemberInstructorID)
         {
@@ -201,7 +197,6 @@ where MemberInstructorID = @MemberInstructorID";
 
             return IsFound;
         }
-
 
         public static DataTable GetAllMemberInstructors()
         {
@@ -238,7 +233,6 @@ where MemberInstructorID = @MemberInstructorID";
             return dt;
         }
 
-
         public static bool IsInstructorTrainingMember(int InstructorID, int MemberID)
         {
             bool IsFound = false;
@@ -270,6 +264,47 @@ where MemberInstructorID = @MemberInstructorID";
             }
 
             return IsFound;
+        }
+
+        public static DataTable GetTrainedMembersByInstructor(int InstructorID)
+        {
+            DataTable dtTrainedMembers = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select MembersDetails_view.*
+                             from MemberInstructors
+                             inner join MembersDetails_view
+                             on MembersDetails_view.MemberID = MemberInstructors.MemberID
+                             where MemberInstructors.InstructorID = @InstructorID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@InstructorID", InstructorID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dtTrainedMembers.Load(reader);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dtTrainedMembers;
         }
     }
 }

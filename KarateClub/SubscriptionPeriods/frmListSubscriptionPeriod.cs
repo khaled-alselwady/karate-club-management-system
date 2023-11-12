@@ -378,5 +378,11 @@ namespace KarateClub.SubscriptionPeriods
 
             lblNumberOfRecords.Text = dgvSubscriptionPeriodsList.Rows.Count.ToString();
         }
+
+        private void dgvSubscriptionPeriodsList_DoubleClick(object sender, EventArgs e)
+        {
+            frmShowSubscriptionPeriodDetails ShowSubscriptionPeriodDetails = new frmShowSubscriptionPeriodDetails(_GetPeriodIDFromDGV());
+            ShowSubscriptionPeriodDetails.ShowDialog();
+        }
     }
 }

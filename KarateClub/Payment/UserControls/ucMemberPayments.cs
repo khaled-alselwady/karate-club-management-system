@@ -66,5 +66,11 @@ namespace KarateClub.Payment.UserControls
             frmShowPaymentDetails ShowPaymentDetails = new frmShowPaymentDetails(_GetPaymentIDFromDGV());
             ShowPaymentDetails.ShowDialog();
         }
+
+        private void dgvMemberPaymentsList_DoubleClick(object sender, EventArgs e)
+        {
+            frmShowPaymentDetails ShowPaymentDetails = new frmShowPaymentDetails(_GetPaymentIDFromDGV());
+            ShowPaymentDetails.ShowDialog();
+        }
     }
 }

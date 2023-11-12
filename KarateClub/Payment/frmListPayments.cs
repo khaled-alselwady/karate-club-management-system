@@ -144,5 +144,11 @@ namespace KarateClub.Payment
             frmShowMemberPaymentsHistory ShowMemberPaymentsHistory = new frmShowMemberPaymentsHistory(MemberID);
             ShowMemberPaymentsHistory.ShowDialog();
         }
+
+        private void dgvPaymentsList_DoubleClick(object sender, EventArgs e)
+        {
+            frmShowPaymentDetails ShowPaymentDetails = new frmShowPaymentDetails(_GetPaymentIDFromDGV());
+            ShowPaymentDetails.ShowDialog();
+        }
     }
 }

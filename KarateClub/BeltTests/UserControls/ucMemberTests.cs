@@ -87,5 +87,11 @@ namespace KarateClub.BeltTests.UserControls
             AddNewBeltTest.RefreshDataBack += _RefreshBeltTestsList;
             AddNewBeltTest.Show();
         }
+
+        private void dgvMemberBeltTestsList_DoubleClick(object sender, EventArgs e)
+        {
+            frmShowBeltTestDetails ShowBeltTestDetails = new frmShowBeltTestDetails(_GetBeltTestsIDFromDGV());
+            ShowBeltTestDetails.ShowDialog();
+        }
     }
 }

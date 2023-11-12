@@ -120,6 +120,10 @@ namespace KarateClub_Business
             return clsMemberInstructorData.IsInstructorTrainingMember(InstructorID, MemberID);
         }
 
+        public static DataTable GetTrainedMembersByInstructor(int InstructorID)
+        {
+            return clsMemberInstructorData.GetTrainedMembersByInstructor(InstructorID);
+        }
     }
 
 

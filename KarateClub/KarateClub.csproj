@@ -147,6 +147,12 @@
     <Compile Include="Instructors\frmShowInstructorDetails.Designer.cs">
       <DependentUpon>frmShowInstructorDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instructors\frmShowTrainedMembersByInstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Instructors\frmShowTrainedMembersByInstructor.Designer.cs">
+      <DependentUpon>frmShowTrainedMembersByInstructor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Instructors\UserControls\ucInstructorCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,6 +206,12 @@
     </Compile>
     <Compile Include="MembersInstructors\UserControls\ucMembersInstructorsCard.Designer.cs">
       <DependentUpon>ucMembersInstructorsCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucTrainedMembersByInstructor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MembersInstructors\UserControls\ucTrainedMembersByInstructor.Designer.cs">
+      <DependentUpon>ucTrainedMembersByInstructor.cs</DependentUpon>
     </Compile>
     <Compile Include="Members\frmAddEditMember.cs">
       <SubType>Form</SubType>
@@ -311,6 +323,12 @@
     <Compile Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.Designer.cs">
       <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucMemberSubscriptionPeriods.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubscriptionPeriods\UserControls\ucMemberSubscriptionPeriods.Designer.cs">
+      <DependentUpon>ucMemberSubscriptionPeriods.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -407,6 +425,9 @@
     <EmbeddedResource Include="Instructors\frmShowInstructorDetails.resx">
       <DependentUpon>frmShowInstructorDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\frmShowTrainedMembersByInstructor.resx">
+      <DependentUpon>frmShowTrainedMembersByInstructor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Instructors\UserControls\ucInstructorCard.resx">
       <DependentUpon>ucInstructorCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MembersInstructors\UserControls\ucMembersInstructorsCard.resx">
       <DependentUpon>ucMembersInstructorsCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembersInstructors\UserControls\ucTrainedMembersByInstructor.resx">
+      <DependentUpon>ucTrainedMembersByInstructor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Members\frmAddEditMember.resx">
       <DependentUpon>frmAddEditMember.cs</DependentUpon>
@@ -497,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubscriptionPeriods\frmShowSubscriptionPeriodsHistory.resx">
       <DependentUpon>frmShowSubscriptionPeriodsHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionPeriods\UserControls\ucMemberSubscriptionPeriods.resx">
+      <DependentUpon>ucMemberSubscriptionPeriods.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubscriptionPeriods\UserControls\ucSubscriptionPeriodInfo.resx">
       <DependentUpon>ucSubscriptionPeriodInfo.cs</DependentUpon>

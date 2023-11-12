@@ -33,6 +33,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSubscriptionPeriodsList = new System.Windows.Forms.DataGridView();
             this.cmsEditProfile = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.ShowPeriodDetailstoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.payToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenewtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPeriodHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblNumberOfRecords = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,13 +51,6 @@
             this.cbIsExpired = new System.Windows.Forms.ComboBox();
             this.btnRenewPeriod = new System.Windows.Forms.PictureBox();
             this.btnAddNewSubscriptionPeriodID = new System.Windows.Forms.Button();
-            this.ShowPeriodDetailstoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.payToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RenewtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showPeriodHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubscriptionPeriodsList)).BeginInit();
             this.cmsEditProfile.SuspendLayout();
@@ -100,6 +100,7 @@
             this.dgvSubscriptionPeriodsList.Size = new System.Drawing.Size(1128, 371);
             this.dgvSubscriptionPeriodsList.TabIndex = 170;
             this.dgvSubscriptionPeriodsList.TabStop = false;
+            this.dgvSubscriptionPeriodsList.DoubleClick += new System.EventHandler(this.dgvSubscriptionPeriodsList_DoubleClick);
             // 
             // cmsEditProfile
             // 
@@ -125,6 +126,77 @@
             this.cmsEditProfile.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.cmsEditProfile.Size = new System.Drawing.Size(240, 270);
             this.cmsEditProfile.Opening += new System.ComponentModel.CancelEventHandler(this.cmsEditProfile_Opening);
+            // 
+            // ShowPeriodDetailstoolStripMenuItem1
+            // 
+            this.ShowPeriodDetailstoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.ShowPeriodDetailstoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
+            this.ShowPeriodDetailstoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowPeriodDetailstoolStripMenuItem1.Name = "ShowPeriodDetailstoolStripMenuItem1";
+            this.ShowPeriodDetailstoolStripMenuItem1.Size = new System.Drawing.Size(239, 38);
+            this.ShowPeriodDetailstoolStripMenuItem1.Text = "   Show Period Details";
+            this.ShowPeriodDetailstoolStripMenuItem1.Click += new System.EventHandler(this.ShowPeriodDetailstoolStripMenuItem1_Click);
+            // 
+            // addNewMemberToolStripMenuItem
+            // 
+            this.addNewMemberToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addNewMemberToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.addNewMemberToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Add_Person_40;
+            this.addNewMemberToolStripMenuItem.Name = "addNewMemberToolStripMenuItem";
+            this.addNewMemberToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
+            this.addNewMemberToolStripMenuItem.Text = "   Add New Period";
+            this.addNewMemberToolStripMenuItem.Click += new System.EventHandler(this.addNewMemberToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.editToolStripMenuItem.Image = global::KarateClub.Properties.Resources.edit_32;
+            this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
+            this.editToolStripMenuItem.Text = "   Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.deleteToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Delete_32;
+            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
+            this.deleteToolStripMenuItem.Text = "   Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // payToolStripMenuItem
+            // 
+            this.payToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.payToolStripMenuItem.Image = global::KarateClub.Properties.Resources.money_32;
+            this.payToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.payToolStripMenuItem.Name = "payToolStripMenuItem";
+            this.payToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
+            this.payToolStripMenuItem.Text = "   Pay";
+            this.payToolStripMenuItem.Click += new System.EventHandler(this.payToolStripMenuItem_Click);
+            // 
+            // RenewtoolStripMenuItem1
+            // 
+            this.RenewtoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.RenewtoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.Renew_Driving_License_32;
+            this.RenewtoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.RenewtoolStripMenuItem1.Name = "RenewtoolStripMenuItem1";
+            this.RenewtoolStripMenuItem1.Size = new System.Drawing.Size(239, 38);
+            this.RenewtoolStripMenuItem1.Text = "   Renew Period";
+            this.RenewtoolStripMenuItem1.Click += new System.EventHandler(this.RenewtoolStripMenuItem1_Click);
+            // 
+            // showPeriodHistoryToolStripMenuItem
+            // 
+            this.showPeriodHistoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showPeriodHistoryToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Calendar_321;
+            this.showPeriodHistoryToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showPeriodHistoryToolStripMenuItem.Name = "showPeriodHistoryToolStripMenuItem";
+            this.showPeriodHistoryToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
+            this.showPeriodHistoryToolStripMenuItem.Text = "   Show Period History";
+            this.showPeriodHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPeriodHistoryToolStripMenuItem_Click);
             // 
             // lblTitle
             // 
@@ -267,77 +339,6 @@
             this.btnAddNewSubscriptionPeriodID.TabIndex = 171;
             this.btnAddNewSubscriptionPeriodID.UseVisualStyleBackColor = true;
             this.btnAddNewSubscriptionPeriodID.Click += new System.EventHandler(this.btnAddNewSubscriptionPeriodID_Click);
-            // 
-            // ShowPeriodDetailstoolStripMenuItem1
-            // 
-            this.ShowPeriodDetailstoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.ShowPeriodDetailstoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.PersonDetails_32;
-            this.ShowPeriodDetailstoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ShowPeriodDetailstoolStripMenuItem1.Name = "ShowPeriodDetailstoolStripMenuItem1";
-            this.ShowPeriodDetailstoolStripMenuItem1.Size = new System.Drawing.Size(239, 38);
-            this.ShowPeriodDetailstoolStripMenuItem1.Text = "   Show Period Details";
-            this.ShowPeriodDetailstoolStripMenuItem1.Click += new System.EventHandler(this.ShowPeriodDetailstoolStripMenuItem1_Click);
-            // 
-            // addNewMemberToolStripMenuItem
-            // 
-            this.addNewMemberToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addNewMemberToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.addNewMemberToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Add_Person_40;
-            this.addNewMemberToolStripMenuItem.Name = "addNewMemberToolStripMenuItem";
-            this.addNewMemberToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
-            this.addNewMemberToolStripMenuItem.Text = "   Add New Period";
-            this.addNewMemberToolStripMenuItem.Click += new System.EventHandler(this.addNewMemberToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.editToolStripMenuItem.Image = global::KarateClub.Properties.Resources.edit_32;
-            this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
-            this.editToolStripMenuItem.Text = "   Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.deleteToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Delete_32;
-            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
-            this.deleteToolStripMenuItem.Text = "   Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // payToolStripMenuItem
-            // 
-            this.payToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.payToolStripMenuItem.Image = global::KarateClub.Properties.Resources.money_32;
-            this.payToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.payToolStripMenuItem.Name = "payToolStripMenuItem";
-            this.payToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
-            this.payToolStripMenuItem.Text = "   Pay";
-            this.payToolStripMenuItem.Click += new System.EventHandler(this.payToolStripMenuItem_Click);
-            // 
-            // RenewtoolStripMenuItem1
-            // 
-            this.RenewtoolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.RenewtoolStripMenuItem1.Image = global::KarateClub.Properties.Resources.Renew_Driving_License_32;
-            this.RenewtoolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.RenewtoolStripMenuItem1.Name = "RenewtoolStripMenuItem1";
-            this.RenewtoolStripMenuItem1.Size = new System.Drawing.Size(239, 38);
-            this.RenewtoolStripMenuItem1.Text = "   Renew Period";
-            this.RenewtoolStripMenuItem1.Click += new System.EventHandler(this.RenewtoolStripMenuItem1_Click);
-            // 
-            // showPeriodHistoryToolStripMenuItem
-            // 
-            this.showPeriodHistoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.showPeriodHistoryToolStripMenuItem.Image = global::KarateClub.Properties.Resources.Calendar_321;
-            this.showPeriodHistoryToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showPeriodHistoryToolStripMenuItem.Name = "showPeriodHistoryToolStripMenuItem";
-            this.showPeriodHistoryToolStripMenuItem.Size = new System.Drawing.Size(239, 38);
-            this.showPeriodHistoryToolStripMenuItem.Text = "   Show Period History";
-            this.showPeriodHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPeriodHistoryToolStripMenuItem_Click);
             // 
             // pbPersonImage
             // 
