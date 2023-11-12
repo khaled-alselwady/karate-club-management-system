@@ -63,3 +63,4 @@ D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClu
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Payment.UserControls.ucMemberPayments.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Payment.frmShowMemberPaymentsHistory.resources
 D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Payment.frmListPayments.resources
+D:\Learning Programming\MyProjectsWithC#\Karate Club Management System\KarateClub\obj\Debug\KarateClub.Permissions.frmAccessDeniedMessage.resources

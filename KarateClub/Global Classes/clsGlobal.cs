@@ -82,5 +82,19 @@ namespace KarateClub.Global_Classes
                 return false;
             }
         }
+
+        public static bool CheckAccessDenied(clsUser.enPermissions enPermissions)
+        {
+            if (CurrentUser.Permissions == (int)clsUser.enPermissions.All)
+                return true;
+
+
+            if (((int)enPermissions & CurrentUser.Permissions) == (int)enPermissions)
+                return true;
+
+            else
+                return false;
+
+        }
     }
 }

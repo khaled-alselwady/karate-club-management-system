@@ -22,6 +22,7 @@ using KarateClub.BeltRanks;
 using KarateClub.SubscriptionPeriods;
 using KarateClub.BeltTests;
 using KarateClub.Payment;
+using KarateClub.Permissions;
 
 namespace KarateClub.Main
 {
@@ -32,6 +33,7 @@ namespace KarateClub.Main
         private Form currentChildForm;
 
         private Form _frmLoginForm;
+        public Form frmDeniedMassage = new frmAccessDeniedMessage();
 
         public frmMainMenu(Form loginForm)
         {
@@ -114,6 +116,8 @@ namespace KarateClub.Main
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
+            // this method will show the context menu by clicking on the left click instead of the right click
+
             // Get the location of the button on the screen
             Point location = btnMenu.PointToScreen(new Point(0, btnMenu.Height));
 
@@ -122,25 +126,43 @@ namespace KarateClub.Main
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
-        {
+        {      
             ActivateButton(sender);
             OpenChildForm(new frmDashboard());
         }
 
         private void btnMembers_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageMembers))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListMembers());
         }
 
         private void btnInstructors_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageInstructors))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListInstructors());
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageUsers))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListUsers());
             RefreshUserInfo(this, clsGlobal.CurrentUser.UserID);
@@ -148,30 +170,60 @@ namespace KarateClub.Main
 
         private void btnMemberInstructors_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageMembersInstructors))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListMembersInstructors());
         }
 
         private void btnBeltRanks_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageBeltRanks))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListBeltRanks());
         }
 
         private void btnSubscriptionPeriods_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageSubscriptionPeriods))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListSubscriptionPeriod());
         }
 
         private void btnBeltTests_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManageBeltTests))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListBeltTests());
         }
 
         private void btnPayments_Click(object sender, EventArgs e)
         {
+            if (!clsGlobal.CheckAccessDenied(clsUser.enPermissions.ManagePayments))
+            {
+                frmDeniedMassage.ShowDialog();
+                return;
+            }
+
             ActivateButton(sender);
             OpenChildForm(new frmListPayments());
         }
