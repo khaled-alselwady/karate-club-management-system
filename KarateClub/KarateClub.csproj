@@ -731,5 +731,8 @@
   <ItemGroup>
     <None Include="Resources\renew-subscripion.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\karate-player2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

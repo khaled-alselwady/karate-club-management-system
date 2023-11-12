@@ -116,7 +116,7 @@ namespace KarateClub.Login
 
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            ((Guna2TextBox)sender).BorderColor = Color.FromArgb(95, 165, 224);
+            ((Guna2TextBox)sender).BorderColor = Color.FromArgb(26, 83, 92);
         }
 
         private void TextBox_Leave(object sender, EventArgs e)
@@ -132,6 +132,15 @@ namespace KarateClub.Login
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature is not implemented yet!");
+        }
+       
+        private void llOpenMyProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Specify the URL you want to open
+            string url = "https://github.com/dev-khaled-yousef";
+
+            // Open the URL in the default web browser
+            System.Diagnostics.Process.Start(url);
         }
     }
 }
