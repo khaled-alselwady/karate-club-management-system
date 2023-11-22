@@ -20,12 +20,11 @@ namespace KarateClub.Global_Classes
                 //this will get the current project directory folder.
                 string currentDirectory = System.IO.Directory.GetCurrentDirectory();
 
-
                 // Define the path to the text file where you want to save the data
                 string filePath = currentDirectory + "\\data.txt";
 
                 //in case the username is empty, delete the file
-                if (Username == "" && File.Exists(filePath))
+                if (string.IsNullOrWhiteSpace(Username) && File.Exists(filePath))
                 {
                     File.Delete(filePath);
                     return true;
@@ -34,9 +33,13 @@ namespace KarateClub.Global_Classes
                 // make the line that I want to save in the file.
                 string Data = Username + "#//#" + Password;
 
-                File.WriteAllText(filePath, Data);
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    // Write the data to the file
+                    writer.WriteLine(Data);
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
@@ -59,17 +62,20 @@ namespace KarateClub.Global_Classes
                 // Check if the file exists before attempting to read it
                 if (File.Exists(filePath))
                 {
-                    string Data = File.ReadAllText(filePath);
-
-                    string[] arrData = Data.Split(new string[] { "#//#" }, StringSplitOptions.None);
-
-                    if (arrData.Length >= 2)
+                    // Create a StreamReader to read from the file
+                    using (StreamReader reader = new StreamReader(filePath))
                     {
-                        Username = arrData[0];
-                        Password = arrData[1];
-                    }
+                        // Read data line by line until the end of the file
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            string[] result = line.Split(new string[] { "#//#" }, StringSplitOptions.None);
 
-                    return (Username != "");
+                            Username = result[0];
+                            Password = result[1];
+                        }
+                        return true;
+                    }
                 }
                 else
                 {

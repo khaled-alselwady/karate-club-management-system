@@ -419,8 +419,8 @@ namespace KarateClub.Users
             }
 
 
-            if ((_Mode == enMode.AddNew && clsUser.DoesUserExist(txtUsername.Text.Trim())) ||
-                (_Mode == enMode.Update && txtUsername.Text.Trim().ToLower() != _User.Username.ToLower() && clsUser.DoesUserExist(txtUsername.Text.Trim())))
+            if (txtUsername.Text.Trim().ToLower() != _User.Username.ToLower() &&
+                clsUser.DoesUserExist(txtUsername.Text.Trim()))
             {
                 e.Cancel = true;
                 txtUsername.Focus();
