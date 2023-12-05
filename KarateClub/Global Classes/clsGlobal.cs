@@ -1,4 +1,5 @@
 ﻿using KarateClub_Business;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,31 +16,21 @@ namespace KarateClub.Global_Classes
 
         public static bool RememberUsernameAndPassword(string Username, string Password)
         {
+            string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\KarateClub";
+
+            string UsernameName = "Username";
+            string UsernameData = Username;
+
+            string PasswordName = "Password";
+            string PasswordData = Password;
+
             try
             {
-                //this will get the current project directory folder.
-                string currentDirectory = System.IO.Directory.GetCurrentDirectory();
+                // Write the value to the Registry
+                Registry.SetValue(keyPath, UsernameName, UsernameData, RegistryValueKind.String);
+                Registry.SetValue(keyPath, PasswordName, PasswordData, RegistryValueKind.String);
 
-                // Define the path to the text file where you want to save the data
-                string filePath = currentDirectory + "\\data.txt";
-
-                //in case the username is empty, delete the file
-                if (string.IsNullOrWhiteSpace(Username) && File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                    return true;
-                }
-
-                // make the line that I want to save in the file.
-                string Data = Username + "#//#" + Password;
-
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    // Write the data to the file
-                    writer.WriteLine(Data);
-
-                    return true;
-                }
+                return true;
             }
             catch (Exception ex)
             {
@@ -48,39 +39,53 @@ namespace KarateClub.Global_Classes
             }
         }
 
-        public static bool GetStoredCredential(ref string Username, ref string Password)
+        public static bool RemoveStoredCredential()
         {
-            //this will get the stored username and password and will return true if found and false if not found.
+            string keyPath = @"SOFTWARE\KarateClub";
+
+            string UsernameName = "Username";
+            string PasswordName = "Password";
+
             try
             {
-                //gets the current project's directory
-                string currentDirectory = System.IO.Directory.GetCurrentDirectory();
-
-                // Path for the file that contains the credential.
-                string filePath = currentDirectory + "\\data.txt";
-
-                // Check if the file exists before attempting to read it
-                if (File.Exists(filePath))
+                // Create or open the registry key
+                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(keyPath))
                 {
-                    // Create a StreamReader to read from the file
-                    using (StreamReader reader = new StreamReader(filePath))
+                    // Check if the key exists before attempting to delete values
+                    if (key == null)
                     {
-                        // Read data line by line until the end of the file
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            string[] result = line.Split(new string[] { "#//#" }, StringSplitOptions.None);
-
-                            Username = result[0];
-                            Password = result[1];
-                        }
-                        return true;
+                        MessageBox.Show($"Registry key not found: {keyPath}");
+                        return false;
                     }
+
+                    // Remove only the data, leaving the value name intact
+                    key.DeleteValue(UsernameName, false);
+                    key.DeleteValue(PasswordName, false);
                 }
-                else
-                {
-                    return false;
-                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static bool GetStoredCredential(ref string Username, ref string Password)
+        {
+            string keyPath = @"HKEY_CURRENT_USER\SOFTWARE\KarateClub";
+
+            string UsernameName = "Username";
+            string PasswordName = "Password";
+
+            try
+            {
+                // Read the value from the Registry
+                Username = Registry.GetValue(keyPath, UsernameName, null) as string;
+                Password = Registry.GetValue(keyPath, PasswordName, null) as string;
+
+                return true;
             }
             catch (Exception ex)
             {

@@ -77,7 +77,7 @@ namespace KarateClub.Login
             else
             {
                 //store empty username and password
-                clsGlobal.RememberUsernameAndPassword("", "");
+                clsGlobal.RemoveStoredCredential();
             }
 
             if (!User.IsActive)
@@ -133,7 +133,7 @@ namespace KarateClub.Login
         {
             MessageBox.Show("This feature is not implemented yet!");
         }
-       
+
         private void llOpenMyProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Specify the URL you want to open
