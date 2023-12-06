@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 
 namespace KarateClub.Global_Classes
 {
@@ -48,26 +48,36 @@ namespace KarateClub.Global_Classes
 
             try
             {
-                // Create or open the registry key
-                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(keyPath))
+                // Open the registry key in read/write mode with explicit registry view
+                using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
                 {
-                    // Check if the key exists before attempting to delete values
-                    if (key == null)
+                    using (RegistryKey key = baseKey.OpenSubKey(keyPath, true))
                     {
-                        MessageBox.Show($"Registry key not found: {keyPath}");
-                        return false;
+                        if (key != null)
+                        {
+                            // Delete the specified value
+                            key.DeleteValue(UsernameName);
+                            key.DeleteValue(PasswordName);
+
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
-
-                    // Remove only the data, leaving the value name intact
-                    key.DeleteValue(UsernameName, false);
-                    key.DeleteValue(PasswordName, false);
                 }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("UnauthorizedAccessException: Run the program with" +
+                    " administrative privileges.", "Access Denied ",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                return true;
+                return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
                 return false;
             }
         }
