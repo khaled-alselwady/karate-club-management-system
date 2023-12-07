@@ -11,9 +11,7 @@ using System.Windows.Forms;
 namespace KarateClub.Members
 {
     public partial class frmShowMemberDetails : Form
-    {
-       
-
+    {     
         public frmShowMemberDetails(int memberID)
         {
             InitializeComponent();

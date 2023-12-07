@@ -12,10 +12,7 @@ namespace KarateClub.Members
 {
     public partial class frmFindMember : Form
     {
-        // Declare a Delegate
-        public delegate void GetMemberID(object sender, int MemberID);
-        // Declare an event
-        public event GetMemberID MemberIDBack;
+        public Action<int> GetMemberID;
 
         public frmFindMember()
         {
@@ -24,7 +21,7 @@ namespace KarateClub.Members
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            MemberIDBack?.Invoke(this, ucMemberCardWithFilter1.MemberID);
+            GetMemberID?.Invoke(ucMemberCardWithFilter1.MemberID);
 
             this.Close();
         }

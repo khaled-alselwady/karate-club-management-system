@@ -21,7 +21,7 @@ namespace KarateClub
         private void button1_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
-            AddNewMember.Show();
+            AddNewMember.ShowDialog();
         }
 
         private void frmTest_Activated(object sender, EventArgs e)

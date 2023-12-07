@@ -97,12 +97,8 @@ namespace KarateClub.Members.UserControls
         private void llEditMemberInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditMember EditMember = new frmAddEditMember(_MemberID);
-            EditMember.MemberIDBack += Refresh;
-            EditMember.Show();
-        }
+            EditMember.ShowDialog();
 
-        private void Refresh(object sender, int MemberID)
-        {
             LoadMemberInfo(_MemberID);
         }
     }

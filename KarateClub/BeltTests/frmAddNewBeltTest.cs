@@ -14,10 +14,6 @@ namespace KarateClub.BeltTests
 {
     public partial class frmAddNewBeltTest : Form
     {
-
-        public delegate void RefreshDataBackEventHandler();
-        public event RefreshDataBackEventHandler RefreshDataBack;
-
         private int _NewBeltTestID = -1;
 
         public frmAddNewBeltTest()
@@ -29,7 +25,7 @@ namespace KarateClub.BeltTests
         {
             InitializeComponent();
 
-            ucMemberInstructorCardWithFilter1.MemberDataBack += LoadNextBeltInfoUsingDelegate;
+            ucMemberInstructorCardWithFilter1.GetMemberID += LoadNextBeltInfoUsingDelegate;
             ucMemberInstructorCardWithFilter1.LoadMemberInfo(MemberID);
         }
 
@@ -43,22 +39,36 @@ namespace KarateClub.BeltTests
         {
             _LoadData();
 
-            ucMemberInstructorCardWithFilter1.MemberDataBack += LoadNextBeltInfoUsingDelegate;
+            ucMemberInstructorCardWithFilter1.GetMemberID += LoadNextBeltInfoUsingDelegate;
+            // subscribe with the delegate, and it will enter in the `EnableBtnSave` method when the Instructor is selected because I put the invoke there
+            ucMemberInstructorCardWithFilter1.GetInstructorID += EnableBtnSaveWhenSelectInstructor;
         }
 
-        private void LoadNextBeltInfoUsingDelegate()
+        private void LoadNextBeltInfoUsingDelegate(int MemberID)
         {
+            if (ucMemberInstructorCardWithFilter1.SelectedMemberInfo == null)
+            {
+                llShowTestsHistory.Enabled = false;
+                btnSave.Enabled = false;
+                return;
+            }
+
             lblBeltRankID.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.RankID.ToString();
             lblBeltRankName.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.RankName;
             lblFees.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.TestFees.ToString("F0");
-            llShowTestsHistory.Enabled = true;
-            // subscribe with the delegate, and it will enter in the `EnableBtnSave` method when the Instructor is selected because I but the invoke there
-            ucMemberInstructorCardWithFilter1.InstructorDataBack += EnableBtnSave;
+            llShowTestsHistory.Enabled = true;  
+            
+            if (ucMemberInstructorCardWithFilter1.SelectedInstructorID != -1)
+            {
+                // here I already choose the instructor, so I enable the btnSave
+                btnSave.Enabled = true;
+            }
+
         }
 
-        private void EnableBtnSave()
+        private void EnableBtnSaveWhenSelectInstructor(int InstructorID)
         {
-            btnSave.Enabled = true;
+            btnSave.Enabled = (InstructorID != -1);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -123,8 +133,6 @@ namespace KarateClub.BeltTests
                 btnSave.Enabled = false;
                 llShowNewBeltTestDetails.Enabled = true;
                 ucMemberInstructorCardWithFilter1.FilterEnable = false;
-
-                RefreshDataBack?.Invoke();
             }
             else
             {

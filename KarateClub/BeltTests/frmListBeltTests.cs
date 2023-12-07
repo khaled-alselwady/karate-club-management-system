@@ -226,15 +226,17 @@ namespace KarateClub.BeltTests
             int MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
 
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(MemberID);
-            AddNewBeltTest.RefreshDataBack += _RefreshBeltTestsList;
-            AddNewBeltTest.Show();
+            AddNewBeltTest.ShowDialog();
+
+            _RefreshBeltTestsList();
         }
 
         private void btnAddNewBeltTest_Click(object sender, EventArgs e)
         {
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest();
-            AddNewBeltTest.RefreshDataBack += _RefreshBeltTestsList;
-            AddNewBeltTest.Show();
+            AddNewBeltTest.ShowDialog();
+
+            _RefreshBeltTestsList();
         }
 
         private void dgvBeltTestsList_DoubleClick(object sender, EventArgs e)

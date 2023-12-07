@@ -12,10 +12,7 @@ namespace KarateClub.Users
 {
     public partial class frmFindUser : Form
     {
-        // Declare a Delegate
-        public delegate void GetUserID(object sender, int UserID);
-        // Declare an event
-        public event GetUserID UserIDBack;
+        public Action<int> GetUserID;
 
         public frmFindUser()
         {
@@ -24,7 +21,7 @@ namespace KarateClub.Users
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            UserIDBack?.Invoke(this, ucUserCardWithFilter1.UserID);
+            GetUserID?.Invoke(ucUserCardWithFilter1.UserID);
 
             this.Close();
         }

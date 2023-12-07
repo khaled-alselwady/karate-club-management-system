@@ -1,4 +1,5 @@
-﻿using KarateClub.Members.UserControls;
+﻿using KarateClub.Members;
+using KarateClub.Members.UserControls;
 using KarateClub_Business;
 using System;
 using System.Collections.Generic;
@@ -122,7 +123,15 @@ namespace KarateClub.Users.UserControls
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not implemented yet");
+            frmAddEditUser AddNewUser = new frmAddEditUser();
+            AddNewUser.GetUserID += AddNewUser_UserIDBack;
+            AddNewUser.ShowDialog();
+        }
+
+        private void AddNewUser_UserIDBack(int UserID)
+        {
+            txtFilterValue.Text = UserID.ToString();
+            ucUserCard1.LoadUserInfo(UserID);
         }
     }
 }

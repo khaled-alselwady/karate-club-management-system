@@ -12,11 +12,6 @@ namespace KarateClub.Instructors
 {
     public partial class frmShowInstructorDetails : Form
     {
-        // Declare a delegate
-        public delegate void DataBackEventHandler(object sender, int InstructorID);
-        // Declare an event using the delegate
-        public event DataBackEventHandler RefreshList;
-
         public frmShowInstructorDetails(int InstructorID)
         {
             InitializeComponent();
@@ -25,8 +20,6 @@ namespace KarateClub.Instructors
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            RefreshList?.Invoke(this, ucInstructorCard1.InstructorID);
-
             this.Close();
         }
     }

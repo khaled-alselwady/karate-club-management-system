@@ -89,16 +89,12 @@ namespace KarateClub.Users.UserControls
             _ShowPermissions = ShowPermissions;
         }
 
-        private void Refresh(object sender, int UserID)
-        {
-            LoadUserInfo(UserID);
-        }
-
         private void llEditUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditUser EditUser = new frmAddEditUser(_UserID, _ShowPermissions);
-            EditUser.UserIDBack += Refresh;
-            EditUser.Show();
+            EditUser.ShowDialog();
+
+            LoadUserInfo(_UserID);
         }
 
 

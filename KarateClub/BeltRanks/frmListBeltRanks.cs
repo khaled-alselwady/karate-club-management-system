@@ -49,15 +49,17 @@ namespace KarateClub.BeltRanks
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmEditBeltRank EditBeltRank = new frmEditBeltRank((int)dgvBeltRanksList.CurrentRow.Cells["RankID"].Value);
-            EditBeltRank.DataBack += _RefreshListBeltRanks;
-            EditBeltRank.Show();
+            EditBeltRank.ShowDialog();
+
+            _RefreshListBeltRanks();
         }
 
         private void dgvBeltRanksList_DoubleClick(object sender, EventArgs e)
         {
-            frmEditBeltRank EditBeltRank = new frmEditBeltRank((int)dgvBeltRanksList.CurrentRow.Cells["RankID"].Value);
-            EditBeltRank.DataBack += _RefreshListBeltRanks;
-            EditBeltRank.Show();
+            frmEditBeltRank EditBeltRank = new frmEditBeltRank((int)dgvBeltRanksList.CurrentRow.Cells["RankID"].Value);;
+            EditBeltRank.ShowDialog();
+
+            _RefreshListBeltRanks();
         }
     }
 }

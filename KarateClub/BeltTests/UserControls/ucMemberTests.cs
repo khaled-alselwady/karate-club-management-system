@@ -84,8 +84,9 @@ namespace KarateClub.BeltTests.UserControls
             int MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
 
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(MemberID);
-            AddNewBeltTest.RefreshDataBack += _RefreshBeltTestsList;
-            AddNewBeltTest.Show();
+            AddNewBeltTest.ShowDialog();
+
+            _RefreshBeltTestsList();
         }
 
         private void dgvMemberBeltTestsList_DoubleClick(object sender, EventArgs e)

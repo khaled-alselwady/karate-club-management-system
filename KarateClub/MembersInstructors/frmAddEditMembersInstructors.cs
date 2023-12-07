@@ -14,10 +14,7 @@ namespace KarateClub.MembersInstructors
 {
     public partial class frmAddEditMembersInstructors : Form
     {
-        // Declare a delegate
-        public delegate void DataBackEventHandler(object sender, int MembersInstructorsID);
-        // Declare an event using the delegate
-        public event DataBackEventHandler MembersInstructorsIDBack;
+        public Action<int> GetMembersInstructorsID;
 
         private enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
@@ -291,7 +288,7 @@ namespace KarateClub.MembersInstructors
                 btnSave.Enabled = false;
                 ucInstructorCardWithFilter1.FilterEnabled = false;
 
-                MembersInstructorsIDBack?.Invoke(this, _MembersInstructor.MemberInstructorID);
+                GetMembersInstructorsID?.Invoke(_MembersInstructor.MemberInstructorID);
             }
 
             else

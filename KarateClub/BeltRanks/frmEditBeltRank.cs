@@ -15,9 +15,6 @@ namespace KarateClub.BeltRanks
 {
     public partial class frmEditBeltRank : Form
     {
-        public delegate void DataBackHandler();
-        public event DataBackHandler DataBack;
-
         private int _BeltRankID = -1;
         private clsBeltRank _BeltRank;
 
@@ -125,11 +122,7 @@ namespace KarateClub.BeltRanks
             {
                 MessageBox.Show("Data Saved Successfully.", "Saved",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                DataBack?.Invoke();
             }
-
-
             else
                 MessageBox.Show("Error: Data Is not Saved Successfully.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -17,7 +17,6 @@ namespace KarateClub.SubscriptionPeriods.UserControls
 {
     public partial class ucSubscriptionPeriodInfo : UserControl
     {
-
         private int _PeriodID = -1;
         private clsSubscriptionPeriod _Period;
 
@@ -123,11 +122,11 @@ namespace KarateClub.SubscriptionPeriods.UserControls
         private void llEditMemberInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditMember EditMember = new frmAddEditMember(_Period.MemberID);
-            EditMember.MemberIDBack += Refresh;
-            EditMember.Show();
+            EditMember.GetMemberID += Refresh;
+            EditMember.ShowDialog();
         }
 
-        private void Refresh(object sender, int MemberID)
+        private void Refresh(int MemberID)
         {
             clsMember Member = clsMember.Find(MemberID);
 

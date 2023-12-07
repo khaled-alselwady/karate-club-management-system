@@ -123,11 +123,11 @@ namespace KarateClub.Instructors.UserControls
         private void btnAddNewInstructor_Click(object sender, EventArgs e)
         {
             frmAddEditInstructor AddNewInstructor = new frmAddEditInstructor();
-            AddNewInstructor.InstructorIDBack += AddNewInstructor_InstructorIDBack;
-            AddNewInstructor.Show();
+            AddNewInstructor.GetInstructorID += AddNewInstructor_InstructorIDBack;
+            AddNewInstructor.ShowDialog();
         }
 
-        private void AddNewInstructor_InstructorIDBack(object sender, int InstructorID)
+        private void AddNewInstructor_InstructorIDBack(int InstructorID)
         {
             txtFilterValue.Text = InstructorID.ToString();
             ucInstructorCard1.LoadInstructorInfo(InstructorID);

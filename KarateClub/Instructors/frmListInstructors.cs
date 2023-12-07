@@ -169,27 +169,25 @@ namespace KarateClub.Instructors
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmShowInstructorDetails ShowInstructorDetails = new frmShowInstructorDetails(_GetInstructorIDFromDGV());
-            ShowInstructorDetails.RefreshList += RefreshList;
-            ShowInstructorDetails.Show();
+            ShowInstructorDetails.ShowDialog();
+
+            _RefreshInstructorList();
         }
 
         private void addNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditInstructor AddNewInstructor = new frmAddEditInstructor();
-            AddNewInstructor.InstructorIDBack += RefreshList;
-            AddNewInstructor.Show();           
-        }
-
-        private void RefreshList(object sender, int InstructorID)
-        {
+            AddNewInstructor.ShowDialog(); 
+            
             _RefreshInstructorList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditInstructor AddNewInstructor = new frmAddEditInstructor(_GetInstructorIDFromDGV());
-            AddNewInstructor.InstructorIDBack += RefreshList;
-            AddNewInstructor.Show();
+            AddNewInstructor.ShowDialog();
+
+            _RefreshInstructorList();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -215,7 +213,7 @@ namespace KarateClub.Instructors
         private void dgvMembersList_DoubleClick(object sender, EventArgs e)
         {
             frmShowInstructorDetails ShowInstructorDetails = new frmShowInstructorDetails(_GetInstructorIDFromDGV());
-            ShowInstructorDetails.Show();
+            ShowInstructorDetails.ShowDialog();
 
             _RefreshInstructorList();
         }
@@ -223,8 +221,9 @@ namespace KarateClub.Instructors
         private void btnAddNewInstructor_Click(object sender, EventArgs e)
         {
             frmAddEditInstructor AddNewInstructor = new frmAddEditInstructor();
-            AddNewInstructor.InstructorIDBack += RefreshList;
-            AddNewInstructor.Show();
+            AddNewInstructor.ShowDialog();
+
+            _RefreshInstructorList();
         }
 
         private void ShowTrainedMembersToolStripMenuItem_Click(object sender, EventArgs e)

@@ -16,10 +16,7 @@ namespace KarateClub.Users
 {
     public partial class frmAddEditUser : Form
     {
-        // Declare a delegate
-        public delegate void DataBackEventHandler(object sender, int UserID);
-        // Declare an event using the delegate
-        public event DataBackEventHandler UserIDBack;
+        public Action<int> GetUserID;
 
         public enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
@@ -347,7 +344,7 @@ namespace KarateClub.Users
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Trigger the event to send data back to the caller form
-                UserIDBack?.Invoke(this, _User.UserID);
+                GetUserID?.Invoke(_User.UserID);
             }
             else
                 MessageBox.Show("Data Saved Failed", "Failed",

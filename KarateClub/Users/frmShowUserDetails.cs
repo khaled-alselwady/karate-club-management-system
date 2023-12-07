@@ -13,11 +13,6 @@ namespace KarateClub.Users
 {
     public partial class frmShowUserDetails : Form
     {
-        // Declare a Delegate
-        public delegate void GetUserID(object sender, int UserID);
-        // Declare an event
-        public event GetUserID RefreshUserInfo;
-
         public frmShowUserDetails(int UserID, bool ShowPermissions = true)
         {
             InitializeComponent();
@@ -27,7 +22,6 @@ namespace KarateClub.Users
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            RefreshUserInfo?.Invoke(this, ucUserCard1.UserID);
             this.Close();
         }
     }

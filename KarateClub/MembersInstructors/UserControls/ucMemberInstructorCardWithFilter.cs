@@ -13,11 +13,8 @@ namespace KarateClub.MembersInstructors.UserControls
 {
     public partial class ucMemberInstructorCardWithFilter : UserControl
     {
-
-        // Declare a delegate
-        public delegate void DataBackEventHandler();
-        public event DataBackEventHandler MemberDataBack;
-        public event DataBackEventHandler InstructorDataBack;
+        public Action<int> GetMemberID;
+        public Action<int> GetInstructorID;
 
         private int _SelectedMemberID = -1;
         private int _SelectedInstructorID = -1;
@@ -98,6 +95,8 @@ namespace KarateClub.MembersInstructors.UserControls
             if (_SelectedMemberID == -1)
             {
                 btnMemberInfoNext.Enabled = false;
+
+                GetMemberID?.Invoke(-1);
                 return;
             }
 
@@ -113,7 +112,7 @@ namespace KarateClub.MembersInstructors.UserControls
 
             btnMemberInfoNext.Enabled = true;
 
-            MemberDataBack?.Invoke();
+            GetMemberID?.Invoke(ucMemberCardWithFilter1.MemberID);
         }
 
         private void ucInstructorCardWithFilter1_OnInstructorSelected(int obj)
@@ -122,10 +121,11 @@ namespace KarateClub.MembersInstructors.UserControls
 
             if (_SelectedInstructorID == -1)
             {
+                GetInstructorID?.Invoke(-1); // to disable btnSave in the frmAddNewBeltTest
                 return;
             }
 
-            InstructorDataBack?.Invoke();
+            GetInstructorID?.Invoke(ucInstructorCardWithFilter1.InstructorID);
         }
 
         private void tcMembersInstructors_SelectedIndexChanged(object sender, EventArgs e)

@@ -26,6 +26,9 @@ namespace KarateClub.MembersInstructors.UserControls
 
         private void _Reset()
         {
+            _MembersInstructorsID = -1;
+            _MembersInstructors = null;
+
             lblAssignDate.Text = "[????]";
             lblMembersInstructorsID.Text = "[????]";
 
@@ -72,13 +75,9 @@ namespace KarateClub.MembersInstructors.UserControls
         private void llEditInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditMembersInstructors EditMembersInstructors = new frmAddEditMembersInstructors(_MembersInstructorsID);
-            EditMembersInstructors.MembersInstructorsIDBack += Refresh;
-            EditMembersInstructors.Show();
-        }
+            EditMembersInstructors.ShowDialog();
 
-        private void Refresh(object sender, int MembersInstructorsID)
-        {
-            LoadMembersInstructorsInfo(MembersInstructorsID);
+            LoadMembersInstructorsInfo(_MembersInstructorsID);
         }
 
         private void llShowTrainedMembers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

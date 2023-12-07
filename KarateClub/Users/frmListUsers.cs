@@ -199,7 +199,7 @@ namespace KarateClub.Users
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmShowUserDetails ShowUserDetails = new frmShowUserDetails(_GetUserIDFromDGV());
-            ShowUserDetails.Show();
+            ShowUserDetails.ShowDialog();
 
             _RefreshUserList();
         }
@@ -207,20 +207,17 @@ namespace KarateClub.Users
         private void addNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditUser AddNewUser = new frmAddEditUser();
-            AddNewUser.UserIDBack += RefreshList;
-            AddNewUser.Show();
-        }
+            AddNewUser.ShowDialog();
 
-        private void RefreshList(object sender, int UserID)
-        {
             _RefreshUserList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditUser AddNewUser = new frmAddEditUser(_GetUserIDFromDGV());
-            AddNewUser.UserIDBack += RefreshList;
-            AddNewUser.Show();
+            AddNewUser.ShowDialog();
+
+            _RefreshUserList();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -246,7 +243,7 @@ namespace KarateClub.Users
         private void dgvUsersList_DoubleClick(object sender, EventArgs e)
         {
             frmShowUserDetails ShowUserDetails = new frmShowUserDetails(_GetUserIDFromDGV());
-            ShowUserDetails.Show();
+            ShowUserDetails.ShowDialog();
 
             _RefreshUserList();
         }
@@ -254,14 +251,15 @@ namespace KarateClub.Users
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
             frmAddEditUser AddNewUser = new frmAddEditUser();
-            AddNewUser.UserIDBack += RefreshList;
-            AddNewUser.Show();
+            AddNewUser.ShowDialog();
+
+            _RefreshUserList();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmChangePassword ChangePasswordToCurrentUser = new frmChangePassword(_GetUserIDFromDGV());
-            ChangePasswordToCurrentUser.Show();
+            ChangePasswordToCurrentUser.ShowDialog();
 
             _RefreshUserList();
         }

@@ -13,8 +13,6 @@ namespace KarateClub.SubscriptionPeriods
 {
     public partial class frmShowSubscriptionPeriodsHistory : Form
     {
-        private DataTable _dtAllSubscriptionPeriodForMember;
-
         public frmShowSubscriptionPeriodsHistory(int MemberID)
         {
             InitializeComponent();
@@ -26,8 +24,6 @@ namespace KarateClub.SubscriptionPeriods
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-       
+        }      
     }
 }

@@ -111,7 +111,7 @@ namespace KarateClub.Main
                 // lblTitleChildForm.Text = childForm.Text;
             }
 
-            RefreshUserInfo(this, clsGlobal.CurrentUser.UserID);
+            RefreshUserInfo(clsGlobal.CurrentUser.UserID);
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -165,7 +165,7 @@ namespace KarateClub.Main
 
             ActivateButton(sender);
             OpenChildForm(new frmListUsers());
-            RefreshUserInfo(this, clsGlobal.CurrentUser.UserID);
+            RefreshUserInfo(clsGlobal.CurrentUser.UserID);
         }
 
         private void btnMemberInstructors_Click(object sender, EventArgs e)
@@ -256,7 +256,7 @@ namespace KarateClub.Main
             lblName.Text = clsGlobal.CurrentUser.Username;
         }
 
-        private void RefreshUserInfo(object sender, int UserID)
+        private void RefreshUserInfo(int UserID)
         {
             clsGlobal.CurrentUser = clsUser.Find(UserID);
 
@@ -281,20 +281,21 @@ namespace KarateClub.Main
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmShowUserDetails ShowCurrentUserDetails = new frmShowUserDetails(clsGlobal.CurrentUser.UserID, false);
-            ShowCurrentUserDetails.RefreshUserInfo += RefreshUserInfo;
-            ShowCurrentUserDetails.Show();
+            ShowCurrentUserDetails.ShowDialog();
+
+            RefreshUserInfo(clsGlobal.CurrentUser.UserID);
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmChangePassword ChangePasswordToCurrentUser = new frmChangePassword(clsGlobal.CurrentUser.UserID, false);
-            ChangePasswordToCurrentUser.Show();
+            ChangePasswordToCurrentUser.ShowDialog();
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clsGlobal.CurrentUser = null;
-            _frmLoginForm.Show();
+            _frmLoginForm.ShowDialog();
             this.Close();
         }
     }

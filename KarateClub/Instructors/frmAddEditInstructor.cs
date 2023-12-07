@@ -16,10 +16,7 @@ namespace KarateClub.Instructors
 {
     public partial class frmAddEditInstructor : Form
     {
-        // Declare a delegate
-        public delegate void DataBackEventHandler(object sender, int InstructorID);
-        // Declare an event using the delegate
-        public event DataBackEventHandler InstructorIDBack;
+        public Action<int> GetInstructorID;
 
         public enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
@@ -103,7 +100,7 @@ namespace KarateClub.Instructors
             {
                 rbFemale.Checked = true;
                 pbInstructorImage.Image = Resources.DefaultFemale;
-            }         
+            }
         }
 
         private void _LoadData()
@@ -210,7 +207,7 @@ namespace KarateClub.Instructors
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Trigger the event to send data back to the caller form
-                InstructorIDBack?.Invoke(this, _Instructor.InstructorID);
+                GetInstructorID?.Invoke(_Instructor.InstructorID);
             }
             else
                 MessageBox.Show("Data Saved Failed", "Failed",

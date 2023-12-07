@@ -107,11 +107,11 @@ namespace KarateClub.Members.UserControls
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
-            AddNewMember.MemberIDBack += AddNewMember_MemberIDBack;
-            AddNewMember.Show();
+            AddNewMember.GetMemberID += AddNewMember_MemberIDBack;
+            AddNewMember.ShowDialog();
         }
 
-        private void AddNewMember_MemberIDBack(object sender, int MemberID)
+        private void AddNewMember_MemberIDBack(int MemberID)
         {
             txtFilterValue.Text = MemberID.ToString();
             ucMemberCard1.LoadMemberInfo(MemberID);

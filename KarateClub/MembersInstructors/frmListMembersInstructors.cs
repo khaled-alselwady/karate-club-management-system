@@ -137,20 +137,17 @@ namespace KarateClub.MembersInstructors
         private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMembersInstructors AddMembersInstructors = new frmAddEditMembersInstructors();
-            AddMembersInstructors.MembersInstructorsIDBack += RefreshList;
-            AddMembersInstructors.Show();
-        }
+            AddMembersInstructors.ShowDialog();
 
-        private void RefreshList(object sender, int MembersInstructorsID)
-        {
             _RefreshMembersInstructorsList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMembersInstructors EditMembersInstructors = new frmAddEditMembersInstructors(_GetMembersInstructorsIDFromDGV());
-            EditMembersInstructors.MembersInstructorsIDBack += RefreshList;
-            EditMembersInstructors.Show();
+            EditMembersInstructors.ShowDialog();
+
+            _RefreshMembersInstructorsList();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,8 +173,9 @@ namespace KarateClub.MembersInstructors
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
             frmAddEditMembersInstructors AddMembersInstructors = new frmAddEditMembersInstructors();
-            AddMembersInstructors.MembersInstructorsIDBack += RefreshList;
-            AddMembersInstructors.Show();
+            AddMembersInstructors.ShowDialog();
+
+            _RefreshMembersInstructorsList();
         }
 
         private void dgvMembersInstructorsList_DoubleClick(object sender, EventArgs e)

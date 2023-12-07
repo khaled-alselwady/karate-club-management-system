@@ -195,8 +195,9 @@ namespace KarateClub.SubscriptionPeriods
         private void btnAddNewSubscriptionPeriodID_Click(object sender, EventArgs e)
         {
             frmAddEditSubscriptionPeriod AddNewSubscriptionPeriod = new frmAddEditSubscriptionPeriod();
-            AddNewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
-            AddNewSubscriptionPeriod.Show();
+            AddNewSubscriptionPeriod.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void cmsEditProfile_Opening(object sender, CancelEventArgs e)
@@ -219,15 +220,17 @@ namespace KarateClub.SubscriptionPeriods
         private void addNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditSubscriptionPeriod AddNewSubscriptionPeriod = new frmAddEditSubscriptionPeriod();
-            AddNewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
-            AddNewSubscriptionPeriod.Show();
+            AddNewSubscriptionPeriod.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditSubscriptionPeriod AddNewSubscriptionPeriod = new frmAddEditSubscriptionPeriod(_GetPeriodIDFromDGV());
-            AddNewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
-            AddNewSubscriptionPeriod.Show();
+            AddNewSubscriptionPeriod.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -328,15 +331,17 @@ namespace KarateClub.SubscriptionPeriods
         private void RenewtoolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmRenewSubscriptionPeriod RenewSubscriptionPeriod = new frmRenewSubscriptionPeriod(_GetPeriodIDFromDGV());
-            RenewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
-            RenewSubscriptionPeriod.Show();
+            RenewSubscriptionPeriod.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void btnRenewPeriod_Click(object sender, EventArgs e)
         {
             frmRenewSubscriptionPeriod RenewSubscriptionPeriod = new frmRenewSubscriptionPeriod();
-            RenewSubscriptionPeriod.DataBack += _RefreshSubscriptionPeriodsList;
-            RenewSubscriptionPeriod.Show();
+            RenewSubscriptionPeriod.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void btnRenewPeriod_MouseEnter(object sender, EventArgs e)

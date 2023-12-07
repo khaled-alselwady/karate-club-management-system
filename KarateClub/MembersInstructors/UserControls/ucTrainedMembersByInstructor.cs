@@ -77,7 +77,7 @@ namespace KarateClub.MembersInstructors.UserControls
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmShowMemberDetails ShowMemberDetails = new frmShowMemberDetails(_GetMemberIDFromDGV());
-            ShowMemberDetails.Show();
+            ShowMemberDetails.ShowDialog();
 
             _RefreshTrainedMembersList();
         }
@@ -85,20 +85,17 @@ namespace KarateClub.MembersInstructors.UserControls
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember(_GetMemberIDFromDGV());
-            AddNewMember.MemberIDBack += RefreshList;
-            AddNewMember.Show();
-        }
+            AddNewMember.ShowDialog();
 
-        private void RefreshList(object sender, int MemberID)
-        {
             _RefreshTrainedMembersList();
         }
 
         private void TakeNextBeltTesttoolStripMenuItem2_Click(object sender, EventArgs e)
         {
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(_GetMemberIDFromDGV());
-            AddNewBeltTest.RefreshDataBack += _RefreshTrainedMembersList;
-            AddNewBeltTest.Show();
+            AddNewBeltTest.ShowDialog();
+
+            _RefreshTrainedMembersList();
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,7 +126,7 @@ namespace KarateClub.MembersInstructors.UserControls
         private void dgvTrainedMembersList_DoubleClick(object sender, EventArgs e)
         {
             frmShowMemberDetails ShowMemberDetails = new frmShowMemberDetails(_GetMemberIDFromDGV());
-            ShowMemberDetails.Show();
+            ShowMemberDetails.ShowDialog();
 
             _RefreshTrainedMembersList();
         }

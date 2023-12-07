@@ -81,12 +81,8 @@ namespace KarateClub.Instructors.UserControls
         private void llEditInstructorInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditInstructor EditInstructor = new frmAddEditInstructor(_InstructorID);
-            EditInstructor.InstructorIDBack += Refresh;
-            EditInstructor.Show();           
-        }
+            EditInstructor.ShowDialog();
 
-        private void Refresh(object sender, int InstructorID)
-        {
             LoadInstructorInfo(_InstructorID);
         }
     }

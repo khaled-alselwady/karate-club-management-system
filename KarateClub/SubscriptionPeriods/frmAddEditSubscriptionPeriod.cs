@@ -14,9 +14,6 @@ namespace KarateClub.SubscriptionPeriods
 {
     public partial class frmAddEditSubscriptionPeriod : Form
     {
-        public delegate void DataBackEventHandler();
-        public event DataBackEventHandler DataBack;
-
         private enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
@@ -254,8 +251,6 @@ namespace KarateClub.SubscriptionPeriods
                 ucMemberCardWithFilter1.FilterEnabled = false;
                 btnSave.Enabled = false;
                 txtFees.Enabled = false;
-
-                DataBack?.Invoke();
             }
             else
             {

@@ -223,7 +223,7 @@ namespace KarateClub.Members
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmShowMemberDetails ShowMemberDetails = new frmShowMemberDetails(_GetMemberIDFromDGV());
-            ShowMemberDetails.Show();
+            ShowMemberDetails.ShowDialog();
 
             _RefreshMemberList();
         }
@@ -231,19 +231,16 @@ namespace KarateClub.Members
         private void addNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
-            AddNewMember.MemberIDBack += RefreshList;
-            AddNewMember.Show();
+            AddNewMember.ShowDialog();
+
+            _RefreshMemberList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember(_GetMemberIDFromDGV());
-            AddNewMember.MemberIDBack += RefreshList;
-            AddNewMember.Show();           
-        }
-
-        private void RefreshList(object sender, int MemberID)
-        {
+            AddNewMember.ShowDialog();     
+            
             _RefreshMemberList();
         }
 
@@ -299,8 +296,9 @@ namespace KarateClub.Members
         private void btnAddNewMember_Click(object sender, EventArgs e)
         {
             frmAddEditMember AddNewMember = new frmAddEditMember();
-            AddNewMember.MemberIDBack += RefreshList;
-            AddNewMember.Show();
+            AddNewMember.ShowDialog();
+
+            _RefreshMemberList();
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
@@ -320,8 +318,9 @@ namespace KarateClub.Members
         private void TakeNextBeltTesttoolStripMenuItem2_Click(object sender, EventArgs e)
         {
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(_GetMemberIDFromDGV());
-            AddNewBeltTest.RefreshDataBack += _RefreshMemberList;
-            AddNewBeltTest.Show();
+            AddNewBeltTest.ShowDialog();
+
+            _RefreshMemberList();
         }
 
         private void cmsEditProfile_Opening(object sender, CancelEventArgs e)

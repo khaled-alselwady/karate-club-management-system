@@ -15,9 +15,6 @@ namespace KarateClub.SubscriptionPeriods
 {
     public partial class frmRenewSubscriptionPeriod : Form
     {
-        public delegate void DataBackEventHandler();
-        public event DataBackEventHandler DataBack;
-
         private int _NewPeriodID = -1;
 
         public frmRenewSubscriptionPeriod()
@@ -156,8 +153,6 @@ namespace KarateClub.SubscriptionPeriods
             btnRenew.Enabled = false;
             ucSubscriptionPeriodInfoWithFilter1.FilterEnabled = false;
             llShowNewPeriodInfo.Enabled = true;
-
-            DataBack?.Invoke();
         }
 
         private void llShowNewPeriodInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -13,10 +13,7 @@ namespace KarateClub.Instructors
 {
     public partial class frmFindInstructor : Form
     {
-        // Declare a Delegate
-        public delegate void GetInstructorID(object sender, int InstructorID);
-        // Declare an event
-        public event GetInstructorID InstructorIDBack;
+        public Action<int> GetInstructorID;
 
         public frmFindInstructor()
         {
@@ -25,7 +22,7 @@ namespace KarateClub.Instructors
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            InstructorIDBack?.Invoke(this, ucInstructorCardWithFilter1.InstructorID);
+            GetInstructorID?.Invoke(ucInstructorCardWithFilter1.InstructorID);
 
             this.Close();
         }
