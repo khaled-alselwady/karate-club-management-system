@@ -223,7 +223,7 @@ namespace KarateClub.BeltTests
 
         private void addNewTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
+            int? MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
 
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(MemberID);
             AddNewBeltTest.ShowDialog();
@@ -247,7 +247,7 @@ namespace KarateClub.BeltTests
 
         private void showTestsHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
+            int? MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
 
             frmShowMemberTestsHistory ShowMemberTestsHistory = new frmShowMemberTestsHistory(MemberID);
             ShowMemberTestsHistory.ShowDialog();

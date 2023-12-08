@@ -45,6 +45,7 @@
     <Compile Include="clsBeltTestData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsInstructorData.cs" />
+    <Compile Include="clsLogError.cs" />
     <Compile Include="clsMemberData.cs" />
     <Compile Include="clsMemberInstructorData.cs" />
     <Compile Include="clsPaymentData.cs" />

@@ -16,7 +16,7 @@ namespace KarateClub.SubscriptionPeriods.UserControls
 
         private DataTable _dtAllSubscriptionPeriodForMember;
 
-        private int _MemberID = -1;
+        private int? _MemberID = null;
 
         public ucMemberSubscriptionPeriods()
         {
@@ -68,7 +68,7 @@ namespace KarateClub.SubscriptionPeriods.UserControls
             return (int)dgvSubscriptionPeriodsList.CurrentRow.Cells["PeriodID"].Value;
         }
 
-        public void LoadSubscriptionPeriodsInfo(int MemberID)
+        public void LoadSubscriptionPeriodsInfo(int? MemberID)
         {
             this._MemberID = MemberID;
             _RefreshSubscriptionPeriodsList();
@@ -104,12 +104,12 @@ namespace KarateClub.SubscriptionPeriods.UserControls
                     return;
                 }
 
-                int PaymentID = Period.Pay((decimal)dgvSubscriptionPeriodsList.CurrentRow.Cells["Fees"].Value);
+                int? PaymentID = Period.Pay((decimal)dgvSubscriptionPeriodsList.CurrentRow.Cells["Fees"].Value);
 
-                if (PaymentID != -1)
+                if (PaymentID.HasValue)
                 {
                     Period.PaymentID = PaymentID;
-                    Period.IsPaid = (PaymentID != -1);
+                    Period.IsPaid = (PaymentID.HasValue);
 
                     if (Period.Save())
                     {

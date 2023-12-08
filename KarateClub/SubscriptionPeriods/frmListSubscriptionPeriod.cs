@@ -269,12 +269,12 @@ namespace KarateClub.SubscriptionPeriods
                     return;
                 }
 
-                int PaymentID = Period.Pay((decimal)dgvSubscriptionPeriodsList.CurrentRow.Cells["Fees"].Value);
+                int? PaymentID = Period.Pay((decimal)dgvSubscriptionPeriodsList.CurrentRow.Cells["Fees"].Value);
 
-                if (PaymentID != -1)
+                if (PaymentID.HasValue)
                 {
                     Period.PaymentID = PaymentID;
-                    Period.IsPaid = (PaymentID != -1);
+                    Period.IsPaid = (PaymentID.HasValue);
 
                     if (Period.Save())
                     {

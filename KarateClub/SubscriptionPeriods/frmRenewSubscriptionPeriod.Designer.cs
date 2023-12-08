@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.ucSubscriptionPeriodInfoWithFilter1 = new KarateClub.SubscriptionPeriods.UserControls.ucSubscriptionPeriodInfoWithFilter();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,6 +61,7 @@
             this.llShowPeriodsHistory = new System.Windows.Forms.LinkLabel();
             this.llShowNewPeriodInfo = new System.Windows.Forms.LinkLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ucSubscriptionPeriodInfoWithFilter1 = new KarateClub.SubscriptionPeriods.UserControls.ucSubscriptionPeriodInfoWithFilter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -84,17 +84,6 @@
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Renew Subscription Period";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ucSubscriptionPeriodInfoWithFilter1
-            // 
-            this.ucSubscriptionPeriodInfoWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucSubscriptionPeriodInfoWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucSubscriptionPeriodInfoWithFilter1.FilterEnabled = true;
-            this.ucSubscriptionPeriodInfoWithFilter1.Location = new System.Drawing.Point(3, 82);
-            this.ucSubscriptionPeriodInfoWithFilter1.Name = "ucSubscriptionPeriodInfoWithFilter1";
-            this.ucSubscriptionPeriodInfoWithFilter1.Size = new System.Drawing.Size(899, 407);
-            this.ucSubscriptionPeriodInfoWithFilter1.TabIndex = 4;
-            this.ucSubscriptionPeriodInfoWithFilter1.OnPeriodSelected += new System.Action<int>(this.ucSubscriptionPeriodInfoWithFilter1_OnPeriodSelected);
             // 
             // groupBox1
             // 
@@ -468,6 +457,17 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // ucSubscriptionPeriodInfoWithFilter1
+            // 
+            this.ucSubscriptionPeriodInfoWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucSubscriptionPeriodInfoWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ucSubscriptionPeriodInfoWithFilter1.FilterEnabled = true;
+            this.ucSubscriptionPeriodInfoWithFilter1.Location = new System.Drawing.Point(0, 92);
+            this.ucSubscriptionPeriodInfoWithFilter1.Name = "ucSubscriptionPeriodInfoWithFilter1";
+            this.ucSubscriptionPeriodInfoWithFilter1.Size = new System.Drawing.Size(899, 407);
+            this.ucSubscriptionPeriodInfoWithFilter1.TabIndex = 182;
+            this.ucSubscriptionPeriodInfoWithFilter1.OnPeriodSelected += new System.EventHandler<KarateClub.SubscriptionPeriods.UserControls.ucSubscriptionPeriodInfoWithFilter.PeriodSelectedEventArgs>(this.ucSubscriptionPeriodInfoWithFilter1_OnPeriodSelected);
+            // 
             // frmRenewSubscriptionPeriod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,17 +475,18 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(905, 770);
+            this.Controls.Add(this.ucSubscriptionPeriodInfoWithFilter1);
             this.Controls.Add(this.llShowNewPeriodInfo);
             this.Controls.Add(this.llShowPeriodsHistory);
             this.Controls.Add(this.btnRenew);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ucSubscriptionPeriodInfoWithFilter1);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmRenewSubscriptionPeriod";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Renew Subscription Period";
+            this.Activated += new System.EventHandler(this.frmRenewSubscriptionPeriod_Activated);
             this.Load += new System.EventHandler(this.frmRenewSubscriptionPeriod_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -506,7 +507,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private UserControls.ucSubscriptionPeriodInfoWithFilter ucSubscriptionPeriodInfoWithFilter1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label label2;
@@ -538,5 +538,6 @@
         private System.Windows.Forms.LinkLabel llShowPeriodsHistory;
         private System.Windows.Forms.LinkLabel llShowNewPeriodInfo;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private UserControls.ucSubscriptionPeriodInfoWithFilter ucSubscriptionPeriodInfoWithFilter1;
     }
 }

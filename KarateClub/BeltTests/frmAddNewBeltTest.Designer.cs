@@ -418,7 +418,7 @@
             // 
             this.ucMemberInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucMemberInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucMemberInstructorCardWithFilter1.FilterEnable = true;
+            this.ucMemberInstructorCardWithFilter1.FilterEnableMember = true;
             this.ucMemberInstructorCardWithFilter1.Location = new System.Drawing.Point(3, 78);
             this.ucMemberInstructorCardWithFilter1.Name = "ucMemberInstructorCardWithFilter1";
             this.ucMemberInstructorCardWithFilter1.Size = new System.Drawing.Size(923, 554);

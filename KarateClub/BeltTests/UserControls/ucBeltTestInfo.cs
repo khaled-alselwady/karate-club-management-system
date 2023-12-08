@@ -18,7 +18,7 @@ namespace KarateClub.BeltTests.UserControls
     public partial class ucBeltTestInfo : UserControl
     {
 
-        private int _TestID = -1;
+        private int? _TestID = null;
         private clsBeltTest _Test;
 
         public ucBeltTestInfo()
@@ -39,7 +39,7 @@ namespace KarateClub.BeltTests.UserControls
             lblInstructorName.Text = _Test.InstructorInfo.Name;
             lblTestDate.Text = clsFormat.DateToShort(_Test.Date);
             lblResult.Text = (_Test.Result) ? "Passed" : "Failed";
-            lblPaymentID.Text = (_Test.PaymentID != -1) ? _Test.PaymentID.ToString() : "Not paid yet";
+            lblPaymentID.Text = (_Test.PaymentID.HasValue) ? _Test.PaymentID.ToString() : "Not paid yet";
             lblFees.Text = _Test.BeltRankInfo.TestFees.ToString("F0");
 
             pbResult.Image = (_Test.Result) ? Resources.passed : Resources.failed;
@@ -47,7 +47,7 @@ namespace KarateClub.BeltTests.UserControls
 
         public void Reset()
         {
-            _TestID = -1;
+            _TestID = null;
             _Test = null;
 
             llShowMemberInfo.Enabled = false;
@@ -65,13 +65,13 @@ namespace KarateClub.BeltTests.UserControls
             lblFees.Text = "[????]";
         }
 
-        public void LoadBeltTestInfo(int TestID)
+        public void LoadBeltTestInfo(int? TestID)
         {
             this._TestID = TestID;
 
-            if (this._TestID == -1)
+            if (!this._TestID.HasValue)
             {
-                MessageBox.Show("There is no test with id = -1", "Missing Test",
+                MessageBox.Show("There is no test with this ID", "Missing Test",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Reset();

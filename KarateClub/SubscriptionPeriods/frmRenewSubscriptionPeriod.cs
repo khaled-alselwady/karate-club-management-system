@@ -10,19 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KarateClub.SubscriptionPeriods.UserControls.ucSubscriptionPeriodInfoWithFilter;
 
 namespace KarateClub.SubscriptionPeriods
 {
     public partial class frmRenewSubscriptionPeriod : Form
     {
-        private int _NewPeriodID = -1;
+        private int? _NewPeriodID = null;
 
         public frmRenewSubscriptionPeriod()
         {
             InitializeComponent();
         }
 
-        public frmRenewSubscriptionPeriod(int OldPeriodID)
+        public frmRenewSubscriptionPeriod(int? OldPeriodID)
         {
             InitializeComponent();
 
@@ -47,45 +48,6 @@ namespace KarateClub.SubscriptionPeriods
         private void frmRenewSubscriptionPeriod_Load(object sender, EventArgs e)
         {
             _LoadData();
-        }
-
-        private void ucSubscriptionPeriodInfoWithFilter1_OnPeriodSelected(int obj)
-        {
-            if (obj == -1)
-            {
-                btnRenew.Enabled = false;
-
-                return;
-            }
-
-            if (!ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.DidPeriodExpire())
-            {
-                DateTime ExpiredDate = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.EndDate;
-
-                MessageBox.Show($"This period has not expired yet!, it expires at" +
-                    $" [{clsFormat.DateToShort(ExpiredDate)}]", "Not Allowed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                btnRenew.Enabled = false;
-
-                return;
-            }
-
-            if (!ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.IsActive)
-            {
-                MessageBox.Show($"This period is not active!, Choose another one.", "Not Allowed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                btnRenew.Enabled = false;
-
-                return;
-            }
-
-            lblMemberID.Text = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.MemberID.ToString();
-            lblPreviousPeriodID.Text = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.PeriodID.ToString();
-
-            btnRenew.Enabled = true;
-            llShowPeriodsHistory.Enabled = true;
         }
 
         private void txtFees_Validating(object sender, CancelEventArgs e)
@@ -129,13 +91,13 @@ namespace KarateClub.SubscriptionPeriods
                 return;
             }
 
-            int PaymentID = -1;
+            int? PaymentID = null;
 
-            int RenewPeriodID = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.
+            int? RenewPeriodID = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.
                 Renew(Convert.ToDecimal(txtFees.Text.Trim()), dtpStartDate.Value,
                 dtpEndDate.Value, rbYes.Checked, ref PaymentID);
 
-            if (RenewPeriodID == -1)
+            if (!RenewPeriodID.HasValue)
             {
                 MessageBox.Show("Failed to Renew the Period", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -145,7 +107,7 @@ namespace KarateClub.SubscriptionPeriods
 
             _NewPeriodID = RenewPeriodID;
             lblRenewPeriodID.Text = RenewPeriodID.ToString();
-            lblPaymentID.Text = (PaymentID != -1) ? PaymentID.ToString() : "[????]";
+            lblPaymentID.Text = (PaymentID.HasValue) ? PaymentID.ToString() : "[????]";
 
             MessageBox.Show("Period Renewed Successfully with ID = " + RenewPeriodID.ToString(),
                 "Period Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -165,6 +127,50 @@ namespace KarateClub.SubscriptionPeriods
         {
             frmShowSubscriptionPeriodsHistory ShowPeriodsHistory = new frmShowSubscriptionPeriodsHistory(ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.MemberID);
             ShowPeriodsHistory.ShowDialog();
+        }
+
+        private void ucSubscriptionPeriodInfoWithFilter1_OnPeriodSelected(object sender, PeriodSelectedEventArgs e)
+        {
+            if (!e.PeriodID.HasValue)
+            {
+                btnRenew.Enabled = false;
+
+                return;
+            }
+
+            if (!ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.DidPeriodExpire())
+            {
+                DateTime ExpiredDate = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.EndDate;
+
+                MessageBox.Show($"This period has not expired yet!, it expires at" +
+                    $" [{clsFormat.DateToShort(ExpiredDate)}]", "Not Allowed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                btnRenew.Enabled = false;
+
+                return;
+            }
+
+            if (!ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.IsActive)
+            {
+                MessageBox.Show($"This period is not active!, Choose another one.", "Not Allowed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                btnRenew.Enabled = false;
+
+                return;
+            }
+
+            lblMemberID.Text = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.MemberID.ToString();
+            lblPreviousPeriodID.Text = ucSubscriptionPeriodInfoWithFilter1.SelectedPeriodInfo.PeriodID.ToString();
+
+            btnRenew.Enabled = true;
+            llShowPeriodsHistory.Enabled = true;
+        }
+
+        private void frmRenewSubscriptionPeriod_Activated(object sender, EventArgs e)
+        {
+            ucSubscriptionPeriodInfoWithFilter1.FilterFocus();
         }
     }
 }

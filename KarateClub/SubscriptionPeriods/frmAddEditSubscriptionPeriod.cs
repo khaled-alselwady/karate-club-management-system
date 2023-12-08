@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KarateClub.Members.UserControls.ucMemberCardWithFilter;
 
 namespace KarateClub.SubscriptionPeriods
 {
@@ -17,9 +18,9 @@ namespace KarateClub.SubscriptionPeriods
         private enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
-        private int _SelectedMemberID = -1;
+        private int? _SelectedMemberID = null;
 
-        private int _PeriodID = -1;
+        private int? _PeriodID = null;
         private clsSubscriptionPeriod _Period;
 
         public frmAddEditSubscriptionPeriod()
@@ -152,48 +153,6 @@ namespace KarateClub.SubscriptionPeriods
             };
         }
 
-        private void ucMemberCardWithFilter1_OnMemberSelected(int obj)
-        {
-            _SelectedMemberID = obj;
-
-            if (_SelectedMemberID == -1)
-            {
-                btnSave.Enabled = false;
-                ucMemberCardWithFilter1.Clear();
-                lblMemberID.Text = "[????]";
-
-                return;
-            }
-
-            int PeriodID = ucMemberCardWithFilter1.SelectedMemberInfo.GetLastActivePeriodID();
-
-            if (PeriodID != -1)
-            {
-                clsSubscriptionPeriod LastPeriod = clsSubscriptionPeriod.Find(PeriodID);
-
-                if (LastPeriod == null)
-                {
-                    btnSave.Enabled = false;
-
-                    return;
-                }
-
-                MessageBox.Show($"This member already has an active subscription period!," +
-                    $" his subscription period will expire at [{clsFormat.DateToShort(LastPeriod.EndDate)}]", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                btnSave.Enabled = false;
-                llShowPeriodsHistory.Enabled = true;
-
-                return;
-            }
-
-            lblMemberID.Text = _SelectedMemberID.ToString();
-            btnSave.Enabled = true;
-            llShowPeriodsHistory.Enabled = true;
-            txtFees.Focus();
-        }
-
         private void frmAddEditSubscriptionPeriod_Activated(object sender, EventArgs e)
         {
             ucMemberCardWithFilter1.FilterFocus();
@@ -227,7 +186,7 @@ namespace KarateClub.SubscriptionPeriods
                 _Period.IssueReason = clsSubscriptionPeriod.enIssueReason.FirstTime;
             }
 
-            int PaymentID = -1;
+            int? PaymentID = null;
 
             if (rbYes.Enabled && rbYes.Checked)
             {
@@ -239,7 +198,7 @@ namespace KarateClub.SubscriptionPeriods
             }
 
             _Period.PaymentID = PaymentID;
-            _Period.IsPaid = (PaymentID != -1);
+            _Period.IsPaid = (PaymentID.HasValue);
 
             clsMember.SetActivity(_Period.MemberID, _Period.IsPaid);
 
@@ -265,6 +224,48 @@ namespace KarateClub.SubscriptionPeriods
         {
             frmShowSubscriptionPeriodsHistory ShowPeriodsHistory = new frmShowSubscriptionPeriodsHistory(ucMemberCardWithFilter1.MemberID);
             ShowPeriodsHistory.ShowDialog();
+        }
+
+        private void ucMemberCardWithFilter1_OnMemberSelected(object sender, MemberSelectedEventArgs e)
+        {
+            _SelectedMemberID = e.MemberID;
+
+            if (!_SelectedMemberID.HasValue)
+            {
+                btnSave.Enabled = false;
+                ucMemberCardWithFilter1.Clear();
+                lblMemberID.Text = "[????]";
+
+                return;
+            }
+
+            int? PeriodID = ucMemberCardWithFilter1.SelectedMemberInfo.GetLastActivePeriodID();
+
+            if (PeriodID.HasValue)
+            {
+                clsSubscriptionPeriod LastPeriod = clsSubscriptionPeriod.Find(PeriodID);
+
+                if (LastPeriod == null)
+                {
+                    btnSave.Enabled = false;
+
+                    return;
+                }
+
+                MessageBox.Show($"This member already has an active subscription period!," +
+                    $" his subscription period will expire at [{clsFormat.DateToShort(LastPeriod.EndDate)}]", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                btnSave.Enabled = false;
+                llShowPeriodsHistory.Enabled = true;
+
+                return;
+            }
+
+            lblMemberID.Text = _SelectedMemberID.ToString();
+            btnSave.Enabled = true;
+            llShowPeriodsHistory.Enabled = true;
+            txtFees.Focus();
         }
     }
 }

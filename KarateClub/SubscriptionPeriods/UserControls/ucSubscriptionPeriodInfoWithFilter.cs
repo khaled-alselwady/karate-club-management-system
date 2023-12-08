@@ -14,18 +14,30 @@ namespace KarateClub.SubscriptionPeriods.UserControls
 {
     public partial class ucSubscriptionPeriodInfoWithFilter : UserControl
     {
-        // Define a custom event handler delegate with parameters
-        public event Action<int> OnPeriodSelected;
-        // Create a protected method to raise the event with a parameter
-        protected virtual void PeriodSelected(int PeriodID)
+        #region Declare Event
+        public class PeriodSelectedEventArgs : EventArgs
         {
-            Action<int> handler = OnPeriodSelected;
-            if (handler != null)
+            public int? PeriodID { get; }
+
+            public PeriodSelectedEventArgs(int? PeriodID)
             {
-                handler(PeriodID); // Raise the event with the parameter
+                this.PeriodID = PeriodID;
             }
         }
-      
+
+        public event EventHandler<PeriodSelectedEventArgs> OnPeriodSelected;
+
+        public void RaiseOnPeriodSelected(int? PeriodID)
+        {
+            RaiseOnPeriodSelected(new PeriodSelectedEventArgs(PeriodID));
+        }
+
+        protected virtual void RaiseOnPeriodSelected(PeriodSelectedEventArgs e)
+        {
+            OnPeriodSelected?.Invoke(this, e);
+        }
+        #endregion
+
         private bool _FilterEnabled = true;
         public bool FilterEnabled
         {
@@ -38,7 +50,7 @@ namespace KarateClub.SubscriptionPeriods.UserControls
             }
         }
 
-        public int PeriodID => ucSubscriptionPeriodInfo1.PeriodID;
+        public int? PeriodID => ucSubscriptionPeriodInfo1.PeriodID;
         public clsSubscriptionPeriod SelectedPeriodInfo => ucSubscriptionPeriodInfo1.Period;
 
         public ucSubscriptionPeriodInfoWithFilter()
@@ -95,7 +107,7 @@ namespace KarateClub.SubscriptionPeriods.UserControls
             txtFilterValue.Focus();
         }
 
-        public void LoadSubscriptionPeriodInfo(int PeriodID)
+        public void LoadSubscriptionPeriodInfo(int? PeriodID)
         {
             txtFilterValue.Text = PeriodID.ToString();
             ucSubscriptionPeriodInfo1.LoadSubscriptionPeriodInfo(PeriodID);
@@ -103,7 +115,7 @@ namespace KarateClub.SubscriptionPeriods.UserControls
             if (OnPeriodSelected != null && FilterEnabled)
             {
                 // Raise the event with a parameter
-                OnPeriodSelected(ucSubscriptionPeriodInfo1.PeriodID);
+                RaiseOnPeriodSelected(ucSubscriptionPeriodInfo1.PeriodID);
             }
         }
 

@@ -12,7 +12,7 @@ namespace KarateClub.Members
 {
     public partial class frmShowMemberDetails : Form
     {     
-        public frmShowMemberDetails(int memberID)
+        public frmShowMemberDetails(int? memberID)
         {
             InitializeComponent();
 

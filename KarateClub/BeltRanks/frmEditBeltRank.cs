@@ -15,10 +15,10 @@ namespace KarateClub.BeltRanks
 {
     public partial class frmEditBeltRank : Form
     {
-        private int _BeltRankID = -1;
+        private int? _BeltRankID = null;
         private clsBeltRank _BeltRank;
 
-        public frmEditBeltRank(int BeltRankID)
+        public frmEditBeltRank(int? BeltRankID)
         {
             InitializeComponent();
 

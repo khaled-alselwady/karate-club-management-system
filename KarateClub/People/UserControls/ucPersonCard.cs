@@ -16,10 +16,10 @@ namespace KarateClub.People.UserControls
 {
     public partial class ucPersonCard : UserControl
     {
-        private int _PersonID = -1;
+        private int? _PersonID = null;
         private clsPerson _Person;
 
-        public int PersonID => _PersonID;
+        public int? PersonID => _PersonID;
         public clsPerson Person => _Person;
 
         public ucPersonCard()
@@ -29,7 +29,7 @@ namespace KarateClub.People.UserControls
 
         public void Reset()
         {
-            this._PersonID = -1;
+            this._PersonID = null;
             this._Person = null;
 
             lblPersonID.Text = "[????]";
@@ -44,7 +44,7 @@ namespace KarateClub.People.UserControls
 
         private void _LoadMemberImage()
         {
-            if (_Person.ImagePath != "")
+            if (_Person.ImagePath != null)
             {
                 if (File.Exists(_Person.ImagePath))
                     pbPersonImage.ImageLocation = _Person.ImagePath;
@@ -74,13 +74,13 @@ namespace KarateClub.People.UserControls
             _LoadMemberImage();
         }
 
-        public void LoadPersonInfo(int PersonID)
+        public void LoadPersonInfo(int? PersonID)
         {
             this._PersonID = PersonID;
 
-            if (PersonID == -1)
+            if (!PersonID.HasValue)
             {
-                MessageBox.Show("There is no person with id = -1", "Missing Member",
+                MessageBox.Show("There is no person with this ID", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Reset();

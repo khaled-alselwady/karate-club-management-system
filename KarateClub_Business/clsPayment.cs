@@ -16,45 +16,45 @@ namespace KarateClub_Business
         public enum enPaymentFor { SubscriptionPeriod, BeltTest }
         public enPaymentFor PaymentFor = enPaymentFor.SubscriptionPeriod;
 
-        public int PaymentID { get; set; }
+        public int? PaymentID { get; set; }
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
-        public int MemberID { get; set; }
+        public int? MemberID { get; set; }
 
         public clsMember MemberInfo { get; set; }
 
-        private int _TempID = -1;
+        private int? _TempID = null;
 
-        public int PaymentForID
+        public int? PaymentForID
         {
             get
             {
-                if ((_TempID = clsSubscriptionPeriod.GetPeriodIDByPaymentID(PaymentID)) != -1)
+                if ((_TempID = clsSubscriptionPeriod.GetPeriodIDByPaymentID(PaymentID)).HasValue)
                 {
                     PaymentFor = enPaymentFor.SubscriptionPeriod;
                     return _TempID;
                 }
-                if ((_TempID = clsBeltTest.GetTestIDByPaymentID(PaymentID)) != -1)
+                if ((_TempID = clsBeltTest.GetTestIDByPaymentID(PaymentID)).HasValue)
                 {
                     PaymentFor = enPaymentFor.BeltTest;
                     return _TempID;
                 }
 
-                return -1;
+                return null;
             }
         }
 
         public clsPayment()
         {
-            this.PaymentID = -1;
+            this.PaymentID = null;
             this.Amount = -1M;
             this.Date = DateTime.Now;
-            this.MemberID = -1;
+            this.MemberID = null;
 
             Mode = enMode.AddNew;
         }
 
-        private clsPayment(int PaymentID, decimal Amount, DateTime Date, int MemberID)
+        private clsPayment(int? PaymentID, decimal Amount, DateTime Date, int? MemberID)
         {
             this.PaymentID = PaymentID;
             this.Amount = Amount;
@@ -70,12 +70,13 @@ namespace KarateClub_Business
         {
             this.PaymentID = clsPaymentData.AddNewPayment(this.Amount, this.MemberID);
 
-            return (this.PaymentID != -1);
+            return (this.PaymentID.HasValue);
         }
 
         private bool _UpdatePayment()
         {
-            return clsPaymentData.UpdatePayment(this.PaymentID, this.Amount, this.Date, this.MemberID);
+            return clsPaymentData.UpdatePayment(this.PaymentID, this.Amount,
+                this.Date, this.MemberID);
         }
 
         public bool Save()
@@ -100,11 +101,11 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsPayment Find(int PaymentID)
+        public static clsPayment Find(int? PaymentID)
         {
             decimal Amount = -1M;
             DateTime Date = DateTime.Now;
-            int MemberID = -1;
+            int? MemberID = null;
 
             bool IsFound = clsPaymentData.GetPaymentInfoByID(PaymentID, ref Amount, ref Date, ref MemberID);
 
@@ -118,12 +119,12 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeletePayment(int PaymentID)
+        public static bool DeletePayment(int? PaymentID)
         {
             return clsPaymentData.DeletePayment(PaymentID);
         }
 
-        public static bool DoesPaymentExist(int PaymentID)
+        public static bool DoesPaymentExist(int? PaymentID)
         {
             return clsPaymentData.DoesPaymentExist(PaymentID);
         }
@@ -138,7 +139,7 @@ namespace KarateClub_Business
             return clsPaymentData.CountPayments();
         }
 
-        public static DataTable GetAllPaymentsForMember(int MemberID)
+        public static DataTable GetAllPaymentsForMember(int? MemberID)
         {
             return clsPaymentData.GetAllPaymentsForMember(MemberID);
         }

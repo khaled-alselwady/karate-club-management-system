@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
-            this.tcMembersInstructors = new Guna.UI2.WinForms.Guna2TabControl();
-            this.tpMember = new System.Windows.Forms.TabPage();
-            this.ucMemberCardWithFilter1 = new KarateClub.Members.UserControls.ucMemberCardWithFilter();
-            this.btnMemberInfoNext = new System.Windows.Forms.Button();
-            this.tpInstructor = new System.Windows.Forms.TabPage();
-            this.ucInstructorCardWithFilter1 = new KarateClub.Instructors.UserControls.ucInstructorCardWithFilter();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.dtpAssignDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
@@ -43,9 +37,7 @@
             this.lblMembersInstructorsID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.tcMembersInstructors.SuspendLayout();
-            this.tpMember.SuspendLayout();
-            this.tpInstructor.SuspendLayout();
+            this.ucMemberInstructorCardWithFilter1 = new KarateClub.MembersInstructors.UserControls.ucMemberInstructorCardWithFilter();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
@@ -60,107 +52,6 @@
             this.lblTitle.TabIndex = 166;
             this.lblTitle.Text = "Tilte";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tcMembersInstructors
-            // 
-            this.tcMembersInstructors.Controls.Add(this.tpMember);
-            this.tcMembersInstructors.Controls.Add(this.tpInstructor);
-            this.tcMembersInstructors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcMembersInstructors.ItemSize = new System.Drawing.Size(180, 40);
-            this.tcMembersInstructors.Location = new System.Drawing.Point(8, 84);
-            this.tcMembersInstructors.Name = "tcMembersInstructors";
-            this.tcMembersInstructors.SelectedIndex = 0;
-            this.tcMembersInstructors.Size = new System.Drawing.Size(918, 547);
-            this.tcMembersInstructors.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
-            this.tcMembersInstructors.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.tcMembersInstructors.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tcMembersInstructors.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
-            this.tcMembersInstructors.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.tcMembersInstructors.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
-            this.tcMembersInstructors.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.tcMembersInstructors.TabButtonIdleState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tcMembersInstructors.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(160)))), ((int)(((byte)(167)))));
-            this.tcMembersInstructors.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.tcMembersInstructors.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty;
-            this.tcMembersInstructors.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(37)))), ((int)(((byte)(49)))));
-            this.tcMembersInstructors.TabButtonSelectedState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tcMembersInstructors.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
-            this.tcMembersInstructors.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(132)))), ((int)(((byte)(255)))));
-            this.tcMembersInstructors.TabButtonSize = new System.Drawing.Size(180, 40);
-            this.tcMembersInstructors.TabIndex = 167;
-            this.tcMembersInstructors.TabMenuBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(42)))), ((int)(((byte)(57)))));
-            this.tcMembersInstructors.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
-            this.tcMembersInstructors.SelectedIndexChanged += new System.EventHandler(this.tcMembersInstructors_SelectedIndexChanged);
-            // 
-            // tpMember
-            // 
-            this.tpMember.BackColor = System.Drawing.Color.White;
-            this.tpMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tpMember.Controls.Add(this.ucMemberCardWithFilter1);
-            this.tpMember.Controls.Add(this.btnMemberInfoNext);
-            this.tpMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tpMember.Location = new System.Drawing.Point(4, 44);
-            this.tpMember.Name = "tpMember";
-            this.tpMember.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMember.Size = new System.Drawing.Size(910, 499);
-            this.tpMember.TabIndex = 0;
-            this.tpMember.Text = "Selecte Member";
-            // 
-            // ucMemberCardWithFilter1
-            // 
-            this.ucMemberCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucMemberCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucMemberCardWithFilter1.FilterEnabled = true;
-            this.ucMemberCardWithFilter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(4, 3);
-            this.ucMemberCardWithFilter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ucMemberCardWithFilter1.Name = "ucMemberCardWithFilter1";
-            this.ucMemberCardWithFilter1.ShowAddMemberButton = true;
-            this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 442);
-            this.ucMemberCardWithFilter1.TabIndex = 121;
-            this.ucMemberCardWithFilter1.OnMemberSelected += new System.Action<int>(this.ucMemberCardWithFilter1_OnMemberSelected);
-            // 
-            // btnMemberInfoNext
-            // 
-            this.btnMemberInfoNext.Enabled = false;
-            this.btnMemberInfoNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMemberInfoNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMemberInfoNext.Image = global::KarateClub.Properties.Resources.Next_32;
-            this.btnMemberInfoNext.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMemberInfoNext.Location = new System.Drawing.Point(772, 454);
-            this.btnMemberInfoNext.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnMemberInfoNext.Name = "btnMemberInfoNext";
-            this.btnMemberInfoNext.Size = new System.Drawing.Size(126, 37);
-            this.btnMemberInfoNext.TabIndex = 120;
-            this.btnMemberInfoNext.Text = "Next";
-            this.btnMemberInfoNext.UseVisualStyleBackColor = true;
-            this.btnMemberInfoNext.Click += new System.EventHandler(this.btnMemberInfoNext_Click);
-            // 
-            // tpInstructor
-            // 
-            this.tpInstructor.BackColor = System.Drawing.Color.White;
-            this.tpInstructor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tpInstructor.Controls.Add(this.ucInstructorCardWithFilter1);
-            this.tpInstructor.Location = new System.Drawing.Point(4, 44);
-            this.tpInstructor.Name = "tpInstructor";
-            this.tpInstructor.Padding = new System.Windows.Forms.Padding(3);
-            this.tpInstructor.Size = new System.Drawing.Size(910, 499);
-            this.tpInstructor.TabIndex = 1;
-            this.tpInstructor.Text = "Select Instrutor";
-            // 
-            // ucInstructorCardWithFilter1
-            // 
-            this.ucInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucInstructorCardWithFilter1.FilterEnabled = true;
-            this.ucInstructorCardWithFilter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ucInstructorCardWithFilter1.Location = new System.Drawing.Point(1, 4);
-            this.ucInstructorCardWithFilter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ucInstructorCardWithFilter1.Name = "ucInstructorCardWithFilter1";
-            this.ucInstructorCardWithFilter1.ShowAddInstructorButton = true;
-            this.ucInstructorCardWithFilter1.Size = new System.Drawing.Size(904, 394);
-            this.ucInstructorCardWithFilter1.TabIndex = 0;
-            this.ucInstructorCardWithFilter1.OnInstructorSelected += new System.Action<int>(this.ucInstructorCardWithFilter1_OnInstructorSelected);
             // 
             // btnSave
             // 
@@ -260,6 +151,16 @@
             this.pictureBox3.TabIndex = 180;
             this.pictureBox3.TabStop = false;
             // 
+            // ucMemberInstructorCardWithFilter1
+            // 
+            this.ucMemberInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucMemberInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ucMemberInstructorCardWithFilter1.FilterEnableMember = true;
+            this.ucMemberInstructorCardWithFilter1.Location = new System.Drawing.Point(0, 77);
+            this.ucMemberInstructorCardWithFilter1.Name = "ucMemberInstructorCardWithFilter1";
+            this.ucMemberInstructorCardWithFilter1.Size = new System.Drawing.Size(923, 554);
+            this.ucMemberInstructorCardWithFilter1.TabIndex = 181;
+            // 
             // frmAddEditMembersInstructors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,6 +168,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(930, 785);
+            this.Controls.Add(this.ucMemberInstructorCardWithFilter1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblMembersInstructorsID);
@@ -275,7 +177,6 @@
             this.Controls.Add(this.dtpAssignDate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.tcMembersInstructors);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditMembersInstructors";
@@ -283,9 +184,6 @@
             this.Text = "Add/Edit Members-Instructors";
             this.Activated += new System.EventHandler(this.frmAddEditMembersInstructors_Activated);
             this.Load += new System.EventHandler(this.frmAddEditMembersInstructors_Load);
-            this.tcMembersInstructors.ResumeLayout(false);
-            this.tpMember.ResumeLayout(false);
-            this.tpInstructor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
@@ -296,11 +194,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.TabPage tpMember;
-        private System.Windows.Forms.TabPage tpInstructor;
-        private System.Windows.Forms.Button btnMemberInfoNext;
-        private Members.UserControls.ucMemberCardWithFilter ucMemberCardWithFilter1;
-        private Instructors.UserControls.ucInstructorCardWithFilter ucInstructorCardWithFilter1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpAssignDate;
@@ -309,6 +202,6 @@
         private System.Windows.Forms.Label lblMembersInstructorsID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private Guna.UI2.WinForms.Guna2TabControl tcMembersInstructors;
+        private UserControls.ucMemberInstructorCardWithFilter ucMemberInstructorCardWithFilter1;
     }
 }

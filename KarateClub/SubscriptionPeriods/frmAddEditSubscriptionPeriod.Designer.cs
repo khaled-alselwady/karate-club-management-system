@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.ucMemberCardWithFilter1 = new KarateClub.Members.UserControls.ucMemberCardWithFilter();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbNo = new System.Windows.Forms.RadioButton();
             this.rbYes = new System.Windows.Forms.RadioButton();
@@ -58,6 +57,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.llShowPeriodsHistory = new System.Windows.Forms.LinkLabel();
+            this.ucMemberCardWithFilter1 = new KarateClub.Members.UserControls.ucMemberCardWithFilter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -79,18 +79,6 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Tilte";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ucMemberCardWithFilter1
-            // 
-            this.ucMemberCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucMemberCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucMemberCardWithFilter1.FilterEnabled = true;
-            this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(6, 72);
-            this.ucMemberCardWithFilter1.Name = "ucMemberCardWithFilter1";
-            this.ucMemberCardWithFilter1.ShowAddMemberButton = true;
-            this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 443);
-            this.ucMemberCardWithFilter1.TabIndex = 3;
-            this.ucMemberCardWithFilter1.OnMemberSelected += new System.Action<int>(this.ucMemberCardWithFilter1_OnMemberSelected);
             // 
             // groupBox1
             // 
@@ -420,6 +408,18 @@
             this.llShowPeriodsHistory.Text = "Show Periods History";
             this.llShowPeriodsHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowPeriodsHistory_LinkClicked);
             // 
+            // ucMemberCardWithFilter1
+            // 
+            this.ucMemberCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucMemberCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ucMemberCardWithFilter1.FilterEnabled = true;
+            this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(5, 76);
+            this.ucMemberCardWithFilter1.Name = "ucMemberCardWithFilter1";
+            this.ucMemberCardWithFilter1.ShowAddMemberButton = true;
+            this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 443);
+            this.ucMemberCardWithFilter1.TabIndex = 179;
+            this.ucMemberCardWithFilter1.OnMemberSelected += new System.EventHandler<KarateClub.Members.UserControls.ucMemberCardWithFilter.MemberSelectedEventArgs>(this.ucMemberCardWithFilter1_OnMemberSelected);
+            // 
             // frmAddEditSubscriptionPeriod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,11 +427,11 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(911, 801);
+            this.Controls.Add(this.ucMemberCardWithFilter1);
             this.Controls.Add(this.llShowPeriodsHistory);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.ucMemberCardWithFilter1);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditSubscriptionPeriod";
@@ -457,7 +457,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private Members.UserControls.ucMemberCardWithFilter ucMemberCardWithFilter1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label7;
@@ -485,5 +484,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.LinkLabel llShowPeriodsHistory;
+        private Members.UserControls.ucMemberCardWithFilter ucMemberCardWithFilter1;
     }
 }

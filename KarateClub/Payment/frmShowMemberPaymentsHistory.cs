@@ -12,7 +12,7 @@ namespace KarateClub.Payment
 {
     public partial class frmShowMemberPaymentsHistory : Form
     {
-        public frmShowMemberPaymentsHistory(int MemberID)
+        public frmShowMemberPaymentsHistory(int? MemberID)
         {
             InitializeComponent();
 

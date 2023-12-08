@@ -248,7 +248,7 @@ namespace KarateClub.Main
             leftBorderBtn.BringToFront();
             OpenChildForm(new frmDashboard());
 
-            if (clsGlobal.CurrentUser.ImagePath != "")
+            if (clsGlobal.CurrentUser.ImagePath != null)
             {
                 pbUserImage.ImageLocation = clsGlobal.CurrentUser.ImagePath;
             }
@@ -256,14 +256,14 @@ namespace KarateClub.Main
             lblName.Text = clsGlobal.CurrentUser.Username;
         }
 
-        private void RefreshUserInfo(int UserID)
+        private void RefreshUserInfo(int? UserID)
         {
             clsGlobal.CurrentUser = clsUser.Find(UserID);
 
             if (clsGlobal.CurrentUser == null)
                 return;
 
-            if (clsGlobal.CurrentUser.ImagePath != "")
+            if (clsGlobal.CurrentUser.ImagePath != null)
             {
                 pbUserImage.ImageLocation = clsGlobal.CurrentUser.ImagePath;
             }

@@ -15,7 +15,7 @@ namespace KarateClub.BeltTests.UserControls
     {
         private DataTable _dtAllMemberBeltTests;
 
-        private int _MemberID = -1;
+        private int? _MemberID = null;
 
         public ucMemberTests()
         {
@@ -62,7 +62,7 @@ namespace KarateClub.BeltTests.UserControls
             return (int)dgvMemberBeltTestsList.CurrentRow.Cells["TestID"].Value;
         }
 
-        public void LoadMemberTestsInfo(int MemberID)
+        public void LoadMemberTestsInfo(int? MemberID)
         {
             this._MemberID = MemberID;
             _RefreshBeltTestsList();
@@ -81,7 +81,7 @@ namespace KarateClub.BeltTests.UserControls
 
         private void addNewTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
+            int? MemberID = clsBeltTest.Find(_GetBeltTestsIDFromDGV()).MemberID;
 
             frmAddNewBeltTest AddNewBeltTest = new frmAddNewBeltTest(MemberID);
             AddNewBeltTest.ShowDialog();

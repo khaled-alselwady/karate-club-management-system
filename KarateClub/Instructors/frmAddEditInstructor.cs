@@ -16,12 +16,12 @@ namespace KarateClub.Instructors
 {
     public partial class frmAddEditInstructor : Form
     {
-        public Action<int> GetInstructorID;
+        public Action<int?> GetInstructorID;
 
         public enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
-        private int _InstructorID = -1;
+        private int? _InstructorID = null;
         private clsInstructor _Instructor;
 
         public frmAddEditInstructor()
@@ -31,7 +31,7 @@ namespace KarateClub.Instructors
             this._Mode = enMode.AddNew;
         }
 
-        public frmAddEditInstructor(int InstructorID)
+        public frmAddEditInstructor(int? InstructorID)
         {
             InitializeComponent();
 
@@ -119,11 +119,11 @@ namespace KarateClub.Instructors
             _FillFieldsWithPersonInfo();
 
             //load person image in case it was set.
-            if (_Instructor.ImagePath != "")
+            if (_Instructor.ImagePath != null)
                 pbInstructorImage.ImageLocation = _Instructor.ImagePath;
 
             //hide/show the remove link in case there is no image for the person
-            llRemoveImage.Visible = (_Instructor.ImagePath != "");
+            llRemoveImage.Visible = (_Instructor.ImagePath != null);
         }
 
         private bool _HandleMemberImage()
@@ -137,7 +137,7 @@ namespace KarateClub.Instructors
             if (_Instructor.ImagePath != pbInstructorImage.ImageLocation)
             {
 
-                if (_Instructor.ImagePath != "")
+                if (_Instructor.ImagePath != null)
                 {
                     // first we delete the old image from the folder in case there is any.
                     try
@@ -187,7 +187,7 @@ namespace KarateClub.Instructors
             if (pbInstructorImage.ImageLocation != null)
                 _Instructor.ImagePath = pbInstructorImage.ImageLocation;
             else
-                _Instructor.ImagePath = "";
+                _Instructor.ImagePath = null;
         }
 
         private void _SaveInstructor()

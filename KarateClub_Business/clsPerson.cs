@@ -15,7 +15,7 @@ namespace KarateClub_Business
 
         public enum enGender { Male = 0, Female = 1 };
 
-        public int PersonID { get; set; }
+        public int? PersonID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -27,19 +27,19 @@ namespace KarateClub_Business
 
         public clsPerson()
         {
-            this.PersonID = -1;
+            this.PersonID = null;
             this.Name = string.Empty;
-            this.Address = string.Empty;
+            this.Address = null;
             this.Phone = string.Empty;
-            this.Email = string.Empty;
+            this.Email = null;
             this.DateOfBirth = DateTime.Now;
             this.Gender = enGender.Male;
-            this.ImagePath = string.Empty;
+            this.ImagePath = null;
 
             Mode = enMode.AddNew;
         }
 
-        private clsPerson(int PersonID, string Name, string Address,
+        private clsPerson(int? PersonID, string Name, string Address,
             string Phone, string Email, DateTime DateOfBirth,
             enGender Gender, string ImagePath)
         {
@@ -60,7 +60,7 @@ namespace KarateClub_Business
             this.PersonID = clsPersonData.AddNewPerson(this.Name, this.Address, this.Phone,
                 this.Email, this.DateOfBirth, (byte)this.Gender, this.ImagePath);
 
-            return (this.PersonID != -1);
+            return (this.PersonID.HasValue);
         }
 
         private bool _UpdatePerson()
@@ -91,15 +91,15 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsPerson Find(int PersonID)
+        public static clsPerson Find(int? PersonID)
         {
             string Name = string.Empty;
-            string Address = string.Empty;
+            string Address = null;
             string Phone = string.Empty;
-            string Email = string.Empty;
+            string Email = null;
             DateTime DateOfBirth = DateTime.Now;
             byte Gender = 0;
-            string ImagePath = string.Empty;
+            string ImagePath = null;
 
             bool IsFound = clsPersonData.GetPersonInfoByID(PersonID, ref Name, ref Address,
                 ref Phone, ref Email, ref DateOfBirth, ref Gender, ref ImagePath);
@@ -115,7 +115,7 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeletePerson(int PersonID)
+        public static bool DeletePerson(int? PersonID)
         {
             return clsPersonData.DeletePerson(PersonID);
         }
@@ -125,7 +125,7 @@ namespace KarateClub_Business
             return DeletePerson(this.PersonID);
         }
 
-        public static bool DoesPersonExist(int PersonID)
+        public static bool DoesPersonExist(int? PersonID)
         {
             return clsPersonData.DoesPersonExist(PersonID);
         }

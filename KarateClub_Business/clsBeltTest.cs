@@ -13,13 +13,13 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
-        public int TestID { get; set; }
-        public int MemberID { get; set; }
-        public int RankID { get; set; }
+        public int? TestID { get; set; }
+        public int? MemberID { get; set; }
+        public int? RankID { get; set; }
         public bool Result { get; set; }
         public DateTime Date { get; set; }
-        public int TestedByInstructorID { get; set; }
-        public int PaymentID { get; set; }
+        public int? TestedByInstructorID { get; set; }
+        public int? PaymentID { get; set; }
 
         public clsMember MemberInfo { get; set; }
         public clsInstructor InstructorInfo { get; set; }
@@ -28,19 +28,19 @@ namespace KarateClub_Business
 
         public clsBeltTest()
         {
-            this.TestID = -1;
-            this.MemberID = -1;
-            this.RankID = -1;
+            this.TestID = null;
+            this.MemberID = null;
+            this.RankID = null;
             this.Result = true;
             this.Date = DateTime.Now;
-            this.TestedByInstructorID = -1;
-            this.PaymentID = -1;
+            this.TestedByInstructorID = null;
+            this.PaymentID = null;
 
             Mode = enMode.AddNew;
         }
 
-        private clsBeltTest(int TestID, int MemberID, int RankID, bool Result,
-            DateTime Date, int TestedByInstructorID, int PaymentID)
+        private clsBeltTest(int? TestID, int? MemberID, int? RankID, bool Result,
+            DateTime Date, int? TestedByInstructorID, int? PaymentID)
         {
             this.TestID = TestID;
             this.MemberID = MemberID;
@@ -63,7 +63,7 @@ namespace KarateClub_Business
             this.TestID = clsBeltTestData.AddNewTest(this.MemberID, this.RankID, this.Result,
                 this.Date, this.TestedByInstructorID, this.PaymentID);
 
-            return (this.TestID != -1);
+            return (this.TestID.HasValue);
         }
 
         private bool _UpdateTest()
@@ -94,14 +94,14 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsBeltTest Find(int TestID)
+        public static clsBeltTest Find(int? TestID)
         {
-            int MemberID = -1;
-            int RankID = -1;
+            int? MemberID = null;
+            int? RankID = null;
             bool Result = true;
             DateTime Date = DateTime.Now;
-            int TestedByInstructorID = -1;
-            int PaymentID = -1;
+            int? TestedByInstructorID = null;
+            int? PaymentID = null;
 
             bool IsFound = clsBeltTestData.GetTestInfoByID(TestID, ref MemberID, ref RankID,
                 ref Result, ref Date, ref TestedByInstructorID, ref PaymentID);
@@ -117,12 +117,12 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeleteTest(int TestID)
+        public static bool DeleteTest(int? TestID)
         {
             return clsBeltTestData.DeleteTest(TestID);
         }
 
-        public static bool DoesTestExist(int TestID)
+        public static bool DoesTestExist(int? TestID)
         {
             return clsBeltTestData.DoesTestExist(TestID);
         }
@@ -137,7 +137,7 @@ namespace KarateClub_Business
             return clsBeltTestData.CountBeltTests();
         }
 
-        public int Pay(decimal Amount)
+        public int? Pay(decimal Amount)
         {
             clsPayment Payment = new clsPayment();
 
@@ -146,18 +146,18 @@ namespace KarateClub_Business
 
             if (!Payment.Save())
             {
-                return -1;
+                return null;
             }
 
             return Payment.PaymentID;
         }
 
-        public static DataTable GetAllBeltTestsForMember(int MemberID)
+        public static DataTable GetAllBeltTestsForMember(int? MemberID)
         {
             return clsBeltTestData.GetAllBeltTestsForMember(MemberID);
         }
 
-        public static int GetTestIDByPaymentID(int PaymentID)
+        public static int? GetTestIDByPaymentID(int? PaymentID)
         {
             return clsBeltTestData.GetTestIDByPaymentID(PaymentID);
         }

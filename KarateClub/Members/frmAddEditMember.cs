@@ -17,12 +17,12 @@ namespace KarateClub.Members
 {
     public partial class frmAddEditMember : Form
     {
-        public Action<int> GetMemberID;
+        public Action<int?> GetMemberID;
 
         public enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
-        private int _MemberID = -1;
+        private int? _MemberID = null;
         private clsMember _Member;
 
         public frmAddEditMember()
@@ -32,7 +32,7 @@ namespace KarateClub.Members
             _Mode = enMode.AddNew;
         }
 
-        public frmAddEditMember(int MemberID)
+        public frmAddEditMember(int? MemberID)
         {
             InitializeComponent();
 
@@ -141,11 +141,11 @@ namespace KarateClub.Members
             _FillFieldsWithMemberInfo();
 
             //load person image in case it was set.
-            if (_Member.ImagePath != "")
+            if (_Member.ImagePath != null)
                 pbMemberImage.ImageLocation = _Member.ImagePath;
 
             //hide/show the remove link in case there is no image for the person
-            llRemoveImage.Visible = (_Member.ImagePath != "");
+            llRemoveImage.Visible = (_Member.ImagePath != null);
         }
 
         private bool _HandleMemberImage()
@@ -159,7 +159,7 @@ namespace KarateClub.Members
             if (_Member.ImagePath != pbMemberImage.ImageLocation)
             {
 
-                if (_Member.ImagePath != "")
+                if (_Member.ImagePath != null)
                 {
                     // first we delete the old image from the folder in case there is any.
                     try
@@ -211,7 +211,7 @@ namespace KarateClub.Members
             if (pbMemberImage.ImageLocation != null)
                 _Member.ImagePath = pbMemberImage.ImageLocation;
             else
-                _Member.ImagePath = "";
+                _Member.ImagePath = null;
         }
 
         private void _SavePerson()

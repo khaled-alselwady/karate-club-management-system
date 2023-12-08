@@ -14,18 +14,29 @@ namespace KarateClub.Instructors.UserControls
 {
     public partial class ucInstructorCardWithFilter : UserControl
     {
-
-        // Define a custom event handler delegate with parameters
-        public event Action<int> OnInstructorSelected;
-        // Create a protected method to raise the event with a parameter
-        protected virtual void InstructorSelected(int InstructorID)
+        #region Declare Event
+        public class InstructorSelectedEventArgs : EventArgs
         {
-            Action<int> handler = OnInstructorSelected;
-            if (handler != null)
+            public int? InstructorID { get; }
+
+            public InstructorSelectedEventArgs(int? InstructorID)
             {
-                handler(InstructorID); // Raise the event with the parameter
+                this.InstructorID = InstructorID;
             }
         }
+
+        public event EventHandler<InstructorSelectedEventArgs> OnInstructorSelected;
+
+        public void RaiseOnInstructorSelected(int? InstructorID)
+        {
+            RaiseOnInstructorSelected(new InstructorSelectedEventArgs(InstructorID));
+        }
+
+        protected virtual void RaiseOnInstructorSelected(InstructorSelectedEventArgs e)
+        {
+            OnInstructorSelected?.Invoke(this, e);
+        }
+        #endregion
 
         private bool _ShowAddInstructorButton = true;
         public bool ShowAddInstructorButton
@@ -51,7 +62,7 @@ namespace KarateClub.Instructors.UserControls
             }
         }
 
-        public int InstructorID => ucInstructorCard1.InstructorID;
+        public int? InstructorID => ucInstructorCard1.InstructorID;
         public clsInstructor SelectedInstructorInfo => ucInstructorCard1.SelectedInstructorInfo;
 
         public ucInstructorCardWithFilter()
@@ -66,7 +77,7 @@ namespace KarateClub.Instructors.UserControls
             if (OnInstructorSelected != null && FilterEnabled)
             {
                 // Raise the event with a parameter
-                OnInstructorSelected(ucInstructorCard1.InstructorID);
+                RaiseOnInstructorSelected(ucInstructorCard1.InstructorID);
             }
         }
 
@@ -127,13 +138,13 @@ namespace KarateClub.Instructors.UserControls
             AddNewInstructor.ShowDialog();
         }
 
-        private void AddNewInstructor_InstructorIDBack(int InstructorID)
+        private void AddNewInstructor_InstructorIDBack(int? InstructorID)
         {
             txtFilterValue.Text = InstructorID.ToString();
             ucInstructorCard1.LoadInstructorInfo(InstructorID);
         }
 
-        public void LoadInstructorInfo(int InstructorID)
+        public void LoadInstructorInfo(int? InstructorID)
         {
             txtFilterValue.Text = InstructorID.ToString();
             ucInstructorCard1.LoadInstructorInfo(InstructorID);

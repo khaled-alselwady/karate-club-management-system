@@ -13,7 +13,7 @@ namespace KarateClub.Users
 {
     public partial class frmShowUserDetails : Form
     {
-        public frmShowUserDetails(int UserID, bool ShowPermissions = true)
+        public frmShowUserDetails(int? UserID, bool ShowPermissions = true)
         {
             InitializeComponent();
 

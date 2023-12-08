@@ -20,13 +20,13 @@ namespace KarateClub.Payment.UserControls
     public partial class ucPaymentDetails : UserControl
     {
 
-        private int _PaymentID = -1;
+        private int? _PaymentID = null;
         private clsPayment _Payment;
 
-        public int PaymentID => _PaymentID;
+        public int? PaymentID => _PaymentID;
         public clsPayment Payment => _Payment;
 
-        private int _TempID = -1; // to store the id of the TestID or the PeriodID depends on the paymentID
+        private int? _TempID = null; // to store the id of the TestID or the PeriodID depends on the paymentID
 
         public ucPaymentDetails()
         {
@@ -35,7 +35,7 @@ namespace KarateClub.Payment.UserControls
 
         private void _LoadMemberImage()
         {
-            if (_Payment.MemberInfo.ImagePath != "")
+            if (_Payment.MemberInfo.ImagePath != null)
             {
                 if (File.Exists(_Payment.MemberInfo.ImagePath))
                     pbMemberImage.ImageLocation = _Payment.MemberInfo.ImagePath;
@@ -93,7 +93,7 @@ namespace KarateClub.Payment.UserControls
 
         public void Reset()
         {
-            this._PaymentID = -1;
+            this._PaymentID = null;
             this._Payment = null;
 
             lblPaymentID.Text = "[????]";
@@ -108,13 +108,13 @@ namespace KarateClub.Payment.UserControls
             pbMemberImage.Image = Resources.DefaultMale;
         }
 
-        public void LoadPaymentInfo(int PaymentID)
+        public void LoadPaymentInfo(int? PaymentID)
         {
             this._PaymentID = PaymentID;
 
-            if (this._PaymentID == -1)
+            if (!this._PaymentID.HasValue)
             {
-                MessageBox.Show("There is no payment with id = -1", "Missing Payment",
+                MessageBox.Show("There is no payment with this ID", "Missing Payment",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Reset();

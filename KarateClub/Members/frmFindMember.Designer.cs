@@ -65,11 +65,11 @@
             this.ucMemberCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucMemberCardWithFilter1.BackColor = System.Drawing.Color.White;
             this.ucMemberCardWithFilter1.FilterEnabled = true;
-            this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(2, 93);
+            this.ucMemberCardWithFilter1.Location = new System.Drawing.Point(0, 95);
             this.ucMemberCardWithFilter1.Name = "ucMemberCardWithFilter1";
             this.ucMemberCardWithFilter1.ShowAddMemberButton = true;
-            this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 444);
-            this.ucMemberCardWithFilter1.TabIndex = 1;
+            this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 443);
+            this.ucMemberCardWithFilter1.TabIndex = 117;
             // 
             // frmFindMember
             // 
@@ -78,8 +78,8 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(904, 600);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ucMemberCardWithFilter1);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmFindMember";
@@ -93,7 +93,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private UserControls.ucMemberCardWithFilter ucMemberCardWithFilter1;
         private System.Windows.Forms.Button btnClose;
+        private UserControls.ucMemberCardWithFilter ucMemberCardWithFilter1;
     }
 }

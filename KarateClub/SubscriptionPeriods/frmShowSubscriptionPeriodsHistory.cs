@@ -13,7 +13,7 @@ namespace KarateClub.SubscriptionPeriods
 {
     public partial class frmShowSubscriptionPeriodsHistory : Form
     {
-        public frmShowSubscriptionPeriodsHistory(int MemberID)
+        public frmShowSubscriptionPeriodsHistory(int? MemberID)
         {
             InitializeComponent();
 

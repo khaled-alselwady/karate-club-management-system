@@ -10,383 +10,405 @@ namespace KarateClub_DataAccess
 {
     public class clsBeltRankData
     {
-        public static bool GetRankInfoByID(int RankID, ref string RankName, ref decimal TestFees)
+        public static bool GetRankInfoByID(int? RankID, ref string RankName, ref decimal TestFees)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select * from BeltRanks where RankID = @RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankID", RankID);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    // The record was found
-                    IsFound = true;
+                    connection.Open();
 
-                    RankName = (string)reader["RankName"];
-                    TestFees = (decimal)reader["TestFees"];
-                }
-                else
-                {
-                    // The record was not found
-                    IsFound = false;
-                }
+                    string query = @"select * from BeltRanks where RankID = @RankID";
 
-                reader.Close();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // The record was found
+                                IsFound = true;
+
+                                RankName = (string)reader["RankName"];
+                                TestFees = (decimal)reader["TestFees"];
+                            }
+                            else
+                            {
+                                // The record was not found
+                                IsFound = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
 
-
-        public static bool GetRankInfoByName(string RankName, ref int RankID, ref decimal TestFees)
+        public static bool GetRankInfoByName(string RankName, ref int? RankID,
+            ref decimal TestFees)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select * from BeltRanks where RankName = @RankName";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankName", RankName);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    // The record was found
-                    IsFound = true;
+                    connection.Open();
 
-                    RankID = (int)reader["RankID"];
-                    TestFees = (decimal)reader["TestFees"];
-                }
-                else
-                {
-                    // The record was not found
-                    IsFound = false;
-                }
+                    string query = @"select * from BeltRanks where RankName = @RankName";
 
-                reader.Close();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankName", RankName);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // The record was found
+                                IsFound = true;
+
+                                RankID = (reader["RankID"] != DBNull.Value) ? (int?)reader["RankID"] : null;
+                                TestFees = (decimal)reader["TestFees"];
+                            }
+                            else
+                            {
+                                // The record was not found
+                                IsFound = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
 
-
-        public static int AddNewRank(string RankName, decimal TestFees)
+        public static int? AddNewRank(string RankName, decimal TestFees)
         {
-            // This function will return the new person id if succeeded and -1 if not
-            int RankID = -1;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"insert into BeltRanks (RankName, TestFees)
-values (@RankName, @TestFees)
-select scope_identity()";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankName", RankName);
-            command.Parameters.AddWithValue("@TestFees", TestFees);
+            // This function will return the new person id if succeeded and null if not
+            int? RankID = null;
 
             try
             {
-                connection.Open();
-
-                object result = command.ExecuteScalar();
-
-                if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    RankID = InsertID;
+                    connection.Open();
+
+                    string query = @"insert into BeltRanks (RankName, TestFees)
+                                     values (@RankName, @TestFees)
+                                     select scope_identity()";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankName", RankName);
+                        command.Parameters.AddWithValue("@TestFees", TestFees);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        {
+                            RankID = InsertID;
+                        }
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return RankID;
         }
 
-
-        public static bool UpdateRank(int RankID, string RankName, decimal TestFees)
+        public static bool UpdateRank(int? RankID, string RankName, decimal TestFees)
         {
             int RowAffected = 0;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"Update BeltRanks
-set RankName = @RankName,
-TestFees = @TestFees
-where RankID = @RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankID", RankID);
-            command.Parameters.AddWithValue("@RankName", RankName);
-            command.Parameters.AddWithValue("@TestFees", TestFees);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                RowAffected = command.ExecuteNonQuery();
+                    string query = @"Update BeltRanks
+                                     set RankName = @RankName,
+                                     TestFees = @TestFees
+                                     where RankID = @RankID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@RankName", RankName);
+                        command.Parameters.AddWithValue("@TestFees", TestFees);
+
+                        RowAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
         }
 
-
-        public static bool DeleteRank(int RankID)
+        public static bool DeleteRank(int? RankID)
         {
             int RowAffected = 0;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"delete BeltRanks where RankID = @RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankID", RankID);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                RowAffected = command.ExecuteNonQuery();
+                    string query = @"delete BeltRanks where RankID = @RankID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
+
+                        RowAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
         }
 
-
-        public static bool DoesRankExist(int RankID)
+        public static bool DoesRankExist(int? RankID)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select found = 1 from BeltRanks where RankID = @RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankID", RankID);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                object result = command.ExecuteScalar();
+                    string query = @"select found = 1 from BeltRanks where RankID = @RankID";
 
-                IsFound = (result != null);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
+
+                        object result = command.ExecuteScalar();
+
+                        IsFound = (result != null);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
-
 
         public static bool DoesRankExist(string RankName)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select found = 1 from BeltRanks where RankName = @RankName";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@RankName", RankName);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                object result = command.ExecuteScalar();
+                    string query = @"select found = 1 from BeltRanks where RankName = @RankName";
 
-                IsFound = (result != null);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@RankName", RankName);
+
+                        object result = command.ExecuteScalar();
+
+                        IsFound = (result != null);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
 
-
         public static DataTable GetAllBeltRanks()
         {
             DataTable dt = new DataTable();
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select * from BeltRanks order by RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    dt.Load(reader);
-                }
+                    connection.Open();
 
-                reader.Close();
+                    string query = @"select * from BeltRanks order by RankID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return dt;
         }
-
 
         public static DataTable GetAllBeltRanksName()
         {
             DataTable dt = new DataTable();
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select RankName from BeltRanks order by RankID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    dt.Load(reader);
-                }
+                    connection.Open();
 
-                reader.Close();
+                    string query = @"select RankName from BeltRanks order by RankID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return dt;
         }
 
-
-        public static int GetNextBeltRankID(int CurrentBeltRankID)
+        public static int? GetNextBeltRankID(int? CurrentBeltRankID)
         {
-            int NextBeltRankID = 0;
+            int? NextBeltRankID = null;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-            // this query will return the next belt, but in case in the last belt, it will return the last belt itself
-            string query = @"SELECT COALESCE(
+                    string query = @"SELECT COALESCE(
                                  (SELECT TOP 1 RankID FROM BeltRanks WHERE RankID > @CurrentBeltRankID ORDER BY RankID),
                                  (SELECT TOP 1 RankID FROM BeltRanks ORDER BY RankID DESC)
                              ) AS NextBeltRankID;";
 
-            SqlCommand command = new SqlCommand(query, connection);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@CurrentBeltRankID", (object)CurrentBeltRankID ?? DBNull.Value);
 
-            command.Parameters.AddWithValue("@CurrentBeltRankID", CurrentBeltRankID);
+                        object result = command.ExecuteScalar();
 
-            try
-            {
-                connection.Open();
-
-                object result = command.ExecuteScalar();
-
-                if (result != null && int.TryParse(result.ToString(), out int Value))
-                {
-                    NextBeltRankID = Value;
+                        if (result != null && int.TryParse(result.ToString(), out int Value))
+                        {
+                            NextBeltRankID = Value;
+                        }
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return NextBeltRankID;
         }
-
     }
 }

@@ -16,12 +16,12 @@ namespace KarateClub.Users
 {
     public partial class frmAddEditUser : Form
     {
-        public Action<int> GetUserID;
+        public Action<int?> GetUserID;
 
         public enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
-        private int _UserID = -1;
+        private int? _UserID = null;
         private clsUser _User;
 
         public frmAddEditUser()
@@ -31,7 +31,7 @@ namespace KarateClub.Users
             this._Mode = enMode.AddNew;
         }
 
-        public frmAddEditUser(int UserID)
+        public frmAddEditUser(int? UserID)
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace KarateClub.Users
             this._Mode = enMode.Update;
         }
 
-        public frmAddEditUser(int UserID, bool ShowPermissions)
+        public frmAddEditUser(int? UserID, bool ShowPermissions)
         {
             InitializeComponent();
 
@@ -218,11 +218,11 @@ namespace KarateClub.Users
             _FillFieldsWithUserInfo();
 
             //load person image in case it was set.
-            if (_User.ImagePath != "")
+            if (_User.ImagePath != null)
                 pbUserImage.ImageLocation = _User.ImagePath;
 
             //hide/show the remove link in case there is no image for the person
-            llRemoveImage.Visible = (_User.ImagePath != "");
+            llRemoveImage.Visible = (_User.ImagePath != null);
         }
 
         private bool _HandleMemberImage()
@@ -236,7 +236,7 @@ namespace KarateClub.Users
             if (_User.ImagePath != pbUserImage.ImageLocation)
             {
 
-                if (_User.ImagePath != "")
+                if (_User.ImagePath != null)
                 {
                     // first we delete the old image from the folder in case there is any.
                     try
@@ -324,7 +324,7 @@ namespace KarateClub.Users
             if (pbUserImage.ImageLocation != null)
                 _User.ImagePath = pbUserImage.ImageLocation;
             else
-                _User.ImagePath = "";
+                _User.ImagePath = null;
         }
 
         private void _SaveUser()

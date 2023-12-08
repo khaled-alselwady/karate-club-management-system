@@ -97,7 +97,7 @@
             this.ucMemberCardWithFilter1.ShowAddMemberButton = true;
             this.ucMemberCardWithFilter1.Size = new System.Drawing.Size(899, 442);
             this.ucMemberCardWithFilter1.TabIndex = 121;
-            this.ucMemberCardWithFilter1.OnMemberSelected += new System.Action<int>(this.ucMemberCardWithFilter1_OnMemberSelected);
+            this.ucMemberCardWithFilter1.OnMemberSelected += new System.EventHandler<KarateClub.Members.UserControls.ucMemberCardWithFilter.MemberSelectedEventArgs>(this.ucMemberCardWithFilter1_OnMemberSelected);
             // 
             // btnMemberInfoNext
             // 
@@ -155,7 +155,7 @@
             this.ucInstructorCardWithFilter1.ShowAddInstructorButton = true;
             this.ucInstructorCardWithFilter1.Size = new System.Drawing.Size(904, 394);
             this.ucInstructorCardWithFilter1.TabIndex = 0;
-            this.ucInstructorCardWithFilter1.OnInstructorSelected += new System.Action<int>(this.ucInstructorCardWithFilter1_OnInstructorSelected);
+            this.ucInstructorCardWithFilter1.OnInstructorSelected += new System.EventHandler<KarateClub.Instructors.UserControls.ucInstructorCardWithFilter.InstructorSelectedEventArgs>(this.ucInstructorCardWithFilter1_OnInstructorSelected);
             // 
             // ucMemberInstructorCardWithFilter
             // 

@@ -17,10 +17,10 @@ namespace KarateClub.Members.UserControls
     public partial class ucMemberCard : UserControl
     {
 
-        private int _MemberID = -1;
+        private int? _MemberID = null;
         private clsMember _Member;
 
-        public int MemberID => _MemberID;
+        public int? MemberID => _MemberID;
         public clsMember SelectedMemberInfo => _Member;
 
         public ucMemberCard()
@@ -30,7 +30,7 @@ namespace KarateClub.Members.UserControls
 
         public void Reset()
         {
-            this._MemberID = -1;
+            this._MemberID = null;
             this._Member = null;
 
             ucPersonCard1.Reset();
@@ -65,13 +65,13 @@ namespace KarateClub.Members.UserControls
             lblEmergencyContact.Text = _Member.EmergencyContactInfo;
         }
 
-        public void LoadMemberInfo(int MemberID)
+        public void LoadMemberInfo(int? MemberID)
         {
             this._MemberID = MemberID;
 
-            if (MemberID == -1)
+            if (!MemberID.HasValue)
             {
-                MessageBox.Show("There is no member with id = -1", "Missing Member",
+                MessageBox.Show("There is no member with this ID", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Reset();

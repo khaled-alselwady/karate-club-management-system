@@ -15,9 +15,9 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
-        public int MemberID { get; set; }
+        public int? MemberID { get; set; }
         public string EmergencyContactInfo { get; set; }
-        public int LastBeltRankID { get; set; }
+        public int? LastBeltRankID { get; set; }
         public bool IsActive { get; set; }
 
         public clsBeltRank LastBeltRankInfo { get; set; }
@@ -25,19 +25,18 @@ namespace KarateClub_Business
 
         public clsMember()
         {
-            this.MemberID = -1;
-            this.PersonID = -1;
+            this.MemberID = null;
             this.EmergencyContactInfo = string.Empty;
-            this.LastBeltRankID = -1;
+            this.LastBeltRankID = null;
             this.IsActive = false;
 
             Mode = enMode.AddNew;
         }
 
-        private clsMember(int PersonID, string Name, string Address,
+        private clsMember(int? PersonID, string Name, string Address,
             string Phone, string Email, DateTime DateOfBirth, enGender Gender,
-            string ImagePath, int MemberID, string EmergencyContactInfo,
-            int LastBeltRankID, bool IsActive)
+            string ImagePath, int? MemberID, string EmergencyContactInfo,
+            int? LastBeltRankID, bool IsActive)
         {
             base.PersonID = PersonID;
             base.Name = Name;
@@ -63,7 +62,7 @@ namespace KarateClub_Business
             this.MemberID = clsMemberData.AddNewMember(this.PersonID, this.EmergencyContactInfo,
                 this.LastBeltRankID, this.IsActive);
 
-            return (this.MemberID != -1);
+            return (this.MemberID.HasValue);
         }
 
         private bool _UpdateMember()
@@ -106,16 +105,16 @@ namespace KarateClub_Business
             return SetActivity(this.MemberID, IsActive);
         }
 
-        public static bool SetActivity(int MemberID, bool IsActive)
+        public static bool SetActivity(int? MemberID, bool IsActive)
         {
             return clsMemberData.SetActivity(MemberID, IsActive);
         }
 
-        public static clsMember Find(int MemberID)
+        public static clsMember Find(int? MemberID)
         {
-            int PersonID = -1;
+            int? PersonID = null;
             string EmergencyContactInfo = string.Empty;
-            int LastBeltRankID = -1;
+            int? LastBeltRankID = null;
             bool IsActive = false;
 
             bool IsFound = clsMemberData.GetMemberInfoByID(MemberID, ref PersonID,
@@ -141,16 +140,16 @@ namespace KarateClub_Business
             }
         }
 
-        private static int _GetPersonIDByMemberID(int MemberID)
+        private static int? _GetPersonIDByMemberID(int? MemberID)
         {
             return clsMemberData.GetPersonIDByMemberID(MemberID);
         }
 
-        public static bool DeleteMember(int MemberID)
+        public static bool DeleteMember(int? MemberID)
         {
-            int PersonID = _GetPersonIDByMemberID(MemberID);
+            int? PersonID = _GetPersonIDByMemberID(MemberID);
 
-            if (PersonID == -1)
+            if (!PersonID.HasValue)
             {
                 return false;
             }
@@ -163,7 +162,7 @@ namespace KarateClub_Business
             return clsPerson.DeletePerson(PersonID);
         }
 
-        public static bool DoesMemberExist(int MemberID)
+        public static bool DoesMemberExist(int? MemberID)
         {
             return clsMemberData.DoesMemberExist(MemberID);
         }
@@ -178,14 +177,14 @@ namespace KarateClub_Business
             return clsMemberData.CountMembers();
         }
 
-        public int GetLastActivePeriodID()
+        public int? GetLastActivePeriodID()
         {
             return clsSubscriptionPeriod.GetLastActivePeriodIDForMember(this.MemberID);
         }
 
         public bool DoesHaveAnActivePeriodID()
         {
-            return (GetLastActivePeriodID() != -1);
+            return (GetLastActivePeriodID().HasValue);
         }
 
         public DataTable GetAllBeltTests()
@@ -197,7 +196,6 @@ namespace KarateClub_Business
         {
             return clsPayment.GetAllPaymentsForMember(this.MemberID);
         }
-
     }
 
 

@@ -13,21 +13,21 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
-        public int InstructorID { get; set; }
+        public int? InstructorID { get; set; }
         public string Qualification { get; set; }
 
         public clsInstructor()
         {
-            this.InstructorID = -1;
-            this.PersonID = -1;
+            this.InstructorID = null;
+            this.PersonID = null;
             this.Qualification = string.Empty;
 
             Mode = enMode.AddNew;
         }
 
-        private clsInstructor(int PersonID, string Name, string Address,
+        private clsInstructor(int? PersonID, string Name, string Address,
             string Phone, string Email, DateTime DateOfBirth,
-            enGender Gender, string ImagePath, int InstructorID,
+            enGender Gender, string ImagePath, int? InstructorID,
             string Qualification)
         {
             base.PersonID = PersonID;
@@ -45,7 +45,7 @@ namespace KarateClub_Business
             Mode = enMode.Update;
         }
 
-        private static int _GetPersonIDByInstructorID(int InstructorID)
+        private static int? _GetPersonIDByInstructorID(int? InstructorID)
         {
             return clsInstructorData.GetPersonIDByInstructorID(InstructorID);
         }
@@ -55,7 +55,7 @@ namespace KarateClub_Business
             this.InstructorID = clsInstructorData.AddNewInstructor(this.PersonID,
                 this.Qualification);
 
-            return (this.InstructorID != -1);
+            return (this.InstructorID.HasValue);
         }
 
         private bool _UpdateInstructor()
@@ -92,10 +92,10 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsInstructor Find(int InstructorID)
+        public static clsInstructor Find(int? InstructorID)
         {
-            int PersonID = -1;
-            string Qualification = string.Empty;
+            int? PersonID = null;
+            string Qualification = null;
 
             bool IsFound = clsInstructorData.GetInstructorInfoByID(InstructorID,
                 ref PersonID, ref Qualification);
@@ -120,11 +120,11 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeleteInstructor(int InstructorID)
+        public static bool DeleteInstructor(int? InstructorID)
         {
-            int PersonID = _GetPersonIDByInstructorID(InstructorID);
+            int? PersonID = _GetPersonIDByInstructorID(InstructorID);
 
-            if (PersonID == -1)
+            if (!PersonID.HasValue)
             {
                 return false;
             }
@@ -137,7 +137,7 @@ namespace KarateClub_Business
             return clsPerson.DeletePerson(PersonID);
         }
 
-        public static bool DoesInstructorExist(int InstructorID)
+        public static bool DoesInstructorExist(int? InstructorID)
         {
             return clsInstructorData.DoesInstructorExist(InstructorID);
         }
@@ -152,11 +152,10 @@ namespace KarateClub_Business
             return clsInstructorData.CountInstructors();
         }
 
-        public bool IsTrainingThisMember(int MemberID)
+        public bool IsTrainingThisMember(int? MemberID)
         {
             return clsMemberInstructor.IsInstructorTrainingMember(this.InstructorID, MemberID);
         }
-
     }
 
 

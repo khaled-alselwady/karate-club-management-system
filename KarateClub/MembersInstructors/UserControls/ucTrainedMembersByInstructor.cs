@@ -19,7 +19,7 @@ namespace KarateClub.MembersInstructors.UserControls
     {
         private DataTable _dtAllTrainedMembers;
 
-        private int _InstructorID = -1;
+        private int? _InstructorID = null;
 
         public ucTrainedMembersByInstructor()
         {
@@ -63,7 +63,7 @@ namespace KarateClub.MembersInstructors.UserControls
             return (int)dgvTrainedMembersList.CurrentRow.Cells["MemberID"].Value;
         }
 
-        public void LoadTrainedMembersInfo(int InstructorID)
+        public void LoadTrainedMembersInfo(int? InstructorID)
         {
             this._InstructorID = InstructorID;
             _RefreshTrainedMembersList();

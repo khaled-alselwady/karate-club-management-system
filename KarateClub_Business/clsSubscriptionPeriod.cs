@@ -15,13 +15,13 @@ namespace KarateClub_Business
 
         public enum enIssueReason { FirstTime = 1, Renew = 2 };
 
-        public int PeriodID { get; set; }
+        public int? PeriodID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal Fees { get; set; }
         public bool IsPaid { get; set; }
-        public int MemberID { get; set; }
-        public int PaymentID { get; set; }
+        public int? MemberID { get; set; }
+        public int? PaymentID { get; set; }
         public enIssueReason IssueReason { get; set; }
         public bool IsActive { get; set; }
 
@@ -31,22 +31,22 @@ namespace KarateClub_Business
 
         public clsSubscriptionPeriod()
         {
-            this.PeriodID = -1;
+            this.PeriodID = null;
             this.StartDate = DateTime.Now;
             this.EndDate = DateTime.Now;
             this.Fees = -1M;
             this.IsPaid = false;
-            this.MemberID = -1;
-            this.PaymentID = -1;
+            this.MemberID = null;
+            this.PaymentID = null;
             this.IssueReason = enIssueReason.FirstTime;
             this.IsActive = true;
 
             this.Mode = enMode.AddNew;
         }
 
-        private clsSubscriptionPeriod(int PeriodID, DateTime StartDate,
-            DateTime EndDate, decimal Fees, bool IsPaid, int MemberID,
-            int PaymentID, enIssueReason IssueReason, bool IsActive)
+        private clsSubscriptionPeriod(int? PeriodID, DateTime StartDate,
+            DateTime EndDate, decimal Fees, bool IsPaid, int? MemberID,
+            int? PaymentID, enIssueReason IssueReason, bool IsActive)
         {
             this.PeriodID = PeriodID;
             this.StartDate = StartDate;
@@ -60,7 +60,7 @@ namespace KarateClub_Business
 
             this.MemberInfo = clsMember.Find(MemberID);
 
-            if (PaymentID != -1)
+            if (PaymentID.HasValue)
                 this.PaymentInfo = clsPayment.Find(PaymentID);
 
             this.Mode = enMode.Update;
@@ -71,7 +71,7 @@ namespace KarateClub_Business
             this.PeriodID = clsSubscriptionPeriodData.AddNewPeriod(this.StartDate, this.EndDate,
                 this.Fees, this.IsPaid, this.MemberID, this.PaymentID, (byte)this.IssueReason, this.IsActive);
 
-            return (this.PeriodID != -1);
+            return (this.PeriodID.HasValue);
         }
 
         private bool _UpdatePeriod()
@@ -103,14 +103,14 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsSubscriptionPeriod Find(int PeriodID)
+        public static clsSubscriptionPeriod Find(int? PeriodID)
         {
             DateTime StartDate = DateTime.Now;
             DateTime EndDate = DateTime.Now;
             decimal Fees = -1M;
             bool IsPaid = false;
-            int MemberID = -1;
-            int PaymentID = -1;
+            int? MemberID = null;
+            int? PaymentID = null;
             byte IssueReason = 0;
             bool isActive = true;
 
@@ -129,12 +129,12 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeletePeriod(int PeriodID)
+        public static bool DeletePeriod(int? PeriodID)
         {
             return clsSubscriptionPeriodData.DeletePeriod(PeriodID);
         }
 
-        public static bool DoesPeriodExist(int PeriodID)
+        public static bool DoesPeriodExist(int? PeriodID)
         {
             return clsSubscriptionPeriodData.DoesPeriodExist(PeriodID);
         }
@@ -149,7 +149,7 @@ namespace KarateClub_Business
             return clsSubscriptionPeriodData.CountSubscriptionPeriods();
         }
 
-        public int Pay(decimal Amount)
+        public int? Pay(decimal Amount)
         {
             clsPayment Payment = new clsPayment();
 
@@ -159,7 +159,7 @@ namespace KarateClub_Business
             if (!Payment.Save())
             {
                 clsMember.SetActivity(this.MemberID, false);
-                return -1;
+                return null;
             }
 
             clsMember.SetActivity(this.MemberID, true);
@@ -167,7 +167,7 @@ namespace KarateClub_Business
             return Payment.PaymentID;
         }
 
-        public int Renew(decimal Fees, DateTime StartDate, DateTime EndDate, bool IsPaid, ref int PaymentID)
+        public int? Renew(decimal Fees, DateTime StartDate, DateTime EndDate, bool IsPaid, ref int? PaymentID)
         {
             clsSubscriptionPeriod NewPeriod = new clsSubscriptionPeriod();
 
@@ -187,18 +187,18 @@ namespace KarateClub_Business
 
             if (!NewPeriod.Save())
             {
-                return -1;
-            }
+                return null;
+            }   
 
             return NewPeriod.PeriodID;
         }
 
-        public static int GetLastActivePeriodIDForMember(int MemberID)
+        public static int? GetLastActivePeriodIDForMember(int? MemberID)
         {
             return clsSubscriptionPeriodData.GetLastActivePeriodForMember(MemberID);
         }
 
-        public static DataTable GetAllPeriodsForMember(int MemberID)
+        public static DataTable GetAllPeriodsForMember(int? MemberID)
         {
             return clsSubscriptionPeriodData.GetAllPeriodsForMember(MemberID);
         }
@@ -228,7 +228,7 @@ namespace KarateClub_Business
             return (this.EndDate < DateTime.Now);
         }
 
-        public static int GetPeriodIDByPaymentID(int PaymentID)
+        public static int? GetPeriodIDByPaymentID(int? PaymentID)
         {
             return clsSubscriptionPeriodData.GetPeriodIDByPaymentID(PaymentID);
         }

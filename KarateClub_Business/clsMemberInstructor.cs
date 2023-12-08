@@ -13,9 +13,9 @@ namespace KarateClub_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
-        public int MemberInstructorID { get; set; }
-        public int MemberID { get; set; }
-        public int InstructorID { get; set; }
+        public int? MemberInstructorID { get; set; }
+        public int? MemberID { get; set; }
+        public int? InstructorID { get; set; }
         public DateTime AssignDate { get; set; }
 
         public clsMember MemberInfo { get; set; }
@@ -23,16 +23,16 @@ namespace KarateClub_Business
 
         public clsMemberInstructor()
         {
-            this.MemberInstructorID = -1;
-            this.MemberID = -1;
-            this.InstructorID = -1;
+            this.MemberInstructorID = null;
+            this.MemberID = null;
+            this.InstructorID = null;
             this.AssignDate = DateTime.Now;
 
             this.Mode = enMode.AddNew;
         }
 
-        private clsMemberInstructor(int MemberInstructorID, int MemberID,
-            int InstructorID, DateTime AssignDate)
+        private clsMemberInstructor(int? MemberInstructorID, int? MemberID,
+            int? InstructorID, DateTime AssignDate)
         {
             this.MemberInstructorID = MemberInstructorID;
             this.MemberID = MemberID;
@@ -50,7 +50,7 @@ namespace KarateClub_Business
             this.MemberInstructorID = clsMemberInstructorData.AddNewMemberInstructor
                 (this.MemberID, this.InstructorID, this.AssignDate);
 
-            return (this.MemberInstructorID != -1);
+            return (this.MemberInstructorID.HasValue);
         }
 
         private bool _UpdateMemberInstructor()
@@ -81,10 +81,10 @@ namespace KarateClub_Business
             return false;
         }
 
-        public static clsMemberInstructor Find(int MemberInstructorID)
+        public static clsMemberInstructor Find(int? MemberInstructorID)
         {
-            int MemberID = -1;
-            int InstructorID = -1;
+            int? MemberID = null;
+            int? InstructorID = null;
             DateTime AssignDate = DateTime.Now;
 
             bool IsFound = clsMemberInstructorData.GetMemberInstructorInfoByID
@@ -100,12 +100,12 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeleteMemberInstructor(int MemberInstructorID)
+        public static bool DeleteMemberInstructor(int? MemberInstructorID)
         {
             return clsMemberInstructorData.DeleteMemberInstructor(MemberInstructorID);
         }
 
-        public static bool DoesMemberInstructorExist(int MemberInstructorID)
+        public static bool DoesMemberInstructorExist(int? MemberInstructorID)
         {
             return clsMemberInstructorData.DoesMemberInstructorExist(MemberInstructorID);
         }
@@ -115,12 +115,12 @@ namespace KarateClub_Business
             return clsMemberInstructorData.GetAllMemberInstructors();
         }
 
-        public static bool IsInstructorTrainingMember(int InstructorID, int MemberID)
+        public static bool IsInstructorTrainingMember(int? InstructorID, int? MemberID)
         {
             return clsMemberInstructorData.IsInstructorTrainingMember(InstructorID, MemberID);
         }
 
-        public static DataTable GetTrainedMembersByInstructor(int InstructorID)
+        public static DataTable GetTrainedMembersByInstructor(int? InstructorID)
         {
             return clsMemberInstructorData.GetTrainedMembersByInstructor(InstructorID);
         }

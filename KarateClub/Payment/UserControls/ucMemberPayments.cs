@@ -15,7 +15,7 @@ namespace KarateClub.Payment.UserControls
     {
         private DataTable _dtAllMemberPayments;
 
-        private int _MemberID = -1;
+        private int? _MemberID = null;
 
         public ucMemberPayments()
         {
@@ -50,7 +50,7 @@ namespace KarateClub.Payment.UserControls
             return (int)dgvMemberPaymentsList.CurrentRow.Cells["PaymentID"].Value;
         }
 
-        public void LoadMemberPaymentsInfo(int MemberID)
+        public void LoadMemberPaymentsInfo(int? MemberID)
         {
             this._MemberID = MemberID;
             _RefreshMemberPaymentsList();

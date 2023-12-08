@@ -15,18 +15,29 @@ namespace KarateClub.Users.UserControls
 {
     public partial class ucUserCardWithFilter : UserControl
     {
-
-        // Define a custom event handler delegate with parameters
-        public event Action<int> OnUserSelected;
-        // Create a protected method to raise the event with a parameter
-        protected virtual void UserSelected(int UserID)
+        #region Declare Event
+        public class UserSelectedEventArgs : EventArgs
         {
-            Action<int> handler = OnUserSelected;
-            if (handler != null)
+            public int? UserID { get; }
+
+            public UserSelectedEventArgs(int? UserID)
             {
-                handler(UserID); // Raise the event with the parameter
+                this.UserID = UserID;
             }
         }
+
+        public event EventHandler<UserSelectedEventArgs> OnUserSelected;
+
+        public void RaiseOnUserSelected(int? UserID)
+        {
+            RaiseOnUserSelected(new UserSelectedEventArgs(UserID));
+        }
+
+        protected virtual void RaiseOnUserSelected(UserSelectedEventArgs e)
+        {
+            OnUserSelected?.Invoke(this, e);
+        }
+        #endregion
 
         private bool _ShowAddUserButton = true;
         public bool ShowAddUserButton
@@ -52,7 +63,7 @@ namespace KarateClub.Users.UserControls
             }
         }
 
-        public int UserID => ucUserCard1.UserID;
+        public int? UserID => ucUserCard1.UserID;
         public clsUser SelectedUserInfo => ucUserCard1.SelectedUserInfo;
 
         public ucUserCardWithFilter()
@@ -67,7 +78,7 @@ namespace KarateClub.Users.UserControls
             if (OnUserSelected != null && FilterEnabled)
             {
                 // Raise the event with a parameter
-                OnUserSelected(ucUserCard1.UserID);
+                RaiseOnUserSelected(ucUserCard1.UserID);
             }
         }
 
@@ -128,7 +139,7 @@ namespace KarateClub.Users.UserControls
             AddNewUser.ShowDialog();
         }
 
-        private void AddNewUser_UserIDBack(int UserID)
+        private void AddNewUser_UserIDBack(int? UserID)
         {
             txtFilterValue.Text = UserID.ToString();
             ucUserCard1.LoadUserInfo(UserID);

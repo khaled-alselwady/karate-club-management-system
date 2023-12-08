@@ -8,32 +8,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KarateClub.Instructors.UserControls.ucInstructorCardWithFilter;
+using static KarateClub.Members.UserControls.ucMemberCardWithFilter;
 
 namespace KarateClub.MembersInstructors.UserControls
 {
     public partial class ucMemberInstructorCardWithFilter : UserControl
     {
-        public Action<int> GetMemberID;
-        public Action<int> GetInstructorID;
+        public Action<int?> SendMemberID;
+        public Action<int?> SendInstructorID;
 
-        private int _SelectedMemberID = -1;
-        private int _SelectedInstructorID = -1;
+        private int? _SelectedMemberID = null;
+        private int? _SelectedInstructorID = null;
 
-        public int SelectedMemberID => ucMemberCardWithFilter1.MemberID;
-        public int SelectedInstructorID => ucInstructorCardWithFilter1.InstructorID;
+        public int? SelectedMemberID => ucMemberCardWithFilter1.MemberID;
+        public int? SelectedInstructorID => ucInstructorCardWithFilter1.InstructorID;
 
         public clsMember SelectedMemberInfo => ucMemberCardWithFilter1.SelectedMemberInfo;
         public clsInstructor SelectedInstructorInfo => ucInstructorCardWithFilter1.SelectedInstructorInfo;
 
-        private bool _FilterEnable = false;
-        public bool FilterEnable
+        private bool _FilterEnableMember = false;
+        public bool FilterEnableMember
         {
-            get => _FilterEnable;
+            get => _FilterEnableMember;
 
             set
             {
-                _FilterEnable = value;
+                _FilterEnableMember = value;
                 ucMemberCardWithFilter1.FilterEnabled = value;
+            }
+        }
+
+        private bool _FilterEnableInstructor = false;
+        public bool FilterEnableInstructor
+        {
+            get => _FilterEnableInstructor;
+
+            set
+            {
+                _FilterEnableInstructor = value;
                 ucInstructorCardWithFilter1.FilterEnabled = value;
             }
         }
@@ -45,7 +58,7 @@ namespace KarateClub.MembersInstructors.UserControls
 
         private bool _IsMemberCorrect()
         {
-            if (_SelectedMemberID == -1)
+            if (!_SelectedMemberID.HasValue)
             {
                 tcMembersInstructors.SelectedTab = tpMember;
 
@@ -73,10 +86,14 @@ namespace KarateClub.MembersInstructors.UserControls
             ucMemberCardWithFilter1.FilterFocus();
         }
 
-        public void LoadMemberInfo(int MemberID)
+        public void LoadMemberInfo(int? MemberID)
         {
             ucMemberCardWithFilter1.LoadMemberInfo(MemberID);
-            ucMemberCardWithFilter1.FilterEnabled = false;
+        }
+
+        public void LoadInstructorInfo(int? InstructorID)
+        {
+            ucInstructorCardWithFilter1.LoadInstructorInfo(InstructorID);
         }
 
         private void btnMemberInfoNext_Click(object sender, EventArgs e)
@@ -86,46 +103,6 @@ namespace KarateClub.MembersInstructors.UserControls
                 tcMembersInstructors.SelectedTab = tpInstructor;
                 ucInstructorCardWithFilter1.FilterFocus();
             }
-        }
-
-        private void ucMemberCardWithFilter1_OnMemberSelected(int obj)
-        {
-            _SelectedMemberID = obj;
-
-            if (_SelectedMemberID == -1)
-            {
-                btnMemberInfoNext.Enabled = false;
-
-                GetMemberID?.Invoke(-1);
-                return;
-            }
-
-            if (!ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
-            {
-                MessageBox.Show("Selected Member is Not Active, choose an active member.",
-                     "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                btnMemberInfoNext.Enabled = false;
-
-                return;
-            }
-
-            btnMemberInfoNext.Enabled = true;
-
-            GetMemberID?.Invoke(ucMemberCardWithFilter1.MemberID);
-        }
-
-        private void ucInstructorCardWithFilter1_OnInstructorSelected(int obj)
-        {
-            _SelectedInstructorID = obj;
-
-            if (_SelectedInstructorID == -1)
-            {
-                GetInstructorID?.Invoke(-1); // to disable btnSave in the frmAddNewBeltTest
-                return;
-            }
-
-            GetInstructorID?.Invoke(ucInstructorCardWithFilter1.InstructorID);
         }
 
         private void tcMembersInstructors_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,6 +125,46 @@ namespace KarateClub.MembersInstructors.UserControls
                 }
 
             }
+        }
+
+        private void ucMemberCardWithFilter1_OnMemberSelected(object sender, MemberSelectedEventArgs e)
+        {
+            _SelectedMemberID = e.MemberID;
+
+            if (!_SelectedMemberID.HasValue)
+            {
+                btnMemberInfoNext.Enabled = false;
+
+                SendMemberID?.Invoke(null);
+                return;
+            }
+
+            if (!ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
+            {
+                MessageBox.Show("Selected Member is Not Active, choose an active member.",
+                     "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                btnMemberInfoNext.Enabled = false;
+
+                return;
+            }
+
+            btnMemberInfoNext.Enabled = true;
+
+            SendMemberID?.Invoke(ucMemberCardWithFilter1.MemberID);
+        }
+
+        private void ucInstructorCardWithFilter1_OnInstructorSelected(object sender, InstructorSelectedEventArgs e)
+        {
+            _SelectedInstructorID = e.InstructorID;
+
+            if (!_SelectedInstructorID.HasValue)
+            {
+                SendInstructorID?.Invoke(null); // to disable btnSave in the frmAddNewBeltTest
+                return;
+            }
+
+            SendInstructorID?.Invoke(ucInstructorCardWithFilter1.InstructorID);
         }
     }
 }

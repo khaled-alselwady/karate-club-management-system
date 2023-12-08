@@ -14,10 +14,10 @@ namespace KarateClub.Instructors.UserControls
     public partial class ucInstructorCard : UserControl
     {
 
-        private int _InstructorID = -1;
+        private int? _InstructorID = null;
         private clsInstructor _Instructor;
 
-        public int InstructorID => _InstructorID;
+        public int? InstructorID => _InstructorID;
         public clsInstructor SelectedInstructorInfo => _Instructor;
 
         public ucInstructorCard()
@@ -27,7 +27,7 @@ namespace KarateClub.Instructors.UserControls
 
         public void Reset()
         {
-            this._InstructorID = -1;
+            this._InstructorID = null;
             this._Instructor = null;
 
             ucPersonCard1.Reset();
@@ -48,13 +48,13 @@ namespace KarateClub.Instructors.UserControls
             lblQualifications.Text = _Instructor.Qualification;
         }
 
-        public void LoadInstructorInfo(int InstructorID)
+        public void LoadInstructorInfo(int? InstructorID)
         {
             this._InstructorID = InstructorID;
 
-            if (InstructorID == -1)
+            if (!InstructorID.HasValue)
             {
-                MessageBox.Show("There is no instructor with id = -1", "Missing Member",
+                MessageBox.Show("There is no instructor with this ID", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Reset();

@@ -139,7 +139,7 @@ namespace KarateClub.Payment
 
         private void showPaymentsHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int MemberID = clsPayment.Find(_GetPaymentIDFromDGV()).MemberID;
+            int? MemberID = clsPayment.Find(_GetPaymentIDFromDGV()).MemberID;
 
             frmShowMemberPaymentsHistory ShowMemberPaymentsHistory = new frmShowMemberPaymentsHistory(MemberID);
             ShowMemberPaymentsHistory.ShowDialog();

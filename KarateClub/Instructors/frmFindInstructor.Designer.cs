@@ -28,21 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucInstructorCardWithFilter1 = new KarateClub.Instructors.UserControls.ucInstructorCardWithFilter();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.ucInstructorCardWithFilter1 = new KarateClub.Instructors.UserControls.ucInstructorCardWithFilter();
             this.SuspendLayout();
-            // 
-            // ucInstructorCardWithFilter1
-            // 
-            this.ucInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ucInstructorCardWithFilter1.FilterEnabled = true;
-            this.ucInstructorCardWithFilter1.Location = new System.Drawing.Point(2, 84);
-            this.ucInstructorCardWithFilter1.Name = "ucInstructorCardWithFilter1";
-            this.ucInstructorCardWithFilter1.ShowAddInstructorButton = true;
-            this.ucInstructorCardWithFilter1.Size = new System.Drawing.Size(904, 394);
-            this.ucInstructorCardWithFilter1.TabIndex = 0;
             // 
             // label1
             // 
@@ -71,6 +60,17 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // ucInstructorCardWithFilter1
+            // 
+            this.ucInstructorCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucInstructorCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ucInstructorCardWithFilter1.FilterEnabled = true;
+            this.ucInstructorCardWithFilter1.Location = new System.Drawing.Point(0, 81);
+            this.ucInstructorCardWithFilter1.Name = "ucInstructorCardWithFilter1";
+            this.ucInstructorCardWithFilter1.ShowAddInstructorButton = true;
+            this.ucInstructorCardWithFilter1.Size = new System.Drawing.Size(904, 394);
+            this.ucInstructorCardWithFilter1.TabIndex = 118;
+            // 
             // frmFindInstructor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -78,9 +78,9 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(908, 532);
+            this.Controls.Add(this.ucInstructorCardWithFilter1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ucInstructorCardWithFilter1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmFindInstructor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -91,9 +91,8 @@
         }
 
         #endregion
-
-        private UserControls.ucInstructorCardWithFilter ucInstructorCardWithFilter1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
+        private UserControls.ucInstructorCardWithFilter ucInstructorCardWithFilter1;
     }
 }

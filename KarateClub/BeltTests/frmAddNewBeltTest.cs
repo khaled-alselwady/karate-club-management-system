@@ -14,19 +14,20 @@ namespace KarateClub.BeltTests
 {
     public partial class frmAddNewBeltTest : Form
     {
-        private int _NewBeltTestID = -1;
+        private int? _NewBeltTestID = null;
 
         public frmAddNewBeltTest()
         {
             InitializeComponent();
         }
 
-        public frmAddNewBeltTest(int MemberID)
+        public frmAddNewBeltTest(int? MemberID)
         {
             InitializeComponent();
 
-            ucMemberInstructorCardWithFilter1.GetMemberID += LoadNextBeltInfoUsingDelegate;
+            ucMemberInstructorCardWithFilter1.SendMemberID += LoadNextBeltInfoUsingDelegate;
             ucMemberInstructorCardWithFilter1.LoadMemberInfo(MemberID);
+            ucMemberInstructorCardWithFilter1.FilterEnableMember = false;
         }
 
         private void _LoadData()
@@ -39,12 +40,12 @@ namespace KarateClub.BeltTests
         {
             _LoadData();
 
-            ucMemberInstructorCardWithFilter1.GetMemberID += LoadNextBeltInfoUsingDelegate;
+            ucMemberInstructorCardWithFilter1.SendMemberID += LoadNextBeltInfoUsingDelegate;
             // subscribe with the delegate, and it will enter in the `EnableBtnSave` method when the Instructor is selected because I put the invoke there
-            ucMemberInstructorCardWithFilter1.GetInstructorID += EnableBtnSaveWhenSelectInstructor;
+            ucMemberInstructorCardWithFilter1.SendInstructorID += EnableBtnSaveWhenSelectInstructor;
         }
 
-        private void LoadNextBeltInfoUsingDelegate(int MemberID)
+        private void LoadNextBeltInfoUsingDelegate(int? MemberID)
         {
             if (ucMemberInstructorCardWithFilter1.SelectedMemberInfo == null)
             {
@@ -58,7 +59,7 @@ namespace KarateClub.BeltTests
             lblFees.Text = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.TestFees.ToString("F0");
             llShowTestsHistory.Enabled = true;  
             
-            if (ucMemberInstructorCardWithFilter1.SelectedInstructorID != -1)
+            if (ucMemberInstructorCardWithFilter1.SelectedInstructorID.HasValue)
             {
                 // here I already choose the instructor, so I enable the btnSave
                 btnSave.Enabled = true;
@@ -66,9 +67,9 @@ namespace KarateClub.BeltTests
 
         }
 
-        private void EnableBtnSaveWhenSelectInstructor(int InstructorID)
+        private void EnableBtnSaveWhenSelectInstructor(int? InstructorID)
         {
-            btnSave.Enabled = (InstructorID != -1);
+            btnSave.Enabled = (InstructorID.HasValue);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -99,8 +100,8 @@ namespace KarateClub.BeltTests
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ucMemberInstructorCardWithFilter1.SelectedMemberID == -1 ||
-                ucMemberInstructorCardWithFilter1.SelectedInstructorID == -1)
+            if (!ucMemberInstructorCardWithFilter1.SelectedMemberID.HasValue ||
+                !ucMemberInstructorCardWithFilter1.SelectedInstructorID.HasValue)
             {
                 MessageBox.Show("You have to select member and instructor first!", "Missing Data",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,7 +121,7 @@ namespace KarateClub.BeltTests
 
             BeltTest.PaymentID = BeltTest.Pay(ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.TestFees);
 
-            lblPaymentID.Text = (BeltTest.PaymentID != -1) ? BeltTest.PaymentID.ToString() : "[????]";
+            lblPaymentID.Text = (BeltTest.PaymentID.HasValue) ? BeltTest.PaymentID.ToString() : "[????]";
 
             if (BeltTest.Save())
             {
@@ -132,7 +133,8 @@ namespace KarateClub.BeltTests
 
                 btnSave.Enabled = false;
                 llShowNewBeltTestDetails.Enabled = true;
-                ucMemberInstructorCardWithFilter1.FilterEnable = false;
+                ucMemberInstructorCardWithFilter1.FilterEnableMember = false;
+                ucMemberInstructorCardWithFilter1.FilterEnableInstructor = false;
             }
             else
             {

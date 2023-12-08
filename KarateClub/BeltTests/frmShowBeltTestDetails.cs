@@ -12,7 +12,7 @@ namespace KarateClub.BeltTests
 {
     public partial class frmShowBeltTestDetails : Form
     {
-        public frmShowBeltTestDetails(int TestID)
+        public frmShowBeltTestDetails(int? TestID)
         {
             InitializeComponent();
 

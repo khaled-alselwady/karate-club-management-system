@@ -26,7 +26,7 @@ namespace KarateClub_Business
             ManagePayments = 128
         }
 
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int Permissions { get; set; }
@@ -34,8 +34,7 @@ namespace KarateClub_Business
 
         public clsUser()
         {
-            this.UserID = -1;
-            this.PersonID = -1;
+            this.UserID = null;
             this.Username = string.Empty;
             this.Password = string.Empty;
             this.Permissions = -1;
@@ -44,9 +43,9 @@ namespace KarateClub_Business
             Mode = enMode.AddNew;
         }
 
-        private clsUser(int PersonID, string Name, string Address,
+        private clsUser(int? PersonID, string Name, string Address,
             string Phone, string Email, DateTime DateOfBirth, enGender Gender,
-            string ImagePath, int UserID, string Username, string Password,
+            string ImagePath, int? UserID, string Username, string Password,
             int Permissions, bool IsActive)
         {
             base.PersonID = PersonID;
@@ -72,7 +71,7 @@ namespace KarateClub_Business
             this.UserID = clsUserData.AddNewUser(this.PersonID, this.Username,
                 this.Password, this.Permissions, this.IsActive);
 
-            return (this.UserID != -1);
+            return (this.UserID.HasValue);
         }
 
         private bool _UpdateUser()
@@ -114,14 +113,14 @@ namespace KarateClub_Business
             return clsUserData.ChangePassword(this.UserID, NewPassword);
         }
 
-        private static int _GetPersonIDByUserID(int UserID)
+        private static int? _GetPersonIDByUserID(int? UserID)
         {
             return clsUserData.GetPersonIDByUserID(UserID);
         }
 
-        public static clsUser Find(int UserID)
+        public static clsUser Find(int? UserID)
         {
-            int PersonID = -1;
+            int? PersonID = null;
             string Username = string.Empty;
             string Password = string.Empty;
             int Permissions = -1;
@@ -151,8 +150,8 @@ namespace KarateClub_Business
 
         public static clsUser Find(string Username)
         {
-            int UserID = -1;
-            int PersonID = -1;
+            int? UserID = null;
+            int? PersonID = null;
             string Password = string.Empty;
             int Permissions = -1;
             bool IsActive = false;
@@ -181,8 +180,8 @@ namespace KarateClub_Business
 
         public static clsUser Find(string Username, string Password)
         {
-            int UserID = -1;
-            int PersonID = -1;
+            int? UserID = null;
+            int? PersonID = null;
             int Permissions = -1;
             bool IsActive = false;
 
@@ -208,11 +207,11 @@ namespace KarateClub_Business
             }
         }
 
-        public static bool DeleteUser(int UserID)
+        public static bool DeleteUser(int? UserID)
         {
-            int PersonID = _GetPersonIDByUserID(UserID);
+            int? PersonID = _GetPersonIDByUserID(UserID);
 
-            if (PersonID == -1)
+            if (!PersonID.HasValue)
             {
                 return false;
             }
@@ -225,7 +224,7 @@ namespace KarateClub_Business
             return clsPerson.DeletePerson(PersonID);
         }
 
-        public static bool DoesUserExist(int UserID)
+        public static bool DoesUserExist(int? UserID)
         {
             return clsUserData.DoesUserExist(UserID);
         }
@@ -249,7 +248,6 @@ namespace KarateClub_Business
         {
             return clsUserData.CountUsers();
         }
-
     }
 
 

@@ -14,14 +14,14 @@ namespace KarateClub.MembersInstructors
 {
     public partial class frmAddEditMembersInstructors : Form
     {
-        public Action<int> GetMembersInstructorsID;
+        public Action<int?> GetMembersInstructorsID;
 
         private enum enMode { AddNew, Update };
         private enMode _Mode = enMode.AddNew;
 
-        private int _SelectedMemberID = -1;
-        private int _SelectedInstructorID = -1;
-        private int _MembersInstructorID = -1;
+        private int? _SelectedMemberID = null;
+        private int? _SelectedInstructorID = null;
+        private int? _MembersInstructorID = null;
 
         private clsMemberInstructor _MembersInstructor;
 
@@ -31,7 +31,8 @@ namespace KarateClub.MembersInstructors
 
             this._Mode = enMode.AddNew;
         }
-        public frmAddEditMembersInstructors(int MembersInstructorID)
+
+        public frmAddEditMembersInstructors(int? MembersInstructorID)
         {
             InitializeComponent();
 
@@ -69,8 +70,8 @@ namespace KarateClub.MembersInstructors
 
             lblMembersInstructorsID.Text = _MembersInstructor.MemberInstructorID.ToString();
 
-            ucMemberCardWithFilter1.LoadMemberInfo(_MembersInstructor.MemberID);
-            ucInstructorCardWithFilter1.LoadInstructorInfo(_MembersInstructor.InstructorID);
+            ucMemberInstructorCardWithFilter1.LoadMemberInfo(_MembersInstructor.MemberID);
+            ucMemberInstructorCardWithFilter1.LoadInstructorInfo(_MembersInstructor.InstructorID);
 
             if (_MembersInstructor.AssignDate < DateTime.Now)
                 dtpAssignDate.Value = DateTime.Now;
@@ -78,61 +79,24 @@ namespace KarateClub.MembersInstructors
                 dtpAssignDate.Value = _MembersInstructor.AssignDate;
 
             btnSave.Enabled = true;
-            btnMemberInfoNext.Enabled = true;
-
-            _SelectedMemberID = ucMemberCardWithFilter1.MemberID;
-            _SelectedInstructorID = ucInstructorCardWithFilter1.InstructorID;
+     
+            _SelectedMemberID = ucMemberInstructorCardWithFilter1.SelectedMemberID;
+            _SelectedInstructorID = ucMemberInstructorCardWithFilter1.SelectedInstructorID;
         }
-
-        private bool _IsMemberCorrect()
-        {
-            if (_SelectedMemberID == -1)
-            {
-                tcMembersInstructors.SelectedTab = tpMember;
-
-                MessageBox.Show("You have to select a member first!", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }
-
-            if (!ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
-            {
-                tcMembersInstructors.SelectedTab = tpMember;
-
-                MessageBox.Show("Selected Member is Not Active, choose an active member."
-                                    , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }
-
-            if (_IsInstructorTrainingThisMember())
-            {
-                // the instructor is already training this member!
-                MessageBox.Show("this instructor is already training that member!," +
-                    " Choose another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                btnSave.Enabled = false;
-
-                return false;
-            }
-
-            return true;
-        }
-
+     
         private bool _IsInstructorTrainingThisMember()
         {
-            if (ucInstructorCardWithFilter1.SelectedInstructorInfo == null)
+            if (ucMemberInstructorCardWithFilter1.SelectedInstructorInfo == null)
                 return false;
 
             // if I am in the `AddNew` Mode, then I have to check is the instructor already training the member or not,
-            // but if I am in the `Update` Mode, I have to check before that if the InstructorID is changed or not, if it is not changed, so I don't have to check
-            if ((_Mode == enMode.AddNew && ucInstructorCardWithFilter1.SelectedInstructorInfo.
+            // but if I am in the `Update` Mode, I have to check before that if the InstructorID is changed or not, if it is not changed, so I don't have to check :)
+            if ((_Mode == enMode.AddNew && ucMemberInstructorCardWithFilter1.SelectedInstructorInfo.
                 IsTrainingThisMember(_SelectedMemberID)) ||
                 (_Mode == enMode.Update && _MembersInstructor != null &&
-                (_MembersInstructor.MemberID != ucMemberCardWithFilter1.MemberID ||
-                _MembersInstructor.InstructorID != ucInstructorCardWithFilter1.InstructorID) &&
-                 ucInstructorCardWithFilter1.SelectedInstructorInfo.IsTrainingThisMember(_SelectedMemberID)))
+                (_MembersInstructor.MemberID != ucMemberInstructorCardWithFilter1.SelectedMemberID ||
+                _MembersInstructor.InstructorID != ucMemberInstructorCardWithFilter1.SelectedInstructorID) &&
+                 ucMemberInstructorCardWithFilter1.SelectedInstructorInfo.IsTrainingThisMember(_SelectedMemberID)))
             {
                 return true;
             }
@@ -145,91 +109,44 @@ namespace KarateClub.MembersInstructors
             this.Close();
         }
 
-        private void tcMembersInstructors_SelectedIndexChanged(object sender, EventArgs e)
+        private void ucMemberCardWithFilter1_OnMemberSelected(int? MemberID)
         {
-            if (_IsInstructorTrainingThisMember())
-            {
-                // the instructor is already training this member!
-                MessageBox.Show("this instructor is already training that member!," +
-                    " Choose another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            _SelectedMemberID = MemberID;
 
+            if (!_SelectedMemberID.HasValue)
+            {               
                 btnSave.Enabled = false;
 
                 return;
             }
 
-            if (ucMemberCardWithFilter1.SelectedMemberInfo != null &&
-                ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
-                return;
-
-
-            TabPage SelectedTabPage = tcMembersInstructors.SelectedTab;
-
-            if (SelectedTabPage == tpMember)
-            {
-                btnSave.Enabled = false;
-            }
-
-            if (SelectedTabPage == tpInstructor)
-            {
-                tcMembersInstructors.SelectedTab = tpMember;
-
-                if (_IsMemberCorrect())
-                {
-                    tcMembersInstructors.SelectedTab = tpInstructor;
-
-                    //btnSave.Enabled = true;
-                }
-
-            }
-        }
-
-        private void ucMemberCardWithFilter1_OnMemberSelected(int obj)
-        {
-            _SelectedMemberID = obj;
-
-            if (_SelectedMemberID == -1)
-            {
-                btnMemberInfoNext.Enabled = false;
-                btnSave.Enabled = false;
-
-                return;
-            }
-
-            if (!ucMemberCardWithFilter1.SelectedMemberInfo.IsActive)
+            if (!ucMemberInstructorCardWithFilter1.SelectedMemberInfo.IsActive)
             {
                 MessageBox.Show("Selected Member is Not Active, choose an active member.",
                      "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                btnMemberInfoNext.Enabled = false;
                 btnSave.Enabled = false;
 
                 return;
             }
 
-
-            btnMemberInfoNext.Enabled = true;
-            ucMemberCardWithFilter1.FilterEnabled = false;
+            if (ucMemberInstructorCardWithFilter1.SelectedInstructorID.HasValue)
+            {
+                // here I already choose the instructor, so I enable the btnSave
+                btnSave.Enabled = true;
+            }
         }
 
         private void frmAddEditMembersInstructors_Activated(object sender, EventArgs e)
         {
-            ucMemberCardWithFilter1.FilterFocus();
+            ucMemberInstructorCardWithFilter1.FilterFocus();
         }
 
-        private void btnMemberInfoNext_Click(object sender, EventArgs e)
+        private void ucInstructorCardWithFilter1_OnInstructorSelected(int? InstructorID)
         {
-            if (_IsMemberCorrect())
-            {
-                tcMembersInstructors.SelectedTab = tpInstructor;
-            }
-        }
+            _SelectedInstructorID = InstructorID;
 
-        private void ucInstructorCardWithFilter1_OnInstructorSelected(int obj)
-        {
-            _SelectedInstructorID = obj;
-
-            if (_SelectedInstructorID == -1)
+            if (!_SelectedInstructorID.HasValue)
             {
                 btnSave.Enabled = false;
 
@@ -258,11 +175,14 @@ namespace KarateClub.MembersInstructors
                 _LoadData();
 
             dtpAssignDate.MinDate = DateTime.Now;
+
+            ucMemberInstructorCardWithFilter1.SendMemberID += ucMemberCardWithFilter1_OnMemberSelected;
+            ucMemberInstructorCardWithFilter1.SendInstructorID += ucInstructorCardWithFilter1_OnInstructorSelected;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_SelectedMemberID == -1 || _SelectedInstructorID == -1)
+            if (!_SelectedMemberID.HasValue || !_SelectedInstructorID.HasValue)
             {
                 return;
             }
@@ -286,7 +206,8 @@ namespace KarateClub.MembersInstructors
                 this.Text = "Update Members-Instructors";
 
                 btnSave.Enabled = false;
-                ucInstructorCardWithFilter1.FilterEnabled = false;
+                ucMemberInstructorCardWithFilter1.FilterEnableMember = false;
+                ucMemberInstructorCardWithFilter1.FilterEnableInstructor = false;
 
                 GetMembersInstructorsID?.Invoke(_MembersInstructor.MemberInstructorID);
             }

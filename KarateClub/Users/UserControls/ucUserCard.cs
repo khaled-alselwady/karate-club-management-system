@@ -16,10 +16,10 @@ namespace KarateClub.Users.UserControls
     public partial class ucUserCard : UserControl
     {
 
-        private int _UserID = -1;
+        private int? _UserID = null;
         private clsUser _User;
 
-        public int UserID => _UserID;
+        public int? UserID => _UserID;
         public clsUser SelectedUserInfo => _User;
 
         private bool _ShowPermissions = true;
@@ -31,7 +31,7 @@ namespace KarateClub.Users.UserControls
 
         private void _Reset()
         {
-            this._UserID = -1;
+            this._UserID = null;
             this._User = null;
 
             lblUserID.Text = "[????]";
@@ -58,13 +58,13 @@ namespace KarateClub.Users.UserControls
                 pbIsActive.Image = Resources.inactive_user;
         }
 
-        public void LoadUserInfo(int UserID, bool ShowPermissions = true)
+        public void LoadUserInfo(int? UserID, bool ShowPermissions = true)
         {
             this._UserID = UserID;
 
-            if (UserID == -1)
+            if (!UserID.HasValue)
             {
-                MessageBox.Show("There is no User with id = -1", "Missing User",
+                MessageBox.Show("There is no User with this ID", "Missing User",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 _Reset();

@@ -16,7 +16,7 @@ namespace KarateClub.MembersInstructors.UserControls
     public partial class ucMembersInstructorsCard : UserControl
     {
 
-        private int _MembersInstructorsID = -1;
+        private int? _MembersInstructorsID = null;
         private clsMemberInstructor _MembersInstructors;
 
         public ucMembersInstructorsCard()
@@ -26,7 +26,7 @@ namespace KarateClub.MembersInstructors.UserControls
 
         private void _Reset()
         {
-            _MembersInstructorsID = -1;
+            _MembersInstructorsID = null;
             _MembersInstructors = null;
 
             lblAssignDate.Text = "[????]";
@@ -36,13 +36,13 @@ namespace KarateClub.MembersInstructors.UserControls
             ucInstructorCard1.Reset();
         }
 
-        public void LoadMembersInstructorsInfo(int MembersInstructorsID)
+        public void LoadMembersInstructorsInfo(int? MembersInstructorsID)
         {
             this._MembersInstructorsID = MembersInstructorsID;
 
-            if (this._MembersInstructorsID == -1)
+            if (!this._MembersInstructorsID.HasValue)
             {
-                MessageBox.Show("There is no Members-Instructors with id = -1", "Missing Member",
+                MessageBox.Show("There is no Members-Instructors with this ID", "Missing Member",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 _Reset();

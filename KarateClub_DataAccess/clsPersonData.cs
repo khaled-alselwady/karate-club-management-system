@@ -12,135 +12,123 @@ namespace KarateClub_DataAccess
 {
     public class clsPersonData
     {
-        public static bool GetPersonInfoByID(int PersonID, ref string Name, 
+        public static bool GetPersonInfoByID(int? PersonID, ref string Name,
             ref string Address, ref string Phone, ref string Email, 
             ref DateTime DateOfBirth, ref byte Gender, ref string ImagePath)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select * from People where PersonID = @PersonID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    // The record was found
-                    IsFound = true;
+                    connection.Open();
 
-                    Name = (string)reader["Name"];
-                    Address = (reader["Address"] != DBNull.Value) ? (string)reader["Address"] : string.Empty;
-                    Phone = (string)reader["Phone"];
-                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : string.Empty;
-                    DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gender = (byte)reader["Gender"];
-                    ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : string.Empty;
-                }
-                else
-                {
-                    // The record was not found
-                    IsFound = false;
-                }
+                    string query = @"select * from People where PersonID = @PersonID";
 
-                reader.Close();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // The record was found
+                                IsFound = true;
+
+                                Name = (string)reader["Name"];
+                                Address = (reader["Address"] != DBNull.Value) ? (string)reader["Address"] : null;
+                                Phone = (string)reader["Phone"];
+                                Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : null;
+                                DateOfBirth = (DateTime)reader["DateOfBirth"];
+                                Gender = (byte)reader["Gender"];
+                                ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : null;
+                            }
+                            else
+                            {
+                                // The record was not found
+                                IsFound = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
 
-
-        public static int AddNewPerson(string Name, string Address, string Phone,
+        public static int? AddNewPerson(string Name, string Address, string Phone,
             string Email, DateTime DateOfBirth, byte Gender, string ImagePath)
         {
-            // This function will return the new person id if succeeded and -1 if not
-            int PersonID = -1;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"insert into People (Name, Address, Phone, Email, DateOfBirth, Gender, ImagePath)
-values (@Name, @Address, @Phone, @Email, @DateOfBirth, @Gender, @ImagePath)
-select scope_identity()";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Name", Name);
-            if (string.IsNullOrWhiteSpace(Address))
-            {
-                command.Parameters.AddWithValue("@Address", DBNull.Value);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@Address", Address);
-            }
-            command.Parameters.AddWithValue("@Phone", Phone);
-            if (string.IsNullOrWhiteSpace(Email))
-            {
-                command.Parameters.AddWithValue("@Email", DBNull.Value);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@Email", Email);
-            }
-            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
-            command.Parameters.AddWithValue("@Gender", Gender);
-            if (string.IsNullOrWhiteSpace(ImagePath))
-            {
-                command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@ImagePath", ImagePath);
-            }
+            // This function will return the new person id if succeeded and null if not
+            int? PersonID = null;
 
             try
             {
-                connection.Open();
-
-                object result = command.ExecuteScalar();
-
-                if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    PersonID = InsertID;
+                    connection.Open();
+
+                    string query = @"insert into People (Name, Address, Phone, Email, DateOfBirth, Gender, ImagePath)
+values (@Name, @Address, @Phone, @Email, @DateOfBirth, @Gender, @ImagePath)
+select scope_identity()";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", Name);
+                        command.Parameters.AddWithValue("@Address", (object)Address ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Phone", Phone);
+                        command.Parameters.AddWithValue("@Email", (object)Email ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                        command.Parameters.AddWithValue("@Gender", Gender);
+                        command.Parameters.AddWithValue("@ImagePath", (object)ImagePath ?? DBNull.Value);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        {
+                            PersonID = InsertID;
+                        }
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return PersonID;
         }
 
-
-        public static bool UpdatePerson(int PersonID, string Name, string Address,
+        public static bool UpdatePerson(int? PersonID, string Name, string Address,
             string Phone, string Email, DateTime DateOfBirth, byte Gender, string ImagePath)
         {
             int RowAffected = 0;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-            string query = @"Update People
+                    string query = @"Update People
 set Name = @Name,
 Address = @Address,
 Phone = @Phone,
@@ -150,151 +138,134 @@ Gender = @Gender,
 ImagePath = @ImagePath
 where PersonID = @PersonID";
 
-            SqlCommand command = new SqlCommand(query, connection);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Name", Name);
+                        command.Parameters.AddWithValue("@Address", (object)Address ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Phone", Phone);
+                        command.Parameters.AddWithValue("@Email", (object)Email ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                        command.Parameters.AddWithValue("@Gender", Gender);
+                        command.Parameters.AddWithValue("@ImagePath", (object)ImagePath ?? DBNull.Value);
 
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-            command.Parameters.AddWithValue("@Name", Name);
-            if (string.IsNullOrWhiteSpace(Address))
-            {
-                command.Parameters.AddWithValue("@Address", DBNull.Value);
+                        RowAffected = command.ExecuteNonQuery();
+                    }
+                }
             }
-            else
+            catch (SqlException ex)
             {
-                command.Parameters.AddWithValue("@Address", Address);
-            }
-            command.Parameters.AddWithValue("@Phone", Phone);
-            if (string.IsNullOrWhiteSpace(Email))
-            {
-                command.Parameters.AddWithValue("@Email", DBNull.Value);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@Email", Email);
-            }
-            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
-            command.Parameters.AddWithValue("@Gender", Gender);
-            if (string.IsNullOrWhiteSpace(ImagePath))
-            {
-                command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@ImagePath", ImagePath);
-            }
-
-            try
-            {
-                connection.Open();
-
-                RowAffected = command.ExecuteNonQuery();
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
         }
 
-
-        public static bool DeletePerson(int PersonID)
+        public static bool DeletePerson(int? PersonID)
         {
             int RowAffected = 0;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"delete People where PersonID = @PersonID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                RowAffected = command.ExecuteNonQuery();
+                    string query = @"delete People where PersonID = @PersonID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
+
+                        RowAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
         }
 
-
-        public static bool DoesPersonExist(int PersonID)
+        public static bool DoesPersonExist(int? PersonID)
         {
             bool IsFound = false;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select found = 1 from People where PersonID = @PersonID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-
             try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    connection.Open();
 
-                object result = command.ExecuteScalar();
+                    string query = @"select found = 1 from People where PersonID = @PersonID";
 
-                IsFound = (result != null);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
+
+                        object result = command.ExecuteScalar();
+
+                        IsFound = (result != null);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
-            }
-            finally
-            {
-                connection.Close();
+
+                clsLogError.LogError("General Exception", ex);
             }
 
             return IsFound;
         }
 
-
         public static DataTable GetAllPeople()
         {
             DataTable dt = new DataTable();
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select * from People";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
             try
             {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    dt.Load(reader);
-                }
+                    connection.Open();
 
-                reader.Close();
+                    string query = @"select * from People";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                clsLogError.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
-                connection.Close();
+                clsLogError.LogError("General Exception", ex);
             }
 
             return dt;

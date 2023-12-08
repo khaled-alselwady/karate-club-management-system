@@ -13,7 +13,7 @@ namespace KarateClub.Instructors
 {
     public partial class frmFindInstructor : Form
     {
-        public Action<int> GetInstructorID;
+        public Action<int?> GetInstructorID;
 
         public frmFindInstructor()
         {

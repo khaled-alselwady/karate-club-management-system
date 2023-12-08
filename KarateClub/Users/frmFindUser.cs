@@ -12,7 +12,7 @@ namespace KarateClub.Users
 {
     public partial class frmFindUser : Form
     {
-        public Action<int> GetUserID;
+        public Action<int?> GetUserID;
 
         public frmFindUser()
         {

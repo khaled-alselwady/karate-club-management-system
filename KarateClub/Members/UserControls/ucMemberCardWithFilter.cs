@@ -14,18 +14,29 @@ namespace KarateClub.Members.UserControls
 {
     public partial class ucMemberCardWithFilter : UserControl
     {
-
-        // Define a custom event handler delegate with parameters
-        public event Action<int> OnMemberSelected;
-        // Create a protected method to raise the event with a parameter
-        protected virtual void MemberSelected(int MemberID)
+        #region Declare Event
+        public class MemberSelectedEventArgs : EventArgs
         {
-            Action<int> handler = OnMemberSelected;
-            if (handler != null)
+            public int? MemberID { get; }
+
+            public MemberSelectedEventArgs(int? MemberID)
             {
-                handler(MemberID); // Raise the event with the parameter
+                this.MemberID = MemberID;
             }
         }
+
+        public event EventHandler<MemberSelectedEventArgs> OnMemberSelected;
+
+        public void RaiseOnMemberSelected(int? MemberID)
+        {
+            RaiseOnMemberSelected(new MemberSelectedEventArgs(MemberID));
+        }
+
+        protected virtual void RaiseOnMemberSelected(MemberSelectedEventArgs e)
+        {
+            OnMemberSelected?.Invoke(this, e);
+        }
+        #endregion
 
 
         private bool _ShowAddMemberButton = true;
@@ -52,7 +63,7 @@ namespace KarateClub.Members.UserControls
             }
         }
 
-        public int MemberID => ucMemberCard1.MemberID;
+        public int? MemberID => ucMemberCard1.MemberID;
         public clsMember SelectedMemberInfo => ucMemberCard1.SelectedMemberInfo;
 
         public ucMemberCardWithFilter()
@@ -111,7 +122,7 @@ namespace KarateClub.Members.UserControls
             AddNewMember.ShowDialog();
         }
 
-        private void AddNewMember_MemberIDBack(int MemberID)
+        private void AddNewMember_MemberIDBack(int? MemberID)
         {
             txtFilterValue.Text = MemberID.ToString();
             ucMemberCard1.LoadMemberInfo(MemberID);
@@ -122,7 +133,7 @@ namespace KarateClub.Members.UserControls
             txtFilterValue.Focus();
         }
 
-        public void LoadMemberInfo(int MemberID)
+        public void LoadMemberInfo(int? MemberID)
         {
             txtFilterValue.Text = MemberID.ToString();
             ucMemberCard1.LoadMemberInfo(MemberID);
@@ -130,7 +141,7 @@ namespace KarateClub.Members.UserControls
             if (OnMemberSelected != null && FilterEnabled)
             {
                 // Raise the event with a parameter
-                OnMemberSelected(ucMemberCard1.MemberID);
+                RaiseOnMemberSelected(ucMemberCard1.MemberID);
             }
         }
 
