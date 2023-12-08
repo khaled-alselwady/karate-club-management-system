@@ -144,10 +144,15 @@ namespace KarateClub.Instructors
                     {
                         File.Delete(_Instructor.ImagePath);
                     }
-                    catch (IOException)
+                    catch (IOException iox)
                     {
-                        // We could not delete the file.
-                        // log it later   
+                        clsLogError.LogError("IO Exception", iox);
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+                        clsLogError.LogError("General Exception", ex);
+                        return false;
                     }
                 }
 

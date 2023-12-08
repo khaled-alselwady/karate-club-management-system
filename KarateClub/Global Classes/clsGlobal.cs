@@ -34,7 +34,7 @@ namespace KarateClub.Global_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An Error occurred: {ex.Message}");
+                clsLogError.LogError("General Exception", ex);
                 return false;
             }
         }
@@ -68,16 +68,14 @@ namespace KarateClub.Global_Classes
                     }
                 }
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
-                MessageBox.Show("UnauthorizedAccessException: Run the program with" +
-                    " administrative privileges.", "Access Denied ",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                clsLogError.LogError("Unauthorized Access Exception", ex);
                 return false;
             }
             catch (Exception ex)
             {
+                clsLogError.LogError("General Exception", ex);
                 return false;
             }
         }
@@ -99,7 +97,7 @@ namespace KarateClub.Global_Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An Error occurred: {ex.Message}");
+                clsLogError.LogError("General Exception", ex);
                 return false;
             }
         }

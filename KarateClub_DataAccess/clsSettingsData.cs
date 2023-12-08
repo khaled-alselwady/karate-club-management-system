@@ -12,33 +12,29 @@ namespace KarateClub_DataAccess
         public static byte GetDefaultSubscriptionPeriod()
         {
             byte DefaultPeriod = 0;
-
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"select DefaultSubscriptionPeriod from settings";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
             try
             {
-                connection.Open();
-
-                object result = command.ExecuteScalar();
-
-                if (result != null && byte.TryParse(result.ToString(), out byte Value))
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    DefaultPeriod = Value;
+                    connection.Open();
+                    string query = @"select DefaultSubscriptionPeriod from settings";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && byte.TryParse(result.ToString(), out byte Value))
+                        {
+                            DefaultPeriod = Value;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-
+                clsLogError.LogError("General Exception", ex);
             }
-            finally
-            {
-                connection.Close();
-            }
-
+           
             return DefaultPeriod;
         }
     }
