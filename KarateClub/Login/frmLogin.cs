@@ -48,7 +48,9 @@ namespace KarateClub.Login
                 return;
             }
 
-            if (!clsUser.DoesUserExist(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
+            string HashedPassword = clsGlobal.ComputeHash(txtPassword.Text.Trim());
+
+            if (!clsUser.DoesUserExist(txtUsername.Text.Trim(), HashedPassword))
             {
                 txtUsername.Focus();
                 MessageBox.Show("Invalid Username/Password.", "Wrong Credentials",
@@ -57,7 +59,7 @@ namespace KarateClub.Login
                 return;
             }
 
-            clsUser User = clsUser.Find(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+            clsUser User = clsUser.Find(txtUsername.Text.Trim(), HashedPassword);
 
             if (User == null)
             {
@@ -72,7 +74,7 @@ namespace KarateClub.Login
             {
                 //store username and password
                 clsGlobal.RememberUsernameAndPassword
-                    (txtUsername.Text.Trim(), txtPassword.Text.Trim());
+                    (txtUsername.Text.Trim(), clsGlobal.Encrypt(txtPassword.Text.Trim()));
             }
             else
             {
@@ -102,7 +104,7 @@ namespace KarateClub.Login
             if (clsGlobal.GetStoredCredential(ref UserName, ref Password))
             {
                 txtUsername.Text = UserName;
-                txtPassword.Text = Password;
+                txtPassword.Text = clsGlobal.Decrypt(Password);
                 chkRememberMe.Checked = true;
             }
             else

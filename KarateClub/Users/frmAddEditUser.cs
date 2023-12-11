@@ -182,7 +182,6 @@ namespace KarateClub.Users
             txtPhone.Text = _User.Phone;
             dtpDateOfBirth.Value = _User.DateOfBirth;
             txtUsername.Text = _User.Username;
-            txtPassword.Text = _User.Password;
             txtConfirmPassword.Text = _User.Password;
 
             if (_User.Gender == (byte)clsPerson.enGender.Male)
@@ -223,6 +222,12 @@ namespace KarateClub.Users
 
             //hide/show the remove link in case there is no image for the person
             llRemoveImage.Visible = (_User.ImagePath != null);
+
+            // in update mode, I show the change password link label to allow the user to change his password
+            panelPassword.Visible = false;
+            chkIsActive.Location = new System.Drawing.Point(639, 214);
+            llChangePassword.Location = new System.Drawing.Point(669, 251);
+            llChangePassword.Visible = true;
         }
 
         private bool _HandleMemberImage()
@@ -313,18 +318,25 @@ namespace KarateClub.Users
             return Permissions;
         }
 
-        private void _FillMemberObjectWithFieldsData()
+        private void _FillUserObjectWithFieldsData()
         {
+            // refresh user password in case I change it in the frmChangePassword form.
+            _User = clsUser.Find(_UserID);
+
             _User.Name = txtName.Text.Trim();
             _User.Email = txtEmail.Text.Trim();
             _User.Address = txtAddress.Text.Trim();
             _User.Phone = txtPhone.Text.Trim();
-            _User.Password = txtPassword.Text.Trim();
             _User.Gender = (rbMale.Checked) ? clsPerson.enGender.Male : clsPerson.enGender.Female;
             _User.DateOfBirth = dtpDateOfBirth.Value;
             _User.Username = txtUsername.Text.Trim();
             _User.IsActive = chkIsActive.Checked;
             _User.Permissions = _CountPermissions();
+
+            if (_Mode == enMode.AddNew)
+            {
+                _User.Password = clsGlobal.ComputeHash(txtPassword.Text.Trim());
+            }
 
             if (pbUserImage.ImageLocation != null)
                 _User.ImagePath = pbUserImage.ImageLocation;
@@ -334,7 +346,7 @@ namespace KarateClub.Users
 
         private void _SaveUser()
         {
-            _FillMemberObjectWithFieldsData();
+            _FillUserObjectWithFieldsData();
 
             if (_User.Save())
             {
@@ -436,6 +448,11 @@ namespace KarateClub.Users
 
         private void txtPassword_Validating(object sender, CancelEventArgs e)
         {
+            if (!panelPassword.Visible)
+            {
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(txtPassword.Text.Trim()))
             {
                 e.Cancel = true;
@@ -449,6 +466,10 @@ namespace KarateClub.Users
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
+            if (!panelPassword.Visible)
+            {
+                return;
+            }
 
             if (string.IsNullOrWhiteSpace(txtConfirmPassword.Text.Trim()))
             {
@@ -547,6 +568,12 @@ namespace KarateClub.Users
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
             txtConfirmPassword.UseSystemPasswordChar = true;
+        }
+
+        private void llChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmChangePassword ChangePassword = new frmChangePassword(_UserID, false);
+            ChangePassword.ShowDialog();
         }
     }
 }

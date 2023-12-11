@@ -1,4 +1,5 @@
-﻿using KarateClub_Business;
+﻿using KarateClub.Global_Classes;
+using KarateClub_Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,7 @@ namespace KarateClub.Users
 
         private void _ChangePassword()
         {
-            if (_User.ChangePassword(txtNewPassword.Text))
+            if (_User.ChangePassword(clsGlobal.ComputeHash(txtNewPassword.Text.Trim())))
             {
                 MessageBox.Show("Password Changed Successfully.", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -89,7 +90,7 @@ namespace KarateClub.Users
                 ErrorProvider1.SetError(txtCurrentPassword, null);
             }
 
-            if (_User.Password != txtCurrentPassword.Text.Trim())
+            if (_User.Password != clsGlobal.ComputeHash(txtCurrentPassword.Text.Trim()))
             {
                 e.Cancel = true;
                 ErrorProvider1.SetError(txtCurrentPassword, "Current password is wrong!");

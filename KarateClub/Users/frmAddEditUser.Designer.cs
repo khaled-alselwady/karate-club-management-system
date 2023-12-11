@@ -79,6 +79,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pbUserImage = new System.Windows.Forms.PictureBox();
+            this.panelPassword = new System.Windows.Forms.Panel();
+            this.llChangePassword = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.gbPermissions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -92,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserImage)).BeginInit();
+            this.panelPassword.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -147,7 +150,7 @@
             // 
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(639, 210);
+            this.txtPassword.Location = new System.Drawing.Point(200, 3);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(213, 29);
             this.txtPassword.TabIndex = 183;
@@ -181,7 +184,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(176, 281);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(275, 29);
+            this.txtEmail.Size = new System.Drawing.Size(267, 29);
             this.txtEmail.TabIndex = 179;
             this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
@@ -226,7 +229,7 @@
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(176, 173);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(275, 29);
+            this.txtName.Size = new System.Drawing.Size(267, 29);
             this.txtName.TabIndex = 175;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
@@ -234,7 +237,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(512, 215);
+            this.label10.Location = new System.Drawing.Point(73, 8);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(91, 20);
@@ -369,7 +372,7 @@
             this.gbPermissions.CustomBorderColor = System.Drawing.Color.Peru;
             this.gbPermissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPermissions.ForeColor = System.Drawing.Color.Black;
-            this.gbPermissions.Location = new System.Drawing.Point(866, 140);
+            this.gbPermissions.Location = new System.Drawing.Point(871, 140);
             this.gbPermissions.Name = "gbPermissions";
             this.gbPermissions.Size = new System.Drawing.Size(246, 319);
             this.gbPermissions.TabIndex = 193;
@@ -551,7 +554,7 @@
             // 
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmPassword.Location = new System.Drawing.Point(639, 246);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(200, 39);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(213, 29);
             this.txtConfirmPassword.TabIndex = 195;
@@ -562,7 +565,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(445, 251);
+            this.label7.Location = new System.Drawing.Point(6, 44);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(158, 20);
@@ -582,7 +585,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::KarateClub.Properties.Resources.confirm_password;
-            this.pictureBox6.Location = new System.Drawing.Point(602, 251);
+            this.pictureBox6.Location = new System.Drawing.Point(163, 44);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(31, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -592,7 +595,7 @@
             // pictureBox9
             // 
             this.pictureBox9.Image = global::KarateClub.Properties.Resources.password;
-            this.pictureBox9.Location = new System.Drawing.Point(602, 214);
+            this.pictureBox9.Location = new System.Drawing.Point(163, 7);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(31, 26);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -715,6 +718,32 @@
             this.pbUserImage.TabIndex = 187;
             this.pbUserImage.TabStop = false;
             // 
+            // panelPassword
+            // 
+            this.panelPassword.Controls.Add(this.pictureBox9);
+            this.panelPassword.Controls.Add(this.label10);
+            this.panelPassword.Controls.Add(this.pictureBox6);
+            this.panelPassword.Controls.Add(this.txtPassword);
+            this.panelPassword.Controls.Add(this.label7);
+            this.panelPassword.Controls.Add(this.txtConfirmPassword);
+            this.panelPassword.Location = new System.Drawing.Point(439, 207);
+            this.panelPassword.Name = "panelPassword";
+            this.panelPassword.Size = new System.Drawing.Size(430, 75);
+            this.panelPassword.TabIndex = 206;
+            // 
+            // llChangePassword
+            // 
+            this.llChangePassword.AutoSize = true;
+            this.llChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llChangePassword.Location = new System.Drawing.Point(906, 477);
+            this.llChangePassword.Name = "llChangePassword";
+            this.llChangePassword.Size = new System.Drawing.Size(147, 20);
+            this.llChangePassword.TabIndex = 255;
+            this.llChangePassword.TabStop = true;
+            this.llChangePassword.Text = "Change Password?";
+            this.llChangePassword.Visible = false;
+            this.llChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llChangePassword_LinkClicked);
+            // 
             // frmAddEditUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -722,9 +751,9 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1304, 509);
+            this.Controls.Add(this.llChangePassword);
+            this.Controls.Add(this.panelPassword);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox1);
@@ -732,8 +761,6 @@
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.txtConfirmPassword);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.gbPermissions);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label3);
@@ -744,7 +771,6 @@
             this.Controls.Add(this.pbUserImage);
             this.Controls.Add(this.lblUserID);
             this.Controls.Add(this.chkIsActive);
-            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtEmail);
@@ -752,7 +778,6 @@
             this.Controls.Add(this.rbMale);
             this.Controls.Add(this.dtpDateOfBirth);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label5);
@@ -780,6 +805,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserImage)).EndInit();
+            this.panelPassword.ResumeLayout(false);
+            this.panelPassword.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,5 +864,7 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.LinkLabel llChangePassword;
+        private System.Windows.Forms.Panel panelPassword;
     }
 }
