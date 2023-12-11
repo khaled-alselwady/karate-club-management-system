@@ -135,6 +135,8 @@ namespace KarateClub.Payment
         {
             frmShowPaymentDetails ShowPaymentDetails = new frmShowPaymentDetails(_GetPaymentIDFromDGV());
             ShowPaymentDetails.ShowDialog();
+
+            _RefreshPaymentsList();
         }
 
         private void showPaymentsHistoryToolStripMenuItem_Click(object sender, EventArgs e)

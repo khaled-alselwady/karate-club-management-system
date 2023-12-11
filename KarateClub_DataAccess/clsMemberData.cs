@@ -310,7 +310,7 @@ where MemberID = @MemberID";
 
                         if (result != null && int.TryParse(result.ToString(), out int InsertID))
                         {
-                            MemberID = InsertID;
+                            PersonID = InsertID;
                         }
                     }
                 }

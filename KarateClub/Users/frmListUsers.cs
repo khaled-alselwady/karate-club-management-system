@@ -263,5 +263,10 @@ namespace KarateClub.Users
 
             _RefreshUserList();
         }
+
+        private void cmsEditProfile_Opening(object sender, CancelEventArgs e)
+        {
+            deleteToolStripMenuItem.Enabled = ((int)dgvUsersList.CurrentRow.Cells["UserID"].Value != clsGlobal.CurrentUser.UserID);
+        }
     }
 }

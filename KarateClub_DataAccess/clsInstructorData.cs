@@ -302,7 +302,7 @@ where InstructorID = @InstructorID";
 
                         if (result != null && int.TryParse(result.ToString(), out int InsertID))
                         {
-                            InstructorID = InsertID;
+                            PersonID = InsertID;
                         }
                     }
                 }

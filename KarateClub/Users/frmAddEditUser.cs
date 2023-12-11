@@ -320,8 +320,11 @@ namespace KarateClub.Users
 
         private void _FillUserObjectWithFieldsData()
         {
-            // refresh user password in case I change it in the frmChangePassword form.
-            _User = clsUser.Find(_UserID);
+            // refresh user password in case I change it in the frmChangePassword form in Update mode
+            if (_Mode == enMode.Update)
+            {
+                _User = clsUser.Find(_UserID);
+            }
 
             _User.Name = txtName.Text.Trim();
             _User.Email = txtEmail.Text.Trim();

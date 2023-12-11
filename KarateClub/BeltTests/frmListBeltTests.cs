@@ -219,6 +219,8 @@ namespace KarateClub.BeltTests
         {
             frmShowBeltTestDetails ShowBeltTestDetails = new frmShowBeltTestDetails(_GetBeltTestsIDFromDGV());
             ShowBeltTestDetails.ShowDialog();
+
+            _RefreshBeltTestsList();
         }
 
         private void addNewTestToolStripMenuItem_Click(object sender, EventArgs e)

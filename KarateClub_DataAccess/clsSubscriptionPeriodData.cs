@@ -254,7 +254,7 @@ where PeriodID = @PeriodID";
                 {
                     connection.Open();
 
-                    string query = @"select * from SubscriptionPeriods";
+                    string query = @"select * from SubscriptionPeriodsDetails_view order by PeriodID desc";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {

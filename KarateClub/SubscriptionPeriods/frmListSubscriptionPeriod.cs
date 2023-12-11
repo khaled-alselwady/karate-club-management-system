@@ -326,6 +326,8 @@ namespace KarateClub.SubscriptionPeriods
         {
             frmShowSubscriptionPeriodDetails ShowSubscriptionPeriodDetails = new frmShowSubscriptionPeriodDetails(_GetPeriodIDFromDGV());
             ShowSubscriptionPeriodDetails.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
 
         private void RenewtoolStripMenuItem1_Click(object sender, EventArgs e)
@@ -388,6 +390,8 @@ namespace KarateClub.SubscriptionPeriods
         {
             frmShowSubscriptionPeriodDetails ShowSubscriptionPeriodDetails = new frmShowSubscriptionPeriodDetails(_GetPeriodIDFromDGV());
             ShowSubscriptionPeriodDetails.ShowDialog();
+
+            _RefreshSubscriptionPeriodsList();
         }
     }
 }
