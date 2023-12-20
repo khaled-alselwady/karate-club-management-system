@@ -37,6 +37,6 @@ The **Karate Club Project** is a feature-rich desktop application designed to me
 2. Open the project in Visual Studio.
 3. Build and run the application.
 
-Explore our demo [here](https://drive.google.com/file/d/1H_bkp_VW3KH6WQiFZg5wpjyaQ2L-DLYv/view?usp=sharing) and experience the power of efficient Karate Club management on your desktop!
+Explore our demo [here](https://www.youtube.com/watch?v=bxPW1hJnmiQ&t=99s) and experience the power of efficient Karate Club management on your desktop!
 
 Feel free to contribute to the project by opening issues or submitting pull requests. For any queries, contact us at `khalidsliman2014@gmail.com`.
