@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -21,10 +17,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from MemberInstructors where MemberInstructorID = @MemberInstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetMemberInstructorInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberInstructorID", (object)MemberInstructorID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -75,22 +71,23 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"insert into MemberInstructors (MemberID, InstructorID, AssignDate)
-values (@MemberID, @InstructorID, @AssignDate)
-select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewMemberInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@AssignDate", AssignDate);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewMemberInstructorID", SqlDbType.Int)
                         {
-                            MemberInstructorID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        MemberInstructorID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -117,14 +114,10 @@ select scope_identity()";
                 {
                     connection.Open();
 
-                    string query = @"Update MemberInstructors
-set MemberID = @MemberID,
-InstructorID = @InstructorID,
-AssignDate = @AssignDate
-where MemberInstructorID = @MemberInstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateMemberInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberInstructorID", (object)MemberInstructorID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
@@ -156,10 +149,10 @@ where MemberInstructorID = @MemberInstructorID";
                 {
                     connection.Open();
 
-                    string query = @"delete MemberInstructors where MemberInstructorID = @MemberInstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeleteMemberInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberInstructorID", (object)MemberInstructorID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -188,15 +181,22 @@ where MemberInstructorID = @MemberInstructorID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from MemberInstructors where MemberInstructorID = @MemberInstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesMemberInstructorExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberInstructorID", (object)MemberInstructorID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -218,38 +218,7 @@ where MemberInstructorID = @MemberInstructorID";
 
         public static DataTable GetAllMemberInstructors()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from MembersInstructorsDetails_view order by MemberInstructorID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllMemberInstructors");
         }
 
         public static bool IsInstructorTrainingMember(int? InstructorID, int? MemberID)
@@ -262,16 +231,23 @@ where MemberInstructorID = @MemberInstructorID";
                 {
                     connection.Open();
 
-                    string query = @"select top 1 Found = 1 from MemberInstructors where InstructorID = @InstructorID and MemberID = @MemberID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_IsInstructorTrainingMember", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -301,15 +277,10 @@ where MemberInstructorID = @MemberInstructorID";
                 {
                     connection.Open();
 
-                    string query = @"select MembersDetails_view.*
-                             from MemberInstructors
-                             inner join MembersDetails_view
-                             on MembersDetails_view.MemberID = MemberInstructors.MemberID
-                             where MemberInstructors.InstructorID = @InstructorID
-                             order by MembersDetails_view.MemberID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetTrainedMembersByInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())

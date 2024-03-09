@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -21,10 +17,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from Instructors where InstructorID = @InstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetInstructorInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -73,21 +69,22 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"insert into Instructors (PersonID, Qualification)
-values (@PersonID, @Qualification)
-select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Qualification", (object)Qualification ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewInstructorID", SqlDbType.Int)
                         {
-                            InstructorID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        InstructorID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -114,13 +111,10 @@ select scope_identity()";
                 {
                     connection.Open();
 
-                    string query = @"Update Instructors
-set PersonID = @PersonID,
-Qualification = @Qualification
-where InstructorID = @InstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Qualification", (object)Qualification ?? DBNull.Value);
@@ -151,10 +145,10 @@ where InstructorID = @InstructorID";
                 {
                     connection.Open();
 
-                    string query = @"delete Instructors where InstructorID = @InstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeleteInstructor", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -183,15 +177,22 @@ where InstructorID = @InstructorID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from Instructors where InstructorID = @InstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesInstructorExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -213,73 +214,12 @@ where InstructorID = @InstructorID";
 
         public static DataTable GetAllInstructors()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from InstructorsDetails_view order by instructorID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllInstructors");
         }
 
         public static short CountInstructors()
         {
-            short Count = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select count(*) from Instructors";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && short.TryParse(result.ToString(), out short Value))
-                        {
-                            Count = Value;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return Count;
+            return clsDataAccessHelper.Count("SP_GetInstructorsCount");
         }
 
         public static int? GetPersonIDByInstructorID(int? InstructorID)
@@ -292,18 +232,21 @@ where InstructorID = @InstructorID";
                 {
                     connection.Open();
 
-                    string query = @"select PersonID from Instructors where InstructorID = @InstructorID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPersonIDByInstructorID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@InstructorID", (object)InstructorID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@PersonID", SqlDbType.Int)
                         {
-                            PersonID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PersonID = (int?)outputIdParam.Value;
                     }
                 }
             }

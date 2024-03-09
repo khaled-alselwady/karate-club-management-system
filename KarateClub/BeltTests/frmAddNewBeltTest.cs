@@ -116,7 +116,7 @@ namespace KarateClub.BeltTests
             BeltTest.MemberID = ucMemberInstructorCardWithFilter1.SelectedMemberID;
             BeltTest.TestedByInstructorID = ucMemberInstructorCardWithFilter1.SelectedInstructorID;
             BeltTest.RankID = ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.RankID;
-            BeltTest.Result = (rbPassed.Checked) ? true : false;
+            BeltTest.Result = (rbPassed.Checked);
             BeltTest.Date = dtpTestDate.Value;
 
             BeltTest.PaymentID = BeltTest.Pay(ucMemberInstructorCardWithFilter1.SelectedMemberInfo.NextBeltRankInfo.TestFees);

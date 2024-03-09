@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace KarateClub_DataAccess
 {
@@ -24,10 +18,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from People where PersonID = @PersonID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPersonInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -82,12 +76,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"insert into People (Name, Address, Phone, Email, DateOfBirth, Gender, ImagePath)
-values (@Name, @Address, @Phone, @Email, @DateOfBirth, @Gender, @ImagePath)
-select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewPerson", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Name", Name);
                         command.Parameters.AddWithValue("@Address", (object)Address ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Phone", Phone);
@@ -96,12 +88,15 @@ select scope_identity()";
                         command.Parameters.AddWithValue("@Gender", Gender);
                         command.Parameters.AddWithValue("@ImagePath", (object)ImagePath ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewPersonID", SqlDbType.Int)
                         {
-                            PersonID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PersonID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -128,18 +123,10 @@ select scope_identity()";
                 {
                     connection.Open();
 
-                    string query = @"Update People
-set Name = @Name,
-Address = @Address,
-Phone = @Phone,
-Email = @Email,
-DateOfBirth = @DateOfBirth,
-Gender = @Gender,
-ImagePath = @ImagePath
-where PersonID = @PersonID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdatePerson", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Name", Name);
                         command.Parameters.AddWithValue("@Address", (object)Address ?? DBNull.Value);
@@ -175,10 +162,10 @@ where PersonID = @PersonID";
                 {
                     connection.Open();
 
-                    string query = @"delete People where PersonID = @PersonID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeletePerson", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -207,15 +194,22 @@ where PersonID = @PersonID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from People where PersonID = @PersonID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesPersonExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -237,38 +231,7 @@ where PersonID = @PersonID";
 
         public static DataTable GetAllPeople()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from People";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllPeople");
         }
 
     }

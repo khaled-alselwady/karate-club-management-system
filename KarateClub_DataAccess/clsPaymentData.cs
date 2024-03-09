@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -21,10 +17,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from Payments where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPaymentInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -74,22 +70,22 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"insert into Payments (Amount, Date, MemberID)
-values (@Amount, @Date, @MemberID)
-select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewPayment", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Amount", Amount);
-                        command.Parameters.AddWithValue("@Date", DateTime.Now);
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewPaymentID", SqlDbType.Int)
                         {
-                            PaymentID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PaymentID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -116,14 +112,10 @@ select scope_identity()";
                 {
                     connection.Open();
 
-                    string query = @"Update Payments
-set Amount = @Amount,
-Date = @Date,
-MemberID = @MemberID
-where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdatePayment", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Amount", Amount);
                         command.Parameters.AddWithValue("@Date", Date);
@@ -155,10 +147,10 @@ where PaymentID = @PaymentID";
                 {
                     connection.Open();
 
-                    string query = @"delete Payments where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeletePayment", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -187,15 +179,22 @@ where PaymentID = @PaymentID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from Payments where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesPaymentExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -217,73 +216,12 @@ where PaymentID = @PaymentID";
 
         public static DataTable GetAllPayments()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from PaymentsDetails_view order by PaymentID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllPayments");
         }
 
         public static short CountPayments()
         {
-            short Count = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select count(*) from Payments";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && short.TryParse(result.ToString(), out short Value))
-                        {
-                            Count = Value;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return Count;
+            return clsDataAccessHelper.Count("SP_GetPaymentsCount");
         }
 
         public static DataTable GetAllPaymentsForMember(int? MemberID)
@@ -296,17 +234,10 @@ where PaymentID = @PaymentID";
                 {
                     connection.Open();
 
-                    string query = @"SELECT        dbo.Payments.PaymentID,
-                             (SELECT        Name
-                               FROM            dbo.People
-                               WHERE        (dbo.Members.PersonID = PersonID)) AS MemberName, dbo.Payments.Date, dbo.Payments.Amount
-FROM            dbo.Payments INNER JOIN
-                         dbo.Members ON dbo.Members.MemberID = dbo.Payments.MemberID
-						 where Members.MemberID = @MemberID
-						 order by Payments.PaymentID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetAllPaymentsForMember", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())

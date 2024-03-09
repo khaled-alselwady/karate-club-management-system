@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices.ComTypes;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -23,10 +18,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from SubscriptionPeriods where PeriodID = @PeriodID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPeriodInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PeriodID", (object)PeriodID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -83,16 +78,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"update SubscriptionPeriods
-                                     set IsActive = 0
-                                     where MemberID = @MemberID;
-
-                                     insert into SubscriptionPeriods (StartDate, EndDate, Fees, IsPaid, MemberID, PaymentID, IssueReason, IsActive)
-                                     values (@StartDate, @EndDate, @Fees, @IsPaid, @MemberID, @PaymentID, @IssueReason, @IsActive)
-                                     select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewPeriod", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@StartDate", StartDate);
                         command.Parameters.AddWithValue("@EndDate", EndDate);
                         command.Parameters.AddWithValue("@Fees", Fees);
@@ -102,12 +91,15 @@ namespace KarateClub_DataAccess
                         command.Parameters.AddWithValue("@IssueReason", IssueReason);
                         command.Parameters.AddWithValue("@IsActive", IsActive);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewPeriodID", SqlDbType.Int)
                         {
-                            PeriodID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PeriodID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -135,19 +127,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"Update SubscriptionPeriods
-set StartDate = @StartDate,
-EndDate = @EndDate,
-Fees = @Fees,
-IsPaid = @IsPaid,
-MemberID = @MemberID,
-PaymentID = @PaymentID,
-IssueReason = @IssueReason,
-IsActive = @IsActive
-where PeriodID = @PeriodID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdatePeriod", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PeriodID", (object)PeriodID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@StartDate", StartDate);
                         command.Parameters.AddWithValue("@EndDate", EndDate);
@@ -184,10 +167,10 @@ where PeriodID = @PeriodID";
                 {
                     connection.Open();
 
-                    string query = @"delete SubscriptionPeriods where PeriodID = @PeriodID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeletePeriod", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PeriodID", (object)PeriodID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -216,15 +199,22 @@ where PeriodID = @PeriodID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from SubscriptionPeriods where PeriodID = @PeriodID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesPeriodExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PeriodID", (object)PeriodID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -246,76 +236,15 @@ where PeriodID = @PeriodID";
 
         public static DataTable GetAllSubscriptionPeriods()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from SubscriptionPeriodsDetails_view order by PeriodID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllSubscriptionPeriods");
         }
 
         public static short CountSubscriptionPeriods()
         {
-            short Count = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select count(*) from SubscriptionPeriods";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && short.TryParse(result.ToString(), out short Value))
-                        {
-                            Count = Value;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return Count;
+            return clsDataAccessHelper.Count("SP_GetSubscriptionPeriodsCount");
         }
 
-        public static int? GetLastActivePeriodForMember(int? MemberID)
+        public static int? GetLastActivePeriodIDForMember(int? MemberID)
         {
             int? LastActivePeriodID = null;
 
@@ -325,21 +254,21 @@ where PeriodID = @PeriodID";
                 {
                     connection.Open();
 
-                    string query = @"select top 1 PeriodID from SubscriptionPeriods
-                             where MemberID = @MemberID
-                             and CONVERT(DATE, SubscriptionPeriods.EndDate) >= CONVERT(DATE, GETDATE())
-                             order by StartDate desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetLastActivePeriodIDForMember", connection))
                     {
-                        command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
-                   
-                        object result = command.ExecuteScalar();
+                        command.CommandType = CommandType.StoredProcedure;
 
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
+
+                        SqlParameter outputIdParam = new SqlParameter("@LastActivePeriodID", SqlDbType.Int)
                         {
-                            LastActivePeriodID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        LastActivePeriodID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -365,18 +294,10 @@ where PeriodID = @PeriodID";
                 {
                     connection.Open();
 
-                    string query = @"SELECT        dbo.SubscriptionPeriods.PeriodID,
-                             (SELECT        Name
-                               FROM            dbo.People
-                               WHERE        (PersonID = dbo.Members.PersonID)) AS MemberName, dbo.SubscriptionPeriods.Fees, dbo.SubscriptionPeriods.IsPaid, dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate, DATEDIFF(day, 
-                         dbo.SubscriptionPeriods.StartDate, dbo.SubscriptionPeriods.EndDate) AS SubscriptionDays, dbo.SubscriptionPeriods.PaymentID,dbo.SubscriptionPeriods.IsActive 
-FROM            dbo.SubscriptionPeriods INNER JOIN
-                         dbo.Members ON dbo.Members.MemberID = dbo.SubscriptionPeriods.MemberID
-						 where SubscriptionPeriods.MemberID = @MemberID
-						 order by SubscriptionPeriods.StartDate desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetAllPeriodsForMember", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -411,13 +332,10 @@ FROM            dbo.SubscriptionPeriods INNER JOIN
                 {
                     connection.Open();
 
-                    string query = @"update SubscriptionPeriods
-                             set   IsPaid = @IsPaid,
-                                   IsActive = @IsActive
-                             where PeriodID = @PeriodID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateActivityAndIsPaid", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PeriodID", (object)PeriodID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsPaid", IsPaid);
                         command.Parameters.AddWithValue("@IsActive", IsActive);
@@ -448,18 +366,21 @@ FROM            dbo.SubscriptionPeriods INNER JOIN
                 {
                     connection.Open();
 
-                    string query = @"select PeriodID from SubscriptionPeriods where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPeriodIDByPaymentID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@PeriodID", SqlDbType.Int)
                         {
-                            PeriodID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PeriodID = (int?)outputIdParam.Value;
                     }
                 }
             }

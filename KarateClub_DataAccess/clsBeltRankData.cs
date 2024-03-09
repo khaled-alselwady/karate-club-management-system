@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -20,10 +16,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from BeltRanks where RankID = @RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetRankInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -72,10 +68,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from BeltRanks where RankName = @RankName";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetRankInfoByName", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankName", RankName);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -124,21 +120,22 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"insert into BeltRanks (RankName, TestFees)
-                                     values (@RankName, @TestFees)
-                                     select scope_identity()";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewRank", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankName", RankName);
                         command.Parameters.AddWithValue("@TestFees", TestFees);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewRankID", SqlDbType.Int)
                         {
-                            RankID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        RankID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -164,13 +161,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"Update BeltRanks
-                                     set RankName = @RankName,
-                                     TestFees = @TestFees
-                                     where RankID = @RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateRank", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@RankName", RankName);
                         command.Parameters.AddWithValue("@TestFees", TestFees);
@@ -201,10 +195,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"delete BeltRanks where RankID = @RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeleteRank", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -233,15 +227,22 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from BeltRanks where RankID = @RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesRankExistByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -271,15 +272,22 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from BeltRanks where RankName = @RankName";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesRankExistByName", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@RankName", RankName);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -301,74 +309,12 @@ namespace KarateClub_DataAccess
 
         public static DataTable GetAllBeltRanks()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from BeltRanks order by RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanks");
         }
 
         public static DataTable GetAllBeltRanksName()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select RankName from BeltRanks order by RankID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanksName");
         }
 
         public static int? GetNextBeltRankID(int? CurrentBeltRankID)
@@ -381,21 +327,21 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"SELECT COALESCE(
-                                 (SELECT TOP 1 RankID FROM BeltRanks WHERE RankID > @CurrentBeltRankID ORDER BY RankID),
-                                 (SELECT TOP 1 RankID FROM BeltRanks ORDER BY RankID DESC)
-                             ) AS NextBeltRankID;";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetNextBeltRankID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@CurrentBeltRankID", (object)CurrentBeltRankID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int Value))
+                        SqlParameter outputIdParam = new SqlParameter("@NextBeltRankID", SqlDbType.Int)
                         {
-                            NextBeltRankID = Value;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        NextBeltRankID = (int?)outputIdParam.Value;
                     }
                 }
             }

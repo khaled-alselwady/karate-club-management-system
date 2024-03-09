@@ -195,7 +195,7 @@ namespace KarateClub_Business
 
         public static int? GetLastActivePeriodIDForMember(int? MemberID)
         {
-            return clsSubscriptionPeriodData.GetLastActivePeriodForMember(MemberID);
+            return clsSubscriptionPeriodData.GetLastActivePeriodIDForMember(MemberID);
         }
 
         public static DataTable GetAllPeriodsForMember(int? MemberID)

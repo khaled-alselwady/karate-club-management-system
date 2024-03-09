@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -22,10 +18,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from Users where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetUserInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -77,10 +73,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from Users where Username = @Username";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetUserInfoByUsername", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Username", Username);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -133,10 +129,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from Users where Username = @Username AND Password = @Password";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetUserInfoByUsernameAndPassword", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Username", Username);
                         command.Parameters.AddWithValue("@Password", Password);
 
@@ -189,27 +185,25 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"if not Exists (select found = 1 from Users where Username = @Username)
-begin
-insert into Users (PersonID, Username, Password, Permissions, IsActive)
-values (@PersonID, @Username, @Password, @Permissions, @IsActive)
-select scope_identity()
-end";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewUser", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Username", Username);
                         command.Parameters.AddWithValue("@Password", Password);
                         command.Parameters.AddWithValue("@Permissions", Permissions);
                         command.Parameters.AddWithValue("@IsActive", IsActive);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewUserID", SqlDbType.Int)
                         {
-                            UserID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        UserID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -236,16 +230,10 @@ end";
                 {
                     connection.Open();
 
-                    string query = @"Update Users
-set PersonID = @PersonID,
-Username = @Username,
-Password = @Password,
-Permissions = @Permissions,
-IsActive = @IsActive
-where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateUser", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PersonID", (object)PersonID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Username", Username);
@@ -279,10 +267,10 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"delete Users where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeleteUser", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -311,15 +299,22 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from Users where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesUserExistByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -349,15 +344,22 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from Users where Username = @Username";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesUserExistByUsername", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Username", Username);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -387,16 +389,23 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from Users where Username = @Username and Password = @Password";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesUserExistByUsernameAndPassword", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@Username", Username);
                         command.Parameters.AddWithValue("@Password", Password);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -418,73 +427,12 @@ where UserID = @UserID";
 
         public static DataTable GetAllUsers()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from usersDetails_view order by UserID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllUsers");
         }
 
         public static short CountUsers()
         {
-            short Count = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select count(*) from Users";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && short.TryParse(result.ToString(), out short Value))
-                        {
-                            Count = Value;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return Count;
+            return clsDataAccessHelper.Count("SP_GetUsersCount");
         }
 
         public static int? GetPersonIDByUserID(int? UserID)
@@ -497,18 +445,21 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"select PersonID from Users where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetPersonIDByUserID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@PersonID", SqlDbType.Int)
                         {
-                            PersonID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        PersonID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -534,12 +485,10 @@ where UserID = @UserID";
                 {
                     connection.Open();
 
-                    string query = @"update Users
-                             set Password = @NewPassword
-                             where UserID = @UserID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_ChangePassword", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@NewPassword", NewPassword);
 

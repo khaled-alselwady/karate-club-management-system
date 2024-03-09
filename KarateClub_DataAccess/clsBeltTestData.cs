@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace KarateClub_DataAccess
 {
@@ -22,10 +18,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"select * from BeltTests where TestID = @TestID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetTestInfoByID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@TestID", (object)TestID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -79,20 +75,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"INSERT INTO BeltTests (MemberID, RankID, Result, Date, TestedByInstructorID, PaymentID)
-                             VALUES (@MemberID, @RankID, @Result, @Date, @TestedByInstructorID, @PaymentID);
-                             
-                             IF (@Result = 1)
-                             BEGIN
-                                 UPDATE Members
-                                 SET LastBeltRankID = @RankID
-                                 WHERE MemberID = @MemberID;
-                             END
-                             
-                             SELECT SCOPE_IDENTITY();";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_AddNewTest", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Result", Result);
@@ -100,12 +86,15 @@ namespace KarateClub_DataAccess
                         command.Parameters.AddWithValue("@TestedByInstructorID", (object)TestedByInstructorID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@NewTestID", SqlDbType.Int)
                         {
-                            TestID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        TestID = (int?)outputIdParam.Value;
                     }
                 }
             }
@@ -132,17 +121,10 @@ namespace KarateClub_DataAccess
                 {
                     connection.Open();
 
-                    string query = @"Update BeltTests
-set MemberID = @MemberID,
-RankID = @RankID,
-Result = @Result,
-Date = @Date,
-TestedByInstructorID = @TestedByInstructorID,
-PaymentID = @PaymentID
-where TestID = @TestID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_UpdateTest", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@TestID", (object)TestID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@RankID", (object)RankID ?? DBNull.Value);
@@ -177,10 +159,10 @@ where TestID = @TestID";
                 {
                     connection.Open();
 
-                    string query = @"delete BeltTests where TestID = @TestID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DeleteTest", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@TestID", (object)TestID ?? DBNull.Value);
 
                         RowAffected = command.ExecuteNonQuery();
@@ -209,15 +191,22 @@ where TestID = @TestID";
                 {
                     connection.Open();
 
-                    string query = @"select found = 1 from BeltTests where TestID = @TestID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_DoesTestExist", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@TestID", (object)TestID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
+                        // @ReturnVal could be any name, and we don't need to add it to the SP, just use it here in the code.
+                        SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.ReturnValue
+                        };
+                        command.Parameters.Add(returnParameter);
 
-                        IsFound = (result != null);
+                        command.ExecuteNonQuery();
+
+                        IsFound = (int)returnParameter.Value == 1;
                     }
                 }
             }
@@ -239,73 +228,12 @@ where TestID = @TestID";
 
         public static DataTable GetAllBeltTests()
         {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select * from TestsDetails_view order by TestID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dt.Load(reader);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return dt;
+            return clsDataAccessHelper.GetAll("SP_GetAllBeltTests");
         }
 
         public static short CountBeltTests()
         {
-            short Count = 0;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    connection.Open();
-
-                    string query = @"select count(*) from BeltTests";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && short.TryParse(result.ToString(), out short Value))
-                        {
-                            Count = Value;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                clsLogError.LogError("Database Exception", ex);
-            }
-            catch (Exception ex)
-            {
-                clsLogError.LogError("General Exception", ex);
-            }
-
-            return Count;
+            return clsDataAccessHelper.Count("SP_GetTestsCount");
         }
 
         public static DataTable GetAllBeltTestsForMember(int? MemberID)
@@ -318,22 +246,10 @@ where TestID = @TestID";
                 {
                     connection.Open();
 
-                    string query = @"SELECT        dbo.BeltTests.TestID,Members.MemberID,
-                             (SELECT        Name
-                               FROM            dbo.People
-                               WHERE        (dbo.Members.PersonID = PersonID)) AS MemberName, dbo.BeltRanks.RankName, dbo.BeltTests.Date,
-                             (SELECT        Name
-                               FROM            dbo.People
-                               WHERE        (dbo.Instructors.PersonID = PersonID)) AS InstructorName, dbo.BeltTests.PaymentID, dbo.BeltTests.Result
-FROM            dbo.BeltTests INNER JOIN
-                         dbo.Members ON dbo.Members.MemberID = dbo.BeltTests.MemberID INNER JOIN
-                         dbo.Instructors ON dbo.Instructors.InstructorID = dbo.BeltTests.TestedByInstructorID INNER JOIN
-                         dbo.BeltRanks ON dbo.BeltRanks.RankID = dbo.BeltTests.RankID
-						 where Members.MemberID = @MemberID
-                         order by TestID desc";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetAllBeltTestsForMember", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@MemberID", (object)MemberID ?? DBNull.Value);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -368,18 +284,21 @@ FROM            dbo.BeltTests INNER JOIN
                 {
                     connection.Open();
 
-                    string query = @"select TestID from BeltTests where PaymentID = @PaymentID";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("SP_GetTestIDByPaymentID", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.AddWithValue("@PaymentID", (object)PaymentID ?? DBNull.Value);
 
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int InsertID))
+                        SqlParameter outputIdParam = new SqlParameter("@TestID", SqlDbType.Int)
                         {
-                            TestID = InsertID;
-                        }
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputIdParam);
+
+                        command.ExecuteNonQuery();
+
+                        TestID = (int?)outputIdParam.Value;
                     }
                 }
             }

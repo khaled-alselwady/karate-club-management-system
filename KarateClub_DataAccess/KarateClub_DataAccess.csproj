@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="clsBeltRankData.cs" />
     <Compile Include="clsBeltTestData.cs" />
+    <Compile Include="clsDataAccessHelper.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsInstructorData.cs" />
     <Compile Include="clsLogError.cs" />
