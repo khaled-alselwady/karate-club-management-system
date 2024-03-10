@@ -134,3 +134,5 @@ C:\Users\PC\Desktop\karate-club-management-system\KarateClub\obj\Debug\KarateClu
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub\obj\Debug\KarateClub.csproj.Up2Date
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub\obj\Debug\KarateClub.exe
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub\obj\Debug\KarateClub.pdb
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub\bin\Debug\DataAccessToolkit.dll
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub\bin\Debug\DataAccessToolkit.pdb

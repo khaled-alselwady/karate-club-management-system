@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessToolkit;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -45,13 +46,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -97,13 +98,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -141,11 +142,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return RankID;
@@ -175,11 +176,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -207,11 +208,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -250,13 +251,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -295,13 +296,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -309,12 +310,12 @@ namespace KarateClub_DataAccess
 
         public static DataTable GetAllBeltRanks()
         {
-            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanks");
+            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanks", "KarateClub");
         }
 
         public static DataTable GetAllBeltRanksName()
         {
-            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanksName");
+            return clsDataAccessHelper.GetAll("SP_GetAllBeltRanksName", "KarateClub");
         }
 
         public static int? GetNextBeltRankID(int? CurrentBeltRankID)
@@ -347,11 +348,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return NextBeltRankID;

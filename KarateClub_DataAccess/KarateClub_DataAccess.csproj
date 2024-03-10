@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataAccessToolkit">
+      <HintPath>..\..\hotel-management-system\Hotel_DataAccessToolkit\bin\Debug\DataAccessToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -44,10 +47,7 @@
   <ItemGroup>
     <Compile Include="clsBeltRankData.cs" />
     <Compile Include="clsBeltTestData.cs" />
-    <Compile Include="clsDataAccessHelper.cs" />
-    <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsInstructorData.cs" />
-    <Compile Include="clsLogError.cs" />
     <Compile Include="clsMemberData.cs" />
     <Compile Include="clsMemberInstructorData.cs" />
     <Compile Include="clsPaymentData.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using DataAccessToolkit;
 
 namespace KarateClub_DataAccess
 {
@@ -46,13 +47,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -90,11 +91,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return InstructorID;
@@ -125,11 +126,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -157,11 +158,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -200,13 +201,13 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return IsFound;
@@ -214,12 +215,12 @@ namespace KarateClub_DataAccess
 
         public static DataTable GetAllInstructors()
         {
-            return clsDataAccessHelper.GetAll("SP_GetAllInstructors");
+            return clsDataAccessHelper.GetAll("SP_GetAllInstructors","KarateClub");
         }
 
         public static short CountInstructors()
         {
-            return clsDataAccessHelper.Count("SP_GetInstructorsCount");
+            return (short)clsDataAccessHelper.Count("SP_GetInstructorsCount", "KarateClub");
         }
 
         public static int? GetPersonIDByInstructorID(int? InstructorID)
@@ -252,11 +253,11 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsLogError.LogError("Database Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsLogError.LogError("General Exception", ex);
+                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
             }
 
             return PersonID;

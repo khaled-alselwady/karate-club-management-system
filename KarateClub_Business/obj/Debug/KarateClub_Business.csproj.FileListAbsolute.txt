@@ -16,3 +16,5 @@ C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\obj\Debug\
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\obj\Debug\KarateCl.FCE475F0.Up2Date
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\obj\Debug\KarateClub_Business.dll
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\obj\Debug\KarateClub_Business.pdb
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\bin\Debug\DataAccessToolkit.dll
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub_Business\bin\Debug\DataAccessToolkit.pdb

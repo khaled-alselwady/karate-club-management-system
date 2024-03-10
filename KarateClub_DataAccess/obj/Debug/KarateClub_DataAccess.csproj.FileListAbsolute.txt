@@ -10,3 +10,6 @@ C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\obj\Debu
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.dll
 C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\obj\Debug\KarateClub_DataAccess.pdb
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\obj\Debug\KarateCl.B23AC7E1.Up2Date
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\bin\Debug\DataAccessToolkit.dll
+C:\Users\PC\Desktop\karate-club-management-system\KarateClub_DataAccess\bin\Debug\DataAccessToolkit.pdb

@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace KarateClub_DataAccess
+namespace KarateClub.Global_Classes
 {
-    public static class clsLogError
+    public static class clsErrorLogger
     {
         public static void LogError(string errorType, Exception ex)
         {
