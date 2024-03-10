@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataAccessToolkit">
-      <HintPath>..\..\hotel-management-system\Hotel_DataAccessToolkit\bin\Debug\DataAccessToolkit.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -56,6 +53,12 @@
     <Compile Include="clsSubscriptionPeriodData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\hotel-management-system\Hotel_DataAccessToolkit\DataAccessToolkit.csproj">
+      <Project>{d0180ee0-399e-4a76-a7bc-d9f78e18c0eb}</Project>
+      <Name>DataAccessToolkit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
