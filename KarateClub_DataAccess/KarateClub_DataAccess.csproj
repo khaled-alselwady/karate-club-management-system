@@ -55,7 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\hotel-management-system\Hotel_DataAccessToolkit\DataAccessToolkit.csproj">
+    <ProjectReference Include="..\KarateClub_DataAccessToolkit\DataAccessToolkit.csproj">
       <Project>{d0180ee0-399e-4a76-a7bc-d9f78e18c0eb}</Project>
       <Name>DataAccessToolkit</Name>
     </ProjectReference>

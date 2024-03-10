@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub_DataAccess", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub_Business", "..\KarateClub_Business\KarateClub_Business.csproj", "{24C1E927-1294-4A8D-A435-93FF401A35D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessToolkit", "..\..\hotel-management-system\Hotel_DataAccessToolkit\DataAccessToolkit.csproj", "{D0180EE0-399E-4A76-A7BC-D9F78E18C0EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessToolkit", "..\KarateClub_DataAccessToolkit\DataAccessToolkit.csproj", "{D0180EE0-399E-4A76-A7BC-D9F78E18C0EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
