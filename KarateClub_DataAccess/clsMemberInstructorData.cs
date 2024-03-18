@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DataAccessToolkit;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using DataAccessToolkit;
 
 namespace KarateClub_DataAccess
 {
@@ -48,13 +48,15 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return IsFound;
@@ -94,11 +96,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return MemberInstructorID;
@@ -130,11 +134,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -162,11 +168,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -205,13 +213,15 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return IsFound;
@@ -219,7 +229,7 @@ namespace KarateClub_DataAccess
 
         public static DataTable GetAllMemberInstructors()
         {
-            return clsDataAccessHelper.GetAll("SP_GetAllMemberInstructors", "KarateClub");
+            return clsDataAccessHelper.GetAll("SP_GetAllMemberInstructors");
         }
 
         public static bool IsInstructorTrainingMember(int? InstructorID, int? MemberID)
@@ -256,13 +266,15 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return IsFound;
@@ -296,11 +308,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return dtTrainedMembers;

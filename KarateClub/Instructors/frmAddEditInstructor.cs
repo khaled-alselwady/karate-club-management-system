@@ -146,12 +146,12 @@ namespace KarateClub.Instructors
                     }
                     catch (IOException iox)
                     {
-                        clsErrorLogger.LogError("IO Exception", iox);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer); loggerToEventViewer.LogError("IO Exception", iox);
                         return false;
                     }
                     catch (Exception ex)
                     {
-                        clsErrorLogger.LogError("General Exception", ex);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer); loggerToEventViewer.LogError("General Exception", ex);
                         return false;
                     }
                 }

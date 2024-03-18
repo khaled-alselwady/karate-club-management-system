@@ -2,14 +2,8 @@
 using KarateClub.Properties;
 using KarateClub_Business;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KarateClub.Users
@@ -230,7 +224,7 @@ namespace KarateClub.Users
             llChangePassword.Visible = true;
         }
 
-        private bool _HandleMemberImage()
+        private bool _HandleUserImage()
         {
             // this procedure will handle the person image,
             // it will take care of deleting the old image from the folder
@@ -250,12 +244,14 @@ namespace KarateClub.Users
                     }
                     catch (IOException iox)
                     {
-                        clsErrorLogger.LogError("IO Exception", iox);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                        loggerToEventViewer.LogError("IO Exception", iox);
                         return false;
                     }
                     catch (Exception ex)
                     {
-                        clsErrorLogger.LogError("General Exception", ex);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                        loggerToEventViewer.LogError("General Exception", ex);
                         return false;
                     }
                 }
@@ -403,7 +399,7 @@ namespace KarateClub.Users
             }
 
 
-            if (!_HandleMemberImage())
+            if (!_HandleUserImage())
                 return;
 
             _SaveUser();

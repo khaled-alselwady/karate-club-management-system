@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace KarateClub.Global_Classes
 {
@@ -35,7 +30,8 @@ namespace KarateClub.Global_Classes
                 }
                 catch (Exception ex)
                 {
-                    clsErrorLogger.LogError("General Exception", ex);
+                    clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                    loggerToEventViewer.LogError("General Exception", ex);
                     return false;
                 }
             }
@@ -74,12 +70,14 @@ namespace KarateClub.Global_Classes
             }
             catch (IOException iox)
             {
-                clsErrorLogger.LogError("IO Exception", iox);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("IO Exception", iox);
                 return false;
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
                 return false;
             }
 

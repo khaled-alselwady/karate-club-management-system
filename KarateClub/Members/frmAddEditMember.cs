@@ -1,16 +1,10 @@
 ﻿using KarateClub.Global_Classes;
 using KarateClub.Properties;
 using KarateClub_Business;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KarateClub.Members
@@ -62,14 +56,14 @@ namespace KarateClub.Members
 
         private void _ResetDefaultValues()
         {
-            _FillBeltRanksInComboBox();           
+            _FillBeltRanksInComboBox();
 
             if (_Mode == enMode.AddNew)
             {
                 lblTitle.Text = "Add New Member";
                 this.Text = "Add New Member";
                 _Member = new clsMember();
-                chkIsActive.Enabled = false; 
+                chkIsActive.Enabled = false;
                 _ResetFields();
             }
             else
@@ -94,7 +88,7 @@ namespace KarateClub.Members
             dtpDateOfBirth.MinDate = DateTime.Now.AddYears(-100);
 
             //this will set default belt rank to Jordan
-            cbLastBeltRank.SelectedIndex = cbLastBeltRank.FindString("White Belt");     
+            cbLastBeltRank.SelectedIndex = cbLastBeltRank.FindString("White Belt");
         }
 
         private void _FillFieldsWithMemberInfo()
@@ -168,12 +162,14 @@ namespace KarateClub.Members
                     }
                     catch (IOException iox)
                     {
-                        clsErrorLogger.LogError("IO Exception", iox);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                        loggerToEventViewer.LogError("IO Exception", iox);
                         return false;
                     }
                     catch (Exception ex)
                     {
-                        clsErrorLogger.LogError("General Exception", ex);
+                        clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                        loggerToEventViewer.LogError("General Exception", ex);
                         return false;
                     }
                 }

@@ -1,31 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KarateClub.Global_Classes
 {
-    public static class clsErrorLogger
+    public class clsErrorLogger
     {
-        public static void LogError(string errorType, Exception ex)
+        private Action<string, Exception> _logAction;
+
+        public clsErrorLogger(Action<string, Exception> logAction)
         {
-            // Specify the source name for the event log
-            string sourceName = "KarateClub";
+            _logAction = logAction;
+        }
 
-            // Create the event source if it does not exist
-            if (!EventLog.SourceExists(sourceName))
-            {
-                EventLog.CreateEventSource(sourceName, "Application");
-            }
-
-            string errorMessage = $"{errorType} in {ex.Source}\n\nException Message:" +
-                    $" {ex.Message}\n\nException Type: {ex.GetType().Name}\n\nStack Trace:" +
-                    $" {ex.StackTrace}\n\nException Location: {ex.TargetSite}";
-
-            // Log an error event
-            EventLog.WriteEntry(sourceName, errorMessage, EventLogEntryType.Error);
+        public void LogError(string errorType, Exception ex)
+        {
+            _logAction?.Invoke(errorType, ex);
         }
     }
 }

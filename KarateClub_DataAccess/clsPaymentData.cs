@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DataAccessToolkit;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using DataAccessToolkit;
 
 namespace KarateClub_DataAccess
 {
@@ -48,13 +48,15 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return IsFound;
@@ -92,11 +94,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return PaymentID;
@@ -128,11 +132,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -160,11 +166,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return (RowAffected > 0);
@@ -203,13 +211,15 @@ namespace KarateClub_DataAccess
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
                 IsFound = false;
 
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return IsFound;
@@ -217,12 +227,12 @@ namespace KarateClub_DataAccess
 
         public static DataTable GetAllPayments()
         {
-            return clsDataAccessHelper.GetAll("SP_GetAllPayments", "KarateClub");
+            return clsDataAccessHelper.GetAll("SP_GetAllPayments");
         }
 
         public static short CountPayments()
         {
-            return (short)clsDataAccessHelper.Count("SP_GetPaymentsCount", "KarateClub");
+            return (short)clsDataAccessHelper.Count("SP_GetPaymentsCount");
         }
 
         public static DataTable GetAllPaymentsForMember(int? MemberID)
@@ -253,11 +263,13 @@ namespace KarateClub_DataAccess
             }
             catch (SqlException ex)
             {
-                clsErrorLogger.LogError("KarateClub", "Database Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("Database Exception", ex);
             }
             catch (Exception ex)
             {
-                clsErrorLogger.LogError("KarateClub", "General Exception", ex);
+                clsErrorLogger loggerToEventViewer = new clsErrorLogger(clsLogHandler.LogToEventViewer);
+                loggerToEventViewer.LogError("General Exception", ex);
             }
 
             return dt;

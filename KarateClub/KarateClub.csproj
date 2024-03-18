@@ -120,6 +120,7 @@
     <Compile Include="Global Classes\clsFormat.cs" />
     <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Global Classes\clsErrorLogger.cs" />
+    <Compile Include="Global Classes\clsLogHandler.cs" />
     <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="Global Classes\clsValidation.cs" />
     <Compile Include="Instructors\frmAddEditInstructor.cs">
