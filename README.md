@@ -26,10 +26,11 @@ The **Karate Club Project** is a feature-rich desktop application designed to me
 - **Payment Details:** System records payment details, including the amount, date, and payment status.
 
 ## Technologies Used:
-- **Framework:** .NET Windows Forms (C#)
+- **Framework:** .NET Framework (C#)
 - **Database:** Microsoft SQL Server with ADO.NET
 - **User Interface:** Windows Forms (WinForms)
 - **Authentication:** Custom user authentication system
+- **Architecture:** 3-tier architecture
 - **Deployment:** Standalone desktop application
 
 ## Getting Started:
